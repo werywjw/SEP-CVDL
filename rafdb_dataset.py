@@ -38,7 +38,7 @@ if __name__ == '__main__':
                              img_dir='archive/DATASET/train/',
                              transform=transform)
     
-    data_train_loader = DataLoader(rafdb_dataset_train, batch_size=4, shuffle=True, num_workers=4)
+    data_train_loader = DataLoader(rafdb_dataset_train, batch_size=64, shuffle=True, num_workers=4)
 
     train_image, train_label = next(iter(data_train_loader))
     print(f"Train batch: image shape {train_image.shape}, labels shape {train_label.shape}")

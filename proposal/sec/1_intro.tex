@@ -51,8 +51,8 @@ All authors will benefit from reading Mermin's description of how to write mathe
       time slot format=isodate,
       x unit=0.3cm, 
       y unit title=1.1cm,
-      y unit chart=0.7cm,
-      bar height=1.1,
+      y unit chart=0.6cm,
+      bar height=0.5,
       bar top shift=0.2,
       group right shift=0,
       group top shift=0.1,
@@ -63,12 +63,22 @@ All authors will benefit from reading Mermin's description of how to write mathe
       title label font=\bfseries\Large
   ]{2023-12-21}{2024-02-23}
       \gantttitlecalendar{year, month} \\
-      \ganttbar[bar/.append style={fill=LightPurple}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
+      \ganttgroup[bar/.append style={fill=LightPurple}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Data Search \& Preprocessing}{2023-12-21}{2023-12-24} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Model Training \& Validating}{2023-12-25}{2024-01-04} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Model Selection \& Fine-Tuning}{2024-01-04}{2024-01-10} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Report Writing}{2024-01-05}{2024-01-16} \\
       \ganttmilestone{Deadline 1}{2024-01-18} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Presentation}{2024-01-04}{2024-02-07} \\
+      \ganttgroup[bar/.append style={fill=LMUGreen}]{Presentation}{2024-01-04}{2024-02-07} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Explainable AI}{2024-01-04}{2024-01-18} \\
       \ganttmilestone{Deadline 2}{2024-02-08} \\
-      \ganttbar[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
+      \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
+      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-22} \\
       \ganttmilestone{Deadline 3}{2024-02-23}
+      \ganttlink{elem1}{elem2}
+      \ganttlink{elem2}{elem3}
+      \ganttlink{elem2}{elem4}
+      \ganttlink{elem4}{elem5}
   \end{ganttchart}
   }
   \caption{Overview of the time schedule on the final project}

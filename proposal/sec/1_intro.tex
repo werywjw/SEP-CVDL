@@ -1,62 +1,80 @@
 \section{Introduction}
 \label{sec:intro}
 
-%-------------------------------------------------------------------------
-\subsection{Language}
-
-All manuscripts must be in English.
-
-\subsection{Paper length}
-The final paper, excluding the references section, must be no longer than eight pages in length. The preliminary paper, excluding the references section, should be around two pages in length.
-The references section will not be included in the page count, and there is no limit on the length of the references section.
-For example, a paper of eight pages with two pages of references would have a total length of 10 pages.
-
-Overlength papers will simply not be reviewed.
-\subsection{Mathematics}
-
-Please number all of your sections and displayed equations as in these examples:
-\begin{equation}
-  E = m\cdot c^2
-  \label{eq:important}
-\end{equation}
-and
-\begin{equation}
-  v = a\cdot t,
-  \label{eq:also-important}
-\end{equation}
-or something like $e^{(i\pi)} + 1 = 0$.
-It is important for readers to be able to refer to any particular equation.
-Just because you did not refer to it in the text does not mean some future reader might not need to refer to it.
-It is cumbersome to have to use circumlocutions like ``the equation second from the top of page 3 column 1''.
-All authors will benefit from reading Mermin's description of how to write mathematics:
-\url{http://www.pamitc.org/documents/mermin.pdf}.
-
-\subsection{Figures}
-
-\begin{figure}[t]
-  \centering
-  \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
-   %\includegraphics[width=0.8\linewidth]{egfigure.eps}
-
-   \caption{Example of caption.
-   It is set in Roman so that mathematics (always set in Roman: $B \sin A = A \sin B$) may be included without an ugly clash.}
-   \label{fig:onecol}
-\end{figure}
-
 \begin{figure*}
-  \centering
-  \begin{subfigure}{0.68\linewidth}
-    \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
-    \caption{An example of a subfigure.}
-    \label{fig:short-a}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.28\linewidth}
-    \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
-    \caption{Another example of a subfigure.}
-    \label{fig:short-b}
-  \end{subfigure}
-  \caption{Example of a short caption, which should be centered.}
-  \label{fig:short}
+  \resizebox{\textwidth}{!}{
+    \begin{ganttchart}[
+      % hgrid,
+      vgrid,
+      time slot format=isodate,
+      x unit=0.3cm, 
+      y unit title=1.1cm,
+      y unit chart=0.6cm,
+      bar height=0.5,
+      bar top shift=0.2,
+      group right shift=0,
+      group top shift=0.1,
+      group height=.3,
+      group peaks width={0.2},
+      milestone left shift=0.5,
+      milestone right shift=0.5,
+      title label font=\bfseries\Large
+  ]{2023-12-21}{2024-02-23}
+      \gantttitlecalendar{year, month} \\
+      \ganttgroup[bar/.append style={fill=LightPurple}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Data Collection}{2023-12-21}{2024-01-10} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Data Preprocessing}{2024-01-04}{2024-01-10} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Model Implementation}{2023-12-25}{2024-01-04} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Model Training \& Validating}{2023-12-25}{2024-01-15} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Model Fine-Tuning}{2024-01-04}{2024-02-10} \\
+      \ganttbar[bar/.append style={fill=LightPurple}]{Report Writing}{2024-01-05}{2024-01-16} \\
+      \ganttmilestone{Deadline 1}{2024-01-18} \\
+      \ganttgroup[bar/.append style={fill=LMUGreen}]{Presentation}{2024-01-04}{2024-02-07} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Explainable AI}{2024-01-04}{2024-01-18} \\
+      \ganttmilestone{Deadline 2}{2024-02-08} \\
+      \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
+      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-22} \\
+      \ganttmilestone{Deadline 3}{2024-02-23}
+      % \ganttlink{elem1}{elem2}
+      % \ganttlink{elem2}{elem3}
+      % \ganttlink{elem2}{elem4}
+      % \ganttlink{elem4}{elem5}
+  \end{ganttchart}
+  }
+  \caption{Overview of the time schedule on the final project}
+  \label{fig:schedule}
 \end{figure*}
+
+%-------------------------------------------------------------------------
+% All authors will benefit from reading Mermin's description of how to write mathematics:
+% \url{http://www.pamitc.org/documents/mermin.pdf}.
+
+% Short captions should be centred.
+
+% \begin{figure}[t]
+%   \centering
+%   \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+%    %\includegraphics[width=0.8\linewidth]{egfigure.eps}
+
+%    \caption{Example of caption.
+%    It is set in Roman so that mathematics (always set in Roman: $B \sin A = A \sin B$) may be included without an ugly clash.}
+%    \label{fig:onecol}
+% \end{figure}
+
+% \begin{figure*}
+%   \centering
+%   \begin{subfigure}{0.68\linewidth}
+%     \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
+%     \caption{An example of a subfigure.}
+%     \label{fig:short-a}
+%   \end{subfigure}
+%   \hfill
+%   \begin{subfigure}{0.28\linewidth}
+%     \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
+%     \caption{Another example of a subfigure.}
+%     \label{fig:short-b}
+%   \end{subfigure}
+%   \caption{Example of a short caption, which should be centered.}
+%   \label{fig:short}
+% \end{figure*}
 

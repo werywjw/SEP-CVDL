@@ -1,0 +1,34 @@
+\section{Approach}
+\label{sec:approach}
+
+\subsection{Dataset}
+Firstly, 
+for all the image data from the training dataset~\cite{li2017reliable,li2019reliable}, 
+we transform and resize the images to \texttt{(64,64)}. 
+
+\subsection{Model Architecture}
+We implemented a emotion-classification model with 3 convolution layers.
+
+We add a \texttt{dropout} layer to prevent overfitting.
+We use the parameter grid from sklearn~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}, 
+in order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model.
+
+\begin{table}
+    \centering
+    \begin{tabular}{@{}lc@{}}
+      \toprule
+      Hyperparameter & Configuration \\
+      \midrule
+      Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
+      Batch size & \{8, 16, 32, 64\} \\
+      Epoch & \{20\} \\
+      Dropout rate & \{0.5\} \\
+      Early stopping & \{\texttt{True}, \texttt{False}\} \\
+      Patience & \{5\} \\
+      \bottomrule
+    \end{tabular}
+    \caption{Explored hyperparameter space for our model}
+    \label{tab:hyper}
+  \end{table}
+
+\subsection{Preliminary Results}

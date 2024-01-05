@@ -17,32 +17,40 @@
 % If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
 % (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
 \definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\definecolor{LMUGreen}{HTML}{00883A} % LMU
+\definecolor{LightPurple}{HTML}{969FFF}
+
+\usepackage{pgfgantt}
 \usepackage[pagebackref,breaklinks,colorlinks,citecolor=cvprblue]{hyperref}
 
 %%%%%%%%% TITLE - PLEASE UPDATE
-\title{\LaTeX\ Guidelines for SEP CV\&DL}
+\title{Emotion Classification for SEP CV\&DL}
 
 %%%%%%%%% AUTHORS - PLEASE UPDATE
-\author{First Author
+\author{
 % For a paper whose authors are all at the same institution,
 % omit the following lines up until the closing ``}''.
 % Additional authors and addresses can be added with ``\and'',
 % just like the second author.
 % To save space, use either the email address or home page, not both
+% \quad
+Tanja Jaschkowitz$^{*}$
 \quad
-Second Author
+Leah Kawka$^{*}$
 \quad
-Third Author
+Mahdi Mohammadi$^{*}$
 \quad
-Fourth Author\\
-\tt\small\{firstauthor,secondauthor,thirdauthor,fourthauthor\}@campus.lmu.de
+Jiawen Wang$^{*}$\\
+\tt\small\{Tanja.Jaschkowitz,Leah.Kawka,Mahdi.Mohammadi,Jiawen.Wang\}@campus.lmu.de
 }
 
 \begin{document}
 \maketitle
 \input{sec/0_abstract}    
 \input{sec/1_intro}
-\input{sec/2_formatting}
+\input{sec/2_related} 
+\input{sec/3_approach} 
+\input{sec/X_suppl}
 {
     \small
     \bibliographystyle{ieeenat_fullname}

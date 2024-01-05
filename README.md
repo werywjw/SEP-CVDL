@@ -16,6 +16,12 @@ https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code
 6. Angry
 7. Neutral (delete)
 
+- archive/DATASET/test is from the RAF-DB dataset test folder
+- archive/DATASET/train contains from: 
+1. RAF-DB 
+2. FER+ 
+3. TFEID 
+4. CK+
 
 ### Notes
 

@@ -26,20 +26,21 @@ class RAFDBDataset(Dataset):
             image = self.transform(image)
 
         return image, label
+
     
 if __name__ == '__main__':
     transform = transforms.Compose([
-        transforms.Resize((64, 64)),
-        transforms.RandomHorizontalFlip(), 
-        transforms.RandomApply([
-                transforms.RandomRotation(5),
-                transforms.RandomCrop(64, padding=8)
-            ], p=0.2),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                std=[0.229, 0.224, 0.225]),
-        transforms.RandomErasing(scale=(0.02,0.25)),
-        ])   
+    transforms.Resize((64, 64)),
+    transforms.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),  
+    transforms.RandomHorizontalFlip(), 
+    transforms.RandomApply([
+        transforms.RandomRotation(5),
+        transforms.RandomCrop(64, padding=8)
+    ], p=0.2),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    transforms.RandomErasing(scale=(0.02,0.25)),
+    ])
     
     rafdb_dataset_train = RAFDBDataset(csv_file='archive/train_labels.csv',
                              img_dir='archive/DATASET/train/',

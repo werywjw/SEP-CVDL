@@ -1,0 +1,62 @@
+\section{Approach}
+\label{sec:approach}
+
+\subsection{Dataset Aquisition and Processing}
+Firstly, 
+for all the image data from the training dataset~\cite{li2017reliable,li2019reliable}, 
+we filter out neutral instances from the original dataset, 
+the emotion labels are denoted as 1 (Surprised), 2 (Fearful), 3 (Disgusted), 4 (Happy), 5 (Sad), and 6 (Angry) for simplicity. 
+Afterward, 
+we transform and resize the images to \texttt{(64,64)}. 
+
+Describe the data collection methods employed, including the datasets used, the acquisition procedures, and the annotation standards.
+
+\subsubsection{Pictures and Labeling}
+\subsubsection{Video Processing}
+\subsubsection{Augmentation}
+
+\subsection{Model Implementation}
+
+\subsubsection{Training Infrastructure}
+
+\subsubsection{Model Architecture}
+We implemented an emotion-classification model with 3 convolution layers.
+
+
+\subsubsection{Model Training and Validation}
+
+We add a \texttt{dropout} layer to prevent overfitting. 
+In order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
+we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}. 
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{@{}lc@{}}
+      \toprule
+      Hyperparameter & Configuration \\
+      \midrule
+      Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
+      Batch size & \{8, 16, 32, 64\} \\
+      Dropout rate & \{0.5\} \\
+      Epoch & \{20\} \\
+      Early stopping & \{\texttt{True}, \texttt{False}\} \\
+      Patience & \{5\} \\
+      \bottomrule
+    \end{tabular}
+    \caption{Explored hyperparameter space for our model}
+    \label{tab:hyper}
+  \end{table}
+
+For evaluation, we use the metric accuracy.
+
+Explain the emotion detection techniques adopted, including the algorithms, models, and machine learning approaches used.
+Model training with GPU (Tanja, Leah, Jiawen, Mahdi, 15.Jan)
+Model testing acc (Jiawen, 15.Jan)
+Elaborate on the experimental setup and evaluation criteria, including the performance metrics used to assess the accuracy and effectiveness of the system.
+
+\subsection{Explainable AI}
+\subsubsection{CAM-Images (Mahdi)}
+\subsubsection{Heatmap (Mahdi, Leah)}
+\subsubsection{CAM-Videos (Tanja)}
+\subsubsection{Video Green-Square (Leah)}
+\subsubsection{Predictions .csv (Tanja)}

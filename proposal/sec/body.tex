@@ -35,13 +35,15 @@ Our code and supplementary material is available at \url{https://github.com/wery
   ]{2023-12-21}{2024-02-23}
       \gantttitlecalendar{year, month} \\
       \ganttbar[bar/.append style={fill=LMUGreen}]{Data Collecting \& Processing}{2023-12-21}{2024-01-10} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Implementing}{2023-12-30}{2024-01-20} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Training \& Validating}{2023-12-30}{2024-01-20} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Implementing}{2023-12-30}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Training \& Validating}{2023-12-30}{2024-01-30} \\
       \ganttbar[bar/.append style={fill=LMUGreen}]{Report Writing}{2024-01-04}{2024-01-16} \\
       \ganttgroup[bar/.append style={fill=LMUGreen}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
       % \ganttmilestone{Deadline 1}{2024-01-18} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-18} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-30} \\
       \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-05}{2024-02-07} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-17}{2024-02-07} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-20}{2024-02-07} \\
       \ganttgroup[bar/.append style={fill=Orange}]{Presentation}{2024-01-05}{2024-02-07} \\
       % \ganttmilestone{Deadline 2}{2024-02-08} \\
       \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-22} \\
@@ -114,16 +116,16 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
 
 % model comparison, e.g., SVM try, also VGG
 % specific dataset comparison, e.g., RAF-DB & FER+
-% Create table for results 
 
 \begin{table}
   \centering
   \resizebox{.47\textwidth}{!}{
   \begin{tabular}{@{}lccc@{}}
     \toprule
-    Models &  Accuracy (Vali) &  Accuracy (Test) & Accuracy (Train) \\
+    Models &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) \\
     \midrule
     Baseline CNN & 66.3 & 75.2 & 52.6 \\
+    CNN (SE) & 74.3 & 79.9 & 59.6 \\
     ResNet18 & 76.8 & 79.8 & 60.3 \\
     \bottomrule
   \end{tabular}
@@ -146,7 +148,7 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
       Patience & \{5\} \\
       \bottomrule
     \end{tabular}
-    \caption{Explored hyperparameter space for our model}
+    \caption{Explored hyperparameter space for our models}
     \label{tab:hyper}
   \end{table}
 

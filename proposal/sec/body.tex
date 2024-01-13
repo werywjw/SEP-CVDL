@@ -100,7 +100,7 @@ This kind of augumentation helps in making the model more robust to orientation 
 Our training dataset is aggregated from CK+~\cite{LuceyCKSAM10}.
 
 \subsection{Model Architecture}
-We implemented an emotion-classification model with four convolution layers. 
+We implemented from scratch an emotion-classification model with four convolution layers at the very begining. 
 Following each convolutional layer, 
 batch normalization is applied. 
 This stabilizes learning by normalizing the input to each layer. 
@@ -115,6 +115,22 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
 % model comparison, e.g., SVM try, also VGG
 % specific dataset comparison, e.g., RAF-DB & FER+
 % Create table for results 
+
+\begin{table}
+  \centering
+  \resizebox{.47\textwidth}{!}{
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Models &  Accuracy (Vali) &  Accuracy (Test) & Accuracy (Train) \\
+    \midrule
+    Baseline CNN & 66.3 & 75.2 & 52.6 \\
+    ResNet18 & 76.8 & 79.8 & 60.3 \\
+    \bottomrule
+  \end{tabular}
+  }
+  \caption{Accuracy (\%) for different models in our experiments}
+  \label{tab:model}
+\end{table}
 
 \begin{table}
     \centering
@@ -160,10 +176,11 @@ Every author did the literature research and contributed to the writing of the p
 An overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 
 \begin{itemize}
-  \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training infrastructure, 
-  \item \textbf{Leah Kawka} collected the training data, prepared dataprocessing, implemented augmentation, Explainable AI \& Video-green square
+  \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, 
+  \item \textbf{Leah Kawka} collected the training data, prepared dataprocessing, implemented augmentation, run the results, 
+  Explainable AI \& Video-green square
   \item \textbf{Mahdi Mohammadi} implemented the 
-  \item \textbf{Jiawen Wang} implemented the model architecture, training infrastructure, and optimization strategies. 
+  \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
   In the specific wrting part, she also checked and aggereated this report from other team members.
 \end{itemize}
 

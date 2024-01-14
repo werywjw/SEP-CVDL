@@ -63,9 +63,6 @@ Our code and supplementary material is available at \url{https://github.com/wery
 % All authors will benefit from reading Mermin's description of how to write mathematics:
 % \url{http://www.pamitc.org/documents/mermin.pdf}.
 
-% Short captions should be centered.
-
-
 
 % \begin{figure*}
 %   \centering
@@ -96,10 +93,10 @@ the emotion labels are denoted as 1 (Surprised), 2 (Fearful), 3 (Disgusted),
 (Our first dataset is downloaded from \url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code} with the addition csv file to their labels). 
 The test result in \Cref{fig:result} is also aggregated from this specific dataset.
 To transform and resize the images to \texttt{(64,64)}, 
-we convert the images to greyscale with three channels as our original CNN is designed to work with three-channel inputs. 
+we convert the images to greyscale with three channels as our original convolutional neutral network (CNN) is designed to work with three-channel inputs. 
 Also, we randomly flip the images horizontally with a default 50\% chance. 
 This kind of augumentation helps in making the model more robust to orientation changes and thus improve the generalization ability. 
-Our training dataset is aggregated from CK+~\cite{LuceyCKSAM10}.
+Our training dataset is aggregated from FER+~\cite{BarsoumZCZ16}, CK+~\cite{LuceyCKSAM10}.
 
 \subsection{Model Architecture}
 We implemented from scratch an emotion-classification model with four convolution layers at the very begining. 
@@ -124,9 +121,10 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
     \toprule
     Models &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) \\
     \midrule
-    Baseline CNN & 66.3 & 75.2 & 52.6 \\
+    CNN (Baseline) & 66.3 & 75.2 & 52.6 \\
     CNN (SE) & 74.3 & 79.9 & 59.6 \\
-    ResNet18 & 76.8 & 79.8 & 60.3 \\
+    CNN (SE+Residual) & 71.5 & 78.9 & 56.4 \\
+    ResNet18~\cite{HeZRS16} & 76.8 & 79.8 & 60.3 \\
     \bottomrule
   \end{tabular}
   }
@@ -167,6 +165,9 @@ The main results of our experiment with respect to loss and accuracy is depicted
 \end{figure}
 
 \section{Optimization Strategies}
+We increase the depth of the network by adding some convolutional layers to learn more complex features. 
+We also add the residual connections to help the training deeper networks more efficiently, 
+as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
 In the coming weeks, 
 we 
 
@@ -181,7 +182,7 @@ An overview of our time schedule for the entire final project is given in \Cref{
   \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, 
   \item \textbf{Leah Kawka} collected the training data, prepared dataprocessing, implemented augmentation, run the results, 
   Explainable AI \& Video-green square
-  \item \textbf{Mahdi Mohammadi} implemented the 
+  \item \textbf{Mahdi Mohammadi} implemented the , augumentation, 
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
   In the specific wrting part, she also checked and aggereated this report from other team members.
 \end{itemize}

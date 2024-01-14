@@ -4,15 +4,18 @@
 Facial emotion recognition (FER)~\cite{Ko18} is not only an interesting in our daily life, 
 but also important in the realm of artificial intelligence and computer vision. 
 In this short proposal, 
-we aim to leverage several deep neutral networks to analyze and interpret different human facial emotions.
+we aim to leverage several deep neural networks to analyze and interpret different human facial emotions.
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:approach}, 
 we provide the datasets we used, 
-the model architecture we implemented, 
-and preliminary evaluation results of our model. 
-Our code and supplementary material is available at \url{https://github.com/werywjw/SEP-CVDL}.
+the model architecture we implemented. 
+The preliminary evaluation results of our models are given in\Cref{sec:result}. 
+In \Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
+Finally,
+an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
+Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
 \begin{figure*}
   \resizebox{\textwidth}{!}{
@@ -55,7 +58,7 @@ Our code and supplementary material is available at \url{https://github.com/wery
       % \ganttlink{elem4}{elem5}
   \end{ganttchart}
   }
-  \caption{Overview of the time schedule for the final project}
+  \caption{Overview of the schedule for the final project}
   \label{fig:schedule}
 \end{figure*}
 
@@ -84,22 +87,22 @@ Our code and supplementary material is available at \url{https://github.com/wery
 \section{Approach}
 \label{sec:approach}
 
-\subsection{Dataset Aquisition and Processing}
+\subsection{Dataset Acquisition and Processing}
 Firstly, 
 for all the image data from the training dataset RAF-DB\footnote{\url{http://www.whdeng.cn/raf/model1.html}}~\cite{li2017reliable,li2019reliable}, 
 we filter out neutral instances from the original dataset, 
 the emotion labels are denoted as 1 (Surprised), 2 (Fearful), 3 (Disgusted), 
 4 (Happy), 5 (Sad), and 6 (Angry) for simplicity 
-(Our first dataset is downloaded from \url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code} with the addition csv file to their labels). 
+(Our first dataset is downloaded from \url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code} with the addition CSV file to their labels). 
 The test result in \Cref{fig:result} is also aggregated from this specific dataset.
 To transform and resize the images to \texttt{(64,64)}, 
-we convert the images to greyscale with three channels as our original convolutional neutral network (CNN) is designed to work with three-channel inputs. 
+we convert the images to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs. 
 Also, we randomly flip the images horizontally with a default 50\% chance. 
-This kind of augumentation helps in making the model more robust to orientation changes and thus improve the generalization ability. 
+This kind of augmentation helps in making the model more robust to orientation changes and thus improves the generalization ability. 
 Our training dataset is aggregated from FER+~\cite{BarsoumZCZ16}, CK+~\cite{LuceyCKSAM10}.
 
 \subsection{Model Architecture}
-We implemented from scratch an emotion-classification model with four convolution layers at the very begining. 
+We implemented from scratch an emotion classification model with four convolution layers at the very beginning. 
 Following each convolutional layer, 
 batch normalization is applied. 
 This stabilizes learning by normalizing the input to each layer. 
@@ -108,11 +111,12 @@ We also add a \texttt{dropout} layer to prevent overfitting.
 The activation function used after each layer is Rectified Linear Unit (ReLU), 
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
-In order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
+In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
 we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}. 
 
 % model comparison, e.g., SVM try, also VGG
 % specific dataset comparison, e.g., RAF-DB & FER+
+% bold the best results later
 
 \begin{table}
   \centering
@@ -150,41 +154,46 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
     \label{tab:hyper}
   \end{table}
 
-\subsection{Preliminary Results}
+\section{Preliminary Results}
+\label{sec:result}
 
 For evaluation, we use the metric accuracy. 
-The loss function is cross entropy, which is typically for multi-class classification. 
-The main results of our experiment with respect to loss and accuracy is depicted in \Cref{fig:result}.
+As seen in \Cref{tab:model}, 
+we report all the training, testing, and validation accuracy in \% to improve the performance of our models. 
+The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 
+The best results of the performance of the model with respect to loss and accuracy are depicted in \Cref{fig:result}.
 
 \begin{figure}[t]
   \centering
   % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
    \includegraphics[width=0.95\linewidth]{output.png}
-   \caption{Empirical results in terms of the loss and accuracy on differen training epochs}
+   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
    \label{fig:result}
 \end{figure}
 
 \section{Optimization Strategies}
+\label{sec:optim}
 We increase the depth of the network by adding some convolutional layers to learn more complex features. 
-We also add the residual connections to help the training deeper networks more efficiently, 
+We also add the residual connections to help the training of deeper networks more efficiently, 
 as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
+Moreover, 
+we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
 we 
 
 \subsection*{Author Contributions}
 \label{sec:author}
 % see https://arxiv.org/pdf/2005.14165.pdf page42
-Equal contributions listed by alphabetical order of surnames. 
+Equal contributions are listed by alphabetical order of surnames. 
 Every author did the literature research and contributed to the writing of the paper. 
-An overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 
 \begin{itemize}
   \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, 
-  \item \textbf{Leah Kawka} collected the training data, prepared dataprocessing, implemented augmentation, run the results, 
+  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, ran the results, 
   Explainable AI \& Video-green square
-  \item \textbf{Mahdi Mohammadi} implemented the , augumentation, 
+  \item \textbf{Mahdi Mohammadi} implemented the , augmentation, 
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
-  In the specific wrting part, she also checked and aggereated this report from other team members.
+  In the specific writing part, she also checked and aggeregated this report from other team members.
 \end{itemize}
 
 \section*{Acknowledgements}

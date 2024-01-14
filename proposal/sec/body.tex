@@ -88,6 +88,9 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \label{sec:approach}
 
 \subsection{Dataset Acquisition and Processing}
+To initiate the training, we acquired the databases FER+, RAF-DB, CK+ and TFEID from public institutions and GitHub-repositories.
+Based on these databases we created a dataset by augmentation to increase variety, 
+full details of augmentation is given in section 4.1.3.
 Firstly, 
 for all the image data from the training dataset RAF-DB\footnote{\url{http://www.whdeng.cn/raf/model1.html}}~\cite{li2017reliable,li2019reliable}, 
 we filter out neutral instances from the original dataset, 
@@ -180,6 +183,26 @@ Moreover,
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
 we 
+
+\subsection{Augmentation}
+\label{sec:optim:aug}
+In the realm of machine learning and artificial intelligence, 
+augmentation stands as a transformative technique, 
+empowering algorithms to learn from and adapt to a wider range of data. 
+By introducing subtle modifications to existing data points, 
+augmentation effectively expands the dataset, 
+enabling models to generalize better and achieve enhanced performance.
+As models encounter slightly altered versions of familiar data, 
+they are forced to make more nuanced and robust predictions. 
+With this process we aim to prevent overfitting, 
+a common pitfall in machine learning. 
+Additionally we guide the models` training to enhance recognition and handling of real-world variations.
+During the project we pursue various approaches. 
+We are implementing different combinations of functions from the pytorch.transforms library and testing already established filters that have been developed, in other research contexts. 
+We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
+
+A colored-frame on a video or image is a visualization to highlight the regions that contributed most to the model's prediction. 
+ In this validation interaction, the colored frame, marks the pixels that are used to identify the depicted emotion. In addition to a colored frame, for example a green square, the written percentage specification of the current emotions should be displayed. This task will be implemented by using the library OpenCV.
 
 \subsection*{Author Contributions}
 \label{sec:author}

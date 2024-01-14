@@ -8,11 +8,11 @@ we aim to leverage several deep neural networks to analyze and interpret differe
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
-In \Cref{sec:approach}, 
+In~\Cref{sec:approach}, 
 we provide the datasets we used, 
 the model architecture we implemented. 
-The preliminary evaluation results of our models are given in\Cref{sec:result}. 
-In \Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
+The preliminary evaluation results of our models are given in~\Cref{sec:result}. 
+In~\Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
 Finally,
 an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
@@ -44,12 +44,12 @@ Our code and supplementary material are available at \url{https://github.com/wer
       \ganttgroup[bar/.append style={fill=LMUGreen}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
       % \ganttmilestone{Deadline 1}{2024-01-18} \\
       \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-05}{2024-02-07} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-17}{2024-02-07} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-20}{2024-02-07} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-05}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-17}{2024-02-06} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-20}{2024-02-06} \\
       \ganttgroup[bar/.append style={fill=Orange}]{Presentation}{2024-01-05}{2024-02-07} \\
       % \ganttmilestone{Deadline 2}{2024-02-08} \\
-      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-22} \\
+      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-21} \\
       \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
       % \ganttmilestone{Deadline 3}{2024-02-23}
       % \ganttlink{elem3}{elem8}
@@ -87,10 +87,21 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \section{Approach}
 \label{sec:approach}
 
+\begin{figure}[ht]
+  \centering
+  % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+  % \resizebox{.45\textwidth}{!}{
+   \includegraphics[width=\linewidth]{output.png}
+  % }
+   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
+   \label{fig:result}
+\end{figure}
+
 \subsection{Dataset Acquisition and Processing}
-To initiate the training, we acquired the databases FER+, RAF-DB, CK+ and TFEID from public institutions and GitHub-repositories.
+To initiate the training, 
+we acquired the databases FER+, RAF-DB, CK+ and TFEID from public institutions and GitHub-repositories.
 Based on these databases we created a dataset by augmentation to increase variety, 
-full details of augmentation is given in section 4.1.3.
+full details of augmentation is given in \Cref{sec:optim:aug}.
 Firstly, 
 for all the image data from the training dataset RAF-DB\footnote{\url{http://www.whdeng.cn/raf/model1.html}}~\cite{li2017reliable,li2019reliable}, 
 we filter out neutral instances from the original dataset, 
@@ -121,6 +132,15 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
 % specific dataset comparison, e.g., RAF-DB & FER+
 % bold the best results later
 
+\section{Preliminary Results}
+\label{sec:result}
+
+For evaluation, we use the metric accuracy. 
+As seen in \Cref{tab:model}, 
+we report all the training, testing, and validation accuracy in \% to improve the performance of our models. 
+The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 
+The best results of the performance of the model with respect to loss and accuracy are depicted in \Cref{fig:result}.
+
 \begin{table}
   \centering
   \resizebox{.47\textwidth}{!}{
@@ -130,6 +150,7 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
     \midrule
     CNN (Baseline) & 66.3 & 75.2 & 52.6 \\
     CNN (SE) & 74.3 & 79.9 & 59.6 \\
+    CNN (SE-Aug) & 84.6 & 79.5 & 62.8 \\
     CNN (SE+Residual) & 71.5 & 78.9 & 56.4 \\
     ResNet18~\cite{HeZRS16} & 76.8 & 79.8 & 60.3 \\
     \bottomrule
@@ -148,31 +169,14 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
       Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
       Batch size & \{8, 16, 32, 64\} \\
       Dropout rate & \{0.5\} \\
-      Epoch & \{10, 20, 30\} \\
+      Epoch & \{10, 20, 30, 40\} \\
       Early stopping & \{\texttt{True}, \texttt{False}\} \\
       Patience & \{5\} \\
       \bottomrule
     \end{tabular}
     \caption{Explored hyperparameter space for our models}
     \label{tab:hyper}
-  \end{table}
-
-\section{Preliminary Results}
-\label{sec:result}
-
-For evaluation, we use the metric accuracy. 
-As seen in \Cref{tab:model}, 
-we report all the training, testing, and validation accuracy in \% to improve the performance of our models. 
-The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 
-The best results of the performance of the model with respect to loss and accuracy are depicted in \Cref{fig:result}.
-
-\begin{figure}[t]
-  \centering
-  % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
-   \includegraphics[width=0.95\linewidth]{output.png}
-   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
-   \label{fig:result}
-\end{figure}
+\end{table}
 
 \section{Optimization Strategies}
 \label{sec:optim}
@@ -182,7 +186,7 @@ as they allow gradients to flow through the network more easily, improving the t
 Moreover, 
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
-we 
+we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:video}.
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
@@ -196,13 +200,20 @@ As models encounter slightly altered versions of familiar data,
 they are forced to make more nuanced and robust predictions. 
 With this process we aim to prevent overfitting, 
 a common pitfall in machine learning. 
-Additionally we guide the models` training to enhance recognition and handling of real-world variations.
+Additionally we guide the training process to enhance recognition and handling of real-world variations.
 During the project we pursue various approaches. 
-We are implementing different combinations of functions from the pytorch.transforms library and testing already established filters that have been developed, in other research contexts. 
+We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
 We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
+\subsection{Video Green-Square}
+\label{sec:optim:video}
 A colored-frame on a video or image is a visualization to highlight the regions that contributed most to the model's prediction. 
- In this validation interaction, the colored frame, marks the pixels that are used to identify the depicted emotion. In addition to a colored frame, for example a green square, the written percentage specification of the current emotions should be displayed. This task will be implemented by using the library OpenCV.
+In this validation interaction, 
+the colored frame, marks the pixels that are used to identify the depicted emotion. 
+In addition to a colored frame, 
+for example a green square, 
+the written percentage specification of the current emotions should be displayed. 
+This task will be implemented by using the library OpenCV~\footnote{~\url{https://opencv.org}}.
 
 \subsection*{Author Contributions}
 \label{sec:author}
@@ -211,10 +222,10 @@ Equal contributions are listed by alphabetical order of surnames.
 Every author did the literature research and contributed to the writing of the paper. 
 
 \begin{itemize}
-  \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, 
-  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, ran the results, 
-  Explainable AI \& Video-green square
-  \item \textbf{Mahdi Mohammadi} implemented the , augmentation, 
+  \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, and CSV file aggregations. 
+  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
+  She also takes part in the explainable AI, specificly in implementing the video-green squares.
+  \item \textbf{Mahdi Mohammadi} implemented the augmentation, and did the research searching. 
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
   In the specific writing part, she also checked and aggeregated this report from other team members.
 \end{itemize}

@@ -159,14 +159,24 @@ We create various replications of existing photos by randomly altering different
 \subsection{Explainable AI \& Grad-CAM}
 \label{sec:optim:cam}
 Class Activation Mapping\cite{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
-Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+Class Activation Mapping (CAM) is a technique used in convolutional neural networks (CNNs) to visualize and understand the regions of an input image that contribute most to a particular class prediction. CAM generates a heatmap that highlights the important regions of the image for the model's decision.
+Model Architecture:
+CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
+CAM Process:
+The final convolutional layer produces feature maps, and the GAP layer computes the average value of each feature map.
+The weights connecting the feature maps to the output class are obtained.
+The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
+Application: 
+CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification.
+It aids in understanding the model's behavior and can be useful for model debugging and improvement.
+The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps.
+Besides proposing a method to visualize the dis criminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
 We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
 This task will be implemented by using the libraris of Pythorch
 ~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 and OpenCV
 ~\footnote{~\url{https://opencv.org}}.
-
 \subsection{Table of Classification scores}
 \label{sec:optim:csv}
 We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. The output is a csv file representing the corresponding classification scores. 
@@ -226,7 +236,7 @@ Every author did the literature research and contributed to the writing of the p
   \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, and CSV file aggregations. 
   \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
   She also takes part in the Explainable AI and Grad-CAM.
-  \item \textbf{Mahdi Mohammadi} implemented the augmentation, and did the research searching. 
+  \item \textbf{Mahdi Mohammadi} implemented the augmentation, and did the research searching, Occlusion reasearching, Data preprocessing, CAM-Images inquiry
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
   In the specific writing part, she also checked and aggeregated this report from other team members.
 \end{itemize}

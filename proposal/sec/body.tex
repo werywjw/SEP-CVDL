@@ -98,7 +98,7 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \subsection{Dataset Acquisition and Processing}
 \label{sec:datasets}
 To initiate the training, 
-we acquired the databases FER+\Cref{noauthor_microsoftferplus_2024}, RAF-DB\Cref{noauthor_raf-db_nodate}, CK+ incl. TFEID\Cref{noauthor_ck_nodate} and DISFA\Cref{noauthor_disfa_nodate}, a videodatabase, from public institutions and GitHub-repositories.
+we acquired the databases FER+\cite{barsoum_training_2016}, RAF-DB\cite{li2019reliable}, CK+\cite{5543262}, TFEID\cite{tfeid} and the videodatabase DISFA\cite{6475933}, from public institutions and GitHub-repositories.
 Based on these databases we created a dataset by augmentation to increase variety, 
 full details of augmentation is given in \Cref{sec:optim:aug}. 
 In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
@@ -179,7 +179,7 @@ we add squeeze and excitation (SE) blocks to apply channel-wise attention.
 In the coming weeks, 
 we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:cam}.
 Further research is orientated on papers engaging similar investigations.
-\Cref{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate, zeiler_visualizing_2013, verma_efficient_2023, li_reliable_2017}
+\cite{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate}, \cite{zeiler_visualizing_2013}, \cite{verma_efficient_2023}, \cite{li_reliable_2017}
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
@@ -200,13 +200,13 @@ We create various replications of existing photos by randomly altering different
 
 \subsection{Explainable AI \& Grad-CAM}
 \label{sec:optim:cam}
-Class Activation Mapping\Cref{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Class Activation Mapping\cite{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
-We follow up Grad-CAM\Cref{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
+We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
 This task will be implemented by using the libraris of Pythorch
-~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}.
-and OpenCV.
+~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
+and OpenCV
 ~\footnote{~\url{https://opencv.org}}.
 
 \subsection{Table of Classification scores}
@@ -222,7 +222,7 @@ Every author did the literature research and contributed to the writing of the p
 \begin{itemize}
   \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, and CSV file aggregations. 
   \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
-  She also takes part in the explainable AI, specificly in implementing the video-green squares.
+  She also takes part in the Explainable AI and Grad-CAM.
   \item \textbf{Mahdi Mohammadi} implemented the augmentation, and did the research searching. 
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
   In the specific writing part, she also checked and aggeregated this report from other team members.

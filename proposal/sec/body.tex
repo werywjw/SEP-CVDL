@@ -1,8 +1,7 @@
 \section{Introduction}
 \label{sec:intro}
 
-Facial emotion recognition (FER)~\cite{Ko18} is not only an interesting in our daily life, 
-but also important in the realm of artificial intelligence and computer vision. 
+Facial emotion recognition (FER)~\cite{Ko18} is a topic of both ongoing debate and significant relevance in the fields of artificial intelligence and computer vision.
 In this short proposal, 
 we aim to leverage several deep neural networks to analyze and interpret different human facial emotions.
 
@@ -99,21 +98,13 @@ Our code and supplementary material are available at \url{https://github.com/wer
 
 \subsection{Dataset Acquisition and Processing}
 To initiate the training, 
-we acquired the databases FER+, RAF-DB, CK+ and TFEID from public institutions and GitHub-repositories.
+we acquired the databases FER+, RAF-DB, CK+, TFEID and ISFA from public institutions and a GitHub-repository.
 Based on these databases we created a dataset by augmentation to increase variety, 
-full details of augmentation is given in \Cref{sec:optim:aug}.
-Firstly, 
-for all the image data from the training dataset RAF-DB\footnote{\url{http://www.whdeng.cn/raf/model1.html}}~\cite{verma_efficient_2023}, 
-we filter out neutral instances from the original dataset, 
-the emotion labels are denoted as 1 (Surprised), 2 (Fearful), 3 (Disgusted), 
-4 (Happy), 5 (Sad), and 6 (Angry) for simplicity 
-(Our first dataset is downloaded from \url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code} with the addition CSV file to their labels). 
-The test result in \Cref{fig:result} is also aggregated from this specific dataset.
-To transform and resize the images to \texttt{(64,64)}, 
-we convert the images to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs. 
-Also, we randomly flip the images horizontally with a default 50\% chance. 
-This kind of augmentation helps in making the model more robust to orientation changes and thus improves the generalization ability. 
-Our training dataset is aggregated from FER+~\cite{BarsoumZCZ16}, CK+~\cite{LuceyCKSAM10}.
+full details of augmentation is given in \Cref{sec:optim:aug}. 
+In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
+Beside the original format we set a standard, resizing all images to 64x64 pixels and saved them as JPEGs.
+
+The first test results in \Cref{fig:result} are aggregated from the database FER+. The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. 
 
 \subsection{Model Architecture}
 We implemented from scratch an emotion classification model with four convolution layers at the very beginning. 
@@ -190,7 +181,7 @@ we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:opt
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
-In the realm of machine learning and artificial intelligence, 
+In machine learning and artificial intelligence, 
 augmentation stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
 By introducing subtle modifications to existing data points, 
@@ -205,15 +196,18 @@ During the project we pursue various approaches.
 We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
 We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
-\subsection{Video Green-Square}
-\label{sec:optim:video}
-A colored-frame on a video or image is a visualization to highlight the regions that contributed most to the model's prediction. 
-In this validation interaction, 
-the colored frame, marks the pixels that are used to identify the depicted emotion. 
-In addition to a colored frame, 
-for example a green square, 
-the written percentage specification of the current emotions should be displayed. 
-This task will be implemented by using the library OpenCV~\footnote{~\url{https://opencv.org}}.
+\subsection{Explainable AI & Grad-CAM}
+\label{sec:optim:cam}
+Class Activation Mapping (Zitat: Zhou 2016) is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
+We follow up Grad-CAM (Zitat: 2019), introduced as a technique that is easier to implement with different architectures.
+This task will be implemented by using the libraris of Pythorch and OpenCV.
+~\footnote{~\url{https://opencv.org}}.
+
+\subsection{}
+\label{sec:optim:cam}
+We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. The output is a csv file representing the corresponding classification scores. 
 
 \subsection*{Author Contributions}
 \label{sec:author}

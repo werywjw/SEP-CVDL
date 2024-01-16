@@ -163,12 +163,12 @@ We create various replications of existing photos by randomly altering different
 
 \subsection{Explainable AI \& Grad-CAM}
 \label{sec:optim:cam}
-<<<<<<< HEAD
+
 Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. 
 The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
-=======
-Class Activation Mapping\cite{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+
+Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Class Activation Mapping (CAM) is a technique used in convolutional neural networks (CNNs) to visualize and understand the regions of an input image that contribute most to a particular class prediction. CAM generates a heatmap that highlights the important regions of the image for the model's decision.
 Model Architecture:
 CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
@@ -186,8 +186,7 @@ CAM provides valuable insights into the decision-making process of deep learning
 We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
 This task will be implemented by using the libraris of Pytorch
 ~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
-and OpenCV
-~\footnote{~\url{https://opencv.org}}.
+and OpenCV~\footnote{~\url{https://opencv.org}}.
 \subsection{Table of Classification scores}
 \label{sec:optim:csv}
 We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. 

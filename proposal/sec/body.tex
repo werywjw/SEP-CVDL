@@ -15,51 +15,6 @@ Finally,
 an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
-\begin{figure*}
-  \resizebox{\textwidth}{!}{
-    \begin{ganttchart}[
-      % hgrid,
-      vgrid,
-      time slot format=isodate,
-      x unit=0.3cm, 
-      y unit title=0.9cm,
-      y unit chart=0.45cm,
-      bar height=0.35,
-      bar top shift=0.2,
-      group right shift=0,
-      group top shift=0.1,
-      group height=.3,
-      group peaks width={0.2},
-      milestone left shift=0.5,
-      milestone right shift=0.5,
-      title label font=\bfseries\Large
-  ]{2023-12-21}{2024-02-23}
-      \gantttitlecalendar{year, month} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Data Collecting \& Processing}{2023-12-21}{2024-01-10} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Implementing}{2023-12-30}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Training \& Validating}{2023-12-30}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Report Writing}{2024-01-04}{2024-01-16} \\
-      \ganttgroup[bar/.append style={fill=LMUGreen}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
-      % \ganttmilestone{Deadline 1}{2024-01-18} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-05}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-17}{2024-02-06} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-20}{2024-02-06} \\
-      \ganttgroup[bar/.append style={fill=Orange}]{Presentation}{2024-01-05}{2024-02-07} \\
-      % \ganttmilestone{Deadline 2}{2024-02-08} \\
-      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-21} \\
-      \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
-      % \ganttmilestone{Deadline 3}{2024-02-23}
-      % \ganttlink{elem3}{elem8}
-      % \ganttlink{elem2}{elem3}
-      % \ganttlink{elem2}{elem4}
-      % \ganttlink{elem4}{elem5}
-  \end{ganttchart}
-  }
-  \caption{Overview of the schedule for the final project}
-  \label{fig:schedule}
-\end{figure*}
-
 %-------------------------------------------------------------------------
 % All authors will benefit from reading Mermin's description of how to write mathematics:
 % \url{http://www.pamitc.org/documents/mermin.pdf}.
@@ -85,16 +40,6 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \section{Approach}
 \label{sec:approach}
 
-\begin{figure}[ht]
-  \centering
-  % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
-  % \resizebox{.45\textwidth}{!}{
-   \includegraphics[width=\linewidth]{output.png}
-  % }
-   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
-   \label{fig:result}
-\end{figure}
-
 \subsection{Dataset Acquisition and Processing}
 \label{sec:datasets}
 To initiate the training, 
@@ -105,6 +50,16 @@ In terms of the illustrating content of the used pictures, we exclusively used h
 Beside the original format of images and videos, we set standards for extracting frames from the videos, resizing trainingpictures to 64x64 pixels, saved them as JPEGs.
 
 The first test results in \Cref{fig:result} are aggregated from the database FER+. The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
+
+\begin{figure}[ht]
+  \centering
+  % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
+  % \resizebox{.45\textwidth}{!}{
+   \includegraphics[width=\linewidth]{output.png}
+  % }
+   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
+   \label{fig:result}
+\end{figure}
 
 \subsection{Model Architecture}
 We implemented from scratch an emotion classification model with four convolution layers at the very beginning. 
@@ -212,6 +167,51 @@ and OpenCV
 \subsection{Table of Classification scores}
 \label{sec:optim:csv}
 We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. The output is a csv file representing the corresponding classification scores. 
+
+\begin{figure*}
+  \resizebox{\textwidth}{!}{
+    \begin{ganttchart}[
+      % hgrid,
+      vgrid,
+      time slot format=isodate,
+      x unit=0.3cm, 
+      y unit title=0.9cm,
+      y unit chart=0.45cm,
+      bar height=0.35,
+      bar top shift=0.2,
+      group right shift=0,
+      group top shift=0.1,
+      group height=.3,
+      group peaks width={0.2},
+      milestone left shift=0.5,
+      milestone right shift=0.5,
+      title label font=\bfseries\Large
+  ]{2023-12-21}{2024-02-23}
+      \gantttitlecalendar{year, month} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Data Collecting \& Processing}{2023-12-21}{2024-01-10} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Implementing}{2023-12-30}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Training \& Validating}{2023-12-30}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=LMUGreen}]{Report Writing}{2024-01-04}{2024-01-16} \\
+      \ganttgroup[bar/.append style={fill=LMUGreen}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
+      % \ganttmilestone{Deadline 1}{2024-01-18} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-05}{2024-01-30} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-17}{2024-02-06} \\
+      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-20}{2024-02-06} \\
+      \ganttgroup[bar/.append style={fill=Orange}]{Presentation}{2024-01-05}{2024-02-07} \\
+      % \ganttmilestone{Deadline 2}{2024-02-08} \\
+      \ganttbar[bar/.append style={fill=cvprblue}]{Report Writing}{2024-01-17}{2024-02-21} \\
+      \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
+      % \ganttmilestone{Deadline 3}{2024-02-23}
+      % \ganttlink{elem3}{elem8}
+      % \ganttlink{elem2}{elem3}
+      % \ganttlink{elem2}{elem4}
+      % \ganttlink{elem4}{elem5}
+  \end{ganttchart}
+  }
+  \caption{Overview of the schedule for the final project}
+  \label{fig:schedule}
+\end{figure*}
 
 \subsection*{Author Contributions}
 \label{sec:author}

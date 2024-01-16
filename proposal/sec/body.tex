@@ -6,7 +6,7 @@ In this short proposal, we aim to leverage several deep neural networks to analy
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
-In~\Cref{sec:approach}, 
+In~\Cref{sec:datasets}, 
 we provide the datasets we used, 
 the model architecture we implemented. 
 The preliminary evaluation results of our models are given in~\Cref{sec:result}. 
@@ -96,8 +96,9 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \end{figure}
 
 \subsection{Dataset Acquisition and Processing}
+\label{sec:datasets}
 To initiate the training, 
-we acquired the databases FER+, RAF-DB, CK+, TFEID and ISFA from public institutions and a GitHub-repository.
+we acquired the databases FER+\Cref{noauthor_microsoftferplus_2024}, RAF-DB\Cref{noauthor_raf-db_nodate}, CK+ incl. TFEID\Cref{noauthor_ck_nodate} and DISFA\Cref{noauthor_disfa_nodate} from public institutions and GitHub-repositories.
 Based on these databases we created a dataset by augmentation to increase variety, 
 full details of augmentation is given in \Cref{sec:optim:aug}. 
 In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
@@ -176,7 +177,12 @@ as they allow gradients to flow through the network more easily, improving the t
 Moreover, 
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
-we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:video}.
+we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:cam}.
+Further research is orientated on papers engaging similar topics.
+\Cref{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate}
+\Cref{zeiler_visualizing_2013}
+\Cref{verma_efficient_2023}
+\Cref{li_reliable_2017}
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
@@ -197,15 +203,17 @@ We create various replications of existing photos by randomly altering different
 
 \subsection{Explainable AI & Grad-CAM}
 \label{sec:optim:cam}
-Class Activation Mapping (Zitat: Zhou 2016) is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Class Activation Mapping\Cref{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
-We follow up Grad-CAM (Zitat: 2019), introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraris of Pythorch and OpenCV.
+We follow up Grad-CAM\Cref{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
+This task will be implemented by using the libraris of Pythorch
+~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}.
+and OpenCV.
 ~\footnote{~\url{https://opencv.org}}.
 
-\subsection{}
-\label{sec:optim:cam}
+\subsection{Table of Classification scores}
+\label{sec:optim:csv}
 We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. The output is a csv file representing the corresponding classification scores. 
 
 \subsection*{Author Contributions}

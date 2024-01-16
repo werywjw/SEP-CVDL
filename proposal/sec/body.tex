@@ -1,8 +1,8 @@
 \section{Introduction}
 \label{sec:intro}
 
-Facial emotion recognition is a topic of significant relevance and ongoing debate, not only in our daily life, but also in the fields of artificial intelligence and computer vision.
-In this short proposal, we aim to leverage several deep neural networks to analyze and interpret different human facial emotions.
+Facial emotion recognition (FER)~\cite{Ko18} is a topic of significant relevance and ongoing debate, not only in our daily life, but also in the fields of artificial intelligence and computer vision.
+In this short proposal, we aim to leverage several deep neural networks to analyze and interpret different human facial emotions. 
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
@@ -12,10 +12,10 @@ the model architecture we implemented.
 The preliminary evaluation results of our models are given in~\Cref{sec:result}. 
 In~\Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
 Finally,
-an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
+an overview of our time schedule for the entire final project is given in~\Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
-%-------------------------------------------------------------------------
+% -------------------------------------------------------------------------
 % All authors will benefit from reading Mermin's description of how to write mathematics:
 % \url{http://www.pamitc.org/documents/mermin.pdf}.
 
@@ -43,13 +43,15 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \subsection{Dataset Acquisition and Processing}
 \label{sec:datasets}
 To initiate the training, 
-we acquired the databases FER+\cite{barsoum_training_2016}, RAF-DB\cite{li2019reliable}, CK+\cite{5543262}, TFEID\cite{tfeid} and the videodatabase DISFA\cite{6475933}, from public institutions and GitHub-repositories.
+we acquired the databases FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li2019reliable}, CK+~\cite{LuceyCKSAM10}, TFEID~\cite{tfeid}, and the videodatabase DISFA~\cite{MavadatiMBTC13}, from public institutions and GitHub repositories.
 Based on these databases we created a dataset by augmentation to increase variety, 
-full details of augmentation is given in \Cref{sec:optim:aug}. 
+full details of augmentation is given in~\Cref{sec:optim:aug}. 
 In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
 Beside the original format of images and videos, we set standards for extracting frames from the videos, resizing trainingpictures to 64x64 pixels, saved them as JPEGs.
 
-The first test results in \Cref{fig:result} are aggregated from the database FER+. The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
+The first test results in~\Cref{fig:result} are aggregated from the database FER+. 
+The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. 
+Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 
 \begin{figure}[ht]
   \centering
@@ -106,24 +108,6 @@ The best results of the performance of the model with respect to loss and accura
   \label{tab:model}
 \end{table}
 
-\begin{table}
-    \centering
-    \begin{tabular}{@{}lc@{}}
-      \toprule
-      Hyperparameter & Configuration \\
-      \midrule
-      Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
-      Batch size & \{8, 16, 32, 64\} \\
-      Dropout rate & \{0.5\} \\
-      Epoch & \{10, 20, 30, 40\} \\
-      Early stopping & \{\texttt{True}, \texttt{False}\} \\
-      Patience & \{5\} \\
-      \bottomrule
-    \end{tabular}
-    \caption{Explored hyperparameter space for our models}
-    \label{tab:hyper}
-\end{table}
-
 \section{Optimization Strategies}
 \label{sec:optim}
 We increase the depth of the network by adding some convolutional layers to learn more complex features. 
@@ -132,9 +116,26 @@ as they allow gradients to flow through the network more easily, improving the t
 Moreover, 
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
-we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:cam}.
-Further research is orientated on papers engaging similar investigations.
-\cite{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate}, \cite{zeiler_visualizing_2013}, \cite{verma_efficient_2023}, \cite{li_reliable_2017}
+we will focus on the following the tasks~\Cref{sec:optim:aug} and~\Cref{sec:optim:cam}.
+Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
+
+\begin{table}
+  \centering
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    Hyperparameter & Configuration \\
+    \midrule
+    Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
+    Batch size & \{8, 16, 32, 64\} \\
+    Dropout rate & \{0.5\} \\
+    Epoch & \{10, 20, 30, 40\} \\
+    Early stopping & \{\texttt{True}, \texttt{False}\} \\
+    Patience & \{5\} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Explored hyperparameter space for our models}
+  \label{tab:hyper}
+\end{table}
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
@@ -155,18 +156,20 @@ We create various replications of existing photos by randomly altering different
 
 \subsection{Explainable AI \& Grad-CAM}
 \label{sec:optim:cam}
-Class Activation Mapping\cite{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
-Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. 
+The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
 We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraris of Pythorch
+This task will be implemented by using the libraris of Pytorch
 ~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 and OpenCV
 ~\footnote{~\url{https://opencv.org}}.
 
 \subsection{Table of Classification scores}
 \label{sec:optim:csv}
-We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. The output is a csv file representing the corresponding classification scores. 
+We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. 
+The output is a csv file representing the corresponding classification scores. 
 
 \begin{figure*}
   \resizebox{\textwidth}{!}{

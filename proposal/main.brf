@@ -1,12 +1,12 @@
-\backcite {barsoum_training_2016}{{1}{2.1}{subsection.2.1}}
+\backcite {Ko18}{{1}{1}{section.1}}
+\backcite {BarsoumZCZ16}{{1}{2.1}{subsection.2.1}}
 \backcite {li2019reliable}{{1}{2.1}{subsection.2.1}}
-\backcite {5543262}{{1}{2.1}{subsection.2.1}}
+\backcite {LuceyCKSAM10}{{1}{2.1}{subsection.2.1}}
 \backcite {tfeid}{{1}{2.1}{subsection.2.1}}
-\backcite {6475933}{{1}{2.1}{subsection.2.1}}
-\backcite {HeZRS16}{{2}{\caption@xref {??}{ on input line 104}}{table.caption.2}}
-\backcite {noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate}{{2}{4}{section.4}}
-\backcite {zeiler_visualizing_2013}{{2}{4}{section.4}}
-\backcite {verma_efficient_2023}{{2}{4}{section.4}}
+\backcite {MavadatiMBTC13}{{1}{2.1}{subsection.2.1}}
+\backcite {HeZRS16}{{2}{\caption@xref {??}{ on input line 106}}{table.caption.2}}
 \backcite {li_reliable_2017}{{2}{4}{section.4}}
-\backcite {zhou_learning_2016}{{2}{4.2}{subsection.4.2}}
+\backcite {VermaMRMV23}{{2}{4}{section.4}}
+\backcite {ZeilerF14}{{2}{4}{section.4}}
+\backcite {ZhouKLOT16}{{2}{4.2}{subsection.4.2}}
 \backcite {almeida_grad-cam_2023}{{2}{4.2}{subsection.4.2}}

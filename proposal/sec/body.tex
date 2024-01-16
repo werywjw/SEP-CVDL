@@ -178,11 +178,8 @@ Moreover,
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
 we will focus on the following the tasks~\Cref{sec:optim:aug} and ~\Cref{sec:optim:cam}.
-Further research is orientated on papers engaging similar topics.
-\Cref{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate}
-\Cref{zeiler_visualizing_2013}
-\Cref{verma_efficient_2023}
-\Cref{li_reliable_2017}
+Further research is orientated on papers engaging similar investigations.
+\Cref{noauthor_multimodal-emotion-recognition00-presentationreportsp4pdf_nodate, zeiler_visualizing_2013, verma_efficient_2023, li_reliable_2017}
 
 \subsection{Augmentation}
 \label{sec:optim:aug}
@@ -201,7 +198,7 @@ During the project we pursue various approaches.
 We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
 We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
-\subsection{Explainable AI & Grad-CAM}
+\subsection{Explainable AI \& Grad-CAM}
 \label{sec:optim:cam}
 Class Activation Mapping\Cref{zhou_learning_2016} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 

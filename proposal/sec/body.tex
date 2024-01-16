@@ -7,35 +7,15 @@ In this short proposal, we aim to leverage several deep neural networks to analy
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
 In~\Cref{sec:datasets}, 
-we provide the datasets we used, 
-the model architecture we implemented. 
+we provide the datasets we used and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in~\Cref{sec:result}. 
 In~\Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
 Finally,
 an overview of our time schedule for the entire final project is given in~\Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
-% -------------------------------------------------------------------------
-% All authors will benefit from reading Mermin's description of how to write mathematics:
-% \url{http://www.pamitc.org/documents/mermin.pdf}.
-
-
-% \begin{figure*}
-%   \centering
-%   \begin{subfigure}{0.68\linewidth}
-%     \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
-%     \caption{An example of a subfigure.}
-%     \label{fig:short-a}
-%   \end{subfigure}
-%   \hfill
-%   \begin{subfigure}{0.28\linewidth}
-%     \fbox{\rule{0pt}{2in} \rule{.9\linewidth}{0pt}}
-%     \caption{Another example of a subfigure.}
-%     \label{fig:short-b}
-%   \end{subfigure}
-%   \caption{Example of a short caption, which should be centered.}
-%   \label{fig:short}
-% \end{figure*}
+% \section{Related Work}
+% \label{sec:related}
 
 \section{Approach}
 \label{sec:approach}
@@ -47,18 +27,17 @@ we acquired the databases FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li2019reliable}
 Based on these databases we created a dataset by augmentation to increase variety, 
 full details of augmentation is given in~\Cref{sec:optim:aug}. 
 In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
-Beside the original format of images and videos, we set standards for extracting frames from the videos, resizing trainingpictures to 64x64 pixels, saved them as JPEGs.
+Besides the original format of images and videos, we set standards for extracting frames from the videos, resizing training pictures to 64x64 pixels, saved them as JPEGs.
 
-<<<<<<< HEAD
-The first test results in~\Cref{fig:result} are aggregated from the database FER+. 
+The first test results in~\Cref{fig:result} are aggregated from the database RAF-DB~\cite{li2019reliable}. 
 The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. 
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
-=======
-The first test results in \Cref{fig:result} are aggregated from the database FER+. The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
+
+The first test results in \Cref{fig:result} are aggregated from the database FER+. % ???
 A custom dataset is a collection of data relating to a specific problem you're working on.
 In essence, a custom dataset can be comprised of almost anything.
-PyTorch includes many existing functions to load in various custom datasets in the TorchVision, TorchText, TorchAudio and TorchRec domain libraries.
->>>>>>> 8cae4859fb8bbb0d283ca90bacb34f5b8a510dda
+PyTorch includes many existing functions to load various custom datasets in the TorchVision, TorchText, TorchAudio and TorchRec domain libraries.
+
 
 \begin{figure}[ht]
   \centering
@@ -123,7 +102,7 @@ as they allow gradients to flow through the network more easily, improving the t
 Moreover, 
 we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 In the coming weeks, 
-we will focus on the following the tasks~\Cref{sec:optim:aug} and~\Cref{sec:optim:cam}.
+we will focus on the following tasks~\Cref{sec:optim:aug} and~\Cref{sec:optim:cam}.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
 
 \begin{table}
@@ -154,43 +133,12 @@ augmentation effectively expands the dataset,
 enabling models to generalize better and achieve enhanced performance.
 As models encounter slightly altered versions of familiar data, 
 they are forced to make more nuanced and robust predictions. 
-With this process we aim to prevent overfitting, 
+With this process, we aim to prevent overfitting, 
 a common pitfall in machine learning. 
-Additionally we guide the training process to enhance recognition and handling of real-world variations.
-During the project we pursue various approaches. 
+Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
+During the project, we pursue various approaches. 
 We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
 We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
-
-\subsection{Explainable AI \& Grad-CAM}
-\label{sec:optim:cam}
-
-Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
-Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. 
-The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
-
-Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
-Class Activation Mapping (CAM) is a technique used in convolutional neural networks (CNNs) to visualize and understand the regions of an input image that contribute most to a particular class prediction. CAM generates a heatmap that highlights the important regions of the image for the model's decision.
-Model Architecture:
-CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
-CAM Process:
-The final convolutional layer produces feature maps, and the GAP layer computes the average value of each feature map.
-The weights connecting the feature maps to the output class are obtained.
-The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
-Application: 
-CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification.
-It aids in understanding the model's behavior and can be useful for model debugging and improvement.
-The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps.
-Besides proposing a method to visualize the dis criminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
->>>>>>> 8cae4859fb8bbb0d283ca90bacb34f5b8a510dda
-CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
-We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraris of Pytorch
-~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
-and OpenCV~\footnote{~\url{https://opencv.org}}.
-\subsection{Table of Classification scores}
-\label{sec:optim:csv}
-We also wrote a script which takes a folder path as input and iterates through the images inside a subfolder. 
-The output is a csv file representing the corresponding classification scores. 
 
 \begin{figure*}
   \resizebox{\textwidth}{!}{
@@ -237,6 +185,37 @@ The output is a csv file representing the corresponding classification scores.
   \label{fig:schedule}
 \end{figure*}
 
+\subsection{Explainable AI \& Grad-CAM}
+\label{sec:optim:cam}
+
+Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. 
+The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+
+Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Class Activation Mapping (CAM) is a technique used in convolutional neural networks (CNNs) to visualize and understand the regions of an input image that contribute most to a particular class prediction. CAM generates a heatmap that highlights the important regions of the image for the model's decision.
+Model Architecture:
+CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
+CAM Process:
+The final convolutional layer produces feature maps, and the GAP layer computes the average value of each feature map.
+The weights connecting the feature maps to the output class are obtained.
+The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
+Application: 
+CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification.
+It aids in understanding the model's behavior and can be useful for model debugging and improvement.
+The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps.
+Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+
+CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
+We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
+This task will be implemented by using the libraries of Pytorch
+~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
+and OpenCV~\footnote{~\url{https://opencv.org}}.
+\subsection{Table of Classification scores}
+\label{sec:optim:csv}
+We also wrote a script that takes a folder path as input and iterates through the images inside a subfolder. 
+The output is a CSV file representing the corresponding classification scores. 
+
 \subsection*{Author Contributions}
 \label{sec:author}
 % see https://arxiv.org/pdf/2005.14165.pdf page42
@@ -247,9 +226,9 @@ Every author did the literature research and contributed to the writing of the p
   \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, and CSV file aggregations. 
   \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
   She also takes part in the Explainable AI and Grad-CAM.
-  \item \textbf{Mahdi Mohammadi} implemented the augmentation, and did the research searching, Occlusion reasearching, Data preprocessing, CAM-Images inquiry
+  \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, Data preprocessing, CAM-Images inquiry
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
-  In the specific writing part, she also checked and aggeregated this report from other team members.
+  In the specific writing part, she also draw the figures and tables and improved this report from other team members.
 \end{itemize}
 
 \section*{Acknowledgements}

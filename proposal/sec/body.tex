@@ -23,13 +23,15 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \subsection{Dataset Acquisition and Processing}
 \label{sec:datasets}
 To initiate the training, 
-we acquired the databases FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li2019reliable}, CK+~\cite{LuceyCKSAM10}, TFEID~\cite{tfeid}, and the videodatabase DISFA~\cite{MavadatiMBTC13}, from public institutions and GitHub repositories.
+we acquired the databases FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, TFEID~\cite{tfeid}, and the videodatabase DISFA~\cite{MavadatiMBTC13}, 
+from public institutions and GitHub repositories. % add links
 Based on these databases we created a dataset by augmentation to increase variety, 
 full details of augmentation is given in~\Cref{sec:optim:aug}. 
-In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
+In terms of the illustrating content of the used pictures, we exclusively used human faces representing 6 emotions. 
+We generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
 Besides the original format of images and videos, we set standards for extracting frames from the videos, resizing training pictures to 64x64 pixels, saved them as JPEGs.
 
-The first test results in~\Cref{fig:result} are aggregated from the database RAF-DB~\cite{li2019reliable}. 
+The first test results in~\Cref{fig:result} are aggregated from the database RAF-DB~\cite{li_reliable_2017,li2019reliable}. 
 The images are converted to greyscale with three channels as our original convolutional neural network (CNN) is designed to work with three-channel inputs and add random augmentation. 
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 
@@ -45,7 +47,7 @@ PyTorch includes many existing functions to load various custom datasets in the 
   % \resizebox{.45\textwidth}{!}{
    \includegraphics[width=\linewidth]{output.png}
   % }
-   \caption{Empirical results in terms of the loss and accuracy on different training epochs}
+   \caption{Empirical results in terms of the loss and accuracy on different training epochs for our current best model} % Specify later
    \label{fig:result}
 \end{figure}
 
@@ -186,35 +188,37 @@ We create various replications of existing photos by randomly altering different
   \label{fig:schedule}
 \end{figure*}
 
-\subsection{Explainable AI \& Grad-CAM}
+\subsection{Explainable AI \& Grad-CAM} % aggregate
 \label{sec:optim:cam}
 
-Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
+Class activation mapping (CAM)~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. 
 The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 
-Class Activation Mapping~\cite{ZhouKLOT16} is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network. 
-Class Activation Mapping (CAM) is a technique used in convolutional neural networks (CNNs) to visualize and understand the regions of an input image that contribute most to a particular class prediction. CAM generates a heatmap that highlights the important regions of the image for the model's decision.
-Model Architecture:
+CAM is a technique used in CNNs to visualize and understand the regions of an input image that contribute most to a particular class prediction. 
+CAM generates a heatmap that highlights the important regions of the image for the model's decision.
+% Model Architecture:
 CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
-CAM Process:
+% CAM Process:
 The final convolutional layer produces feature maps, and the GAP layer computes the average value of each feature map.
 The weights connecting the feature maps to the output class are obtained.
 The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
-Application: 
+% Application: 
 CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification.
 It aids in understanding the model's behavior and can be useful for model debugging and improvement.
-The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps.
-Besides proposing a method to visualize the discriminative regions of a classification-trained convolutional neural network (CNN), the authors also use this method to localize objects without providing the model with any bounding box annotations. The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
+The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps. 
+Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, the authors also use this method to localize objects without providing the model with any bounding box annotations. % ??? which authors, if others please cite, if us please say we
+The model just learns the classification task with class labels and is then able to localize the object of a specific class in an image. 
 
 CAM provides valuable insights into the decision-making process of deep learning models, like CNNs.
-We follow up Grad-CAM\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraries of Pytorch
-~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
+We follow up Grad-CAM~\cite{almeida_grad-cam_2023}, introduced as a technique that is easier to implement with different architectures.
+This task will be implemented by using the libraries of Pytorch~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 and OpenCV~\footnote{~\url{https://opencv.org}}.
+
 \subsection{Table of Classification scores}
 \label{sec:optim:csv}
-We also wrote a script that takes a folder path as input and iterates through the images inside a subfolder. 
+To further analyze the separate scores of the each class of the model, 
+we wrote a script that takes a folder path as input and iterates through the images inside a subfolder. 
 The output is a CSV file representing the corresponding classification scores. 
 
 \subsection*{Author Contributions}

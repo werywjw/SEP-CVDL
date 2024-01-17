@@ -1,19 +1,21 @@
 \section{Introduction}
 \label{sec:intro}
 
-Facial emotion recognition (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
+\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
 not only in our daily life, but also in the fields of artificial intelligence and computer vision.
-In this short proposal, we aim to leverage several deep neural networks (DNNs), 
+In this short proposal, we aim to leverage several \textit{deep neural networks} (DNNs), 
 which contain convolution layers and residual/attention blocks, 
-to detect and interpret six basic human facial emotions 
-(i.e., happiness, surprise, sadness, anger, disgust, and fear), which are universally recognized and expressed. % update see
+to detect and interpret six basic universally recognized and expressed human facial emotions 
+(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
+To make our model more transparent, 
+we explain this emotion classification task with \textit{class activation mapping} (CAM) and \textit{gradient-weighted class activation mapping} (Grad-CAM). 
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:approach}, 
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:result}. 
-In \Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
+\Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
 Finally,
 an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
@@ -27,9 +29,9 @@ Our code and supplementary material are available at \url{https://github.com/wer
 \subsection{Dataset Acquisition and Processing}
 \label{sec:datasets}
 To initiate the training, 
-we acquired the databases FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
-TFEID, %~\cite{tfeid}, 
-and the videodatabase DISFA~\cite{MavadatiMBTC13}, 
+we acquired the databases such as FER+~\cite{BarsoumZCZ16}, RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
+TFEID~\cite{tfeid,LiGL22}, 
+as well as the video database DISFA~\cite{MavadatiMBTC13}, 
 from public institutions and GitHub repositories. % add links
 Based on these databases we created a dataset by augmentation to increase variety, 
 full details of augmentation is given in~\Cref{sec:optim:aug}. 
@@ -75,23 +77,6 @@ Techniques like dropout, renormalization, and data augmentation are employed to 
 % specific dataset comparison, e.g., RAF-DB & FER+
 % bold the best results later
 
-\subsection{Data Augmentation}
-\label{sec:optim:aug}
-In machine learning and artificial intelligence, 
-augmentation stands as a transformative technique, 
-empowering algorithms to learn from and adapt to a wider range of data. 
-By introducing subtle modifications to existing data points, 
-augmentation effectively expands the dataset, 
-enabling models to generalize better and achieve enhanced performance.
-As models encounter slightly altered versions of familiar data, 
-they are forced to make more nuanced and robust predictions. 
-With this process, we aim to prevent overfitting, 
-a common pitfall in machine learning. 
-Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
-During the project, we pursue various approaches. 
-We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
-We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
-
 \section{Preliminary Results}
 \label{sec:result}
 
@@ -130,6 +115,24 @@ we add squeeze and excitation (SE) blocks to apply channel-wise attention.
 In the coming weeks, 
 we will focus on the following tasks~\Cref{sec:optim:aug} and~\Cref{sec:optim:cam}.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
+
+\subsection{Data Augmentation}
+\label{sec:optim:aug}
+In machine learning and artificial intelligence, 
+augmentation stands as a transformative technique, 
+empowering algorithms to learn from and adapt to a wider range of data. 
+By introducing subtle modifications to existing data points, 
+augmentation effectively expands the dataset, 
+enabling models to generalize better and achieve enhanced performance.
+As models encounter slightly altered versions of familiar data, 
+they are forced to make more nuanced and robust predictions. 
+With this process, we aim to prevent overfitting, 
+a common pitfall in machine learning. 
+Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
+During the project, we pursue various approaches. 
+We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
+We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
+
 
 \begin{table}
   \centering
@@ -197,7 +200,7 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 \subsection{CAM} % aggregate
 \label{sec:optim:cam}
 
-Generally speaking, class activation mapping (CAM) is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network, 
+Generally speaking, Class Activation Mapping is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network, 
 typically the final convolutional layer of a CNN before the fully connected layers. 
 Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
 Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, 
@@ -222,8 +225,9 @@ The global average pooling (GAP) layer is used to obtain a spatial average of th
 
 Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
 CAM must be implemented in the last layer of a CNN, 
-Grad-CAM can be implemented with every architecture without big effort. 
-We thus follow up Grad-CAM~\cite{SelvarajuCDVPB20}, introduced as a technique that is easier to implement with different architectures.
+% Grad-CAM  can be implemented with every architecture without big effort. 
+We thus follow up Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
+introduced as a technique that is easier to implement with different architectures.
 This task will be implemented by using the libraries of Pytorch and OpenCV~\footnote{~\url{https://opencv.org}}.
 
 \subsection{Table of Classification scores}

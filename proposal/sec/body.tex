@@ -2,7 +2,7 @@
 \label{sec:intro}
 
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
-not only in our daily life, but also in the fields of artificial intelligence and computer vision.
+not only in our daily life, but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
 In this short proposal, we aim to leverage several \textit{deep neural networks} (DNNs), 
 which contain convolution layers and residual/attention blocks, 
 to detect and interpret six basic universally recognized and expressed human facial emotions 
@@ -15,8 +15,8 @@ The structure of this report is arranged as follows.
 In \Cref{sec:approach}, 
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:result}. 
-\Cref{sec:optim} describes the optimization strategies we have already used and plan to investigate in the coming weeks. 
-Finally,
+\Cref{sec:optim} describes the optimization strategies we have plan to investigate in the coming weeks. 
+\Cref{fig:result} illustrates the empirical results of our current best model, 
 an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
@@ -58,7 +58,7 @@ as it includes plenty existing functions to load various custom datasets in doma
   % \resizebox{.45\textwidth}{!}{
    \includegraphics[width=\linewidth]{output.png}
   % }
-   \caption{Empirical results in terms of the loss and accuracy on different training epochs for our current best model} % Specify later
+   \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
    \label{fig:result}
 \end{figure}
 
@@ -72,11 +72,17 @@ We also add a dropout layer to prevent overfitting.
 The activation function after each layer is \textit{Rectified Linear Unit} (ReLU), 
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
-The test results in \Cref{fig:result} are aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+
 In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
 we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
+Additionally, we increase the depth of the network by adding some convolutional layers to learn more complex features. 
+To help the training of deeper networks more efficiently, 
+we add the residual connections, 
+as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
+Moreover, 
+we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
 
-\begin{table}
+\begin{table}%[ht]
   \centering
   \begin{tabular}{@{}lc@{}}
     \toprule
@@ -102,15 +108,17 @@ we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.o
 \label{sec:result}
 
 For evaluation, we use the metric accuracy. 
-As seen in \Cref{tab:model}, 
-we report all the training, testing, and validation accuracy in \% to improve the performance of our models. 
 The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 
-The best results of the performance of the model with respect to loss and accuracy are depicted in \Cref{fig:result}.
+We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
 
-\section{Optimization Strategies}
-\label{sec:optim}
+\Cref{fig:result} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+As seen in \Cref{tab:model}, 
+our CNN without random augmentation outperforms the other models in terms of the accuracy, 
+indicating that this kind of augmentation is not able to help our model predict the correct the label, 
+thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
+Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
-\begin{table}
+\begin{table}[ht]
   \centering
   \resizebox{.47\textwidth}{!}{
   \begin{tabular}{@{}lccc@{}}
@@ -118,47 +126,46 @@ The best results of the performance of the model with respect to loss and accura
     Models &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) \\
     \midrule
     CNN (Baseline) & 66.3 & 75.2 & 52.6 \\
+    ResNet18~\cite{HeZRS16} & 76.8 & 79.8 & 60.3 \\
     CNN (SE+Aug) & 74.3 & 79.9 & 59.6 \\
     CNN (SE-Aug) & 84.6 & 79.5 & \textbf{62.8} \\
     CNN (SE+Res) & 71.5 & 78.9 & 56.4 \\
-    ResNet18~\cite{HeZRS16} & 76.8 & 79.8 & 60.3 \\
     CNN (Ours-Aug) & \textbf{84.9} & \textbf{80.0} & 62.6 \\
     \bottomrule
   \end{tabular}
   }
   \caption{Accuracy (\%) for different models in our experiments 
-  (Aug stands for data augmentation, SE for squeeze and excitation, and Res for residual connections; 
-  +/- represent)}
+  (Note that Aug stands for data augmentation, SE for squeeze and excitation, and Res for residual connections; 
+  +/- represent with/without respectively.)}
   \label{tab:model}
 \end{table}
 
-Techniques like dropout, renormalization, and data augmentation are employed to enhance model performance during training.
-Additionally, we increase the depth of the network by adding some convolutional layers to learn more complex features. 
-To help the training of deeper networks more efficiently, 
-we add the residual connections, 
-as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
-Moreover, 
-we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
-In the coming weeks, 
-we will focus on the following tasks~\Cref{sec:optim:aug} and~\Cref{sec:optim:cam}.
-Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.%~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
+\section{Optimization Strategies}
+\label{sec:optim}
+
+% To enhance model performance during training, 
+% we will focus on the following tasks, 
+% i.e., data augumentation (see \Cref{sec:optim:aug}), CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
+%~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
+% Techniques like dropout, renormalization, and data augmentation are employed 
 
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
-In machine learning and artificial intelligence, 
+In machine learning and AI, 
 augmentation stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
 By introducing subtle modifications to existing data points, 
 augmentation effectively expands the dataset, 
-enabling models to generalize better and achieve enhanced performance.
+enabling models to generalize better and achieve enhanced performance. 
 As models encounter slightly altered versions of familiar data, 
 they are forced to make more nuanced and robust predictions. 
-With this process, we aim to prevent overfitting, 
-a common pitfall in machine learning. 
+With this process, we aim to prevent overfitting. 
+% which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 During the project, we pursue various approaches. 
-We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed, in other research contexts. 
-We create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
+We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed. 
+% in other research contexts. 
+Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
 \begin{figure*}
   \resizebox{\textwidth}{!}{

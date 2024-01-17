@@ -2,22 +2,23 @@
 \label{sec:intro}
 
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
-not only in our daily life, but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
+not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
 In this short proposal, we aim to leverage several \textit{deep neural networks} (DNNs), 
 which contain convolution layers and residual/attention blocks, 
 to detect and interpret six basic universally recognized and expressed human facial emotions 
 (i.e., happiness, surprise, sadness, anger, disgust, and fear). 
 To make our model more transparent, 
-we explain this emotion classification task with \textit{class activation mapping} (CAM) and \textit{gradient-weighted class activation mapping} (Grad-CAM). 
+we explain this emotion classification task with \textit{class activation mapping} (CAM) 
+and \textit{gradient-weighted class activation mapping} (Grad-CAM). 
 
 The structure of this report is arranged as follows. 
 % \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:approach}, 
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:result}. 
-\Cref{sec:optim} describes the optimization strategies we have plan to investigate in the coming weeks. 
-\Cref{fig:result} illustrates the empirical results of our current best model, 
-an overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
+\Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
+\Cref{fig:result} illustrates the empirical results of our current best model. 
+An overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
@@ -34,23 +35,13 @@ we acquired the databases such as FER+~\cite{BarsoumZCZ16}~\footnote{\url{https:
 TFEID~\cite{tfeid,LiGL22}, 
 as well as the video database DISFA~\cite{MavadatiMBTC13}, 
 from public institutions and GitHub repositories~\footnote{\url{https://github.com/spenceryee/CS229}}. 
-Based on these databases, we created a dataset by augmentation to increase variety, 
-full details of augmentation (see \Cref{sec:optim:aug} for details). % is given in~
+Based on these databases, we created a dataset by augmentation to increase the variety, 
+and full details of augmentation (see \Cref{sec:optim:aug}). % is given in~
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
 That is, 
 we generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
 Besides the original format of images and videos, we set standards for extracting frames from the videos, 
-resize training pictures to 64x64 pixels, and save them as the JPG format.
-
-The images are converted to greyscale with three channels, 
-as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
-Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
-We create a custom dataset, which is a collection of data relating to all training images we collected, 
-using PyTorch~\footnote{\url{https://pytorch.org}}, 
-as it includes plenty existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
-
-% a specific problem you're working on.
-% In essence, a custom dataset can be comprised of almost anything. 
+resizing training pictures to 64x64 pixels, and saving them in the JPG format.
 
 \begin{figure}[ht]
   \centering
@@ -61,6 +52,16 @@ as it includes plenty existing functions to load various custom datasets in doma
    \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
    \label{fig:result}
 \end{figure}
+
+The images are converted to greyscale with three channels, 
+as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
+Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
+We create a custom dataset, which is a collection of data relating to all training images we collected, 
+using PyTorch~\footnote{\url{https://pytorch.org}}, 
+as it includes plenty of existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
+
+% a specific problem you're working on.
+% In essence, a custom dataset can be comprised of almost anything. 
 
 \subsection{Model Architecture}
 We implement an emotion classification model from scratch with four convolution layers at the very beginning. 
@@ -80,7 +81,7 @@ To help the training of deeper networks more efficiently,
 we add the residual connections, 
 as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
 Moreover, 
-we add squeeze and excitation (SE) blocks to apply channel-wise attention. 
+we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attention. 
 
 \begin{table}%[ht]
   \centering
@@ -112,9 +113,10 @@ The loss function employed for all models is cross-entropy, which is typically f
 We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
 
 \Cref{fig:result} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 
-our CNN without random augmentation outperforms the other models in terms of the accuracy, 
-indicating that this kind of augmentation is not able to help our model predict the correct the label, 
+our CNN without random augmentation outperforms the other models in terms of accuracy, 
+indicating that this kind of augmentation is not able to help our model predict the correct label, 
 thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
@@ -136,7 +138,7 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
   }
   \caption{Accuracy (\%) for different models in our experiments 
   (Note that Aug stands for data augmentation, SE for squeeze and excitation, and Res for residual connections; 
-  +/- represent with/without respectively.)}
+  +/- represent with/without respectively)}
   \label{tab:model}
 \end{table}
 
@@ -151,7 +153,8 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
-In machine learning and AI, 
+
+In deep learning and AI, %machine
 augmentation stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
 By introducing subtle modifications to existing data points, 
@@ -163,7 +166,6 @@ With this process, we aim to prevent overfitting.
 % which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 During the project, we pursue various approaches. 
-We are implementing different combinations of functions from the \texttt{pytorch.transforms} library and testing already established filters that have been developed. 
 % in other research contexts. 
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
@@ -212,44 +214,46 @@ Meanwhile, we create various replications of existing photos by randomly alterin
   \label{fig:schedule}
 \end{figure*}
 
-\subsection{CAM} % aggregate
+\subsection{Classification Scores}
+\label{sec:optim:csv}
+To further analyze the separate scores of each class of the model, 
+we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
+This CSV file is represented with the corresponding classification scores. 
+
+\subsection{CAM and Grad-CAM} % aggregate Class Activation Mapping (CAM)
 \label{sec:optim:cam}
 
-Generally speaking, Class Activation Mapping is a visualization technique designed to highlight the regions of an image or video that contribute the most to the prediction of a specific class by a neural network, 
-typically the final convolutional layer of a CNN before the fully connected layers. 
-Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
-Besides proposing a method to visualize the discriminative regions of a classification-trained CNN, 
-we adapte this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
-The model can thus learn the classification task with class labels and is then able to localize the object of a specific class in an image. 
+In generally, 
+CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
+as it highlights the important regions of an image or a video, 
+aiding in the understanding of the behavior of the model, 
+which is especially useful for model debugging and improvement. 
+Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, % classification-trained
+we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
+The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
 
+% Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
 %~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 % CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute most to a particular class prediction. 
 % Model Architecture:
 % CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
 % CAM Process:
-The final convolutional layer produces feature maps, and the GAP layer computes the average value of each feature map.
-The weights connecting the feature maps to the output class are obtained.
-The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
+% The final convolutional layer produces feature maps, and 
 % Application: 
-CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification.
-It aids in understanding the model's behavior and can be useful for model debugging and improvement.
-The global average pooling (GAP) layer is used to obtain a spatial average of the feature maps. 
-
-\subsection{Grad-CAM} % aggregate
-\label{sec:optim:gcam}
-
+% The GAP layer is used to obtain a spatial average of the feature maps. 
+% The \textit{global average pooling} (GAP) layer computes the average value of each feature map to obtain a spatial average of feature maps.
+% The weights connecting the feature maps to the output class are obtained.
+% The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
+% CAM is a visualization technique designed to highlight the important regions of an image or video that contribute the most to the prediction of a specific class by a neural network, 
+% typically the final convolutional layer of a CNN before the fully connected layers. 
 Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
-CAM must be implemented in the last layer of a CNN, 
+CAM must be implemented in the last layer of a CNN or before the fully connected layer, 
 % Grad-CAM  can be implemented with every architecture without big effort. 
-We thus follow up Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
+We will meanwhile compare to Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
 introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraries of Pytorch and OpenCV~\footnote{~\url{https://opencv.org}}.
-
-\subsection{Table of Classification scores}
-\label{sec:optim:csv}
-To further analyze the separate scores of the each class of the model, 
-we wrote a script that takes a folder path as input and iterates through the images inside a subfolder. 
-The output is a CSV file representing the corresponding classification scores. 
+This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
+% \subsection{Grad-CAM} % aggregate
+% \label{sec:optim:gcam}
 
 \subsection*{Author Contributions}
 \label{sec:author}
@@ -263,7 +267,7 @@ Every author did the literature research and contributed to the writing of the p
   She also takes part in the explainable AI and Grad-CAM.
   \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, data preprocessing, and CAM-Images inquiry.
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
-  In the specific writing part, she also draw the figures and tables and improved this report from other team members.
+  In the specific writing part, she draws the figures and tables and improved this report from team members.
 \end{itemize}
 
 \section*{Acknowledgements}

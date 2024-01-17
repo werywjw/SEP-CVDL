@@ -18,12 +18,11 @@ we address the datasets we collected and the model architecture we implemented.
 The preliminary evaluation results of our models are given in \Cref{sec:result}. 
 \Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
 \Cref{fig:result} illustrates the empirical results of our current best model. 
-An overview of our time schedule for the entire final project is given in \Cref{fig:schedule}. 
 Our code and supplementary material are available at \url{https://github.com/werywjw/SEP-CVDL}.
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
-% \section{Related Work}
-% \label{sec:related}
+\section{Related Work}
+\label{sec:related}
 
 \section{Approach}
 \label{sec:approach}
@@ -169,50 +168,6 @@ During the project, we pursue various approaches.
 % in other research contexts. 
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
-\begin{figure*}
-  \resizebox{\textwidth}{!}{
-    \begin{ganttchart}[
-      % hgrid,
-      vgrid,
-      time slot format=isodate,
-      x unit=0.3cm, 
-      y unit title=0.9cm,
-      y unit chart=0.45cm,
-      bar height=0.35,
-      bar top shift=0.2,
-      group right shift=0,
-      group top shift=0.1,
-      group height=.3,
-      group peaks width={0.2},
-      milestone left shift=0.5,
-      milestone right shift=0.5,
-      title label font=\bfseries\Large
-  ]{2023-12-21}{2024-02-23}
-      \gantttitlecalendar{year, month} \\
-      \ganttgroup[bar/.append style={fill=LMUGreen}]{Preliminary Report}{2023-12-21}{2024-01-17} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Data Collecting \& Processing}{2023-12-21}{2024-01-10} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Implementing}{2023-12-30}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Model Training \& Validating}{2023-12-30}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=LMUGreen}]{Preliminary Report Writing}{2024-01-04}{2024-01-16} \\
-      % \ganttmilestone{Deadline 1}{2024-01-18} \\
-      \ganttgroup[bar/.append style={fill=Orange}]{Presentation}{2024-01-05}{2024-02-07} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Explainable AI}{2024-01-05}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Model Fine-Tuning}{2024-01-18}{2024-01-30} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Video Preparing}{2024-01-18}{2024-02-06} \\
-      \ganttbar[bar/.append style={fill=Orange}]{Slides Preparing}{2024-01-25}{2024-02-06} \\
-      % \ganttmilestone{Deadline 2}{2024-02-08} \\
-      \ganttgroup[bar/.append style={fill=cvprblue}]{Final Submission}{2024-01-19}{2024-02-22} \\
-      \ganttbar[bar/.append style={fill=cvprblue}]{Final Report Writing}{2024-01-19}{2024-02-21} \\
-      % \ganttmilestone{Deadline 3}{2024-02-23}
-      \ganttlink{elem4}{elem11}
-      % \ganttlink{elem2}{elem3}
-      % \ganttlink{elem2}{elem4}
-      % \ganttlink{elem4}{elem5}
-  \end{ganttchart}
-  }
-  \caption{Overview of the schedule for the final project}
-  \label{fig:schedule}
-\end{figure*}
 
 \subsection{Classification Scores}
 \label{sec:optim:csv}
@@ -267,7 +222,7 @@ Every author did the literature research and contributed to the writing of the p
   She also takes part in the explainable AI and Grad-CAM.
   \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, data preprocessing, and CAM-Images inquiry.
   \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
-  In the specific writing part, she draws the figures and tables and improved this report from team members.
+  In the specific writing part, she drew the figures and tables and improved this report from team members.
 \end{itemize}
 
 \section*{Acknowledgements}

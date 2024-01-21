@@ -49,3 +49,15 @@ exit
 ```
 exit
 ```
+
+## important git commands
+
+```
+git status
+
+git add -A --dry-run
+git add -A
+
+git commit -m  'comment'
+git push
+```

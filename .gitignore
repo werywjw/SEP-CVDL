@@ -22,3 +22,6 @@ presentation
 *.fdb_latexmk
 *.fls
 *.brf
+
+__pycache__/
+

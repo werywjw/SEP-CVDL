@@ -19,7 +19,7 @@ Our main contributions can be summarized as follows. % update later
 \end{itemize}
 
 The structure of this report is arranged as follows. 
-% \Cref{sec:related} contains the related work of our research. 
+\Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:approach}, 
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:evaluation:results}. 
@@ -48,13 +48,15 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \label{sec:evaluation:datasets}
 
 % Table: dataset description 
+% How many images, videos, per class and in total, see paper if they have already described this
 To initiate the project, % training, 
-we acquired the databases such as FER+~\cite{BarsoumZCZ16}~\footnote{\url{https://github.com/microsoft/FERPlus}}, RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
+we acquired the databases such as FER+~\cite{BarsoumZCZ16}~\footnote{\url{https://github.com/microsoft/FERPlus}}, 
+RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
 TFEID~\cite{tfeid,LiGL22}, 
 as well as the video database DISFA~\cite{MavadatiMBTC13}, 
 from public institutions and GitHub repositories~\footnote{\url{https://github.com/spenceryee/CS229}}. 
 Based on these databases, we created a dataset by augmentation to increase the variety, 
-and full details of augmentation (see \Cref{sec:optim:aug}). % is given in~
+and full details of augmentation (see \Cref{sec:optim:aug}). 
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
 That is, 
 we generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
@@ -141,16 +143,16 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 \begin{table*}[ht]
   \centering
   % \resizebox{.47\textwidth}{!}{
-  \begin{tabular}{@{}lcccc@{}}
+  \begin{tabular}{@{}lccccc@{}}
     \toprule 
-    Models &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) & \# params \\
+    Models & Architecture &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) & \# params \\
     \midrule
-    CNN (Baseline) & 66.3 & 75.2 & 52.6 & \\
-    ResNet18~\cite{HeZRS16} & 76.8 & 79.8 & 60.3 & \\
-    CNN (SE+Res) & 71.5 & 78.9 & 56.4 & \\
-    CNN (SE+Aug) & 74.3 & 79.9 & 59.6 & \\
-    CNN (SE-Aug) & 84.6 & 79.5 & \textbf{62.8} & \\
-    CNN (Ours-Aug) & \textbf{84.9} & \textbf{80.0} & 62.6 & \\
+    CNN (Baseline) & & 66.3 & 75.2 & 52.6 & \\
+    ResNet18~\cite{HeZRS16} & & 76.8 & 79.8 & 60.3 & \\
+    CNN (SE+Res) & & 71.5 & 78.9 & 56.4 & \\
+    CNN (SE+Aug) & & 74.3 & 79.9 & 59.6 & \\
+    CNN (SE-Aug) & & 84.6 & 79.5 & \textbf{62.8} & \\
+    CNN (Ours-Aug) & & \textbf{84.9} & \textbf{80.0} & 62.6 & \\
     \bottomrule
   \end{tabular}
   % }
@@ -165,7 +167,8 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 
 % To enhance model performance during training, 
 % we will focus on the following tasks, 
-% i.e., data augumentation (see \Cref{sec:optim:aug}), CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
+% i.e., data augumentation (see \Cref{sec:optim:aug}), 
+% CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
 %~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
 % Techniques like dropout, renormalization, and data augmentation are employed 
 
@@ -180,11 +183,9 @@ augmentation effectively expands the dataset,
 enabling models to generalize better and achieve enhanced performance. 
 As models encounter slightly altered versions of familiar data, 
 they are forced to make more nuanced and robust predictions. 
-With this process, we aim to prevent overfitting. 
-% which is a common pitfall in machine learning. 
+With this process, we aim to prevent overfitting. % which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 During the project, we pursue various approaches. 
-% in other research contexts. 
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
 
@@ -226,7 +227,7 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 We will meanwhile compare to Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
 introduced as a technique that is easier to implement with different architectures.
 This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
-% \subsection{Grad-CAM} % aggregate
+% \subsection{Grad-CAM} 
 % \label{sec:optim:gcam}
 
 \section{Conclusion and Discussion}

@@ -33,8 +33,8 @@ def classify_image(image_path):
         outputs = model(image)
         probabilities = F.softmax(outputs, dim=1)
     scores = probabilities.cpu().numpy().flatten()
-    ordered_scores = [scores[i] for i in [3, 1, 2, 4, 5, 0]]  # difference see README!!!
-    rounded_scores = [round(score, 2) for score in ordered_scores]
+    # ordered_scores = [scores[i] for i in [3, 1, 2, 4, 5, 0]]  # difference see README!!!
+    rounded_scores = [round(score, 2) for score in scores]
     return rounded_scores
 
 def process_folder(folder_path):
@@ -48,13 +48,14 @@ def process_folder(folder_path):
 
 def main(folder_path):
     results = process_folder(folder_path)
-    header = ['filepath', 'surprise', 'fear', 'disgust', 'happiness', 'sadness', 'anger']
-    with open('classification_scores_test.csv', 'w', newline='') as file:
+    header = ['filepath', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
+    with open('classification_scores_train_RAF.csv', 'w', newline='') as file: # change here
         writer = csv.writer(file)
         writer.writerow(header)
         writer.writerows(results)
         
 if __name__ == '__main__':
-    image_path = 'dataset/vali' # Please change this to your own path
+    # image_path = 'dataset/vali' # Please change this to your own path
+    image_path = 'archive/RAF-DB/train'
     # image_path = 'archive/DATASET/test'
     main(image_path)

@@ -1,5 +1,9 @@
 # SEP-CVDL
 
+## evaluation plan
+[ ] train on the RAF-DB train firstly
+[ ] see CSV results on RAF-DB test & validation given 
+
 ## requirements.txt
 ```
 pipreqs /Users/wery/Desktop/SEP-CVDL

@@ -60,4 +60,7 @@ git add -A
 
 git commit -m  'comment'
 git push
+
+git stash list
+git stash clear
 ```

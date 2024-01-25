@@ -8,7 +8,11 @@ from torchvision.transforms import transforms
 from model import EmotionClassifier
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
 model = EmotionClassifier().to(device)
+model.load_state_dict(torch.load('best_vgg.pth', map_location=device))
+model.eval()
+
 transform = transforms.Compose([
     transforms.Resize((64, 64)),
     transforms.Grayscale(num_output_channels=3),
@@ -45,11 +49,12 @@ def process_folder(folder_path):
 def main(folder_path):
     results = process_folder(folder_path)
     header = ['filepath', 'surprise', 'fear', 'disgust', 'happiness', 'sadness', 'anger']
-    with open('classification_scores.csv', 'w', newline='') as file:
+    with open('classification_scores_test.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(header)
         writer.writerows(results)
         
 if __name__ == '__main__':
-    image_path = 'dataset/validation_set' # Please change this to your own path
+    # image_path = 'dataset/validation_set' # Please change this to your own path
+    image_path = 'archive/DATASET/test'
     main(image_path)

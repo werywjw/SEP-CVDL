@@ -8,13 +8,13 @@ http://www.whdeng.cn/raf/model1.html
 Where I downloaded:
 https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code
 
-1. Surprised
-2. Fearful
-3. Disgusted
-4. Happy
-5. Sad
-6. Angry
-7. Neutral (delete)
+0. happiness
+1. surprise
+2. sadness
+3. anger
+4. disgust
+5. fear
+6. Neutral (delete)
 
 - archive/DATASET/test is from the RAF-DB dataset test folder
 - archive/DATASET/train contains from: 

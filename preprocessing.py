@@ -4,12 +4,12 @@ import pandas as pd
 path = 'dataset/validation_set'
 
 label_mapping = {
+    "happiness": 0,
     "surprise": 1,
-    "fear": 2,
-    "disgust": 3,
-    "happiness": 4,
-    "sadness": 5,
-    "anger": 6
+    "sadness": 2,
+    "anger": 3,
+    "disgust": 4,
+    "fear": 5,
 }
 
 image_data = []

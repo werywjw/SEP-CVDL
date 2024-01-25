@@ -10,7 +10,7 @@ from model import EmotionClassifier
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 model = EmotionClassifier().to(device)
-model.load_state_dict(torch.load('best_vgg.pth', map_location=device))
+model.load_state_dict(torch.load('best_RAF.pth', map_location=device))
 model.eval()
 
 transform = transforms.Compose([
@@ -55,6 +55,6 @@ def main(folder_path):
         writer.writerows(results)
         
 if __name__ == '__main__':
-    # image_path = 'dataset/validation_set' # Please change this to your own path
-    image_path = 'archive/DATASET/test'
+    image_path = 'dataset/vali' # Please change this to your own path
+    # image_path = 'archive/DATASET/test'
     main(image_path)

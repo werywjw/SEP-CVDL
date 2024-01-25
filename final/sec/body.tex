@@ -13,9 +13,11 @@ and \textit{gradient-weighted class activation mapping} (Grad-CAM).
 
 Our main contributions can be summarized as follows. % update later
 \begin{itemize}
-  \item We collect and preprocess the training image and video data from various public databases. 
-  \item We implement several CNN models from scratch and optimize it with different augmentation techniques. 
-  \item We explain the model with CAM and Grad-CAM.
+  \item We collect and preprocess the training and testing data (image and video) from various public databases. 
+  \item We implement all CNN models from scratch and optimize it with different augmentation techniques. 
+  Meanwhile, we provide the classification scores of each emotion class in a comprehensive CSV file with respect to each image. 
+  \item Video demo???
+  \item We explain our model with CAM and Grad-CAM. 
 \end{itemize}
 
 The structure of this report is arranged as follows. 
@@ -47,7 +49,7 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \subsection{Dataset Description}
 \label{sec:evaluation:datasets}
 
-% Table: dataset description 
+% add Table: dataset description 
 % How many images, videos, per class and in total, see paper if they have already described this
 To initiate the project, % training, 
 we acquired the databases such as FER+~\cite{BarsoumZCZ16}~\footnote{\url{https://github.com/microsoft/FERPlus}}, 
@@ -59,7 +61,7 @@ Based on these databases, we created a dataset by augmentation to increase the v
 and full details of augmentation (see \Cref{sec:optim:aug}). 
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
 That is, 
-we generalized a folder structure annotating the labels 1 (surprise), 2 (fear), 3 (disgust), 4 (happiness), 5 (sadness), and 6 (anger). 
+we generalized a folder structure annotating the labels 0 (happiness), 1 (surprise), 2 (sadness), 3 (anger), 4 (disgust), and 5 (fear). 
 Besides the original format of images and videos, we set standards for extracting frames from the videos, 
 resizing training pictures to 64x64 pixels, and saving them in the JPG format.
 
@@ -128,8 +130,10 @@ We report all the training, testing, and validation accuracy in \% to compare th
   \label{tab:hyper}
 \end{table}
 
-% model comparison, e.g., SVM try, also VGG
-% specific dataset comparison, e.g., RAF-DB & FER+
+% model comparison, e.g., SVM try
+% specific dataset comparison, 
+% e.g., RAF-DB (train, test, validation) & FER+ (train & test & validation)
+% Aggregated train & test (RAF-DB / FER+) & validation 
 % bold the best results later
 
 \Cref{fig:result} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
@@ -247,7 +251,7 @@ Every author did the literature research and contributed to the writing of the p
   \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
   She also takes part in the explainable AI and Grad-CAM.
   \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, data preprocessing, and CAM-Images inquiry.
-  \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, and optimization strategies. 
+  \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, classification score script, and optimization strategies. 
   In the specific writing part, she drew the figures and tables and improved this report from team members.
 \end{itemize}
 

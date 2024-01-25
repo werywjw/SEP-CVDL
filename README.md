@@ -17,9 +17,10 @@
 pipreqs /Users/wery/Desktop/SEP-CVDL
 ```
 
-## How to get the classification score in a CSV file?
+## How to get the classification scores in a CSV file?
 
-run ```
+Run the following command:
+```
 python3 script_csv.py
 ```
 Note that please change the filepath to the image folder that you would like to try 😄

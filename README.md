@@ -4,7 +4,7 @@
 ```
 pipreqs /Users/wery/Desktop/SEP-CVDL
 ```
-# SEP-CVDL
+
 ## notes on Slurm
 
 1. get your CIP account information 

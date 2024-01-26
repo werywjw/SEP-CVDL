@@ -33,7 +33,6 @@ def classify_image(image_path):
         outputs = model(image)
         probabilities = F.softmax(outputs, dim=1)
     scores = probabilities.cpu().numpy().flatten()
-    # ordered_scores = [scores[i] for i in [3, 1, 2, 4, 5, 0]]  # difference see README!!!
     rounded_scores = [round(score, 2) for score in scores]
     return rounded_scores
 

@@ -1,13 +1,13 @@
 # SEP-CVDL
 
 ## evaluation plan TODO
-- [ ] train on the RAF-DB training set firstly
+- [X] train on the RAF-DB training set firstly
 
-- [ ] see CSV results on RAF-DB test & validation given 
+- [X] see CSV results on RAF-DB test & validation given 
 
-- [ ] rerun models after CSV classification score is fine
+- [X] rerun models after CSV classification score is fine
 
-- [ ] rerun aggregated training data (FER&RAF-DB)
+- [X] rerun aggregated training data (FER&RAF-DB)
 
 - [ ] see if given image with label in names.jpeg as validation can directly read
 

@@ -49,13 +49,13 @@ def process_folder(folder_path):
 def main(folder_path):
     results = process_folder(folder_path)
     header = ['filepath', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
-    with open('classification_scores_train_RAF.csv', 'w', newline='') as file: # change here
+    with open('classification_scores_vali.csv', 'w', newline='') as file: # change here
         writer = csv.writer(file)
         writer.writerow(header)
         writer.writerows(results)
         
 if __name__ == '__main__':
-    # image_path = 'dataset/vali' # Please change this to your own path
-    image_path = 'archive/RAF-DB/train'
-    # image_path = 'archive/DATASET/test'
+    image_path = 'dataset/vali' # Please change this to your own path
+    # image_path = 'archive/RAF-DB/train'
+    # image_path = 'archive/RAF-DB/test'
     main(image_path)

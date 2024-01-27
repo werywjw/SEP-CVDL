@@ -20,9 +20,10 @@ source ~/miniconda3/bin/activate
 echo "$(conda --version)"
 
 # create conda environment
-conda create --name myenv
-conda create --name new_env --file installed_packages.txt
+conda create --name myenv --file installed_packages.txt
+conda activate myenv
 conda info --env | grep "active environment"
+conda list
 
 # run jupyternotebook headless
 # jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb

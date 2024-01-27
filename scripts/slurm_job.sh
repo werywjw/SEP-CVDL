@@ -20,9 +20,15 @@ source ~/miniconda3/bin/activate
 echo "$(conda --version)"
 
 # create conda environment
+# delete existing
+conda env remove --name myenv
+# create a new environment from the list of installed packages
 conda create --name myenv --file installed_packages.txt --force
+# activate the environment
 conda activate myenv
+# check the environment
 conda info --env | grep "active environment"
+# list the packages in the environment
 conda list
 
 # run jupyternotebook headless

@@ -27,9 +27,9 @@ conda create --name myenv
 # activate the environment
 conda activate myenv
 # install packages
-conda install pip
+conda install pip --yes
 # install packages from requirements.txt
-pip install -r installed_packages.txt
+pip install -r installed_packages.txt --yes
 # check the environment
 conda info --env | grep "active environment"
 # list the packages in the environment

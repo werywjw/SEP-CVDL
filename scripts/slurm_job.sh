@@ -23,11 +23,11 @@ echo "$(conda --version)"
 # delete existing
 conda env remove --name myenv
 # create a new environment from the list of installed packages
-conda create --name myenv --force
+conda create --name myenv
 # activate the environment
 conda activate myenv
 # install packages
-conda insatll pip
+conda install pip
 # install packages from requirements.txt
 pip install -r installed_packages.txt
 # check the environment

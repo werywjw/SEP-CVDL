@@ -9,8 +9,6 @@ echo "Starting executio of CVDL_JML"
 echo "Shell: $SHELL"
 echo "Python version: $(python3 --version)"
 
-# get repo
-git clone https://github.com/werywjw/SEP-CVDL.git
 
 # create python environment
 # install miniconda
@@ -22,10 +20,14 @@ rm -rf ~/miniconda3/miniconda.sh
 source ~/miniconda3/bin/activate
 echo "$(conda --version)"
 
+# get repo
+git clone https://github.com/werywjw/SEP-CVDL.git
+
 # create conda environment
 # delete existing
 conda env remove --name myenv
 # create a new environment from the list of installed packages
+cd SEP-CVDL/
 conda create --name myenv --file installed_packages.txt --yes
 # activate the environment
 conda activate myenv

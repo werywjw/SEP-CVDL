@@ -20,7 +20,7 @@ source ~/miniconda3/bin/activate
 echo "$(conda --version)"
 
 # create conda environment
-conda create --name myenv --file installed_packages.txt
+conda create --name myenv --file installed_packages.txt --force
 conda activate myenv
 conda info --env | grep "active environment"
 conda list

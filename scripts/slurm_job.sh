@@ -9,6 +9,9 @@ echo "Starting executio of CVDL_JML"
 echo "Shell: $SHELL"
 echo "Python version: $(python3 --version)"
 
+# get repo
+git clone https://github.com/werywjw/SEP-CVDL.git
+
 # create python environment
 # install miniconda
 mkdir -p ~/miniconda3
@@ -36,5 +39,5 @@ conda activate myenv
 conda list
 
 # run jupyternotebook headless
-# jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb
+jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb
 sleep 30

@@ -29,7 +29,8 @@ ssh <cip-kennung>@<server_name>
 ```
 (e.g., ssh <cip-kennung>@chondrit, ssh <cip-kennung>@idle) asked to type yes + enter password
 
-7. to get information of the server architechtur, 
+7. to get information of the server architechtur
+
 Linux terminal command: lsb_release -a
 get info of graphiccard command: nvidia-smi
 list of python versions: 
@@ -38,15 +39,43 @@ Python 2.7.18
 kawka@chondrit:~ (0) [15:45:06] % python3 --version  
 Python 3.8.10  
 information systemworkload command: htop 
+
 exit: q
 
-8. exit the server by command:
+8. get project to server
+
+```bash
+git clone https://github.com/werywjw/SEP-CVDL.git
 ```
+
+login with unsername of github and github Mastertoken 
+TODO: Explanation Mastertoken
+
+check branch:
+```bash
+git status
+```
+
+swith to your branch, to the correct directory: 
+```bash
+git checkout <branch_name>
+ls
+cd <path to directory>
+```
+
+run code
+```
+sbatch <slurm_script>
+```
+
+
+9. exit the server by command:
+```bash
 exit
 ```
 
-9. exit the remote host by command:
-```
+10. exit the remote host by command:
+```bash
 exit
 ```
 

@@ -6,8 +6,8 @@
 #TODO: check how to get files created by script
 
 echo "Starting executio of CVDL_JML"
-echo $SHELL
-# clone repository
+echo "Shell: $SHELL"
+echo "Python version: $(python3 --version)"
 
 # create python environment
 # install miniconda
@@ -17,9 +17,12 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 ~/miniconda3/bin/conda init zsh
 source ~/miniconda3/bin/activate
-
-echo "$(python3 --version)"
 echo "$(conda --version)"
+
+# create conda environment
+conda create --name myenv
+conda create --name new_env --file installed_packages.txt
+conda info --env | grep "active environment"
 
 # run jupyternotebook headless
 # jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb

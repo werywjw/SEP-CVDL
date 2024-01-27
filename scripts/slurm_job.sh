@@ -1,8 +1,11 @@
 #!/bin/bash
 #SBATCH --job-name=CVDL_JML
-#SBATCH --output=CVDL_JML_%j_%N_%Y-%m-%d_%H-%M.out
-#SBATCH --error=CVDL_JML_%j_%N_%Y-%m-%d_%H-%M.err
+#SBATCH --output=%x_%j_%N.out
+#SBATCH --error=%x_%j_%N.err
 #SBATCH --partition=Nvidia2060
 
+# run jupyternotebook headless
+# jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb
 echo "Hello World!"
+echo "$(python3 --version)"
 sleep 30

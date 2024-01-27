@@ -81,7 +81,7 @@ cd <path to directory>
 9. run code
 
 ```bash
-sbatch <slurm_script>
+sbatch slurm_job.sh
 ```
 
 get joblist
@@ -120,7 +120,7 @@ git config credential.helper store
 exit
 ```
 
-11. exit jumphost
+13. exit jumphost
 ```bash
 exit
 ```

@@ -5,10 +5,9 @@
 #SBATCH --partition=Nvidia2060
 #TODO: check how to get files created by script
 
-echo "Starting executio of CVDL_JML"
+echo "Starting execution of CVDL_JML"
 echo "Shell: $SHELL"
 echo "Python version: $(python3 --version)"
-
 
 # create python environment
 # install miniconda
@@ -18,30 +17,33 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 ~/miniconda3/bin/conda init zsh
 source ~/miniconda3/bin/activate
-echo "$(conda --version)"
+echo "Conda version: $(conda --version)"
+conda config --append channels conda-forge
 
 # get repo
+rm -rf SEP-CVDL
 git clone https://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@github.com/werywjw/SEP-CVDL.git
+cd SEP-CVDL/
+git checkout Leah
+GIT_CHECKOUT_PID=$!
 
+# Step 2: Wait for the Git checkout to finish
+wait $GIT_CHECKOUT_PID
+
+ls
 # create conda environment
 # delete existing
 conda env remove --name myenv
 # create a new environment from the list of installed packages
-cd SEP-CVDL/
-# list files and folders in the current directory
-ls
 conda create --name myenv --file installed_packages.txt --yes
 # activate the environment
 conda activate myenv
-# install packages
-# conda install pip --yes
-# install packages from requirements.txt
-# pip install -r installed_packages.txt --yes
 # check the environment
-# conda info --env | grep "active environment"
+conda info --env | grep "active environment"
 # list the packages in the environment
 conda list
 
 # run jupyternotebook headless
 jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb
-sleep 30
+
+echo "Ending execution of CVDL_JML"

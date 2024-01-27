@@ -21,13 +21,15 @@ source ~/miniconda3/bin/activate
 echo "$(conda --version)"
 
 # get repo
-git clone https://github.com/werywjw/SEP-CVDL.git
+git clone https://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@github.com/werywjw/SEP-CVDL.git
 
 # create conda environment
 # delete existing
 conda env remove --name myenv
 # create a new environment from the list of installed packages
 cd SEP-CVDL/
+# list files and folders in the current directory
+ls
 conda create --name myenv --file installed_packages.txt --yes
 # activate the environment
 conda activate myenv

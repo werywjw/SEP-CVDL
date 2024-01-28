@@ -9,6 +9,12 @@ echo "Starting execution of CVDL_JML"
 echo "Shell: $SHELL"
 echo "Python version: $(python3 --version)"
 
+branch_name="Leah" # TODO: change to your branch name
+echo "Branch name: $branch_name"
+
+jupyternotebook_to_execute="validation_GCAM.ipynb"
+echo "Jupyter notebook to execute: $jupyternotebook_to_execute"
+
 # create python environment
 # install miniconda
 mkdir -p ~/miniconda3
@@ -20,14 +26,14 @@ source ~/miniconda3/bin/activate
 echo "Conda version: $(conda --version)"
 conda config --append channels conda-forge
 
-# get repo
+# get repo for Leah for everyone to use
 rm -rf SEP-CVDL
 git clone https://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@github.com/werywjw/SEP-CVDL.git
 cd SEP-CVDL/
-git checkout Leah
+git checkout $branch_name
 GIT_CHECKOUT_PID=$!
 
-# Step 2: Wait for the Git checkout to finish
+# step 2: Wait for the Git checkout to finish
 wait $GIT_CHECKOUT_PID
 
 ls
@@ -35,7 +41,7 @@ ls
 # delete existing
 conda env remove --name myenv
 # create a new environment from the list of installed packages
-conda create --name myenv --file installed_packages.txt --yes
+conda create --name myenv --file slurm/installed_packages.txt --yes
 # activate the environment
 conda activate myenv
 # check the environment
@@ -44,6 +50,6 @@ conda info --env | grep "active environment"
 conda list
 
 # run jupyternotebook headless
-jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False validation_GCAM.ipynb
+jupyter nbconvert --to html --execute --ExecutePreprocessor.enabled=False $jupyternotebook_to_execute
 
 echo "Ending execution of CVDL_JML"

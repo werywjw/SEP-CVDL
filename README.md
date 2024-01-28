@@ -1,5 +1,11 @@
 # SEP-CVDL
 
+### How to run the script to get the CSV file of classification scores?
+
+```
+./script_csv.sh
+```
+
 ### Dataset
 
 Original dataset web page:

@@ -4,7 +4,10 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 from torchvision.transforms import transforms
-
+import argparse
+import warnings
+from urllib3.exceptions import InsecureRequestWarning
+warnings.simplefilter('ignore', InsecureRequestWarning)
 from model import EmotionClassifier
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
@@ -54,7 +57,12 @@ def main(folder_path):
         writer.writerows(results)
         
 if __name__ == '__main__':
-    image_path = 'dataset/vali' # Please change this to your own path
-    # image_path = 'archive/RAF-DB/train'
-    # image_path = 'archive/RAF-DB/test'
-    main(image_path)
+    parser = argparse.ArgumentParser(description='Classify images in a folder.')
+    parser.add_argument('folder_path', type=str, help='Path to the folder containing images.')
+    args = parser.parse_args()
+    main(args.folder_path)
+    
+    # IMAGE_PATH = 'dataset/vali' # Please change this to your own path
+    # # IMAGE_PATH = 'archive/RAF-DB/train'
+    # # IMAGE_PATH = 'archive/RAF-DB/test'
+    # main(IMAGE_PATH)

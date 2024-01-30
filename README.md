@@ -6,6 +6,10 @@
 ./script_csv.sh
 ```
 
+### archieve folder contains 2 separate datasets (Training & Testing)
+
+### dataset folder contains all datasets together
+
 ### Dataset
 
 Original dataset web page:

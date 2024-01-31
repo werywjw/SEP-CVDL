@@ -1,18 +1,14 @@
 # SEP-CVDL
 
-## evaluation plan TODO
-- [X] train on the RAF-DB training set firstly
+## Where is our slides?
 
-- [X] see CSV results on RAF-DB test & validation given 
+<https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31>
 
-- [X] rerun models after CSV classification score is fine
+shared link:
 
-- [X] rerun aggregated training data (FER&RAF-DB)
+<https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing>
 
-- [ ] see if given image with label in names.jpeg as validation can directly read
-
-
-## requirements.txt
+## How to generate a requirements.txt?
 ```
 pipreqs /Users/wery/Desktop/SEP-CVDL
 ```

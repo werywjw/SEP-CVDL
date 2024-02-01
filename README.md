@@ -1,29 +1,29 @@
 # SEP-CVDL
 
-## evaluation plan TODO
-- [X] train on the RAF-DB training set firstly
+## Where are our slides 🎥?
 
-- [X] see CSV results on RAF-DB test & validation given 
+On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31).
 
-- [X] rerun models after CSV classification score is fine
+The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing).
 
-- [X] rerun aggregated training data (FER&RAF-DB)
-
-- [ ] see if given image with label in names.jpeg as validation can directly read
-
-
-## requirements.txt
+## How to generate a requirements.txt?
 ```
 pipreqs /Users/wery/Desktop/SEP-CVDL
 ```
 
-## How to get the classification scores in a CSV file?
+## How to run the script to get the CSV file of classification scores?
 
-Run the following command:
+- Option 1️⃣: Run the following command:
 ```
 python3 script_csv.py
 ```
-Note that please change the filepath to the image folder that you would like to try 😄
+
+*Note that please change the filepath to the image folder that you would like to try. 😄*
+
+- Option 2️⃣: Use shell:
+```
+./script_csv.sh
+```
 
 ## notes on Slurm
 

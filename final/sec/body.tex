@@ -16,8 +16,8 @@ Our main contributions can be summarized as follows. % update later
   \item We collect and preprocess the training and testing data (image and video) from various public databases. 
   \item We implement all CNN models from scratch and optimize it with different augmentation techniques. 
   Meanwhile, we provide the classification scores of each emotion class in a comprehensive CSV file with respect to each image. 
-  \item Video demo???
-  \item We explain our model with CAM and Grad-CAM. 
+  \item We give the video demo to illustrate the real-world performance of our best model.
+  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
 \end{itemize}
 
 The structure of this report is arranged as follows. 
@@ -107,6 +107,33 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 
 \subsection{Results}
 \label{sec:evaluation:results}
+
+\begin{table*}[ht]
+  \centering
+  % \begin{tabular}{l|c|c|c|c|c|c}
+  \begin{tabular}{lcccccc} 
+  \toprule
+  filepath & happiness & surprise & sadness & anger & disgust & fear \\
+  \midrule
+  archive/RAF-DB/train/train\_01127\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_01774\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_01991\_aligned\_sadness.jpg & 0.01 & 0.00 & \textbf{0.78} & 0.01 & 0.19 & 0.01 \\
+  archive/RAF-DB/train/train\_02768\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_03058\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_05198\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_06649\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_06798\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{0.98} & 0.01 & 0.01 \\ 
+  archive/RAF-DB/train/train\_06979\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_08757\_aligned\_happiness.jpg & \textbf{0.98} & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 \\
+  archive/RAF-DB/train/train\_09067\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/train/train\_09294\_aligned\_fear.jpg & 0.02 & 0.01 & 0.00 & 0.00 & 0.00 & \textbf{0.97} \\
+  archive/RAF-DB/train/train\_09530\_aligned\_disgust.jpg & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{0.99} & 0.00 \\
+  \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+  \bottomrule
+  \end{tabular}
+  \caption{Examples of the training results of our model extracted from the CSV file}
+  \label{tab:trainCSV}
+\end{table*}  
 
 For evaluation, we use the metric accuracy. 
 The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 

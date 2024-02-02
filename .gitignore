@@ -2,6 +2,9 @@ paper
 presentation
 
 best_6layer.pth
+best_6FER.pth
+best_RAF_res.pth
+
 .DS_Store
 *.DS_Store
 .ipynb_checkpoints
@@ -24,3 +27,4 @@ __pycache__
 *.bcf
 *.fdb_latexmk
 *.fls
+*.brf

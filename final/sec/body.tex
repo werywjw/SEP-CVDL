@@ -106,6 +106,69 @@ The activation function after each layer is \textit{Rectified Linear Unit} (ReLU
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
 
+
+\tikzstyle{layer} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=LightPurple!30]
+\tikzstyle{pool} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=cvprblue!30]
+\tikzstyle{fc} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=LMUGreen!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\begin{figure}[ht]
+  \centering
+  \resizebox{.14\textwidth}{!}{
+  \begin{tikzpicture}[node distance=2cm]
+
+    \node (input) [layer] {Input $3 \times H \times W$};
+    \node (conv1) [layer, below of=input] {Conv1 $64$, $3\times3$, padding=1};
+    \node (bn1) [layer, below of=conv1] {BatchNorm1 $64$};
+    \node (pool1) [pool, below of=bn1] {MaxPool $2\times2$};
+    \node (conv2) [layer, below of=pool1] {Conv2 $128$, $3\times3$, padding=1};
+    \node (bn2) [layer, below of=conv2] {BatchNorm2 $128$};
+    \node (pool2) [pool, below of=bn2] {MaxPool $2\times2$};
+    \node (conv3) [layer, below of=pool2] {Conv3 $256$, $3\times3$, padding=1};
+    \node (bn3) [layer, below of=conv3] {BatchNorm3 $256$};
+    \node (pool3) [pool, below of=bn3] {MaxPool $2\times2$};
+    \node (conv4) [layer, below of=pool3] {Conv4 $512$, $3\times3$, padding=1};
+    \node (bn4) [layer, below of=conv4] {BatchNorm4 $512$};
+    \node (pool4) [pool, below of=bn4] {MaxPool $2\times2$};
+    \node (conv5) [layer, below of=pool4] {Conv5 $1024$, $3\times3$, padding=1};
+    \node (bn5) [layer, below of=conv5] {BatchNorm5 $1024$};
+    \node (pool5) [pool, below of=bn5] {MaxPool $2\times2$};
+    \node (adaptivePool) [pool, below of=pool5] {AdaptiveAvgPool};
+    \node (fc1) [fc, below of=adaptivePool] {FC1 $2048$};
+    \node (dropout1) [fc, below of=fc1] {Dropout $0.5$};
+    \node (fc2) [fc, below of=dropout1] {FC2 $1024$};
+    \node (dropout2) [fc, below of=fc2] {Dropout $0.5$};
+    \node (fc3) [fc, below of=dropout2] {FC3 $6$};
+
+    \draw [arrow] (input) -- (conv1);
+    \draw [arrow] (conv1) -- (bn1);
+    \draw [arrow] (bn1) -- (pool1);
+    \draw [arrow] (pool1) -- (conv2);
+    \draw [arrow] (conv2) -- (bn2);
+    \draw [arrow] (bn2) -- (pool2);
+    \draw [arrow] (pool2) -- (conv3);
+    \draw [arrow] (conv3) -- (bn3);
+    \draw [arrow] (bn3) -- (pool3);
+    \draw [arrow] (pool3) -- (conv4);
+    \draw [arrow] (conv4) -- (bn4);
+    \draw [arrow] (bn4) -- (pool4);
+    \draw [arrow] (pool4) -- (conv5);
+    \draw [arrow] (conv5) -- (bn5);
+    \draw [arrow] (bn5) -- (pool5);
+    \draw [arrow] (pool5) -- (adaptivePool);
+    \draw [arrow] (adaptivePool) -- (fc1);
+    \draw [arrow] (fc1) -- (dropout1);
+    \draw [arrow] (dropout1) -- (fc2);
+    \draw [arrow] (fc2) -- (dropout2);
+    \draw [arrow] (dropout2) -- (fc3);
+
+  \end{tikzpicture}
+  }
+  \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
+  \label{fig:model}
+\end{figure}
+
 In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
 we utilize the parameter grid from sklearn.
 % ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.

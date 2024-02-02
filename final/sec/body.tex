@@ -51,6 +51,21 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 
 % add Table: dataset description 
 % How many images, videos, per class and in total, see paper if they have already described this
+
+\begin{table}%[ht]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    Dataset & # Images in training set & # Images in training set & # Images in training set & Accuracy \\
+    \midrule
+    RAF-DB & 9747 & 2388 & 600 & \\
+    FER+ & 23743 & 5945 & 600 & \\
+    \bottomrule
+  \end{tabular}
+  \caption{Overview of the datasets used in our experiment}
+  \label{tab:hyper}
+\end{table}
+
 To initiate the project, % training, 
 we acquired the databases such as FER+~\cite{BarsoumZCZ16}, 
 RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
@@ -180,15 +195,10 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
     \toprule 
     Models & Architecture &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) & \# params \\
     \midrule
-    CNN (Baseline) & & 66.3 & 75.2 & 52.6 & \\
-    ResNet18~\cite{HeZRS16} & & 76.8 & 79.8 & 60.3 & \\
-    CNN (SE+Res) & & 71.5 & 78.9 & 56.4 & \\
-    CNN (SE+Aug) & & 74.3 & 79.9 & 59.6 & \\
-    CNN (SE-Aug) & & 84.6 & 79.5 & \textbf{62.8} & \\
-    CNN (Ours-Aug) & & \textbf{84.9} & \textbf{80.0} & 62.6 & \\
     CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\
-    CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    ResNet18~\cite{HeZRS16} & & 98.9 & 81.3 & 67.9 & 11179590 \\
     CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
     CNN (5 layers) & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
     \bottomrule
   \end{tabular}

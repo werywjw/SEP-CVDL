@@ -3,7 +3,7 @@
 
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
-In this short proposal, we aim to leverage several \textit{deep neural networks} (DNNs), 
+In this report, we aim to leverage several \textit{deep neural networks} (DNNs), 
 which contain convolution layers and residual/attention blocks, 
 to detect and interpret six basic universally recognized and expressed human facial emotions 
 (i.e., happiness, surprise, sadness, anger, disgust, and fear). 
@@ -52,11 +52,11 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 % add Table: dataset description 
 % How many images, videos, per class and in total, see paper if they have already described this
 To initiate the project, % training, 
-we acquired the databases such as FER+~\cite{BarsoumZCZ16}~\footnote{\url{https://github.com/microsoft/FERPlus}}, 
+we acquired the databases such as FER+~\cite{BarsoumZCZ16}, 
 RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
 TFEID~\cite{tfeid,LiGL22}, 
 as well as the video database DISFA~\cite{MavadatiMBTC13}, 
-from public institutions and GitHub repositories~\footnote{\url{https://github.com/spenceryee/CS229}}. 
+from public institutions and GitHub repositories~\cite{cs229_2023}. 
 Based on these databases, we created a dataset by augmentation to increase the variety, 
 and full details of augmentation (see \Cref{sec:optim:aug}). 
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
@@ -79,11 +79,9 @@ The images are converted to greyscale with three channels,
 as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 We create a custom dataset, which is a collection of data relating to all training images we collected, 
-using PyTorch~\footnote{\url{https://pytorch.org}}, 
+using PyTorch, 
+% ~\footnote{\url{https://pytorch.org}}, 
 as it includes plenty of existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
-
-% a specific problem you're working on.
-% In essence, a custom dataset can be comprised of almost anything. 
 
 \subsection{Model Architecture}
 We implement an emotion classification model from scratch with four convolution layers at the very beginning. 
@@ -97,7 +95,8 @@ since it introduces the non-linearity into the model,
 allowing it to learn more complex patterns. 
 
 In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
-we utilize the parameter grid from sklearn~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
+we utilize the parameter grid from sklearn.
+% ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
 Additionally, we increase the depth of the network by adding some convolutional layers to learn more complex features. 
 To help the training of deeper networks more efficiently, 
 we add the residual connections, 
@@ -111,28 +110,29 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 \begin{table*}[ht]
   \centering
   % \begin{tabular}{l|c|c|c|c|c|c}
-  \begin{tabular}{lcccccc} 
+  % \begin{tabular}{lcccccc} 
+  \begin{tabular}{@{}lcccccc@{}}
   \toprule
   filepath & happiness & surprise & sadness & anger & disgust & fear \\
   \midrule
-  archive/RAF-DB/train/train\_01127\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_01774\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_01991\_aligned\_sadness.jpg & 0.01 & 0.00 & \textbf{0.78} & 0.01 & 0.19 & 0.01 \\
-  archive/RAF-DB/train/train\_02768\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_03058\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_05198\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_06649\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_06798\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{0.98} & 0.01 & 0.01 \\ 
-  archive/RAF-DB/train/train\_06979\_aligned\_sadness.jpg & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_08757\_aligned\_happiness.jpg & \textbf{0.98} & 0.00 & 0.00 & 0.00 & 0.01 & 0.00 \\
-  archive/RAF-DB/train/train\_09067\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/train/train\_09294\_aligned\_fear.jpg & 0.02 & 0.01 & 0.00 & 0.00 & 0.00 & \textbf{0.97} \\
-  archive/RAF-DB/train/train\_09530\_aligned\_disgust.jpg & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{0.99} & 0.00 \\
-  \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+  archive/RAF-DB/test/test\_0524\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_0093\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_2193\_aligned\_sadness.jpg & 0.03 & 0.01 & \textbf{0.90} & 0.01 & 0.02 & 0.04 \\
+  archive/RAF-DB/test/test\_1214\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_1816\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_0294\_aligned\_surprise.jpg & 0.01 & \textbf{0.99} & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_1128\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_1799\_aligned\_sadness.jpg & 0.37 & 0.02 & \textbf{0.45} & 0.02 & 0.1 & 0.03 \\
+  archive/RAF-DB/test/test\_0610\_aligned\_sadness.jpg & 0.02 & 0.00 & \textbf{0.74} & 0.02 & 0.21 & 0.01 \\
+  archive/RAF-DB/test/test\_1373\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 \\
+  archive/RAF-DB/test/test\_1788\_aligned\_fear.jpg & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{1.00} \\
+  archive/RAF-DB/test/test\_0007\_aligned\_disgust.jpg & 0.03 & 0.05 & 0.03 & \textbf{0.58} & 0.18 & 0.13 \\
+  archive/RAF-DB/test/test\_0804\_aligned\_disgust.jpg & 0.02 & 0.00 & 0.18 & 0.02 & \textbf{0.77} & 0.00 \\
+  % \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
   \bottomrule
   \end{tabular}
-  \caption{Examples of the training results of our model extracted from the CSV file}
-  \label{tab:trainCSV}
+  \caption{Overview of our random testing results examples extracted from the CSV file}
+  \label{tab:testcsv}
 \end{table*}  
 
 For evaluation, we use the metric accuracy. 
@@ -157,7 +157,6 @@ We report all the training, testing, and validation accuracy in \% to compare th
   \label{tab:hyper}
 \end{table}
 
-% model comparison, e.g., SVM try
 % specific dataset comparison, 
 % e.g., RAF-DB (train, test, validation) & FER+ (train & test & validation)
 % Aggregated train & test (RAF-DB / FER+) & validation 
@@ -230,7 +229,7 @@ This CSV file is represented with the corresponding classification scores.
 \label{sec:optim:cam}
 
 In generally, 
-CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
+CAM~\cite{ZhouKLOT16} helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
 as it highlights the important regions of an image or a video, 
 aiding in the understanding of the behavior of the model, 
 which is especially useful for model debugging and improvement. 
@@ -260,6 +259,8 @@ introduced as a technique that is easier to implement with different architectur
 This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
 % \subsection{Grad-CAM} 
 % \label{sec:optim:gcam}
+
+\citet{chattopadhay2018grad} proposed Grad-CAM++,
 
 \section{Conclusion and Discussion}
 \label{sec:conclusion}

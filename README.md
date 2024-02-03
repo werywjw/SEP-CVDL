@@ -90,7 +90,8 @@ https://towardsdatascience.com/grad-cam-in-pytorch-use-of-forward-and-backward-h
 ## approach with pytorch Grad-CAM: 
 https://github.com/jacobgil/pytorch-grad-cam?tab=readme-ov-file
 
-## Grad-CAM with Torchcam: https://github.com/frgfm/torch-cam/blob/main/README.md
+## Grad-CAM with Torchcam: 
+https://github.com/frgfm/torch-cam/blob/main/README.md
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o

@@ -1,5 +1,15 @@
 # SEP-CVDL
 
+😄
+
+😲
+
+😭
+
+🤢
+
+😨
+
 ## Where are our slides 🎥?
 
 On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31).

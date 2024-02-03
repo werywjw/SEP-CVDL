@@ -77,15 +77,12 @@ we generalized a folder structure annotating the labels 0 (happiness), 1 (surpri
 Besides the original format of images and videos, we set standards for extracting frames from the videos, 
 resizing training pictures to 64x64 pixels, and saving them in the JPG format.
 
-\begin{figure}[ht]
-  \centering
-  % \fbox{\rule{0pt}{2in} \rule{0.9\linewidth}{0pt}}
-  % \resizebox{.45\textwidth}{!}{
-   \includegraphics[width=\linewidth]{output.png}
-  % }
-   \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
-   \label{fig:result}
-\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%    \includegraphics[width=\linewidth]{output.png}
+%    \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
+%    \label{fig:result}
+% \end{figure}
 
 The images are converted to greyscale with three channels, 
 as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
@@ -106,12 +103,41 @@ The activation function after each layer is \textit{Rectified Linear Unit} (ReLU
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
 
+\tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+
+\begin{figure}[ht]
+  \centering
+  \resizebox{.47\textwidth}{!}{
+  \begin{tikzpicture}[node distance=2.5cm, auto]
+
+      \node [block] (input) {Input Layer};
+      \node [block, right of=input] (conv1) {Conv Block 1 \\ 64 Filters};
+      \node [block, right of=conv1] (conv2) {Conv Block 2 \\ 128 Filters};
+      \node [block, right of=conv2] (conv3) {Conv Block 3 \\ 256 Filters};
+      \node [block, right of=conv3] (conv4) {Conv Block 4 \\ 512 Filters};
+      \node [block, right of=conv4] (conv5) {Conv Block 5 \\ 1024 Filters};
+      \node [block, right of=conv5] (adaptivePool) {Adaptive Avg Pool};
+      \node [block, right of=adaptivePool] (fc) {Fully Connected Block};
+
+      \path [line] (input) -- (conv1);
+      \path [line] (conv1) -- (conv2);
+      \path [line] (conv2) -- (conv3);
+      \path [line] (conv3) -- (conv4);
+      \path [line] (conv4) -- (conv5);
+      \path [line] (conv5) -- (adaptivePool);
+      \path [line] (adaptivePool) -- (fc);
+
+  \end{tikzpicture}
+  }
+  \caption{Overview of the model architecture} 
+  \label{fig:arc}
+\end{figure}
 
 \tikzstyle{layer} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=LightPurple!30]
 \tikzstyle{pool} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=cvprblue!30]
-\tikzstyle{fc} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=LMUGreen!30]
+\tikzstyle{fc} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=Orange!30]
 \tikzstyle{arrow} = [thick,->,>=stealth]
-
 
 \begin{figure}[ht]
   \centering
@@ -165,7 +191,7 @@ allowing it to learn more complex patterns.
 
   \end{tikzpicture}
   }
-  \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
+  \caption{Overview of the model architecture} 
   \label{fig:model}
 \end{figure}
 

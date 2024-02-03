@@ -83,3 +83,15 @@ exit
 ```
 exit
 ```
+
+## Approach with self defined hook functions: 
+https://towardsdatascience.com/grad-cam-in-pytorch-use-of-forward-and-backward-hooks-7eba5e38d569
+
+## approach with pytorch Grad-CAM: 
+https://github.com/jacobgil/pytorch-grad-cam?tab=readme-ov-file
+
+## Grad-CAM with Torchcam: https://github.com/frgfm/torch-cam/blob/main/README.md
+
+```
+colab-convert livecam.ipynb livecam.py -nc -rm -o
+```

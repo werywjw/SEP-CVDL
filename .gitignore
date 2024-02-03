@@ -7,6 +7,7 @@ best_6FER.pth
 *.DS_Store
 .ipynb_checkpoints
 .vscode
+__pycache__
 
 *blx.bib
 *.aux

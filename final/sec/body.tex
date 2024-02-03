@@ -141,8 +141,8 @@ allowing it to learn more complex patterns.
 
 \begin{figure}[ht]
   \centering
-  \resizebox{.14\textwidth}{!}{
-  \begin{tikzpicture}[node distance=2cm]
+  \resizebox{.16\textwidth}{!}{
+  \begin{tikzpicture}[node distance=1.7cm]
 
     \node (input) [layer] {Input $3 \times H \times W$};
     \node (conv1) [layer, below of=input] {Conv1 $64$, $3\times3$, padding=1};
@@ -266,7 +266,8 @@ Batch normalization can indeed improve the performance of the model.
 % Aggregated train & test (RAF-DB / FER+) & validation 
 % bold the best results later
 
-\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb}.
+% ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 
 our CNN without random augmentation outperforms the other models in terms of accuracy, 

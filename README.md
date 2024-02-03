@@ -1,4 +1,5 @@
-# SEP-CVDL (Facial Emotion Recognition & Interpretation)
+# SEP-CVDL 
+## Facial Emotion Recognition & Interpretation
 
 😄 happiness
 
@@ -14,7 +15,7 @@
 
 ## Where are our slides 🎥?
 
-On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31).
+On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31). 
 The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing).
 
 ## How to generate a requirements.txt?
@@ -24,7 +25,7 @@ pipreqs /Path/to/the/repository/SEP-CVDL
 ```
 
 ## How to run the script to get the CSV file of classification scores?
-*Note that please change the filepath to the image folder that you would like to try. 😄*
+Note that please change the **filepath** to the image folder that you would like to try. 😄
 
 - Option 1️⃣: Run the following command:
 ```

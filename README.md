@@ -1,14 +1,16 @@
-# SEP-CVDL
+# SEP-CVDL (Facial Emotion Recognition & Interpretation)
 
-😄
+😄 happiness
 
-😲
+😲 surprise
 
-😭
+😭 sadness
 
-🤢
+😡 anger
 
-😨
+🤢 disgust
+
+😨 fear
 
 ## Where are our slides 🎥?
 

@@ -26,7 +26,7 @@ In \Cref{sec:approach},
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:evaluation:results}. 
 \Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
-\Cref{fig:result} illustrates the empirical results of our current best model. 
+\Cref{fig:model} illustrates the empirical results of our current best model. 
 
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
@@ -266,7 +266,7 @@ Batch normalization can indeed improve the performance of the model.
 % Aggregated train & test (RAF-DB / FER+) & validation 
 % bold the best results later
 
-\Cref{fig:result} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 
 our CNN without random augmentation outperforms the other models in terms of accuracy, 

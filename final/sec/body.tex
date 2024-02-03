@@ -26,7 +26,7 @@ In \Cref{sec:approach},
 we address the datasets we collected and the model architecture we implemented. 
 The preliminary evaluation results of our models are given in \Cref{sec:evaluation:results}. 
 \Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
-\Cref{fig:model} illustrates the empirical results of our current best model. 
+\Cref{fig:modeldetail} illustrates the empirical results of our current best model. 
 
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
@@ -93,12 +93,16 @@ using PyTorch,
 as it includes plenty of existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
 
 \subsection{Model Architecture}
+The input to our emotion recognition model is a gray scale image at 64 $\times$ 64 resolution. 
+The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution layers at the very beginning. 
 Following each convolutional layer, 
-batch normalization is used, 
+batch normalization and interleaved with max pooling are used, 
 as this stabilizes learning by normalizing the input to each layer. 
 Afterward, three linear layers are applied to extract features to the final output. 
-We also add a dropout layer to prevent overfitting. 
+We also add a 50\% dropout layer to prevent overfitting. 
+Verified by \citet{BarsoumZCZ16}, 
+the dropout layers are effective in avoiding model overfitting. 
 The activation function after each layer is \textit{Rectified Linear Unit} (ReLU), 
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
@@ -106,10 +110,10 @@ allowing it to learn more complex patterns.
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex']
 
-\begin{figure}[ht]
+\begin{figure*}[ht]
   \centering
-  \resizebox{.47\textwidth}{!}{
-  \begin{tikzpicture}[node distance=2.5cm, auto]
+  \resizebox{.97\textwidth}{!}{
+  \begin{tikzpicture}[node distance=2.7cm, auto]
 
       \node [block] (input) {Input Layer};
       \node [block, right of=input] (conv1) {Conv Block 1 \\ 64 Filters};
@@ -119,6 +123,7 @@ allowing it to learn more complex patterns.
       \node [block, right of=conv4] (conv5) {Conv Block 5 \\ 1024 Filters};
       \node [block, right of=conv5] (adaptivePool) {Adaptive Avg Pool};
       \node [block, right of=adaptivePool] (fc) {Fully Connected Block};
+      \node [block, right of=fc] (softmax) {Softmax Layer};
 
       \path [line] (input) -- (conv1);
       \path [line] (conv1) -- (conv2);
@@ -127,12 +132,13 @@ allowing it to learn more complex patterns.
       \path [line] (conv4) -- (conv5);
       \path [line] (conv5) -- (adaptivePool);
       \path [line] (adaptivePool) -- (fc);
+      \path [line] (fc) -- (softmax);
 
   \end{tikzpicture}
   }
-  \caption{Overview of the model architecture} 
-  \label{fig:arc}
-\end{figure}
+  \caption{Overview of the model architecture (see \Cref{fig:modeldetail} for a detailed version)} 
+  \label{fig:model}
+\end{figure*}
 
 \tikzstyle{layer} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=LightPurple!30]
 \tikzstyle{pool} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=cvprblue!30]
@@ -191,8 +197,8 @@ allowing it to learn more complex patterns.
 
   \end{tikzpicture}
   }
-  \caption{Overview of the model architecture} 
-  \label{fig:model}
+  \caption{Overview of the detailed model architecture} 
+  \label{fig:modeldetail}
 \end{figure}
 
 In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
@@ -237,7 +243,12 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 \end{table*}  
 
 For evaluation, we use the metric accuracy. 
-The loss function employed for all models is cross-entropy, which is typically for multi-class classification. 
+The loss function employed for all models is cross-entropy (CE), which is typically for multi-class classification. 
+That is:
+\begin{equation}
+  \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
+\end{equation}
+where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class.
 We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
 
 \begin{table}%[ht]

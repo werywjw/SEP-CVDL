@@ -49,13 +49,15 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \subsection{Dataset Description}
 \label{sec:evaluation:datasets}
 
+% see https://arxiv.org/pdf/2303.15889.pdf
+
 \begin{table*}[ht]
   \centering
   \begin{tabular}{@{}lccc@{}}
     \toprule
     Dataset & \#Images in training set/Accuracy & \#Images in testing set/Accuracy & \# Images in validation set/Accuracy  \\
     \midrule
-    RAF-DB & 9747/98.6 & 2388/83.1 & 600/72.1 \\
+    Real-world Affective Faces Database (RAF-DB) & 9747/98.6 & 2388/83.1 & 600/72.1 \\
     FER+ & 23743/89.6 & 5945/65.6 & 600/40.7  \\
     \bottomrule
   \end{tabular}
@@ -257,12 +259,12 @@ We report all the training, testing, and validation accuracy in \% to compare th
     \toprule
     Hyperparameter & Value \\
     \midrule
-    Learning rate & \{0.1, 0.01, 0.001, 0.0001\}  \\
+    Learning rate & \{0.1, 0.01, 0.001, 0.005, 0.0001\}  \\
     Batch size & \{8, 16, 32, 64\} \\
-    Dropout rate & \{0.5\} \\
+    Dropout rate & \{0.2, 0.5\} \\
     Epoch & \{30, 40\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
-    Patience & \{5\} \\
+    Patience & \{5, 10\} \\
     \bottomrule
   \end{tabular}
   \caption{Explored hyperparameter space for our models}

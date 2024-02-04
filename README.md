@@ -1,5 +1,4 @@
-# SEP-CVDL 
-## Facial Emotion Recognition & Interpretation
+# SEP-CVDL: Facial Emotion Recognition & Interpretation
 
 😄 happiness
 

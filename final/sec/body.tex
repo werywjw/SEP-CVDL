@@ -1,6 +1,7 @@
 \section{Introduction}
 \label{sec:intro}
 
+% rewrite
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
 In this report, we aim to leverage several \textit{deep neural networks} (DNNs), 
@@ -33,6 +34,9 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \section{Related Work}
 \label{sec:related}
 
+\subsection{Facial Emotion Recognition}
+\label{sec:related:fer}
+
 \subsection{Explainable AI}
 \label{sec:related:ai}
 
@@ -45,6 +49,15 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \subsection{Experimental Setup}
 \label{sec:evaluation:setup}
 
+All the experiments are implemented in Python and Shell for generating scripts. 
+For evaluation, we use the metric accuracy. 
+We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
+The loss function employed for all models is cross-entropy (CE), which is typically for multi-class classification. 
+That is:
+\begin{equation}
+  \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
+\end{equation}
+where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class.
 
 \subsection{Dataset Description}
 \label{sec:evaluation:datasets}
@@ -95,9 +108,7 @@ The images are converted to greyscale with three channels,
 as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 We create a custom dataset, which is a collection of data relating to all training images we collected, 
-using PyTorch, 
-% ~\footnote{\url{https://pytorch.org}}, 
-as it includes plenty of existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
+using PyTorch.
 
 \subsection{Model Architecture}
 The input to our emotion recognition model is a gray scale image at $64 \times 64 $ resolution. 
@@ -223,6 +234,34 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 
 \begin{table*}[ht]
   \centering
+  % \resizebox{.99\textwidth}{!}{
+  \begin{tabular}{@{}llccccr@{}}
+    \toprule 
+    \multirow{2}{*}{\textsc{Dataset}}&\multirow{2}{*}{\textsc{Models}}&\multirow{2}{*}{\textsc{Architecture}} & \multicolumn{3}{c}{\textsc{Accuracies}} & \multirow{2}{*}{\textsc{\# Parameters}} \\
+    \cline{4-6}
+    &&& \textsc{Training} & \textsc{Testing} & \textsc{Validation}  &  \\
+    \midrule
+    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
+    &CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    &CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    &CNN (5 layers) & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
+    \midrule
+    \multirow{3}{*}{FER+~\cite{BarsoumZCZ16}} & CNN (4 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    &CNN (5 layers) & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
+    &CNN (6 layers) & +BN-SE & \textbf{96.0} & \textbf{65.5} & \textbf{41.6} & 41950726 \\
+    \bottomrule
+  \end{tabular}
+  % }
+  \caption{Accuracies (\%) for different models (with specific architectures and numbers of parameters) in our experiments 
+  (Note that SE stands for the squeeze and excitation block and BN for the batch normalization; 
+  +/- represent with/without respectively)}
+  \label{tab:model}
+\end{table*}
+
+\begin{table*}[ht]
+  \centering
   % \begin{tabular}{l|c|c|c|c|c|c}
   % \begin{tabular}{lcccccc} 
   \begin{tabular}{@{}lcccccc@{}}
@@ -249,16 +288,7 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
   \label{tab:testcsv}
 \end{table*}  
 
-For evaluation, we use the metric accuracy. 
-The loss function employed for all models is cross-entropy (CE), which is typically for multi-class classification. 
-That is:
-\begin{equation}
-  \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
-\end{equation}
-where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class.
-We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
-
-\begin{table}%[ht]
+\begin{table}[ht]
   \centering
   \begin{tabular}{@{}lc@{}}
     \toprule
@@ -288,33 +318,6 @@ indicating that this kind of augmentation is not able to help our model predict 
 thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
-% bold the best results later
-\begin{table*}[ht]
-  \centering
-  \resizebox{.99\textwidth}{!}{
-  \begin{tabular}{@{}llccccc@{}}
-    \toprule 
-    \textsc{Dataset} & \textsc{Models} & \textsc{Architecture} & \textsc{Train Accuracy} & \textsc{Test Accuracy} & \textsc{Validation Accuracy}  & \textsc{\# Parameters} \\
-    \midrule
-    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Res & 98.9 & 81.3 & 67.9 & 11179590 \\
-    &CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
-    &CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
-    &CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    &CNN (5 layers) & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
-    &CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
-    \midrule
-    \multirow{3}{*}{FER+~\cite{BarsoumZCZ16}} & CNN (4 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
-    &CNN (5 layers) & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
-    &CNN (6 layers) & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\
-    \bottomrule
-  \end{tabular}
-  }
-  \caption{Accuracies (\%) for different models in our experiments 
-  (Note that SE stands for squeeze and excitation, BN for batch normalization, and Res for residual connections; 
-  +/- represent with/without respectively)}
-  \label{tab:model}
-\end{table*}
-
 \section{Optimization Strategies}
 \label{sec:optim}
 
@@ -335,7 +338,7 @@ augmentation effectively expands the dataset,
 enabling models to generalize better and achieve enhanced performance. 
 As models encounter slightly altered versions of familiar data, 
 they are forced to make more nuanced and robust predictions. 
-With this process, we aim to prevent overfitting. % which is a common pitfall in machine learning. 
+With this process, we aim to prevent overfitting, which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 During the project, we pursue various approaches. 
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.

@@ -1,4 +1,4 @@
-# SEP-CVDL: Facial Emotion Recognition & Interpretation
+# CVDL-SEP: Facial Emotion Recognition & Interpretation
 
 😄 happiness
 
@@ -24,7 +24,7 @@ pipreqs /Path/to/the/repository/SEP-CVDL
 ```
 
 ## How to run the script to get the CSV file of classification scores?
-Note that please change the **filepath** to the image folder that you would like to try. 😄
+Please change the **filepath** to the image folder that you would like to try. 😄
 
 - Option 1️⃣: Run the following command:
 ```

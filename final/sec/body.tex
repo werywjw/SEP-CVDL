@@ -119,7 +119,7 @@ allowing it to learn more complex patterns.
 
 \begin{figure*}[ht]
   \centering
-  \resizebox{.97\textwidth}{!}{
+  \resizebox{.99\textwidth}{!}{
   \begin{tikzpicture}[node distance=2.7cm, auto]
 
       \node [block] (input) {Input Layer};
@@ -279,11 +279,6 @@ We report all the training, testing, and validation accuracy in \% to compare th
 Adding a extra convolutional layer to the model with much more parameters does not necessarily lead to better performance.
 Batch normalization can indeed improve the performance of the model. 
 
-% specific dataset comparison, 
-% e.g., RAF-DB (train, test, validation) & FER+ (train & test & validation)
-% Aggregated train & test (RAF-DB / FER+) & validation 
-% bold the best results later
-
 \Cref{fig:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb}.
 % ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
@@ -293,28 +288,29 @@ indicating that this kind of augmentation is not able to help our model predict 
 thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
+% bold the best results later
 \begin{table*}[ht]
   \centering
-  % \resizebox{.47\textwidth}{!}{
-  \begin{tabular}{@{}lccccc@{}}
+  \resizebox{.99\textwidth}{!}{
+  \begin{tabular}{@{}llccccc@{}}
     \toprule 
-    Models & Architecture & Training Accuracy & Testing Accuracy & Validation Accuracy  & \# Parameters \\
+    \textsc{Dataset} & \textsc{Models} & \textsc{Architecture} & \textsc{Training Accuracy} & \textsc{Testing Accuracy} & \textsc{Validation Accuracy}  & \textsc{\# Parameters} \\
     \midrule
-    CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ % RAF-DB add dataset at the very begining coloumn
-    ResNet18~\cite{HeZRS16} & residual block & 98.9 & 81.3 & 67.9 & 11179590 \\
-    CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
-    CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    CNN (5 layers) & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
-    CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ % RAF-DB
+    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Res & 98.9 & 81.3 & 67.9 & 11179590 \\
+    &CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    &CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    &CNN (5 layers) & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
+    &CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
-    CNN (4 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\ % FER
-    CNN (5 layers) & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\ % FER
-    CNN (6 layers) & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\ % FER
+    \multirow{3}{*}{FER+~\cite{BarsoumZCZ16}} & CNN (4 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    &CNN (5 layers) & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
+    &CNN (6 layers) & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\
     \bottomrule
   \end{tabular}
-  % }
-  \caption{Accuracy (\%) for different models in our experiments 
-  (Note that Aug stands for data augmentation, SE for squeeze and excitation, and Res for residual connections; 
+  }
+  \caption{Accuracies (\%) for different models in our experiments 
+  (Note that SE stands for squeeze and excitation, BN for batch normalization, and Res for residual connections; 
   +/- represent with/without respectively)}
   \label{tab:model}
 \end{table*}
@@ -327,12 +323,11 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 % i.e., data augumentation (see \Cref{sec:optim:aug}), 
 % CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
 %~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
-% Techniques like dropout, renormalization, and data augmentation are employed 
 
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
 
-In deep learning and AI, %machine
+In deep learning and AI, 
 augmentation stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
 By introducing subtle modifications to existing data points, 

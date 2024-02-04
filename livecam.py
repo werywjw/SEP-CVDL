@@ -1,5 +1,3 @@
-# %%
-# !! {"metadata":# !! {}
 import torch
 import torch.nn as nn
 from torch.nn import Linear, Conv2d, BatchNorm1d, BatchNorm2d, PReLU, Sequential, Module
@@ -117,28 +115,3 @@ while True:
 
 video_capture.release()
 cv2.destroyAllWindows()
-
-# %%
-# !! {"metadata":# !! {}
-
-
-# %%
-# !! {"main_metadata":{
-# !!   "kernelspec": {
-# !!     "display_name": "myenv",
-# !!     "language": "python",
-# !!     "name": "python3"
-# !!   },
-# !!   "language_info": {
-# !!     "codemirror_mode": {
-# !!       "name": "ipython",
-# !!       "version": 3
-# !!     },
-# !!     "file_extension": ".py",
-# !!     "mimetype": "text/x-python",
-# !!     "name": "python",
-# !!     "nbconvert_exporter": "python",
-# !!     "pygments_lexer": "ipython3",
-# !!     "version": "3.9.6"
-# !!   }
-# !! }}

@@ -49,26 +49,31 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \subsection{Dataset Description}
 \label{sec:evaluation:datasets}
 
-% see https://arxiv.org/pdf/2303.15889.pdf
+% see 
+% https://arxiv.org/pdf/2303.15889.pdf
+% https://www.mdpi.com/1424-8220/22/21/8089
 
 \begin{table*}[ht]
   \centering
+  \resizebox{.99\textwidth}{!}{
   \begin{tabular}{@{}lccc@{}}
     \toprule
-    Dataset & \#Images in training set/Accuracy & \#Images in testing set/Accuracy & \# Images in validation set/Accuracy  \\
+    Dataset & \#Images in training set & \#Images in testing set & \# Images in validation set  \\
     \midrule
-    Real-world Affective Faces Database (RAF-DB) & 9747/98.6 & 2388/83.1 & 600/72.1 \\
-    FER+ & 23743/89.6 & 5945/65.6 & 600/40.7  \\
+    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
+    Facial Expression Recognition Plus (FER+~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
+    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) &&-& 600 \\
+    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) &&-& 600 \\
     \bottomrule
   \end{tabular}
-  \caption{Overview of the datasets statistics (number of images in respective dataset/accuracy in \%) used in our experiment}
+  }
+  \caption{Overview of the datasets statistics used in our experiment}
   \label{tab:data}
 \end{table*}
 
 To initiate the project, % training, 
-we acquired the databases such as FER+~\cite{BarsoumZCZ16}, 
-RAF-DB~\cite{li_reliable_2017,li2019reliable}, CK+~\cite{LuceyCKSAM10}, 
-TFEID~\cite{tfeid,LiGL22}, 
+we acquired the databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
+FER+~\cite{BarsoumZCZ16}, CK+~\cite{LuceyCKSAM10}, TFEID~\cite{tfeid,LiGL22}, 
 as well as the video database DISFA~\cite{MavadatiMBTC13}, 
 from public institutions and GitHub repositories~\cite{cs229_2023}. 
 Based on these databases, we created a dataset by augmentation to increase the variety, 
@@ -77,7 +82,7 @@ In terms of illustrating the content of used pictures, we exclusively analyze hu
 That is, 
 we generalized a folder structure annotating the labels 0 (happiness), 1 (surprise), 2 (sadness), 3 (anger), 4 (disgust), and 5 (fear). 
 Besides the original format of images and videos, we set standards for extracting frames from the videos, 
-resizing training pictures to 64x64 pixels, and saving them in the JPG format.
+resizing training pictures to $64\times 64$ pixels, and saving them in the JPG format.
 
 % \begin{figure}[ht]
 %   \centering
@@ -95,7 +100,7 @@ using PyTorch,
 as it includes plenty of existing functions to load various custom datasets in domain libraries such as \texttt{TorchVision}, \texttt{TorchText}, \texttt{TorchAudio}, and \texttt{TorchRec}.
 
 \subsection{Model Architecture}
-The input to our emotion recognition model is a gray scale image at 64 $\times$ 64 resolution. 
+The input to our emotion recognition model is a gray scale image at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution layers at the very beginning. 
 Following each convolutional layer, 
@@ -259,12 +264,12 @@ We report all the training, testing, and validation accuracy in \% to compare th
     \toprule
     Hyperparameter & Value \\
     \midrule
-    Learning rate & \{0.1, 0.01, 0.001, 0.005, 0.0001\}  \\
+    Learning rate & \{0.01, 0.001, 0.0001\}  \\
     Batch size & \{8, 16, 32, 64\} \\
     Dropout rate & \{0.2, 0.5\} \\
-    Epoch & \{30, 40\} \\
+    Epoch & \{20, 30, 40\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
-    Patience & \{5, 10\} \\
+    Patience & \{5\} \\
     \bottomrule
   \end{tabular}
   \caption{Explored hyperparameter space for our models}
@@ -293,7 +298,7 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
   % \resizebox{.47\textwidth}{!}{
   \begin{tabular}{@{}lccccc@{}}
     \toprule 
-    Models & Architecture &  Accuracy (Train) &  Accuracy (Test) & Accuracy (Vali) & \# params \\
+    Models & Architecture & Training Accuracy & Testing Accuracy & Validation Accuracy  & \# Parameters \\
     \midrule
     CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ % RAF-DB add dataset at the very begining coloumn
     ResNet18~\cite{HeZRS16} & residual block & 98.9 & 81.3 & 67.9 & 11179590 \\

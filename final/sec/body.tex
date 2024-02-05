@@ -126,8 +126,8 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
 To initiate the project, % training, 
 we acquired the databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
 FER+~\cite{BarsoumZCZ16}, CK+~\cite{LuceyCKSAM10}, TFEID~\cite{tfeid,LiGL22}, 
-as well as the video database DISFA~\cite{MavadatiMBTC13}, 
-from public institutions and GitHub repositories~\cite{cs229_2023}. 
+as well as the video database DISFA~\cite{MavadatiMBTC13}. 
+% from public institutions and GitHub repositories~\cite{cs229_2023}
 Based on these databases, we created a dataset by augmentation to increase the variety, 
 and full details of augmentation (see \Cref{sec:optim:aug}). 
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
@@ -204,7 +204,7 @@ allowing it to learn more complex patterns.
 
 \begin{figure}[ht]
   \centering
-  \resizebox{.16\textwidth}{!}{
+  \resizebox{.17\textwidth}{!}{
   \begin{tikzpicture}[node distance=1.7cm]
 
     \node (input) [layer] {Input $3 \times H \times W$};
@@ -227,8 +227,8 @@ allowing it to learn more complex patterns.
     \node (fc1) [fc, below of=adaptivePool] {FC1 $2048$};
     \node (dropout1) [fc, below of=fc1] {Dropout $0.5$};
     \node (fc2) [fc, below of=dropout1] {FC2 $1024$};
-    \node (dropout2) [fc, below of=fc2] {Dropout $0.5$};
-    \node (fc3) [fc, below of=dropout2] {FC3 $6$};
+    % \node (dropout2) [fc, below of=fc2] {Dropout $0.5$};
+    \node (fc3) [fc, below of=fc2] {FC3 $6$};
 
     \draw [arrow] (input) -- (conv1);
     \draw [arrow] (conv1) -- (bn1);
@@ -249,8 +249,8 @@ allowing it to learn more complex patterns.
     \draw [arrow] (adaptivePool) -- (fc1);
     \draw [arrow] (fc1) -- (dropout1);
     \draw [arrow] (dropout1) -- (fc2);
-    \draw [arrow] (fc2) -- (dropout2);
-    \draw [arrow] (dropout2) -- (fc3);
+    \draw [arrow] (fc2) -- (fc3);
+    % \draw [arrow] (dropout2) -- (fc3);
 
   \end{tikzpicture}
   }
@@ -278,18 +278,18 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
     \toprule 
     \multirow{2}{*}{\textsc{Dataset}}&\multirow{2}{*}{\textsc{Models}}&\multirow{2}{*}{\textsc{Architecture}} & \multicolumn{3}{c}{\textsc{Accuracies}} & \multirow{2}{*}{\textsc{\# Parameters}} \\
     \cline{4-6}
-    &&& \textsc{Training} & \textsc{Testing} & \textsc{Validation}  &  \\
+    &&& Training & Testing & Validation  &  \\
     \midrule
     \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
-    &CNN (4 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
-    &CNN (5 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
-    &CNN (5 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    &CNN (5 layers) & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
-    &CNN (6 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
+    &Ours (13 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &Ours (10 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    &Ours (16 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    &Ours (15 layers) & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &Ours (17 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
-    \multirow{3}{*}{FER2013~\cite{BarsoumZCZ16}} & CNN (4 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
-    &CNN (5 layers) & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
-    &CNN (6 layers) & +BN-SE & \textbf{96.0} & \textbf{65.5} & \textbf{41.6} & 41950726 \\
+    \multirow{3}{*}{FER2013~\cite{BarsoumZCZ16}} & Ours (13 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    &Ours (15 layers) & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
+    &Ours (17 layers) & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
     \bottomrule
   \end{tabular}
   % }

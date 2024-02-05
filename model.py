@@ -61,8 +61,8 @@ class EmotionClassifier(nn.Module):
 
         self.pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc1 = nn.Linear(1024, 2048)
-        self.fc2 = nn.Linear(2048, 1024) 
         self.dropout1 = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(2048, 1024) 
         self.fc3 = nn.Linear(1024, 6)
 
     def forward(self, x):

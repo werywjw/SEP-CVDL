@@ -23,6 +23,14 @@ pipreqs /Users/wery/Desktop/SEP-CVDL
 pipreqs /Path/to/the/repository/SEP-CVDL
 ```
 
+## Requirements
+
+A detailed list of requirements can be found in `requirements.txt`. 
+
+```
+pip install -r requirements.txt
+```
+
 ## How to run the script to get the CSV file of classification scores?
 Please change the **filepath** to the image folder that you would like to try. 😄
 
@@ -86,11 +94,6 @@ exit
 ## Approach with self defined hook functions: 
 https://towardsdatascience.com/grad-cam-in-pytorch-use-of-forward-and-backward-hooks-7eba5e38d569
 
-## approach with pytorch Grad-CAM: 
-https://github.com/jacobgil/pytorch-grad-cam?tab=readme-ov-file
-
-## Grad-CAM with Torchcam: 
-https://github.com/frgfm/torch-cam/blob/main/README.md
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o

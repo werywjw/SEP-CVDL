@@ -12,7 +12,8 @@ To make our model more transparent,
 we explain this emotion classification task with \textit{class activation mapping} (CAM) 
 and \textit{gradient-weighted class activation mapping} (Grad-CAM). 
 
-Our main contributions can be summarized as follows. % update later
+% update later
+Our main contributions can be summarized as follows.
 \begin{itemize}
   \item We collect and preprocess the training and testing data (image and video) from various public databases. 
   \item We implement all CNN models from scratch and optimize it with different augmentation techniques. 
@@ -50,21 +51,26 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
     auto,
     rect/.style={rectangle, draw=black, align=center, thick, minimum height=1.5cm, minimum width=2.7cm},
     box/.style={rectangle, rounded corners, draw=black, align=center, thick, minimum height=1.5cm, minimum width=3cm},
+    bigbox/.style={rectangle, rounded corners, draw=LMUGreen, thick, inner sep=0.3cm, line width=1pt, fill=LMUGreen!5} % 
   ]
-
+    
     \node [rect] (data) {Data};
     \node [rect, below=of data] (mlmodel) {ML Model};
     \node [rect, below=of mlmodel] (preds) {Predictions};
-    \node [box, dashed, right=of mlmodel, fill=cvprblue!30] (interpretability) {Interpretability};
-    \node [box, dashed, right=of interpretability, fill=LightPurple!30] (inspection) {Human Inspection};
-    \node [box, dashed, below=of inspection] (predictions) {Verified Predictions};
+    \node [box, right=of mlmodel, fill=cvprblue!30] (interpretability) {Interpretability};
+    \node [box, right=of interpretability, fill=LightPurple!30] (inspection) {Human Inspection};
+    \node [box, below=of inspection] (predictions) {Verified Predictions};
 
+    \begin{pgfonlayer}{background}
+      \node[bigbox, fit=(data) (mlmodel) (preds)] (group) {};
+    \end{pgfonlayer}
+    
     \path [line] (data) -- (mlmodel);
     \path [line] (mlmodel) -- (preds);
     \path [line] (mlmodel) -- (interpretability);
     \path [line] (interpretability) -- (inspection);
-    \path [line] (inspection) |- node[above left] {Data Improvement} (data);
-    \path [line] (inspection) -- node[right] {Model Improvement}  (predictions);
+    \path [line] (inspection) |- node[below left] {Data Improvement} (data);
+    \path [line] (inspection) -- node[left] {Model Improvement}  (predictions);
 
   \end{tikzpicture}
   }

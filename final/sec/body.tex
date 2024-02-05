@@ -40,6 +40,38 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \subsection{Explainable AI}
 \label{sec:related:ai}
 
+\tikzstyle{line} = [draw, -latex', line width=0.7pt]
+
+\begin{figure}[ht]
+  \centering
+  \resizebox{.47\textwidth}{!}{
+  \begin{tikzpicture}[
+    node distance=1cm,
+    auto,
+    rect/.style={rectangle, draw=black, align=center, thick, minimum height=1.5cm, minimum width=2.7cm},
+    box/.style={rectangle, rounded corners, draw=black, align=center, thick, minimum height=1.5cm, minimum width=3cm},
+  ]
+
+    \node [rect] (data) {Data};
+    \node [rect, below=of data] (mlmodel) {ML Model};
+    \node [rect, below=of mlmodel] (preds) {Predictions};
+    \node [box, dashed, right=of mlmodel, fill=cvprblue!30] (interpretability) {Interpretability};
+    \node [box, dashed, right=of interpretability, fill=LightPurple!30] (inspection) {Human Inspection};
+    \node [box, dashed, below=of inspection] (predictions) {Verified Predictions};
+
+    \path [line] (data) -- (mlmodel);
+    \path [line] (mlmodel) -- (preds);
+    \path [line] (mlmodel) -- (interpretability);
+    \path [line] (interpretability) -- (inspection);
+    \path [line] (inspection) |- node[above left] {Data Improvement} (data);
+    \path [line] (inspection) -- node[right] {Model Improvement}  (predictions);
+
+  \end{tikzpicture}
+  }
+  \caption{Overview of the explainable AI compared with standardized ML evaluation process} 
+  \label{fig:xai}
+\end{figure}
+
 \section{Approach}
 \label{sec:approach}
 
@@ -126,7 +158,7 @@ since it introduces the non-linearity into the model,
 allowing it to learn more complex patterns. 
 
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
-\tikzstyle{line} = [draw, -latex']
+\tikzstyle{line} = [draw, -latex', line width=0.7pt]
 
 \begin{figure*}[ht]
   \centering

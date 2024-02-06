@@ -105,23 +105,6 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
 % https://arxiv.org/pdf/2303.15889.pdf
 % https://www.mdpi.com/1424-8220/22/21/8089
 
-\begin{table*}[ht]
-  \centering
-  \resizebox{.99\textwidth}{!}{
-  \begin{tabular}{@{}lccc@{}}
-    \toprule
-    Dataset & \#Images in training set & \#Images in testing set & \# Images in validation set  \\
-    \midrule
-    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
-    Facial Expression Recognition Plus (FER+~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) &&-& 600 \\
-    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) &&-& 600 \\
-    \bottomrule
-  \end{tabular}
-  }
-  \caption{Overview of the datasets statistics used in our experiment}
-  \label{tab:data}
-\end{table*}
 
 To initiate the project, % training, 
 we acquired the databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
@@ -326,6 +309,24 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
   \caption{Overview of our random testing results examples extracted from the CSV file}
   \label{tab:testcsv}
 \end{table*}  
+
+\begin{table*}[ht]
+  \centering
+  \resizebox{.99\textwidth}{!}{
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Dataset & \#Images in training set & \#Images in testing set & \# Images in validation set  \\
+    \midrule
+    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
+    Facial Expression Recognition Plus (FER+~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
+    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) &&-& 600 \\
+    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) &&-& 600 \\
+    \bottomrule
+  \end{tabular}
+  }
+  \caption{Overview of the datasets statistics used in our experiment}
+  \label{tab:data}
+\end{table*}
 
 \begin{table}[ht]
   \centering

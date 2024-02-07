@@ -28,7 +28,7 @@ conda config --append channels conda-forge
 
 # get repo for Leah for everyone to use
 rm -rf SEP-CVDL
-git clone https://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@github.com/werywjw/SEP-CVDL.git
+git clone https://<github-token>/werywjw/SEP-CVDL.git
 cd SEP-CVDL/
 git checkout $branch_name
 GIT_CHECKOUT_PID=$!

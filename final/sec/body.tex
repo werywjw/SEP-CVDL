@@ -30,6 +30,13 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
 \Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
 \Cref{fig:modeldetail} illustrates the empirical results of our current best model. 
 
+% add fig from Leah: Overview
+% \begin{figure}[ht]
+%   \centering
+%    \includegraphics[width=\linewidth]{output.png}
+%    \caption{Overview} 
+%    \label{fig:result}
+% \end{figure}
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
 \section{Related Work}
@@ -79,6 +86,41 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
   \label{fig:xai}
 \end{figure}
 
+\subsection{CAM and Grad-CAM} % aggregate Class Activation Mapping (CAM)
+\label{sec:optim:cam}
+
+In generally, 
+CAM~\cite{ZhouKLOT16} helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
+as it highlights the important regions of an image or a video, 
+aiding in the understanding of the behavior of the model, 
+which is especially useful for model debugging and further improvement. 
+Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, 
+we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
+The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
+
+% Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
+%~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
+CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
+Typically,
+CAM is applied to the final convolutional layer of a CNN. 
+In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
+The \textit{global average pooling} (GAP) layer, 
+which computes the average value of each feature map to obtain a spatial average of feature maps, 
+is used to obtain a spatial average of the feature maps. 
+% The weights connecting the feature maps to the output class are obtained.
+% The weighted combination of feature maps, 
+% representing the importance of each spatial location, is used to generate the CAM heatmap.
+
+Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
+CAM must be implemented in the last layer of a CNN or before the fully connected layer, 
+We will meanwhile compare to Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
+introduced as a technique that is easier to implement with different architectures.
+This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
+% \subsection{Grad-CAM} 
+% \label{sec:optim:gcam}
+
+\citet{chattopadhay2018grad} proposed Grad-CAM++,
+
 \section{Approach}
 \label{sec:approach}
 
@@ -118,13 +160,6 @@ That is,
 we generalized a folder structure annotating the labels 0 (happiness), 1 (surprise), 2 (sadness), 3 (anger), 4 (disgust), and 5 (fear). 
 Besides the original format of images and videos, we set standards for extracting frames from the videos, 
 resizing training pictures to $64\times 64$ pixels, and saving them in the JPG format.
-
-% \begin{figure}[ht]
-%   \centering
-%    \includegraphics[width=\linewidth]{output.png}
-%    \caption{Empirical results in terms of the loss and accuracy with respect to different epochs for our current best model} 
-%    \label{fig:result}
-% \end{figure}
 
 The images are converted to greyscale with three channels, 
 as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
@@ -380,7 +415,6 @@ As models encounter slightly altered versions of familiar data,
 they are forced to make more nuanced and robust predictions. 
 With this process, we aim to prevent overfitting, which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
-During the project, we pursue various approaches. 
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
 
@@ -389,43 +423,6 @@ Meanwhile, we create various replications of existing photos by randomly alterin
 To further analyze the separate scores of each class of the model, 
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
 This CSV file is represented with the corresponding classification scores. 
-
-\subsection{CAM and Grad-CAM} % aggregate Class Activation Mapping (CAM)
-\label{sec:optim:cam}
-
-In generally, 
-CAM~\cite{ZhouKLOT16} helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
-as it highlights the important regions of an image or a video, 
-aiding in the understanding of the behavior of the model, 
-which is especially useful for model debugging and improvement. 
-Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, % classification-trained
-we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
-The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
-
-% Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
-%~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
-% CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute most to a particular class prediction. 
-% Model Architecture:
-% CAM is typically applied to the final convolutional layer of a CNN, just before the fully connected layers.
-% CAM Process:
-% The final convolutional layer produces feature maps, and 
-% Application: 
-% The GAP layer is used to obtain a spatial average of the feature maps. 
-% The \textit{global average pooling} (GAP) layer computes the average value of each feature map to obtain a spatial average of feature maps.
-% The weights connecting the feature maps to the output class are obtained.
-% The weighted combination of feature maps, representing the importance of each spatial location, is used to generate the CAM heatmap.
-% CAM is a visualization technique designed to highlight the important regions of an image or video that contribute the most to the prediction of a specific class by a neural network, 
-% typically the final convolutional layer of a CNN before the fully connected layers. 
-Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
-CAM must be implemented in the last layer of a CNN or before the fully connected layer, 
-% Grad-CAM  can be implemented with every architecture without big effort. 
-We will meanwhile compare to Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
-introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
-% \subsection{Grad-CAM} 
-% \label{sec:optim:gcam}
-
-\citet{chattopadhay2018grad} proposed Grad-CAM++,
 
 \section{Conclusion and Discussion}
 \label{sec:conclusion}

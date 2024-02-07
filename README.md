@@ -91,9 +91,7 @@ exit
 exit
 ```
 
-## Approach with self defined hook functions: 
-https://towardsdatascience.com/grad-cam-in-pytorch-use-of-forward-and-backward-hooks-7eba5e38d569
-
+## How to convert `.ipynb` to `.py`?
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o

@@ -11,7 +11,6 @@ import cv2
 
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-# device = torch.device("cpu")
 
 class_labels = ['happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
 

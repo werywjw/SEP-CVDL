@@ -50,7 +50,7 @@ TODO
 
 ## How does our video look?
 
-![](./presentation/CV&DL Video.mov)
+![](./presentation/CVDLgif.gif)
 
 ## How to resolve the conflicts?
 ```

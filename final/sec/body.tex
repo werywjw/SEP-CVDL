@@ -170,7 +170,7 @@ using PyTorch.
 \subsection{Model Architecture}
 The input to our emotion recognition model is a gray scale image at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
-We implement an emotion classification model from scratch with four convolution layers at the very beginning. 
+We implement an emotion classification model from scratch with four convolution blocks at the very beginning. 
 Following each convolutional layer, 
 batch normalization and interleaved with max pooling are used, 
 as this stabilizes learning by normalizing the input to each layer. 
@@ -398,8 +398,8 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 \section{Optimization Strategies}
 \label{sec:optim}
 
-% To enhance model performance during training, 
-% we will focus on the following tasks, 
+To further understand and enhance the performance of the model during training, 
+% we focus on the following tasks, 
 % i.e., data augumentation (see \Cref{sec:optim:aug}), 
 % CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
 %~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
@@ -435,19 +435,22 @@ This CSV file is represented with the corresponding classification scores.
 \subsection*{Author Contributions}
 \label{sec:author}
 % see https://arxiv.org/pdf/2005.14165.pdf page42
-Equal contributions are listed by alphabetical order of surnames. 
-Every author did the literature research and contributed to the writing of the paper. 
 
 \begin{itemize}
-  \item \textbf{Tanja Jaschkowitz} implemented the model architecture, training and testing infrastructure, and CSV file aggregations. 
-  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation, and ran the results. 
-  She also takes part in the explainable AI and Grad-CAM.
+  \item \textbf{Jiawen Wang} implemented different model architectures from scratch, 
+  training and testing infrastructure, classification score script, Grad-CAM explaination, and optimization strategies, 
+  together with the corresponding writing part. 
+  % Also, she is responsible for the figures and tables of this report.
+  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation. 
+  She helps run the results with slurm. 
+  She also takes part in the explainable AI and Grad-CAM. 
+  In the specific writing part, she drew the %\Cref{}
   \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, data preprocessing, and CAM-Images inquiry.
-  \item \textbf{Jiawen Wang} implemented the model architecture, training and testing infrastructure, classification score script, and optimization strategies. 
-  In the specific writing part, she drew the figures and tables and improved this report from team members.
 \end{itemize}
 
 \section*{Acknowledgements}
 
 We are deeply grateful to our advisors \textbf{Johannes Fischer} and \textbf{Ming Gui} for their helpful and valuable support during the entire semester. 
-We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course.
+We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course. 
+We specially acknowledge our former team member \textbf{Tanja Jaschkowitz}, 
+who joined us during the first phase of the project and shared two scripts.

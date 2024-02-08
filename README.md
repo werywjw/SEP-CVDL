@@ -46,6 +46,8 @@ python3 script_csv.py
 
 ## How to run the script to the video?
 
+## How to resolve the conflict?
+
 ## Notes on Slurm
 
 1. get your CIP account information 

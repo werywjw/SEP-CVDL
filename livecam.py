@@ -94,7 +94,8 @@ def detect_bounding_box(video_frame, counter):
             max_emotion = get_max_emotion(x, y, w, h, video_frame) 
         
         print_max_emotion(x, y, video_frame, max_emotion) # displays the max_emotion according to evaluation_frequency
-        print_all_emotion(x, y, w, h, video_frame) # evaluates every video_frame for debugging
+        print_all_emotion(x, y, w, h, video_frame) 
+        # evaluates every video_frame for debugging
 
     return faces
 

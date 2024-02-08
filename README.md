@@ -46,7 +46,23 @@ python3 script_csv.py
 
 ## How to run the script to the video?
 
-## How to resolve the conflict?
+TODO
+
+## How does our video look?
+
+![](./presentation/CV&DL Video.mov)
+
+## How to resolve the conflicts?
+```
+git status
+```
+See what is asked to be modified, then:
+```
+git add 
+git pull 
+git commit
+git push
+```
 
 ## Notes on Slurm
 

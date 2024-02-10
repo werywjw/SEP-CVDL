@@ -15,9 +15,10 @@ and \textit{gradient-weighted class activation mapping} (Grad-CAM).
 % update later
 Our main contributions can be summarized as follows.
 \begin{itemize}
-  \item We collect and preprocess the training and testing data (image and video) from various public databases. 
-  \item We implement all CNN models from scratch and optimize it with different augmentation techniques. 
-  Meanwhile, we provide the classification scores of each emotion class in a comprehensive CSV file with respect to each image. 
+  \item We collect, preprocess, and evaluate the training and testing data throughly, 
+  (both image and video) from various public databases. 
+  \item We implement all classification models from scratch and optimize them with several techniques in a systematical manner. 
+  Meanwhile, we provide the classification scores of each emotion class in a detailed script with respect to each image. 
   \item We give the video demo to illustrate the real-world performance of our best model.
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
 \end{itemize}
@@ -60,7 +61,6 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
     box/.style={rectangle, rounded corners, draw=black, align=center, thick, minimum height=1.5cm, minimum width=3cm},
     bigbox/.style={rectangle, rounded corners, draw=LMUGreen, thick, inner sep=0.3cm, line width=1pt, fill=LMUGreen!5} 
   ]
-    
     \node [rect] (data) {Data};
     \node [rect, below=of data] (mlmodel) {ML Model};
     \node [rect, below=of mlmodel] (preds) {Predictions};
@@ -86,38 +86,31 @@ The preliminary evaluation results of our models are given in \Cref{sec:evaluati
   \label{fig:xai}
 \end{figure}
 
-\subsection{CAM and Grad-CAM} % aggregate Class Activation Mapping (CAM)
-\label{sec:optim:cam}
+To understand the decision-making process of our model, 
+we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
+i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
+a technique that is easier to implement with different architectures. 
 
-In generally, 
+\paragraph{Class Activation Mapping (CAM).}
+CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
+Generally speaking, 
 CAM~\cite{ZhouKLOT16} helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
 as it highlights the important regions of an image or a video, 
 aiding in the understanding of the behavior of the model, 
 which is especially useful for model debugging and further improvement. 
+Typically,
+CAM is applied to the final convolutional layer of a CNN. 
 Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, 
 we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
 The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
 
-% Technically, CAM generates a heatmap that highlights the important regions of the image in terms of the decision of the model. 
 %~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
-CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
-Typically,
-CAM is applied to the final convolutional layer of a CNN. 
-In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
-The \textit{global average pooling} (GAP) layer, 
-which computes the average value of each feature map to obtain a spatial average of feature maps, 
-is used to obtain a spatial average of the feature maps. 
 % The weights connecting the feature maps to the output class are obtained.
 % The weighted combination of feature maps, 
 % representing the importance of each spatial location, is used to generate the CAM heatmap.
-
 Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
-CAM must be implemented in the last layer of a CNN or before the fully connected layer, 
-We will meanwhile compare to Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
-introduced as a technique that is easier to implement with different architectures.
-This task will be implemented by using the libraries from PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
-% \subsection{Grad-CAM} 
-% \label{sec:optim:gcam}
+CAM must be implemented in the last layer of a CNN or before the fully connected layer.
+% We implement using the libraries such as PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
 
 \citet{chattopadhay2018grad} proposed Grad-CAM++,
 
@@ -147,6 +140,26 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
 % https://arxiv.org/pdf/2303.15889.pdf
 % https://www.mdpi.com/1424-8220/22/21/8089
 
+\begin{table*}[ht]
+  \centering
+  \resizebox{.99\textwidth}{!}{
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Dataset & \#Images in training set & \#Images in testing set & \# Video/Images in validation set  \\
+    \midrule
+    Denver Intensity of Spontaneous Facial Action Database (DISFA~\cite{mavadati2013disfa}) & - & - & 27 \\
+    \midrule
+    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
+    Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
+    Fer Affectnet Database (Fer Affectnet~\cite{kagaff, Mollah2019ANet}) & 21045 &-& 600  \\
+    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& 600 \\
+    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& 600 \\
+    \bottomrule
+  \end{tabular}
+  }
+  \caption{Overview of statistics of datasets used in our experiment}
+  \label{tab:data}
+\end{table*}
 
 To initiate the project, % training, 
 we acquired the databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
@@ -168,7 +181,7 @@ We create a custom dataset, which is a collection of data relating to all traini
 using PyTorch.
 
 \subsection{Model Architecture}
-The input to our emotion recognition model is a gray scale image at $64 \times 64 $ resolution. 
+The input to our emotion recognition model is a grayscale image at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution blocks at the very beginning. 
 Following each convolutional layer, 
@@ -277,7 +290,7 @@ allowing it to learn more complex patterns.
 \end{figure}
 
 In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
-we utilize the parameter grid from sklearn.
+we utilize the parameter grid from Sklearn.
 % ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
 Additionally, we increase the depth of the network by adding some convolutional layers to learn more complex features. 
 To help the training of deeper networks more efficiently, 
@@ -286,7 +299,7 @@ as they allow gradients to flow through the network more easily, improving the t
 Moreover, 
 we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attention. 
 
-\subsection{Results}
+\subsection{Evaluation Results}
 \label{sec:evaluation:results}
 
 \begin{table*}[ht]
@@ -317,6 +330,40 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
   \label{tab:model}
 \end{table*}
 
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{@{}lc@{}}
+    \toprule
+    Hyperparameter & Value \\
+    \midrule
+    Learning rate & \{0.01, 0.001, 0.0001\}  \\
+    Batch size & \{8, 16, 32, 64\} \\
+    Dropout rate & \{0.2, 0.5\} \\
+    Epoch & \{20, 30, 40\} \\
+    Early stopping & \{\texttt{True}, \texttt{False}\} \\
+    Patience & \{5\} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Explored hyperparameter space for our models}
+  \label{tab:hyper}
+\end{table}
+
+Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
+Batch normalization can indeed improve the performance of the model. 
+
+\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
+% ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
+Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
+As seen in \Cref{tab:model}, 
+our CNN without random augmentation outperforms the other models in terms of accuracy, 
+indicating that this kind of augmentation is not able to help our model predict the correct label, 
+thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
+Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
+
+
+\subsection{Interpretable Results}
+\label{sec:evaluation:inter}
+
 \begin{table*}[ht]
   \centering
   % \begin{tabular}{l|c|c|c|c|c|c}
@@ -345,56 +392,10 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
   \label{tab:testcsv}
 \end{table*}  
 
-\begin{table*}[ht]
-  \centering
-  \resizebox{.99\textwidth}{!}{
-  \begin{tabular}{@{}lccc@{}}
-    \toprule
-    Dataset & \#Images in training set & \#Images in testing set & \# Video/Images in validation set  \\
-    \midrule
-    Denver Intensity of Spontaneous Facial Action Database (DISFA~\cite{mavadati2013disfa}) & - & - & 27 \\
-    \midrule
-    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
-    Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    Fer Affectnet Database (Fer Affectnet~\cite{kagaff, Mollah2019ANet}) & 21045 &-& 600  \\
-    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& 600 \\
-    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& 600 \\
-    \bottomrule
-  \end{tabular}
-  }
-  \caption{Overview of the datasets statistics used in our experiment}
-  \label{tab:data}
-\end{table*}
-
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{@{}lc@{}}
-    \toprule
-    Hyperparameter & Value \\
-    \midrule
-    Learning rate & \{0.01, 0.001, 0.0001\}  \\
-    Batch size & \{8, 16, 32, 64\} \\
-    Dropout rate & \{0.2, 0.5\} \\
-    Epoch & \{20, 30, 40\} \\
-    Early stopping & \{\texttt{True}, \texttt{False}\} \\
-    Patience & \{5\} \\
-    \bottomrule
-  \end{tabular}
-  \caption{Explored hyperparameter space for our models}
-  \label{tab:hyper}
-\end{table}
-
-Adding a extra convolutional layer to the model with much more parameters does not necessarily lead to better performance.
-Batch normalization can indeed improve the performance of the model. 
-
-\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
-% ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
-Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
-As seen in \Cref{tab:model}, 
-our CNN without random augmentation outperforms the other models in terms of accuracy, 
-indicating that this kind of augmentation is not able to help our model predict the correct label, 
-thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
-Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
+In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
+The \textit{global average pooling} (GAP) layer, 
+which computes the average value of each feature map to obtain a spatial average of feature maps, 
+is used to obtain a spatial average of the feature maps. 
 
 \section{Optimization Strategies}
 \label{sec:optim}
@@ -439,19 +440,19 @@ This CSV file is represented with the corresponding classification scores.
 
 \begin{itemize}
   \item \textbf{Jiawen Wang} implemented different model architectures from scratch, 
-  training and testing infrastructure, classification score script, Grad-CAM explaination, and optimization strategies, 
+  training and testing infrastructure, classification score script, Grad-CAM explanation, and optimization strategies, 
   together with the corresponding writing part. 
   % Also, she is responsible for the figures and tables of this report.
-  \item \textbf{Leah Kawka} collected the training data, prepared data processing, implemented augmentation. 
-  She helps run the results with slurm. 
+  \item \textbf{Leah Kawka} collected the training data, prepared data processing, and implemented augmentation. 
+  She helps run the results with Slurm. 
   She also takes part in the explainable AI and Grad-CAM. 
   In the specific writing part, she drew the %\Cref{}
-  \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion reasearching, data preprocessing, and CAM-Images inquiry.
+  \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion researching, data preprocessing, and CAM-Images inquiry.
 \end{itemize}
 
 \section*{Acknowledgements}
 
 We are deeply grateful to our advisors \textbf{Johannes Fischer} and \textbf{Ming Gui} for their helpful and valuable support during the entire semester. 
 We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course. 
-We specially acknowledge our former team member \textbf{Tanja Jaschkowitz}, 
-who joined us during the first phase of the project and shared two scripts.
+We especially acknowledge our former team member \textbf{Tanja Jaschkowitz}, 
+who joined us during the first phase of the project and shared two notebook scripts.

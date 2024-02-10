@@ -181,12 +181,18 @@ We create a custom dataset, which is a collection of data relating to all traini
 using PyTorch.
 
 \subsection{Model Architecture}
-The input to our emotion recognition model is a grayscale image at $64 \times 64 $ resolution. 
+\label{sec:evaluation:model}
+
+\Cref{fig:model} illustrates the overview of our model architecture. 
+The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution blocks at the very beginning. 
+Despite larger kernel can provide more information and wider area view due to more parameters, 
+we use a $3 \times 3$ kernel size for all convolutional layers, 
+as it is efficient to train and shares the weights without expensive computation. 
 Following each convolutional layer, 
-batch normalization and interleaved with max pooling are used, 
-as this stabilizes learning by normalizing the input to each layer. 
+batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
+We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
 We also add a 50\% dropout layer to prevent overfitting. 
 Verified by \citet{BarsoumZCZ16}, 
@@ -339,9 +345,15 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
     Learning rate & \{0.01, 0.001, 0.0001\}  \\
     Batch size & \{8, 16, 32, 64\} \\
     Dropout rate & \{0.2, 0.5\} \\
-    Epoch & \{20, 30, 40\} \\
+    Convolution depth & \{4, 5, 6\} \\
+    Fully connected depth & \{2, 3\} \\
+    Batch normalization & \{\texttt{True}, \texttt{False}\} \\
+    Pooling & \{\texttt{max}, \texttt{adaptive avg}\} \\
+    Optimizer & \{\texttt{Adam}, \texttt{SGD}\} \\
+    Activation & \{ \texttt{relu}, \texttt{tanh}, \texttt{elu}, \texttt{gelu}\} \\
+    Epoch & \{30, 40, 50, 70, 100\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
-    Patience & \{5\} \\
+    Patience & \{5, 10\} \\
     \bottomrule
   \end{tabular}
   \caption{Explored hyperparameter space for our models}
@@ -351,7 +363,7 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
 Batch normalization can indeed improve the performance of the model. 
 
-\Cref{fig:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
+\Cref{tab:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
 % ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 

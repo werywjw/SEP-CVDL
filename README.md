@@ -48,7 +48,7 @@ python3 script_csv.py
 
 TODO
 
-## How does our video look?
+## How does our video look like?
 
 ![](./presentation/CVDLgif.gif)
 
@@ -62,6 +62,31 @@ git add .
 git pull 
 git commit
 git push
+```
+
+## How to coauthor?
+
+```
+git add .
+git commit -m "
+
+
+Co-authored-by: leahkawka <leahkawka@gmail.com>"
+git push origin main
+```
+
+Similarly, `command` + `enter` for blank lines:
+```
+git commit -m " <balala>
+
+
+Co-authored-by: werywjw <werywjw@gmail.com>"
+```
+
+## How to convert `.ipynb` to `.py`?
+
+```
+colab-convert livecam.ipynb livecam.py -nc -rm -o
 ```
 
 ## Notes on Slurm
@@ -107,20 +132,4 @@ exit
 9. exit the remote host by command:
 ```
 exit
-```
-
-## How to convert `.ipynb` to `.py`?
-
-```
-colab-convert livecam.ipynb livecam.py -nc -rm -o
-```
-
-## How to coauthor?
-
-```
-git commit -m "
-
-
-Co-authored-by: leahkawka <leahkawka@gmail.com>
-Co-authored-by: werywjw <werywjw@gmail.com>"
 ```

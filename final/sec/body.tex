@@ -28,9 +28,9 @@ The structure of rest of the report is arranged as follows.
 \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:setup}, 
 we address the datasets we collected and the model architecture we implemented. 
-The preliminary evaluation results of our models are given in \Cref{sec:evaluation:results}. 
-\Cref{sec:optim} describes the optimization strategies we plan to investigate in the coming weeks. 
-\Cref{fig:modeldetail} illustrates the empirical results of our current best model. 
+The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
+\Cref{sec:optim} describes the optimization strategies such as data augmentation and hyper-parameter tuning. 
+We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 \begin{figure*}[ht]
   \centering
@@ -137,14 +137,14 @@ All the experiments are implemented in Python and Shell for generating scripts.
     \midrule
     Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
     Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    Fer Affectnet Database (Fer Affectnet~\cite{Mollah2019ANet}) & 21045 (check 6 classes) &-& 600  \\
+    Fer Affectnet Database (Fer Affectnet~\cite{Mollah2019ANet}) & 21045 &-& 600  \\
     Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& 600 \\
     Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& 600 \\
     \bottomrule
   \end{tabular}
   }
   \caption{Overview of statistics of datasets used in our experiment 
-  (Note that)}
+  (Note that 600 images in the validation set above is given from our advisors)}
   \label{tab:data}
 \end{table*}
 

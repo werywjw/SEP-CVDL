@@ -32,6 +32,7 @@ https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code
 2. FER+ 
 3. TFEID 
 4. CK+
+5. AffectNet (https://www.kaggle.com/datasets/ibtsam/affectnet-yolo?resource=download)
 
 ### Notes
 

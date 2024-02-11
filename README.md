@@ -58,7 +58,7 @@ git status
 ```
 See what is asked to be modified, then:
 ```
-git add 
+git add .
 git pull 
 git commit
 git push
@@ -113,4 +113,14 @@ exit
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o
+```
+
+## How to coauthor?
+
+```
+git commit -m "
+
+
+Co-authored-by: leahkawka <leahkawka@gmail.com>
+Co-authored-by: werywjw <werywjw@gmail.com>"
 ```

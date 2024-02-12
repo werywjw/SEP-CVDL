@@ -1,14 +1,19 @@
 # SEP-CVDL
 
-### How to run the script to get the CSV file of classification scores?
+### archieve folder contains 2 separate datasets (Training & Testing) contains all datasets together
 
-```
-./script_csv.sh
-```
 
-### archieve folder contains 2 separate datasets (Training & Testing)
-
-### dataset folder contains all datasets together
+### dataset with clear 6 emotion folders 
+- training_sets:
+1. RAF-DB
+2. FER
+3. AffectNet
+4. CK+
+5. TFEID
+- testing_sets:
+1. RAF-DB
+2. FER
+- validation_set
 
 ### Dataset
 
@@ -38,3 +43,9 @@ https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code
 
 The configuration parameters of the DLP-CNN and the hyper-parameters of the trianing process is caffe-expression: 
 https://github.com/cmdrootaccess/caffe
+
+### How to run the script to get the CSV file of classification scores?
+
+```
+./script_csv.sh
+```

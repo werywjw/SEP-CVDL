@@ -1,5 +1,10 @@
 # SEP-CVDL
 
+## Where is the overview of the pipeline (drawio)?
+
+https://app.diagrams.net/#G15989rnA3gZtCfwwUN6p3uUDmJ0T69YZN
+
+
 ### Archieve folder contains 2 separate datasets (Training & Testing) contains all datasets together
 
 

@@ -48,43 +48,6 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \subsection{Explainable AI}
 \label{sec:related:ai}
 
-\tikzstyle{line} = [draw, -latex', line width=0.7pt]
-
-% \begin{figure}[ht]
-%   \centering
-%   \resizebox{.47\textwidth}{!}{
-%   \begin{tikzpicture}[
-%     node distance=1cm,
-%     auto,
-%     rect/.style={rectangle, draw=black, align=center, thick, minimum height=1.5cm, minimum width=2.7cm},
-%     box/.style={rectangle, rounded corners, draw=black, align=center, thick, minimum height=1.5cm, minimum width=3cm},
-%     bigbox/.style={rectangle, rounded corners, draw=LMUGreen, thick, inner sep=0.3cm, line width=1pt, fill=LMUGreen!5} 
-%   ]
-%     \node [rect] (data) {Data};
-%     \node [rect, below=of data] (mlmodel) {ML Model};
-%     \node [rect, below=of mlmodel] (preds) {Predictions};
-%     \node [box, right=of mlmodel, fill=cvprblue!30] (interpretability) {Interpretability};
-%     \node [box, right=of interpretability, fill=LightPurple!30] (inspection) {Human Inspection};
-%     \node [box, below=of inspection] (predictions) {Verified Predictions};
-
-%     \begin{pgfonlayer}{background}
-%       \node[bigbox, fit=(data) (mlmodel) (preds)] (group) {};
-%     \end{pgfonlayer}
-    
-%     \path [line] (data) -- (mlmodel);
-%     \path [line] (mlmodel) -- (preds);
-%     \path [line] (mlmodel) -- (interpretability);
-%     \path [line] (interpretability) -- (inspection);
-%     \path [line] (inspection) |- node[below left] {Data Improvement} (data);
-%     \path [line] (inspection) -- node[left] {Model Improvement}  (predictions);
-
-%   \end{tikzpicture}
-%   }
-%   \caption{Overview of the traditional standardized ML evaluation process 
-%   (see the illustration in the large \textcolor{LMUGreen}{green} box) and the explainable AI pipeline} 
-%   \label{fig:xai}
-% \end{figure}
-
 To understand the decision-making process of our model, 
 we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
 i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
@@ -136,43 +99,44 @@ All the experiments are implemented in Python and Shell for generating scripts.
     \midrule
     Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
     Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    FER AffectNet Database (FER AffectNet~\cite{Mollah2019ANet}) & 21045 &-& 600  \\
-    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& 600 \\
-    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& 600 \\
+    FER AffectNet Database (FER AffectNet~\cite{Mollah2019ANet}) & 21045 &-& -  \\
+    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& - \\
+    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& - \\
     \midrule
     \midrule
-    FER \textsc{GiMeFive} & 55073 & 8333 & 600 \\
+    FER \textsc{GiMeFive} & \textbf{55073} & \textbf{8333} & \textbf{600} \\
     \bottomrule
   \end{tabular}
   }
   \caption{Overview of statistics of datasets used in our experiment 
-  (Note that 600 images in the validation set above is given from our advisors)}
+  (Note that 600 images in the validation set above is given from our advisors, 
+  we provide the detailed training image statistics for each emotion class in \Cref{tab:emotion})}
   \label{tab:data}
 \end{table*}
 
-
-% % tabel of labeled training images !! not the right size yet !!
-% \begin{table*}[ht]
-%   \centering
-%   \resizebox{\textwidth}{!}{
-%   \begin{tabular}{@{}lccc@{}}
-%       \toprule
-%       \textsc{Numbers of emotion labeled Images} & \#happiness & \#surprise & \#sadness & \#anger & \#disgust & \#fear \\
-%       \midrule
-%       RAF-DB & 4772 & 1290 & 1982 & 705 & 717 & 281 \\
-%       FER2013 & 7215 & 3171 & 4830 & 3994 & 436 & 4097 \\
-%       FER AffectNet & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 \\
-%       CK+ & 69 & 83 & 28 & 45 & 59 & 25 \\
-%       TFEID & 40 & 36 & 39 & 34 & 40 & 40 \\
-%       \midrule
-%       \midrule
-%       FER \textsc{GiMeFive} & 15187 & 8619 & 11923 & 7996 & 3729 & 7619 \\
-%       \bottomrule
-%   \end{tabular}
-%   }
-% \caption{Overview of statistics of labeled Images for Training used in our experiment}
-% \label{tab:data}
-% \end{table*}
+\begin{table}[ht]
+  \centering
+  \resizebox{.47\textwidth}{!}{
+  \begin{tabular}{@{}lcccccc@{}}
+      \toprule
+      \textsc{Dataset} & \#happiness & \#surprise & \#sadness & \#anger & \#disgust & \#fear \\
+      \midrule
+      RAF-DB & 4772 & 1290 & 1982 & 705 & 717 & 281 \\
+      FER2013 & 7215 & 3171 & 4830 & 3994 & 436 & 4097 \\
+      FER AffectNet & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 \\
+      CK+ & 69 & 83 & 28 & 45 & 59 & 25 \\
+      TFEID & 40 & 36 & 39 & 34 & 40 & 40 \\
+      \midrule
+      \midrule
+      FER \textsc{GiMeFive} (Train)  & 15187 & 8619 & 11923 & 7996 & 3729 & 7619 \\
+      FER \textsc{GiMeFive} (Test) & 2959 & 1160 & 1725 & 1120 & 271 & 1098 \\
+      FER \textsc{GiMeFive} (Valid) & 100 & 100 & 100 & 100 & 100 & 100 \\ 
+      \bottomrule
+  \end{tabular}
+  }
+\caption{Overview of the training image statistics for each emotion class}
+\label{tab:emotion}
+\end{table}
 
 To initiate the project, % training, 
 we acquired the image databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
@@ -280,7 +244,7 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
     \toprule 
     \multirow{2}{*}{\textsc{Dataset}}&\multirow{2}{*}{\textsc{Models}}&\multirow{2}{*}{\textsc{Architecture}} & \multicolumn{3}{c}{\textsc{Accuracies}} & \multirow{2}{*}{\textsc{\# Parameters}} \\
     \cline{4-6}
-    &&& Training & Testing & Validation  &  \\
+    &&& Train & Test & Valid  &  \\
     \midrule
     \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
     &Ours (13 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
@@ -386,7 +350,7 @@ Meanwhile, we create various replications of existing photos by randomly alterin
   \centering
   \begin{tabular}{@{}lc@{}}
     \toprule
-    Hyperparameter & Value \\
+    \textsc{Hyperparameter} & \textsc{Value} \\
     \midrule
     Learning rate & \{0.01, 0.001, 0.0001\}  \\
     Batch size & \{8, 16, 32, 64\} \\
@@ -395,9 +359,9 @@ Meanwhile, we create various replications of existing photos by randomly alterin
     Fully connected depth & \{2, 3\} \\
     Batch normalization & \{\texttt{True}, \texttt{False}\} \\
     Pooling & \{\texttt{max}, \texttt{adaptive avg}\} \\
-    Optimizer & \{\texttt{Adam}, \texttt{SGD}\} \\
+    Optimizer & \{\texttt{Adam}, \texttt{AdamW}, \texttt{SGD}\} \\
     Activation & \{ \texttt{relu}, \texttt{tanh}, \texttt{elu}, \texttt{gelu}\} \\
-    Epoch & \{30, 40, 50, 70, 100\} \\
+    Epoch & \{40, 80\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
     Patience & \{5, 10\} \\
     \bottomrule
@@ -412,86 +376,5 @@ Meanwhile, we create various replications of existing photos by randomly alterin
 \section{Limitation}
 \label{sec:limitation}
 
-\subsection*{Author Contributions}
-\label{sec:author}
-% see https://arxiv.org/pdf/2005.14165.pdf page42
-
-\begin{itemize}
-  \item \textbf{Jiawen Wang} implemented different model architectures from scratch, 
-  training and testing infrastructure, classification score script, Grad-CAM explanation, and optimization strategies, 
-  together with the corresponding writing part. 
-  % Also, she is responsible for the figures and tables of this report.
-  \item \textbf{Leah Kawka} collected the training data, prepared data processing, and implemented augmentation. 
-  She helps run the results with Slurm. 
-  She also takes part in the explainable AI and Grad-CAM. 
-  In the specific writing part, she drew the %\Cref{}
-  \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion researching, data preprocessing, and CAM-Images inquiry.
-\end{itemize}
-
-\section*{Acknowledgements}
-
-We are deeply grateful to our advisors \textbf{Johannes Fischer} and \textbf{Ming Gui} for their helpful and valuable support during the entire semester. 
-We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course. 
-We especially acknowledge our former team member \textbf{Tanja Jaschkowitz}, 
-who joined us during the first phase of the project and shared two notebook scripts.
-
-\tikzstyle{layer} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=LightPurple!30]
-\tikzstyle{pool} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=cvprblue!30]
-\tikzstyle{fc} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=Orange!30]
-\tikzstyle{arrow} = [thick,->,>=stealth]
-
-\begin{figure}[ht]
-  \centering
-  \resizebox{.17\textwidth}{!}{
-  \begin{tikzpicture}[node distance=1.7cm]
-
-    \node (input) [layer] {Input $3 \times H \times W$};
-    \node (conv1) [layer, below of=input] {Conv1 $64$, $3\times3$, padding=1};
-    \node (bn1) [layer, below of=conv1] {BatchNorm1 $64$};
-    \node (pool1) [pool, below of=bn1] {MaxPool $2\times2$};
-    \node (conv2) [layer, below of=pool1] {Conv2 $128$, $3\times3$, padding=1};
-    \node (bn2) [layer, below of=conv2] {BatchNorm2 $128$};
-    \node (pool2) [pool, below of=bn2] {MaxPool $2\times2$};
-    \node (conv3) [layer, below of=pool2] {Conv3 $256$, $3\times3$, padding=1};
-    \node (bn3) [layer, below of=conv3] {BatchNorm3 $256$};
-    \node (pool3) [pool, below of=bn3] {MaxPool $2\times2$};
-    \node (conv4) [layer, below of=pool3] {Conv4 $512$, $3\times3$, padding=1};
-    \node (bn4) [layer, below of=conv4] {BatchNorm4 $512$};
-    \node (pool4) [pool, below of=bn4] {MaxPool $2\times2$};
-    \node (conv5) [layer, below of=pool4] {Conv5 $1024$, $3\times3$, padding=1};
-    \node (bn5) [layer, below of=conv5] {BatchNorm5 $1024$};
-    \node (pool5) [pool, below of=bn5] {MaxPool $2\times2$};
-    \node (adaptivePool) [pool, below of=pool5] {AdaptiveAvgPool};
-    \node (fc1) [fc, below of=adaptivePool] {FC1 $2048$};
-    \node (dropout1) [fc, below of=fc1] {Dropout $0.5$};
-    \node (fc2) [fc, below of=dropout1] {FC2 $1024$};
-    % \node (dropout2) [fc, below of=fc2] {Dropout $0.5$};
-    \node (fc3) [fc, below of=fc2] {FC3 $6$};
-
-    \draw [arrow] (input) -- (conv1);
-    \draw [arrow] (conv1) -- (bn1);
-    \draw [arrow] (bn1) -- (pool1);
-    \draw [arrow] (pool1) -- (conv2);
-    \draw [arrow] (conv2) -- (bn2);
-    \draw [arrow] (bn2) -- (pool2);
-    \draw [arrow] (pool2) -- (conv3);
-    \draw [arrow] (conv3) -- (bn3);
-    \draw [arrow] (bn3) -- (pool3);
-    \draw [arrow] (pool3) -- (conv4);
-    \draw [arrow] (conv4) -- (bn4);
-    \draw [arrow] (bn4) -- (pool4);
-    \draw [arrow] (pool4) -- (conv5);
-    \draw [arrow] (conv5) -- (bn5);
-    \draw [arrow] (bn5) -- (pool5);
-    \draw [arrow] (pool5) -- (adaptivePool);
-    \draw [arrow] (adaptivePool) -- (fc1);
-    \draw [arrow] (fc1) -- (dropout1);
-    \draw [arrow] (dropout1) -- (fc2);
-    \draw [arrow] (fc2) -- (fc3);
-    % \draw [arrow] (dropout2) -- (fc3);
-
-  \end{tikzpicture}
-  }
-  \caption{Overview of our detailed model architecture} 
-  \label{fig:modeldetail}
-\end{figure}
+\newpage*
+% \clearpage

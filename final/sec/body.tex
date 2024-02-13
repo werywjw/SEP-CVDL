@@ -3,10 +3,9 @@
 
 % rewrite
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
-not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI) and computer vision.
-In this report, we aim to leverage several \textit{deep neural networks} (DNNs), 
-which contain convolution layers and residual/attention blocks, 
-to detect and interpret six basic universally recognized and expressed human facial emotions 
+not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
+In this report, we aim to leverage several deep 
+\textit{convolutional neural networks} (CNNs) to detect and interpret six basic universally recognized and expressed human facial emotions 
 (i.e., happiness, surprise, sadness, anger, disgust, and fear). 
 To make our model more transparent, 
 we explain this emotion classification task with \textit{gradient-weighted class activation mapping} (Grad-CAM). 
@@ -42,19 +41,18 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Facial Emotion Recognition}
-\label{sec:related:fer}
+\paragraph{Interpretable FER.}
 
-\subsection{Explainable AI}
-\label{sec:related:ai}
+\citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
+\citet{Malik0R21} 
 
+\paragraph{Explainable AI.}
 To understand the decision-making process of our model, 
 we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
 i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
 a technique that is easier to implement with different architectures. 
 
-\paragraph{Class Activation Mapping (CAM).}
-CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
+Class Activation Mapping (CAM) is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
 Generally speaking, 
 CAM~\cite{ZhouKLOT16} helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
 as it highlights the important regions of an image or a video, 
@@ -152,7 +150,7 @@ Besides the original format of images and videos, we set standards for extractin
 resizing training pictures to $64\times 64$ pixels, and saving them in the JPG format.
 
 The images are converted to greyscale with three channels, 
-as our original \textit{convolutional neural network} (CNN) is designed to work with three-channel inputs with random rotation and crop. 
+as our original CNN is designed to work with three-channel inputs with random rotation and crop. 
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 We create a custom dataset, which is a collection of data relating to all training images we collected, 
 using PyTorch.

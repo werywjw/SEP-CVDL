@@ -1,5 +1,7 @@
 
 models
+data
+*.pth
 
 .DS_Store
 *.DS_Store

@@ -130,15 +130,18 @@ All the experiments are implemented in Python and Shell for generating scripts.
   \resizebox{.99\textwidth}{!}{
   \begin{tabular}{@{}lccc@{}}
     \toprule
-    Dataset & \#Images in training set & \#Images in testing set & \# Video/Images in validation set  \\
+    \textsc{Dataset} & \#Images in training set & \#Images in testing set & \# Video/Images in validation set  \\
     \midrule
     Denver Intensity of Spontaneous Facial Action Database (DISFA~\cite{mavadati2013disfa}) & - & 27 & - \\
     \midrule
     Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
     Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    Fer Affectnet Database (Fer Affectnet~\cite{Mollah2019ANet}) & 21045 &-& 600  \\
+    Fer AffectNet Database (FER AffectNet~\cite{Mollah2019ANet}) & 21045 &-& 600  \\
     Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& 600 \\
     Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& 600 \\
+    \midrule
+    \midrule
+    FER \textsc{GiMeFive} & 55073 & 8333 & 600 \\
     \bottomrule
   \end{tabular}
   }
@@ -149,7 +152,7 @@ All the experiments are implemented in Python and Shell for generating scripts.
 
 To initiate the project, % training, 
 we acquired the image databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
-FER+~\cite{BarsoumZCZ16}, Fer Affectnet~\cite{Mollah2019ANet}, 
+FER+~\cite{BarsoumZCZ16}, FER AffectNet~\cite{Mollah2019ANet}, 
 CK+~\cite{LuceyCKSAM10}, and TFEID~\cite{tfeid,LiGL22}, 
 as well as the video database DISFA~\cite{MavadatiMBTC13} from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}
 Based on these databases, we created a dataset by augmentation to increase the variety, 

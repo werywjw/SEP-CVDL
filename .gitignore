@@ -6,6 +6,7 @@ data
 best_6layer.pth
 best_6FER.pth
 best_RAF_res.pth
+*.pth
 
 .DS_Store
 *.DS_Store

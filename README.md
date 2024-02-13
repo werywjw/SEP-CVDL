@@ -1,9 +1,9 @@
 # SEP-CVDL
 
-### archieve folder contains 2 separate datasets (Training & Testing) contains all datasets together
+### Archieve folder contains 2 separate datasets (Training & Testing) contains all datasets together
 
 
-### dataset with clear 6 emotion folders 
+### Dataset with clear 6 emotion-folders
 - training_sets:
 1. RAF-DB
 2. FER
@@ -37,9 +37,12 @@ https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset/code
 2. FER+ 
 3. TFEID 
 4. CK+
-5. AffectNet (https://www.kaggle.com/datasets/ibtsam/affectnet-yolo?resource=download)
+5. AffectNet 
+(https://www.kaggle.com/datasets/ibtsam/affectnet-yolo?resource=download)
 
 ### Notes
+
+https://github.com/Tandon-A/emotic
 
 The configuration parameters of the DLP-CNN and the hyper-parameters of the trianing process is caffe-expression: 
 https://github.com/cmdrootaccess/caffe

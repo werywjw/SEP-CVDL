@@ -29,6 +29,7 @@ A detailed list of requirements can be found in `requirements.txt`.
 
 ```
 pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ## How to run the script to get the CSV file of classification scores?
@@ -36,7 +37,7 @@ Please change the **filepath** to the image folder that you would like to try. �
 
 - Option 1️⃣: Run the following command:
 ```
-python3 script_csv.py
+python3 script_csv.py 'dataset/validation_set'
 ```
 
 - Option 2️⃣: Use shell:
@@ -51,6 +52,15 @@ TODO
 ## How does our video look like?
 
 ![](./presentation/CVDLgif.gif)
+
+## How to test the live Demo with camera?
+
+Run the following command:
+```
+python3 livecam.py
+```
+
+Exit via `control` + `C`
 
 ## How to resolve the conflicts?
 ```
@@ -87,6 +97,12 @@ Co-authored-by: werywjw <werywjw@gmail.com>"
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o
+```
+
+## How to create the virtual environment?
+
+```
+source /Users/wery/venv/bin/activate
 ```
 
 ## Notes on Slurm

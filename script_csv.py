@@ -62,7 +62,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     main(args.folder_path)
     
-    # IMAGE_PATH = 'dataset/vali' # Please change this to your own path
-    # # IMAGE_PATH = 'archive/RAF-DB/train'
-    # # IMAGE_PATH = 'archive/RAF-DB/test'
-    # main(IMAGE_PATH)
+    # Please change this to your own path
+    # IMAGE_PATH = 'dataset/validation_set' 

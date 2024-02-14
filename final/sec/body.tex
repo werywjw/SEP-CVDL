@@ -2,27 +2,28 @@
 \label{sec:intro}
 
 % rewrite
-\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19} is a topic of significant frontier and ongoing debate, 
+\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
 In this report, we aim to leverage several deep 
 \textit{convolutional neural networks} (CNNs) to detect and interpret six basic universally recognized and expressed human facial emotions 
 (i.e., happiness, surprise, sadness, anger, disgust, and fear). 
 To make our model more transparent, 
-we explain this emotion classification task with \textit{gradient-weighted class activation mapping} (Grad-CAM). 
+we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
+(Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
 % update later
 Our main contributions can be summarized as follows.
 \begin{itemize}
-  \item We collect, preprocess, and evaluate the training and testing data throughly, 
+  \item We collect, preprocess, and evaluate the training and testing data thoroughly, 
   (both image and video) from various public databases. 
-  \item We implement all classification models from scratch and optimize them with several techniques in a systematical manner. 
+  \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
   Meanwhile, we provide the classification scores of each emotion class in a detailed script with respect to each image. 
   \item We give the video demo to illustrate the real-world performance of our best model.
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
 \end{itemize}
 
 An overview of the experimental pipeline of our project is illustrated in \Cref{fig:pipeline}. 
-The structure of rest of the report is arranged as follows. 
+The structure of the rest of the report is arranged as follows. 
 \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:setup}, 
 we address the datasets we collected and the model architecture we implemented. 
@@ -33,7 +34,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \begin{figure*}[ht]
   \centering
    \includegraphics[width=\linewidth]{pipeline.png}
-   \caption{Overview the experimental pipeline of our project} 
+   \caption{Overview of the experimental pipeline} 
    \label{fig:pipeline}
 \end{figure*}
 
@@ -107,7 +108,7 @@ All the experiments are implemented in Python and Shell for generating scripts.
   \end{tabular}
   }
   \caption{Overview of statistics of datasets used in our experiment 
-  (Note that 600 images in the validation set above is given from our advisors, 
+  (Note that 600 images in the validation set above are given, 
   we provide the detailed training image statistics for each emotion class in \Cref{tab:emotion})}
   \label{tab:data}
 \end{table*}
@@ -117,27 +118,26 @@ All the experiments are implemented in Python and Shell for generating scripts.
   \resizebox{.47\textwidth}{!}{
   \begin{tabular}{@{}lcccccc@{}}
       \toprule
-      \textsc{Dataset (Train)} & \#happiness & \#surprise & \#sadness & \#anger & \#disgust & \#fear \\
+      \textsc{Dataset} & \#happiness & \#surprise & \#sadness & \#anger & \#disgust & \#fear \\
       \midrule
-      RAF-DB & 4772 & 1290 & 1982 & 705 & 717 & 281 \\
-      FER2013 & 7215 & 3171 & 4830 & 3994 & 436 & 4097 \\
-      FER AffectNet & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 \\
-      CK+ & 69 & 83 & 28 & 45 & 59 & 25 \\
-      TFEID & 40 & 36 & 39 & 34 & 40 & 40 \\
+      RAF-DB (Train) & 4772 & 1290 & 1982 & 705 & 717 & 281 \\
+      FER2013 (Train) & 7215 & 3171 & 4830 & 3994 & 436 & 4097 \\
+      FER AffectNet (Train) & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 \\
+      CK+ (Train) & 69 & 83 & 28 & 45 & 59 & 25 \\
+      TFEID (Train) & 40 & 36 & 39 & 34 & 40 & 40 \\
       \midrule
       \midrule
       FER \textsc{GiMeFive} (Train)  & 15187 & 8619 & 11923 & 7996 & 3729 & 7619 \\
-      \midrule
       FER \textsc{GiMeFive} (Test) & 2959 & 1160 & 1725 & 1120 & 271 & 1098 \\
       FER \textsc{GiMeFive} (Valid) & 100 & 100 & 100 & 100 & 100 & 100 \\ 
       \bottomrule
   \end{tabular}
   }
-\caption{Overview of the training image statistics for each emotion class}
+\caption{Overview of the image statistics for each emotion class}
 \label{tab:emotion}
 \end{table}
 
-To initiate the project, % training, 
+To initiate the project,  
 we acquired the image databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
 FER2013~\cite{BarsoumZCZ16}, FER AffectNet~\cite{Mollah2019ANet}, 
 CK+~\cite{LuceyCKSAM10}, and TFEID~\cite{tfeid,LiGL22}, 
@@ -196,9 +196,9 @@ using PyTorch.
 The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution blocks at the very beginning. 
-Despite larger kernel can provide more information and wider area view due to more parameters, 
+Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
-as it is efficient to train and shares the weights without expensive computation. 
+as it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
@@ -246,6 +246,7 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
     &&& Train & Test & Valid  &  \\
     \midrule
     \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
+    &VGG16~\cite{SimonyanZ14a} &&&&&\\
     &Ours (13 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
     &Ours (10 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
     &Ours (16 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
@@ -268,7 +269,6 @@ Adding an extra convolutional block to the model with more parameters does not n
 Batch normalization can indeed improve the performance of the model. 
 
 \Cref{tab:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
-% ~\footnote{\url{https://www.kaggle.com/datasets/shuvoalok/raf-db-dataset}}. 
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 
 our CNN without random augmentation outperforms the other models in terms of accuracy, 
@@ -323,7 +323,7 @@ is used to obtain a spatial average of the feature maps.
 
 To further understand and enhance the performance of the model during training, 
 % we focus on the following tasks, 
-% i.e., data augumentation (see \Cref{sec:optim:aug}), 
+% i.e., data augmentation (see \Cref{sec:optim:aug}), 
 % CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
 %~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
 
@@ -360,9 +360,9 @@ Meanwhile, we create various replications of existing photos by randomly alterin
     Pooling & \{\texttt{max}, \texttt{adaptive avg}\} \\
     Optimizer & \{\texttt{Adam}, \texttt{AdamW}, \texttt{SGD}\} \\
     Activation & \{ \texttt{relu}, \texttt{tanh}, \texttt{elu}, \texttt{gelu}\} \\
-    Epoch & \{40, 80\} \\
+    Epoch & \{50, 100\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
-    Patience & \{5, 10\} \\
+    Patience & \{5, 10, 15\} \\
     \bottomrule
   \end{tabular}
   \caption{Explored hyperparameter space for our models}
@@ -375,5 +375,5 @@ Meanwhile, we create various replications of existing photos by randomly alterin
 \section{Limitation}
 \label{sec:limitation}
 
-\newpage*
+\newpage
 % \clearpage

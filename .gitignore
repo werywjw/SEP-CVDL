@@ -2,6 +2,7 @@ final/main.pdf
 models
 data
 *.pth
+result.md
 
 .DS_Store
 *.DS_Store

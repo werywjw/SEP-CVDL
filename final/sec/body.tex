@@ -42,7 +42,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \section{Related Work}
 \label{sec:related}
 
-\paragraph{Interpretable FER.}
+\paragraph{Interpretable Emotion Classification.}
 
 \citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
 \citet{Malik0R21} 
@@ -285,33 +285,33 @@ To further analyze the separate scores of each class of the model,
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
 This CSV file is represented with the corresponding classification scores. 
 
-\begin{table*}[ht]
-  \centering
-  % \begin{tabular}{l|c|c|c|c|c|c}
-  % \begin{tabular}{lcccccc} 
-  \begin{tabular}{@{}lcccccc@{}}
-  \toprule
-  filepath & happiness & surprise & sadness & anger & disgust & fear \\
-  \midrule
-  archive/RAF-DB/test/test\_0524\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_0093\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_2193\_aligned\_sadness.jpg & 0.03 & 0.01 & \textbf{0.90} & 0.01 & 0.02 & 0.04 \\
-  archive/RAF-DB/test/test\_1214\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_1816\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_0294\_aligned\_surprise.jpg & 0.01 & \textbf{0.99} & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_1128\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_1799\_aligned\_sadness.jpg & 0.37 & 0.02 & \textbf{0.45} & 0.02 & 0.1 & 0.03 \\
-  archive/RAF-DB/test/test\_0610\_aligned\_sadness.jpg & 0.02 & 0.00 & \textbf{0.74} & 0.02 & 0.21 & 0.01 \\
-  archive/RAF-DB/test/test\_1373\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 \\
-  archive/RAF-DB/test/test\_1788\_aligned\_fear.jpg & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{1.00} \\
-  archive/RAF-DB/test/test\_0007\_aligned\_disgust.jpg & 0.03 & 0.05 & 0.03 & \textbf{0.58} & 0.18 & 0.13 \\
-  archive/RAF-DB/test/test\_0804\_aligned\_disgust.jpg & 0.02 & 0.00 & 0.18 & 0.02 & \textbf{0.77} & 0.00 \\
-  % \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
-  \bottomrule
-  \end{tabular}
-  \caption{Overview of our random testing results examples extracted from the CSV file}
-  \label{tab:testcsv}
-\end{table*}  
+% \begin{table*}[ht]
+%   \centering
+%   % \begin{tabular}{l|c|c|c|c|c|c}
+%   % \begin{tabular}{lcccccc} 
+%   \begin{tabular}{@{}lcccccc@{}}
+%   \toprule
+%   filepath & happiness & surprise & sadness & anger & disgust & fear \\
+%   \midrule
+%   archive/RAF-DB/test/test\_0524\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_0093\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_2193\_aligned\_sadness.jpg & 0.03 & 0.01 & \textbf{0.90} & 0.01 & 0.02 & 0.04 \\
+%   archive/RAF-DB/test/test\_1214\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_1816\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_0294\_aligned\_surprise.jpg & 0.01 & \textbf{0.99} & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_1128\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_1799\_aligned\_sadness.jpg & 0.37 & 0.02 & \textbf{0.45} & 0.02 & 0.1 & 0.03 \\
+%   archive/RAF-DB/test/test\_0610\_aligned\_sadness.jpg & 0.02 & 0.00 & \textbf{0.74} & 0.02 & 0.21 & 0.01 \\
+%   archive/RAF-DB/test/test\_1373\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 \\
+%   archive/RAF-DB/test/test\_1788\_aligned\_fear.jpg & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{1.00} \\
+%   archive/RAF-DB/test/test\_0007\_aligned\_disgust.jpg & 0.03 & 0.05 & 0.03 & \textbf{0.58} & 0.18 & 0.13 \\
+%   archive/RAF-DB/test/test\_0804\_aligned\_disgust.jpg & 0.02 & 0.00 & 0.18 & 0.02 & \textbf{0.77} & 0.00 \\
+%   % \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+%   \bottomrule
+%   \end{tabular}
+%   \caption{Overview of our random testing results examples extracted from the CSV file}
+%   \label{tab:testcsv}
+% \end{table*}  
 
 In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
 The \textit{global average pooling} (GAP) layer, 

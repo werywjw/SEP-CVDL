@@ -8,17 +8,17 @@ https://app.diagrams.net/#G15989rnA3gZtCfwwUN6p3uUDmJ0T69YZN
 ### Archieve folder contains 2 separate datasets (Training & Testing) contains all datasets together
 
 
-### Dataset with clear 6 emotion-folders
-- training_sets:
+### data (GiMeFive)
+- train (image+label)
 1. RAF-DB
 2. FER
 3. AffectNet
 4. CK+
 5. TFEID
-- testing_sets:
+- test (image+label)
 1. RAF-DB
 2. FER
-- validation_set
+- valid (image+label)
 
 ### Dataset
 

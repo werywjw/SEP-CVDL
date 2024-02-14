@@ -87,3 +87,40 @@ class EmotionClassifier(nn.Module):
         x = self.fc3(x)
         return x
 
+class GiMeFiveRes(nn.Module):
+    def __init__(self):
+        super(GiMeFiveRes, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.relu = nn.ReLU(inplace=True)
+        self.se1 = SEBlock(64)
+
+        self.res_block1 = ResidualBlock(64, 128, stride=2)
+        self.res_block2 = ResidualBlock(128, 256, stride=2)
+        self.res_block3 = ResidualBlock(256, 512, stride=2)
+        self.res_block4 = ResidualBlock(512, 1024, stride=2)
+        self.res_block5 = ResidualBlock(1024, 2048, stride=2)
+
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.fc1 = nn.Linear(2048, 4096)
+        self.fc2 = nn.Linear(4096, 2048) 
+        self.dropout1 = nn.Dropout(0.5)
+        self.fc3 = nn.Linear(2048, 6)
+
+    def forward(self, x):
+        x = self.relu(self.bn1(self.conv1(x)))
+        x = self.se1(x)
+        
+        x = self.res_block1(x)
+        x = self.res_block2(x)
+        x = self.res_block3(x)
+        x = self.res_block4(x)
+        x = self.res_block5(x)
+        
+        x = self.pool(x)
+        x = x.view(x.size(0), -1)
+        x = F.relu(self.fc1(x))
+        x = self.dropout1(x)
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x

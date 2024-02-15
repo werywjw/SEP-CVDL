@@ -22,6 +22,58 @@ Our main contributions can be summarized as follows.
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
 \end{itemize}
 
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+        ybar, 
+        enlargelimits=0.1,
+        legend style={at={(0.5,-0.15)},
+          anchor=north,legend columns=-1},
+        ylabel={Accuracies (\%)}, 
+        symbolic x coords={VGG16, ResNet18,ResNet50,Basline,GiMeFive},
+        xtick=data,
+        x tick label style={rotate=30,anchor=east},
+        every axis plot/.append style={
+        bar shift=0pt 
+      },
+        % nodes near coords, 
+        % nodes near coords align={vertical},
+        % bar width=18pt, 
+    ]
+    % \addplot coordinates {(VGG16,90) (ResNet18,85) (ResNet50,88) (Basline,92) (GiMeFive,87)}; % Change here, fake numbers now
+    \addplot[fill=red] coordinates {(VGG16,90)};
+    \addplot[fill=red!50] coordinates {(VGG16,88)};
+    \addlegendentry{VGG16 Test}
+    \addlegendentry{VGG16 Validation}
+
+    \addplot[fill=blue] coordinates {(ResNet18,85)};
+    \addplot[fill=blue!50] coordinates {(ResNet18,82)};
+    \addlegendentry{ResNet18 Test}
+    \addlegendentry{ResNet18 Validation}
+
+    \addplot[fill=green] coordinates {(ResNet50,88)};
+    \addplot[fill=green!50] coordinates {(ResNet50,85)};
+    \addlegendentry{ResNet50 Test}
+    \addlegendentry{ResNet50 Validation}
+
+    \addplot[fill=orange] coordinates {(Basline,92)};
+    \addplot[fill=orange!50] coordinates {(Basline,90)};
+    \addlegendentry{Basline Test}
+    \addlegendentry{Basline Validation}
+
+    \addplot[fill=purple] coordinates {(GiMeFive,87)};
+    \addplot[fill=purple!50] coordinates {(GiMeFive,85)};
+    \addlegendentry{GiMeFive Test}
+    \addlegendentry{GiMeFive Validation}
+    
+    % \legend{Models}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models} 
+  \label{fig:acc}
+\end{figure}
+
 An overview of the experimental pipeline of our project is illustrated in \Cref{fig:pipeline}. 
 The structure of the rest of the report is arranged as follows. 
 \Cref{sec:related} contains the related work of our research. 

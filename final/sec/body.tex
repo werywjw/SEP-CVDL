@@ -29,50 +29,30 @@ Our main contributions can be summarized as follows.
     \begin{axis}[
         ybar, 
         enlargelimits=0.15,
-        legend style={at={(1.35,0.75)},
+        legend style={at={(1.35,0.795)},
           anchor=east}, % ,legend columns=-1
-        ylabel={Accuracies (\%)}, 
-        symbolic x coords={VGG16,ResNet18,ResNet50,Basline,GiMeFive},
-        xtick=data,
+        ylabel={Validation Accuracies (\%)}, 
+        symbolic x coords={VGG16,ResNet18,ResNet50,Baseline,GiMeFive},
         x tick label style={rotate=30,anchor=east},
         every axis plot/.append style={
           bar shift=0pt 
         },
-        % nodes near coords, 
-        % nodes near coords align={vertical},
         bar width=18pt, 
     ]
-    % \addplot coordinates {(VGG16,90) (ResNet18,85) (ResNet50,88) (Basline,92) (GiMeFive,87)}; % Change here, fake numbers now
-    \addplot[fill=Pink!30] coordinates {(VGG16,90)};
-    % \addplot[fill=Pink!50] coordinates {(VGG16,88)};
-    % \addlegendentry{VGG16 Test}
+    \addplot[fill=Pink!30] coordinates {(VGG16,44)};
     \addlegendentry{VGG16}
-
-    \addplot[fill=LightPurple!30] coordinates {(ResNet18,85)};
-    % \addplot[fill=LightPurple!50] coordinates {(ResNet18,82)};
-    % \addlegendentry{ResNet18 Test}
+    \addplot[fill=LightPurple!30] coordinates {(ResNet18,73.8)};
     \addlegendentry{ResNet18}
-
-    \addplot[fill=cvprblue!30] coordinates {(ResNet50,88)};
-    % \addplot[fill=cvprblue!50] coordinates {(ResNet50,85)};
-    % \addlegendentry{ResNet50 Test}
+    \addplot[fill=cvprblue!30] coordinates {(ResNet50,78)};
     \addlegendentry{ResNet50}
-
-    \addplot[fill=Orange!30] coordinates {(Basline,92)};
-    % \addplot[fill=Orange!50] coordinates {(Basline,90)};
-    % \addlegendentry{Basline Test}
+    \addplot[fill=Orange!30] coordinates {(Baseline,73.5)};
     \addlegendentry{Basline}
-
-    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,87)};
-    % \addplot[fill=LMUGreen!50] coordinates {(GiMeFive,85)};
-    % \addlegendentry{GiMeFive Test}
+    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,74.5)};
     \addlegendentry{GiMeFive}
-    
-    % \legend{Models}
     \end{axis}
   \end{tikzpicture}
   }
-  \caption{Accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models} 
+  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the aggregated five FER datasets} 
   \label{fig:acc}
 \end{figure}
 
@@ -132,7 +112,10 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 \section{Experimental Setup}
 \label{sec:setup}
 
-All the experiments are implemented in Python and Shell for generating scripts. 
+All the experiments are implemented in Python. 
+We also use Shell for generating image and video scripts. 
+The experiment and evaluation are conducted on two MacBook Pro 
+(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i7 with 2.6 GHz 6-Core). % Please Check Leah
 
 \subsection{Dataset Description}
 \label{sec:setup:datasets}

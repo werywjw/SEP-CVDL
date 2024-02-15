@@ -115,13 +115,11 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 All the experiments are implemented in Python. 
 We also use Shell for generating image and video scripts. 
 The experiment and evaluation are conducted on two MacBook Pro 
-(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i7 with 2.6 GHz 6-Core). % Please Check Leah
+(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
-\subsection{Dataset Description}
+\subsection{Dataset}
 \label{sec:setup:datasets}
 
-% see 
-% https://arxiv.org/pdf/2303.15889.pdf
 % https://www.mdpi.com/1424-8220/22/21/8089
 
 \begin{table*}[ht]
@@ -178,9 +176,13 @@ To initiate the project,
 we acquired the image databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
 FER2013~\cite{BarsoumZCZ16}, FER AffectNet~\cite{Mollah2019ANet}, 
 CK+~\cite{LuceyCKSAM10}, and TFEID~\cite{tfeid,LiGL22}, 
-as well as the video database DISFA~\cite{MavadatiMBTC13} from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}
-Based on these databases, we created a dataset by augmentation to increase the variety, 
-and full details of augmentation (see \Cref{sec:optim:aug}). 
+as well as the video database DISFA~\cite{MavadatiMBTC13} from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
+
+\paragraph{Image Preprocessing.}
+Build upon these databases, 
+we firstly created a custom dataset by augmentation to increase the variety, 
+which includes \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
+
 In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
 That is, 
 we generalized a folder structure annotating the labels 0 (happiness), 1 (surprise), 2 (sadness), 3 (anger), 4 (disgust), and 5 (fear). 
@@ -192,6 +194,9 @@ as our original CNN is designed to work with three-channel inputs with random ro
 Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
 We create a custom dataset, which is a collection of data relating to all training images we collected, 
 using PyTorch.
+
+\paragraph{Video Preprocessing.}
+Frame extraction % TODO
 
 \subsection{Model Architecture}
 \label{sec:setup:model}

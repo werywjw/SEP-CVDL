@@ -1,21 +1,24 @@
-# CVDL-SEP: Facial Emotion Recognition & Interpretation
+# GiMeFive✋: Towards Interpretable Facial Emotion Classification
 
-😄 happiness (0)
+## Abstract
 
-😲 surprise (1)
+## Overview
 
-😭 sadness (2)
+![](./final/pipeline.png)
 
-😡 anger (3)
+## Results
 
-🤢 disgust (4)
-
-😨 fear (5)
+## Where is our final report 📄?
 
 ## Where are our slides 🎥?
 
 On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31). 
-The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing).
+The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing). 
+The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf).
+
+## Where is our proposal (preliminary report) 📃?
+
+The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf).
 
 ## How to generate a requirements.txt?
 ```

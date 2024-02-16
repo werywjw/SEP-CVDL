@@ -63,7 +63,7 @@ Run the following command:
 python3 livecam.py
 ```
 
-Exit via `control` + `C`
+Exit via `control` + `C`.
 
 ## How to resolve the conflicts?
 ```

@@ -46,7 +46,7 @@ Our main contributions can be summarized as follows.
     \addplot[fill=cvprblue!30] coordinates {(ResNet50,78)};
     \addlegendentry{ResNet50}
     \addplot[fill=Orange!30] coordinates {(Baseline,73.5)};
-    \addlegendentry{Basline}
+    \addlegendentry{Baseline}
     \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,74.5)};
     \addlegendentry{GiMeFive}
     \end{axis}
@@ -56,13 +56,14 @@ Our main contributions can be summarized as follows.
   \label{fig:acc}
 \end{figure}
 
-An overview of the experimental pipeline of our project is illustrated in \Cref{fig:pipeline}. 
+\paragraph{Paper Outline.}
 The structure of the rest of the report is arranged as follows. 
 \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:setup}, 
 we address the datasets we collected and the model architecture we implemented. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
+An overview of the experimental pipeline of our project is illustrated in \Cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 \begin{figure*}[ht]
@@ -151,18 +152,18 @@ The experiment and evaluation are conducted on two MacBook Pro
   \end{tabular}
   }
 \caption{Overview of the data statistics for each emotion class and total number of videos/images in our experiment}
-\label{tab:emotion}
+\label{tab:data}
 \end{table*}
 
 To initiate the project,  
 we acquired the image databases such as 
-\textit{Real-world Affective Faces Database} (RAF-DB~\cite{li_reliable_2017,li2019reliable}), 
-\textit{Facial Expression Recognition} 2013 (FER2013~\cite{BarsoumZCZ16}), 
-\textit{FER AffectNet Database} (FER AffectNet~\cite{Mollah2019ANet}), 
-\textit{Extended Cohn-Kanade Dataset Plus} (CK+~\cite{LuceyCKSAM10}), 
-and \textit{Taiwanese Facial Expression Image Database} (TFEID~\cite{tfeid,LiGL22}), 
+\textit{Real-world Affective Faces Database} (RAF-DB)~\cite{li_reliable_2017,li2019reliable}, 
+\textit{Facial Expression Recognition} 2013 (FER2013)~\cite{BarsoumZCZ16}, 
+\textit{FER AffectNet Database} (FER AffectNet)~\cite{Mollah2019ANet}, 
+\textit{Extended Cohn-Kanade Dataset Plus} (CK+)~\cite{LuceyCKSAM10}, 
+and \textit{Taiwanese Facial Expression Image Database} (TFEID)~\cite{tfeid,LiGL22}, 
 as well as the video database 
-\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA~\cite{mavadati2013disfa}) 
+\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA)~\cite{mavadati2013disfa} 
 from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
 
 \paragraph{Image Preprocessing.}
@@ -181,11 +182,24 @@ as our original CNN is designed to work with three-channel inputs.
 Typically, we assume that the color of the image does not affect the emotion classification. 
 Our result and analysis is given in \Cref{sec:optim:aug}. 
 
+To enhance the generalizability and robustness of our model, 
+we aggregate the previous five FER benchmarks into a new customed dataset called FER \textsc{GiMeFive} 
+(See \Cref{tab:data} for statistic details with specific numbers for each emotion class). 
+That is, 
+the training set of FER \textsc{GiMeFive} is aggregated from the training sets of the five datasets, 
+while the test set is combined from the test sets of RAF-DB and FER2013. 
+The validation set is given with equally 100 images per class to test the performance of models. 
+
 \paragraph{Video Preprocessing.} % TODO Leah
 We set standards for extracting frames from the selected videos. 
 
 \subsection{Model Architecture}
 \label{sec:setup:model}
+
+In order to compare the performance of our model with other state-of-the-art models, 
+we replicate several CNNs from scratch, 
+which includes ResNet18~\cite{HeZRS16}, 
+VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}. 
 
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex', line width=0.7pt]
@@ -194,7 +208,6 @@ We set standards for extracting frames from the selected videos.
   \centering
   \resizebox{.99\textwidth}{!}{
   \begin{tikzpicture}[node distance=2.7cm, auto]
-
       \node [block] (input) {Input Layer};
       \node [block, right of=input] (conv1) {Conv Block 1 \\ 64 Filters};
       \node [block, right of=conv1] (conv2) {Conv Block 2 \\ 128 Filters};
@@ -213,15 +226,18 @@ We set standards for extracting frames from the selected videos.
       \path [line] (conv5) -- (adaptivePool);
       \path [line] (adaptivePool) -- (fc);
       \path [line] (fc) -- (softmax);
-
   \end{tikzpicture}
   }
-  \caption{Overview of the model architecture (see \Cref{fig:modeldetail} for a detailed version)} 
+  \caption{Overview of the \textsc{GiMeFive} model architecture 
+  (see \Cref{fig:modeldetail} for a detailed version)} 
   \label{fig:model}
 \end{figure*}
 
-\paragraph{ResNet18.}
-\citet{HeZRS16}
+\paragraph{Residual Networks.}
+In principle, 
+deeper neural networks are more difficult to train. 
+Inspired by \citet{HeZRS16}, 
+we build the ResNet18 with the residual block from scratch to ease the training process. 
 
 \paragraph{VGG16.}
 \citet{SimonyanZ14a}
@@ -235,7 +251,9 @@ Despite the larger kernel being able to provide more information and a wider are
 we use a $3 \times 3$ kernel size for all convolutional layers, 
 as it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
-batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
+batch normalization (BN) is used for stabilizing the learning by normalizing the input to each layer. 
+Meanwhile, 
+BN ensures forward propagated signals to have non-zero variances. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
 We also add a 50\% dropout layer to prevent overfitting. 
@@ -245,23 +263,13 @@ The activation function after each layer is \textit{Rectified Linear Unit} (ReLU
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
 
-In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
-we utilize the parameter grid from Sklearn.
-% ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
-Additionally, we increase the depth of the network by adding some convolutional layers to learn more complex features. 
-To help the training of deeper networks more efficiently, 
-we add the residual connections, 
-as they allow gradients to flow through the network more easily, improving the training for deep architectures. 
-Moreover, 
-we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attention. 
-
 \section{Evaluation}
 \label{sec:evaluation}
 
 % add confusion matrix figure
 For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
 We report all the training, testing, and validation accuracies in 
-\% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art models. 
+\% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
 
 The loss function employed for all models is cross-entropy (CE), 
 which is typically for multi-class classification. 
@@ -278,23 +286,23 @@ Here $n$ denotes the total number of classes, in our case, 6.
 \begin{table*}[ht]
   \centering
   % \resizebox{.99\textwidth}{!}{
-  \begin{tabular}{@{}llccccr@{}}
+  \begin{tabular}{@{}llcccccr@{}}
     \toprule 
-    \multirow{2}{*}{\textsc{Dataset}}&\multirow{2}{*}{\textsc{Models}}&\multirow{2}{*}{\textsc{Architecture}} & \multicolumn{3}{c}{\textsc{Accuracies}} & \multirow{2}{*}{\textsc{\# Parameters}} \\
-    \cline{4-6}
-    &&& Train & Test & Valid  &  \\
+    \multirow{2}{*}{\textsc{Dataset}}&\multirow{2}{*}{\textsc{Models}}&\multirow{2}{*}{\textsc{\# Layers}}&\multirow{2}{*}{\textsc{Architecture}} & \multicolumn{3}{c}{\textsc{Accuracies}} & \multirow{2}{*}{\textsc{\# Parameters}} \\
+    \cline{5-7}
+    &&&& Train & Test & Valid  &  \\
     \midrule
-    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
-    &VGG16~\cite{SimonyanZ14a} &&&&&\\
-    &Ours (13 layers) & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
-    &Ours (10 layers) & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
-    &Ours (16 layers) & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    &Ours (15 layers) & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
-    &Ours (17 layers) & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
+    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & 18 & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
+    &VGG16~\cite{SimonyanZ14a} & 16 &&&&&\\
+    &Ours & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &Ours & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    &Ours & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    &Ours & 15 & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &Ours & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
-    \multirow{3}{*}{FER2013~\cite{BarsoumZCZ16}} & Ours (13 layers) & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
-    &Ours (15 layers) & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
-    &Ours (17 layers) & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
+    \multirow{3}{*}{FER2013~\cite{BarsoumZCZ16}} & Ours & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    &Ours & 15 & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
+    &Ours & 17 & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
     \bottomrule
   \end{tabular}
   % }
@@ -324,34 +332,7 @@ To further analyze the separate scores of each class of the model,
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
 This CSV file is represented with the corresponding classification scores. 
 
-% \begin{table*}[ht]
-%   \centering
-%   % \begin{tabular}{l|c|c|c|c|c|c}
-%   % \begin{tabular}{lcccccc} 
-%   \begin{tabular}{@{}lcccccc@{}}
-%   \toprule
-%   filepath & happiness & surprise & sadness & anger & disgust & fear \\
-%   \midrule
-%   archive/RAF-DB/test/test\_0524\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_0093\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_2193\_aligned\_sadness.jpg & 0.03 & 0.01 & \textbf{0.90} & 0.01 & 0.02 & 0.04 \\
-%   archive/RAF-DB/test/test\_1214\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_1816\_aligned\_surprise.jpg & 0.00 & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_0294\_aligned\_surprise.jpg & 0.01 & \textbf{0.99} & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_1128\_aligned\_happiness.jpg & \textbf{1.00} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_1799\_aligned\_sadness.jpg & 0.37 & 0.02 & \textbf{0.45} & 0.02 & 0.1 & 0.03 \\
-%   archive/RAF-DB/test/test\_0610\_aligned\_sadness.jpg & 0.02 & 0.00 & \textbf{0.74} & 0.02 & 0.21 & 0.01 \\
-%   archive/RAF-DB/test/test\_1373\_aligned\_anger.jpg & 0.00 & 0.00 & 0.00 & \textbf{1.00} & 0.00 & 0.00 \\
-%   archive/RAF-DB/test/test\_1788\_aligned\_fear.jpg & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \textbf{1.00} \\
-%   archive/RAF-DB/test/test\_0007\_aligned\_disgust.jpg & 0.03 & 0.05 & 0.03 & \textbf{0.58} & 0.18 & 0.13 \\
-%   archive/RAF-DB/test/test\_0804\_aligned\_disgust.jpg & 0.02 & 0.00 & 0.18 & 0.02 & \textbf{0.77} & 0.00 \\
-%   % \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
-%   \bottomrule
-%   \end{tabular}
-%   \caption{Overview of our random testing results examples extracted from the CSV file}
-%   \label{tab:testcsv}
-% \end{table*}  
-
+\paragraph{Heatmap Overlayed GradCAM.}
 In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
 The \textit{global average pooling} (GAP) layer, 
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
@@ -407,6 +388,18 @@ Meanwhile, we create various replications of existing photos by randomly alterin
   \caption{Explored hyperparameter space for our models}
   \label{tab:hyper}
 \end{table}
+
+In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
+we utilize the parameter grid from Sklearn.
+% ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
+Additionally, 
+we increase the depth of the network by adding some convolutional layers to learn more complex features. 
+To help the training of deeper networks more efficiently, 
+we add the residual connections, 
+as they allow gradients to flow through the network more easily, 
+improving the training for deep architectures. 
+Moreover, 
+we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attention. 
 
 \section{Conclusion and Discussion}
 \label{sec:conclusion}

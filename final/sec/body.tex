@@ -62,7 +62,7 @@ The structure of the rest of the report is arranged as follows.
 In \Cref{sec:setup}, 
 we address the datasets we collected and the model architecture we implemented. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
-\Cref{sec:optim} describes the optimization strategies such as data augmentation and hyper-parameter tuning. 
+\Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 \begin{figure*}[ht]
@@ -125,78 +125,64 @@ The experiment and evaluation are conducted on two MacBook Pro
 \begin{table*}[ht]
   \centering
   \resizebox{.99\textwidth}{!}{
-  \begin{tabular}{@{}lccc@{}}
-    \toprule
-    \textsc{Dataset} & \#Images in training set & \#Images in testing set & \# Video/Images in validation set  \\
-    \midrule
-    Denver Intensity of Spontaneous Facial Action Database (DISFA~\cite{mavadati2013disfa}) & - & 27 & - \\
-    \midrule
-    Real-world Affective Faces Database (RAF-DB~\cite{li_reliable_2017,li2019reliable}) & 9747 & 2388 & 600 \\
-    Facial Expression Recognition 2013 (FER2013~\cite{BarsoumZCZ16}) & 23743 & 5945 & 600  \\
-    FER AffectNet Database (FER AffectNet~\cite{Mollah2019ANet}) & 21045 &-& -  \\
-    Extended Cohn-Kanade Dataset Plus (CK+~\cite{LuceyCKSAM10}) & 309 &-& - \\
-    Taiwanese Facial Expression Image Database (TFEID~\cite{tfeid,LiGL22}) & 229 &-& - \\
-    \midrule
-    \midrule
-    FER \textsc{GiMeFive} & \textbf{55073} & \textbf{8333} & \textbf{600} \\
-    \bottomrule
-  \end{tabular}
-  }
-  \caption{Overview of statistics of datasets used in our experiment 
-  (Note that 600 images in the validation set above are given, 
-  we provide the detailed training image statistics for each emotion class in \Cref{tab:emotion})}
-  \label{tab:data}
-\end{table*}
-
-\begin{table}[ht]
-  \centering
-  \resizebox{.47\textwidth}{!}{
-  \begin{tabular}{@{}lcccccc@{}}
+  \begin{tabular}{@{}lrcccccc|c@{}}
       \toprule
-      \textsc{Dataset} & \#happiness & \#surprise & \#sadness & \#anger & \#disgust & \#fear \\
+      \textsc{Dataset} & \textsc{Split} & \# happiness & \# surprise & \# sadness & \# anger & \# disgust & \# fear & \# total videos/images \\
       \midrule
-      RAF-DB (Train) & 4772 & 1290 & 1982 & 705 & 717 & 281 \\
-      FER2013 (Train) & 7215 & 3171 & 4830 & 3994 & 436 & 4097 \\
-      FER AffectNet (Train) & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 \\
-      CK+ (Train) & 69 & 83 & 28 & 45 & 59 & 25 \\
-      TFEID (Train) & 40 & 36 & 39 & 34 & 40 & 40 \\
+      DISFA~\cite{mavadati2013disfa} & Test &  &  &  &  &  &  & 27 \\ % TODO Leah
+      \midrule
+      \multirow{2}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} & Train & 4772 & 1290 & 1982 & 705 & 717 & 281 & 9747 \\
+      &Test &1185&329&478&162&160&74& 2388 \\
+      \midrule
+      \multirow{2}{*}{FER2013~\cite{BarsoumZCZ16}} & Train & 7215 & 3171 & 4830 & 3994 & 436 & 4097 & 23743 \\
+      &Test &1774&831&1247&958&111&1024& 5945 \\
+      \midrule
+      FER AffectNet~\cite{Mollah2019ANet} & Train & 3091 & 4039 & 5044 & 3218 & 2477 & 3176 & 21045 \\
+      \midrule
+      CK+~\cite{LuceyCKSAM10} & Train & 69 & 83 & 28 & 45 & 59 & 25 & 309 \\
+      \midrule
+      TFEID~\cite{tfeid,LiGL22} & Train & 40 & 36 & 39 & 34 & 40 & 40 & 229 \\
       \midrule
       \midrule
-      FER \textsc{GiMeFive} (Train)  & 15187 & 8619 & 11923 & 7996 & 3729 & 7619 \\
-      FER \textsc{GiMeFive} (Test) & 2959 & 1160 & 1725 & 1120 & 271 & 1098 \\
-      FER \textsc{GiMeFive} (Valid) & 100 & 100 & 100 & 100 & 100 & 100 \\ 
+      \multirow{3}{*}{FER \textsc{GiMeFive}} & Train  & 15187 & 8619 & 11923 & 7996 & 3729 & 7619 & \textbf{55073} \\
+      & Test & 2959 & 1160 & 1725 & 1120 & 271 & 1098 & \textbf{8333} \\
+      & Valid & 100 & 100 & 100 & 100 & 100 & 100 & \textbf{600} \\ 
       \bottomrule
   \end{tabular}
   }
-\caption{Overview of the image statistics for each emotion class}
+\caption{Overview of the data statistics for each emotion class and total number of videos/images in our experiment}
 \label{tab:emotion}
-\end{table}
+\end{table*}
 
 To initiate the project,  
-we acquired the image databases such as RAF-DB~\cite{li_reliable_2017,li2019reliable}, 
-FER2013~\cite{BarsoumZCZ16}, FER AffectNet~\cite{Mollah2019ANet}, 
-CK+~\cite{LuceyCKSAM10}, and TFEID~\cite{tfeid,LiGL22}, 
-as well as the video database DISFA~\cite{MavadatiMBTC13} from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
+we acquired the image databases such as 
+\textit{Real-world Affective Faces Database} (RAF-DB~\cite{li_reliable_2017,li2019reliable}), 
+\textit{Facial Expression Recognition} 2013 (FER2013~\cite{BarsoumZCZ16}), 
+\textit{FER AffectNet Database} (FER AffectNet~\cite{Mollah2019ANet}), 
+\textit{Extended Cohn-Kanade Dataset Plus} (CK+~\cite{LuceyCKSAM10}), 
+and \textit{Taiwanese Facial Expression Image Database} (TFEID~\cite{tfeid,LiGL22}), 
+as well as the video database 
+\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA~\cite{mavadati2013disfa}) 
+from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
 
 \paragraph{Image Preprocessing.}
 Build upon these databases, 
-we firstly created a custom dataset by augmentation to increase the variety, 
-which includes \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
-
-In terms of illustrating the content of used pictures, we exclusively analyze human faces representing 6 emotions. 
+we exclusively analyze human faces representing 6 emotions. 
 That is, 
-we generalized a folder structure annotating the labels 0 (happiness), 1 (surprise), 2 (sadness), 3 (anger), 4 (disgust), and 5 (fear). 
-Besides the original format of images and videos, we set standards for extracting frames from the videos, 
-resizing training pictures to $64\times 64$ pixels, and saving them in the JPG format.
+we first generalize a folder structure annotating the labels of happiness (0), surprise (1), sadness (2), 
+anger (3), disgust (4), and fear (5). 
+Afterward, we append the emotion labels to the name of each matching image. 
+In order to later efficiently pass the images to the model, 
+we also create a CSV file to store all the image and their corresponding labels. 
+We use a custom dataset by augmentation to increase the variety, 
+which includes \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
+The images are converted to greyscale with three channels at $64 \times 64 $ resolution in the JPG format, 
+as our original CNN is designed to work with three-channel inputs. 
+Typically, we assume that the color of the image does not affect the emotion classification. 
+Our result and analysis is given in \Cref{sec:optim:aug}. 
 
-The images are converted to greyscale with three channels, 
-as our original CNN is designed to work with three-channel inputs with random rotation and crop. 
-Emotions were assigned tags to each individual picture in a CSV file to facilitate further processing in the model.
-We create a custom dataset, which is a collection of data relating to all training images we collected, 
-using PyTorch.
-
-\paragraph{Video Preprocessing.}
-Frame extraction % TODO
+\paragraph{Video Preprocessing.} % TODO Leah
+We set standards for extracting frames from the selected videos. 
 
 \subsection{Model Architecture}
 \label{sec:setup:model}
@@ -234,6 +220,13 @@ Frame extraction % TODO
   \label{fig:model}
 \end{figure*}
 
+\paragraph{ResNet18.}
+\citet{HeZRS16}
+
+\paragraph{VGG16.}
+\citet{SimonyanZ14a}
+
+\paragraph{\textsc{GiMeFive}.}
 \Cref{fig:model} illustrates the overview of our model architecture. 
 The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
 The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
@@ -265,15 +258,19 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 \section{Evaluation}
 \label{sec:evaluation}
 
-For evaluation, we use the metric accuracy. 
-We report all the training, testing, and validation accuracy in \% to compare the performance of our models. 
-The loss function employed for all models is cross-entropy (CE), which is typically for multi-class classification. 
-That is:
+% add confusion matrix figure
+For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
+We report all the training, testing, and validation accuracies in 
+\% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art models. 
+
+The loss function employed for all models is cross-entropy (CE), 
+which is typically for multi-class classification. 
+Mathematically, the CE loss is defined as follows: 
 \begin{equation}
   \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
 \end{equation}
-where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class.
-
+where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class. 
+Here $n$ denotes the total number of classes, in our case, 6.
 
 \subsection{Evaluation Results}
 \label{sec:evaluation:results}
@@ -307,17 +304,17 @@ where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-
   \label{tab:model}
 \end{table*}
 
-Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
-Batch normalization can indeed improve the performance of the model. 
-
-\Cref{tab:model} shows the test result aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
-Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
 As seen in \Cref{tab:model}, 
-our CNN without random augmentation outperforms the other models in terms of accuracy, 
+the test result are aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
+Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
+
+Our CNN without random augmentation outperforms the other models in terms of accuracy, 
 indicating that this kind of augmentation is not able to help our model predict the correct label, 
 thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
+Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
+Batch normalization can indeed improve the performance of the model. 
 
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
@@ -384,7 +381,7 @@ With this process, we aim to prevent overfitting, which is a common pitfall in m
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
 
-\subsection{Hyper-parameter Tuning}
+\subsection{Hyperparameter Tuning}
 \label{sec:optim:tuning}
 
 \begin{table}[ht]

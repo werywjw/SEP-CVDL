@@ -2,7 +2,7 @@ final
 presentation
 models
 data
-result.md
+# result.md
 
 best_6layer.pth
 best_6FER.pth

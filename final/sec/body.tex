@@ -181,8 +181,8 @@ Afterward, we append the emotion labels 0 to 5 to the name of each matching imag
 In order to later efficiently pass the images to the model, 
 we also create via script a CSV file to store all the images and their corresponding labels. 
 The images together with CSV file are being loaded and preprocessed for training. Therefor we manipulate the pixel data through resizing, 
-augmentation, creating Tensors and normalization. 
-The images are converted to greyscale with three channels at $64 \times 64 $ resolution in the JPG format, 
+augmentation, convertion to grayscale, creating Tensors and normalization. 
+The images are converted to greyscale with three channels at $64 \times 64$ resolution in the JPG format, 
 as our original CNN is designed to work with three-channel inputs. 
 Typically, we assume that the color of the image does not affect the emotion classification. 
 For augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
@@ -198,11 +198,12 @@ The validation set is given with equally 100 images per class to test the perfor
 
 \paragraph{Video Preprocessing.} % TODO Leah in progress
 % We set standards for extracting frames from the selected videos.
-To evaluate videos we extract every frame and crop the area (rectangle) of interest for detect emotions.
-The cropped imaged 
-wrote is beeing cropped in the detect emotion function and beeing evaluated through  
+To evaluate videos or live webcam streams, we extract every frame and crop the area (rectangle) of interest for emotion detection.
+The cropped image is preprocessed by resizing to $64 \times 64$ resolution, then converted to greyscale with three channels, 
+after that a Tensor is generated, wich then is normalized. 
+After that we evaluate every cropped image through our model.
+% where to put the writing of the evaluated videos?
 
-this also works for live web cam
 
 \subsection{Model Architecture}
 \label{sec:setup:model}

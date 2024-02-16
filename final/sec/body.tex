@@ -169,23 +169,23 @@ For reviewing Explainable AI we used the Video Dataset
 containing a variety of levels of intensity in expression.
 % The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
 The procurement was proceeded through public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
-\Cref{tab:data} gives detailed insides of each test-, training-, and validationset, along with data statistics on emotion classes.
+% \Cref{tab:data} gives detailed insides of each test-, training-, and validationset, along with data statistics on emotion classes.
 
 
 \paragraph{Image Preprocessing.}
 Build upon these image databases, we exclusively analyze human faces representing 6 emotions. 
 That is, we first generalize a folder structure in happiness (0), surprise (1), sadness (2), 
 anger (3), disgust (4), and fear (5).
-Afterward, we append the emotion labels to the name of each matching image, annotating the labels, 0 to 5.   
+Afterward, we append the emotion labels 0 to 5 to the name of each matching image.
+
 In order to later efficiently pass the images to the model, 
 we also create via script a CSV file to store all the images and their corresponding labels. 
-The images together with CSV file are being loaded into the Preprocessor, where we manipulate the pixel data through resizing, 
-further through augmentation, normalization and then generate Tensors. 
-In augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
-% We use a custom dataset by augmentation to increase the variety, 
+The images together with CSV file are being loaded and preprocessed for training. Therefor we manipulate the pixel data through resizing, 
+augmentation, creating Tensors and normalization. 
 The images are converted to greyscale with three channels at $64 \times 64 $ resolution in the JPG format, 
 as our original CNN is designed to work with three-channel inputs. 
 Typically, we assume that the color of the image does not affect the emotion classification. 
+For augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
 Our result and analysis is given in \Cref{sec:optim:aug}. 
 
 To enhance the generalizability and robustness of our model, 
@@ -196,8 +196,13 @@ the training set of FER \textsc{GiMeFive} is aggregated from the training sets o
 while the test set is combined from the test sets of RAF-DB and FER2013. 
 The validation set is given with equally 100 images per class to test the performance of models. 
 
-\paragraph{Video Preprocessing.} % TODO Leah
-We set standards for extracting frames from the selected videos. 
+\paragraph{Video Preprocessing.} % TODO Leah in progress
+% We set standards for extracting frames from the selected videos.
+To evaluate videos we extract every frame and crop the area (rectangle) of interest for detect emotions.
+The cropped imaged 
+wrote is beeing cropped in the detect emotion function and beeing evaluated through  
+
+this also works for live web cam
 
 \subsection{Model Architecture}
 \label{sec:setup:model}

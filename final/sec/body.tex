@@ -12,6 +12,7 @@ we explain this emotion classification task with \textit{gradient-weighted class
 (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
 % update later
+\paragraph{Paper Contribution.}
 Our main contributions can be summarized as follows.
 \begin{itemize}
   \item We collect, preprocess, and evaluate the training and testing data thoroughly, 
@@ -106,7 +107,6 @@ The model can therefore learn the classification task with class labels and is t
 % representing the importance of each spatial location, is used to generate the CAM heatmap.
 Despite CAM can provide valuable insights into the decision-making process of deep learning models, especially CNNs, 
 CAM must be implemented in the last layer of a CNN or before the fully connected layer.
-% We implement using the libraries such as PyTorch and OpenCV~\footnote{~\url{https://opencv.org}}.
 
 \citet{chattopadhay2018grad} proposed Grad-CAM++,
 
@@ -167,9 +167,8 @@ These image datasets come in folder-structure classification.
 For reviewing Explainable AI we used the Video Dataset
 \textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA, spontaneous expressions)~\cite{mavadati2013disfa}, 
 containing a variety of levels of intensity in expression.
-% The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
 The procurement was proceeded through public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
-% \Cref{tab:data} gives detailed insides of each test-, training-, and validationset, along with data statistics on emotion classes.
+\Cref{tab:data} gives detailed insides of each training, test, and validation set, along with data statistics on emotion classes.
 
 
 \paragraph{Image Preprocessing.}
@@ -197,12 +196,13 @@ while the test set is combined from the test sets of RAF-DB and FER2013.
 The validation set is given with equally 100 images per class to test the performance of models. 
 
 \paragraph{Video Preprocessing.} % TODO Leah in progress
+The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
 % We set standards for extracting frames from the selected videos.
 To evaluate videos or live webcam streams, we extract every frame and crop the area (rectangle) of interest for emotion detection.  
 The cropped image is preprocessed by resizing to $64 \times 64$ resolution, then converted to greyscale with three channels, 
 after that a Tensor is generated, wich then is normalized. 
 For every cropped image is evaluated through our model.
-% where to put the writing of the evaluated videos?
+% where to put the writing of the evaluated videos? - See \Cref{sec:evaluation:inter} \paragraph{Video.}
 
 
 \subsection{Model Architecture}
@@ -349,6 +349,9 @@ In our case, we leverage the fifth convolutional layer of our model to generate 
 The \textit{global average pooling} (GAP) layer, 
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
+
+\paragraph{Video Landmark Something.} % TODO Leah
+We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}.
 
 \section{Optimization Strategies}
 \label{sec:optim}

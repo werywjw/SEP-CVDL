@@ -12,14 +12,14 @@ we explain this emotion classification task with \textit{gradient-weighted class
 (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
 % update later
-\paragraph{Paper Contribution.}
+% \paragraph{Paper Contribution.}
 Our main contributions can be summarized as follows.
 \begin{itemize}
   \item We collect, preprocess, and evaluate the training and testing data thoroughly, 
   (both image and video) from various public databases. 
   \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
   Meanwhile, we provide the classification scores of each emotion class in a detailed script with respect to each image. 
-  \item We give the video demo to illustrate the real-world performance of our best model.
+  \item We give the video demo to illustrate the real-world performance of our best model. 
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
 \end{itemize}
 
@@ -29,24 +29,29 @@ Our main contributions can be summarized as follows.
   \begin{tikzpicture}
     \begin{axis}[
         ybar, 
-        enlargelimits=0.15,
+        % enlargelimits=0.1, 
         legend style={at={(1.35,0.795)},
           anchor=east}, % ,legend columns=-1
         ylabel={Validation Accuracies (\%)}, 
         symbolic x coords={VGG16,ResNet18,ResNet50,Baseline,GiMeFive},
         x tick label style={rotate=30,anchor=east},
         every axis plot/.append style={
-          bar shift=0pt 
+          bar shift=0pt
         },
         bar width=18pt, 
+        ymin=60, 
+        ymax=80,
+        grid=major, 
+        % ymajorgrids=true,
+        % xmajorgrids=true,
     ]
-    \addplot[fill=Pink!30] coordinates {(VGG16,44)};
+    \addplot[fill=Pink!30] coordinates {(VGG16,68.8)};
     \addlegendentry{VGG16}
     \addplot[fill=LightPurple!30] coordinates {(ResNet18,73.8)};
     \addlegendentry{ResNet18}
     \addplot[fill=cvprblue!30] coordinates {(ResNet50,78)};
     \addlegendentry{ResNet50}
-    \addplot[fill=Orange!30] coordinates {(Baseline,73.5)};
+    \addplot[fill=Orange!30] coordinates {(Baseline,66.8)};
     \addlegendentry{Baseline}
     \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,74.5)};
     \addlegendentry{GiMeFive}
@@ -304,22 +309,31 @@ Here $n$ denotes the total number of classes, in our case, 6.
     \cline{5-7}
     &&&& Train & Test & Valid  &  \\
     \midrule
-    \multirow{6}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}}     & ResNet18~\cite{HeZRS16} & 18 & Residual Block  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
-    &VGG16~\cite{SimonyanZ14a} & 16 &&&&&\\
-    &Ours & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
-    &Ours & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
-    &Ours & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    &Ours & 15 & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
-    &Ours & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
+    \multirow{7}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG16~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
+    & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
+    &\textsc{GiMeFive} & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &\textsc{GiMeFive} & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
+    &\textsc{GiMeFive} & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
+    &\textsc{GiMeFive} & 15 & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &\textsc{GiMeFive} & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
-    \multirow{3}{*}{FER2013~\cite{BarsoumZCZ16}} & Ours & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
-    &Ours & 15 & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
-    &Ours & 17 & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
+    \multirow{4}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\
+    & \textsc{GiMeFive} & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    &\textsc{GiMeFive} & 15 & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
+    &\textsc{GiMeFive} & 17 & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
+    \midrule
+    \midrule
+    \multirow{4}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
+    & ResNet18~\cite{HeZRS16} & 18 & +RB  & 96.5 & 72.4 & 73.8 & 11179590 \\
+    &\textsc{GiMeFive} & 15 & +BN-SE & 94.6 & 72.5 & 73.5 & 10478086 \\
+    &\textsc{GiMeFive} & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule
   \end{tabular}
   % }
   \caption{Accuracies (\%) for different models (with specific architectures and numbers of parameters) in our experiments 
-  (Note that SE stands for the squeeze and excitation block and BN for the batch normalization; 
+  (Note that BN stands for the batch normalization, 
+  RB for residual block, 
+  and SE for the squeeze and excitation block; 
   +/- represent with/without respectively)}
   \label{tab:model}
 \end{table*}
@@ -344,7 +358,7 @@ To further analyze the separate scores of each class of the model,
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
 This CSV file is represented with the corresponding classification scores. 
 
-\paragraph{Heatmap Overlayed GradCAM.}
+\paragraph{Heatmap Overlayed Grad-CAM.}
 In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
 The \textit{global average pooling} (GAP) layer, 
 which computes the average value of each feature map to obtain a spatial average of feature maps, 

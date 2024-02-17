@@ -18,17 +18,13 @@ model.load_state_dict(torch.load('best_GiMeFive.pth', map_location=device))
 model.eval()
 
 transform = transforms.Compose([
-    transforms.Resize((64, 64)),
-    transforms.Grayscale(num_output_channels=3),
-    # transforms.RandomHorizontalFlip(), 
-    # transforms.RandomApply([
-    #     transforms.RandomRotation(5),
-    #     transforms.RandomCrop(64, padding=8)
-    # ], p=0.2),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    # transforms.RandomErasing(scale=(0.02,0.25)),
-])
+        transforms.Resize((64, 64)),
+        transforms.Grayscale(num_output_channels=3),
+        transforms.RandomHorizontalFlip(), 
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # transforms.RandomErasing(scale=(0.02,0.25)),
+    ])
 
 def classify_image(image_path):
     image = Image.open(image_path).convert('RGB')

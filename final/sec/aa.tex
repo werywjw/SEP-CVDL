@@ -1,0 +1,33 @@
+\subsection*{Author Contributions}
+\label{sec:author}
+% see https://arxiv.org/pdf/2005.14165.pdf page42
+
+\begin{itemize}
+  \item \textbf{Jiawen Wang} preprocessed the image data 
+  and implemented different model architectures including \textsc{GiMeFive}, ResNet18, and VGG16 from scratch, 
+  training and evaluation infrastructure, classification score and image labeling script, 
+  heat-map plot and Grad-CAM explanation, optimization strategies, 
+  together with the corresponding writing part. 
+  Also, she is responsible for the figures and tables of this report.
+  \item \textbf{Leah Kawka} collected the databases, prepared data processing, provided sever with databases, 
+  implemented augmentation, landmarks, heatmap-overlay, detected emotions visualization, 
+  and evaluated video/webcam script. 
+  She helps run the results with Slurm. 
+  In the specific writing part, 
+  she also wrote the related parts and drew the \Cref{fig:pipeline} and took part in the \Cref{tab:data}.
+  \item \textbf{Mahdi Mohammadi} implemented the augmentation, did the research searching, conclusion researching, data preprocessing, and CAM-Images inquiry.
+\end{itemize}
+
+\section*{Acknowledgements}
+
+We are deeply grateful to our advisors \textbf{Johannes Fischer} and \textbf{Ming Gui} for their helpful and valuable support during the entire semester. 
+We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course. 
+We especially acknowledge our former team member \textbf{Tanja Jaschkowitz}, 
+who joined us during the first phase of the project and shared two notebook scripts.
+
+\begin{figure}[ht]
+  \centering
+   \includegraphics[width=\linewidth]{mattest.png}
+   \caption{Overview of the confusion matrix on the test set of RAF-DB} 
+   \label{fig:mattest}
+\end{figure}

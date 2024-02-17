@@ -47,18 +47,18 @@ Our main contributions can be summarized as follows.
     ]
     \addplot[fill=Pink!30] coordinates {(VGG16,68.8)};
     \addlegendentry{VGG16}
-    \addplot[fill=LightPurple!30] coordinates {(ResNet18,73.8)};
+    \addplot[fill=LightPurple!30] coordinates {(ResNet18,67.9)};
     \addlegendentry{ResNet18}
     \addplot[fill=cvprblue!30] coordinates {(ResNet50,78)};
     \addlegendentry{ResNet50}
-    \addplot[fill=Orange!30] coordinates {(Baseline,66.8)};
+    \addplot[fill=Orange!30] coordinates {(Baseline,60.6)};
     \addlegendentry{Baseline}
-    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,75.0)};
+    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,78.1)};
     \addlegendentry{GiMeFive}
     \end{axis}
   \end{tikzpicture}
   }
-  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the aggregated five FER datasets} 
+  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the RAF-DB dataset} 
   \label{fig:acc}
 \end{figure}
 
@@ -310,12 +310,13 @@ Here $n$ denotes the total number of classes, in our case, 6.
     \cline{5-7}
     &&&& Train & Test & Valid  &  \\
     \midrule
-    \multirow{7}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG16~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
+    \multirow{8}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG16~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
     &\textsc{GiMeFive} & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
     &\textsc{GiMeFive} & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
     &\textsc{GiMeFive} & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
     &\textsc{GiMeFive} & 15 & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &\textsc{GiMeFive} & 15 & +DO+BN-SE & 97.0 & \textbf{86.5} & \textbf{78.1} & 10478086 \\
     &\textsc{GiMeFive} & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
     \multirow{5}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\

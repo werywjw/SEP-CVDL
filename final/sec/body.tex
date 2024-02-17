@@ -33,7 +33,7 @@ Our main contributions can be summarized as follows.
         legend style={at={(1.35,0.795)},
           anchor=east}, % ,legend columns=-1
         ylabel={Validation Accuracies (\%)}, 
-        symbolic x coords={VGG16,ResNet18,ResNet50,Baseline,GiMeFive},
+        symbolic x coords={VGG16,ResNet18,ResNet34,Baseline,GiMeFive},
         x tick label style={rotate=30,anchor=east},
         every axis plot/.append style={
           bar shift=0pt
@@ -49,9 +49,9 @@ Our main contributions can be summarized as follows.
     \addlegendentry{VGG16}
     \addplot[fill=LightPurple!30] coordinates {(ResNet18,67.9)};
     \addlegendentry{ResNet18}
-    \addplot[fill=cvprblue!30] coordinates {(ResNet50,78)};
-    \addlegendentry{ResNet50}
-    \addplot[fill=Orange!30] coordinates {(Baseline,60.6)};
+    \addplot[fill=cvprblue!30] coordinates {(ResNet34,75)}; % update later
+    \addlegendentry{ResNet34}
+    \addplot[fill=Orange!30] coordinates {(Baseline,66.8)};
     \addlegendentry{Baseline}
     \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,78.1)};
     \addlegendentry{GiMeFive}
@@ -312,23 +312,23 @@ Here $n$ denotes the total number of classes, in our case, 6.
     \midrule
     \multirow{8}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG16~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{98.9} & 81.3 & 67.9 & 11179590 \\
-    &\textsc{GiMeFive} & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
+    &\textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
     &\textsc{GiMeFive} & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
     &\textsc{GiMeFive} & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
-    &\textsc{GiMeFive} & 15 & +BN-SE & 98.6 & \textbf{83.1} & \textbf{72.1} & 10478086 \\
+    &\textsc{GiMeFive} & 15 & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
     &\textsc{GiMeFive} & 15 & +DO+BN-SE & 97.0 & \textbf{86.5} & \textbf{78.1} & 10478086 \\
     &\textsc{GiMeFive} & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
     \multirow{5}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & 92.6 & 64.7 & 42.1 & 11179590 \\
-    & \textsc{GiMeFive} & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
+    & \textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
     &\textsc{GiMeFive} & 15 & +BN-SE & 89.6 & \textbf{65.6} & 40.7 & 10478086 \\
     &\textsc{GiMeFive} & 17 & +BN-SE & \textbf{96.0} & 65.5 & \textbf{41.6} & 41950726 \\
     \midrule
     \midrule
     \multirow{4}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
-    & ResNet18~\cite{HeZRS16} & 18 & +RB  & 96.5 & 72.4 & 73.8 & 11179590 \\
-    &\textsc{GiMeFive} & 15 & +BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
+    & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
+    &\textsc{GiMeFive} & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
     &\textsc{GiMeFive} & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule
   \end{tabular}
@@ -336,7 +336,8 @@ Here $n$ denotes the total number of classes, in our case, 6.
   \caption{Accuracies (\%) for different models (with specific architectures and numbers of parameters) in our experiments 
   (Note that BN stands for the batch normalization, 
   RB for residual block, 
-  and SE for the squeeze and excitation block; 
+  SE for the squeeze and excitation block, 
+  and DO for dropout; 
   +/- represent with/without respectively)}
   \label{tab:model}
 \end{table*}

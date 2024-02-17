@@ -13,12 +13,7 @@
 ![](./final/pipeline.png)
 
 ## Results
-
-## How to generate a requirements.txt?
-```
-pipreqs /Users/wery/Desktop/SEP-CVDL
-pipreqs /Path/to/the/repository/SEP-CVDL
-```
+TODO
 
 ## Requirements
 
@@ -72,6 +67,26 @@ The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/presenta
 ### Where is our proposal (preliminary report) 📃?
 
 The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf).
+
+### What are the emotion labels?
+
+😄 happiness (0)
+
+😲 surprise (1)
+
+😭 sadness (2)
+
+😡 anger (3)
+
+🤢 disgust (4)
+
+😨 fear (5)
+
+### How to generate a requirements.txt?
+```
+pipreqs /Users/wery/Desktop/SEP-CVDL
+pipreqs /Path/to/the/repository/SEP-CVDL
+```
 
 ### How to resolve the conflicts?
 ```

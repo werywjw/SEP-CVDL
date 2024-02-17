@@ -52,7 +52,7 @@ def process_folder(folder_path):
 def main(folder_path):
     results = process_folder(folder_path)
     header = ['filepath', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
-    with open('classification_scores_valid.csv', 'w', newline='') as file: # change here
+    with open('classification_scores_test.csv', 'w', newline='') as file: # change here!!!
         writer = csv.writer(file)
         writer.writerow(header)
         writer.writerows(results)

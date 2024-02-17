@@ -6,7 +6,7 @@ import torch
 from torchvision.transforms import transforms
 from torch.utils.data import DataLoader
 
-class RAFDBDataset(Dataset):
+class GiMeFiveDataset(Dataset):
     def __init__(self, csv_file, img_dir, transform=None):
         self.labels = pd.read_csv(csv_file)
         self.img_dir = img_dir
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     transforms.RandomErasing(scale=(0.02,0.25)),
     ])
     
-    rafdb_dataset_train = RAFDBDataset(csv_file='archive/train_labels.csv',
+    rafdb_dataset_train = GiMeFiveDataset(csv_file='archive/train_labels.csv',
                              img_dir='archive/DATASET/train/',
                              transform=transform)
     

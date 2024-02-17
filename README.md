@@ -1,5 +1,11 @@
 # GiMeFive✋: Towards Interpretable Facial Emotion Classification
 
+<div align="center" style="text-align: center; white-space: nowrap;">
+  <a href="https://github.com/werywjw/SEP-CVDL/blob/main/final/main.pdf">Paper PDF Version📄</a> &nbsp; | &nbsp;
+  <a href="https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf">Presentation PDF Version🎥</a> &nbsp; | &nbsp;
+  <a href="https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf">Proposal PDF Version📃</a>
+</div>
+
 ## Abstract
 
 ## Overview
@@ -7,18 +13,6 @@
 ![](./final/pipeline.png)
 
 ## Results
-
-## Where is our final report 📄?
-
-## Where are our slides 🎥?
-
-On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31). 
-The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing). 
-The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf).
-
-## Where is our proposal (preliminary report) 📃?
-
-The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf).
 
 ## How to generate a requirements.txt?
 ```
@@ -54,7 +48,7 @@ TODO
 
 ## How does our video look like?
 
-![](./presentation/CVDLgif.gif)
+![](./video/v1.gif)
 
 ## How to test the live Demo with camera?
 
@@ -65,7 +59,21 @@ python3 livecam.py
 
 Exit via `control` + `C`.
 
-## How to resolve the conflicts?
+## Q&A
+
+### Where is our final report 📄?
+
+### Where are our slides 🎥?
+
+On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31). 
+The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing). 
+The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf).
+
+### Where is our proposal (preliminary report) 📃?
+
+The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf).
+
+### How to resolve the conflicts?
 ```
 git status
 ```
@@ -77,7 +85,7 @@ git commit
 git push
 ```
 
-## How to coauthor?
+### How to coauthor?
 
 ```
 git add .
@@ -96,13 +104,13 @@ git commit -m " <balala>
 Co-authored-by: werywjw <werywjw@gmail.com>"
 ```
 
-## How to convert `.ipynb` to `.py`?
+### How to convert `.ipynb` to `.py`?
 
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o
 ```
 
-## How to create the virtual environment?
+### How to create the virtual environment?
 
 ```
 source /Users/wery/venv/bin/activate

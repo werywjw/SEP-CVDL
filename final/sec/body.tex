@@ -358,10 +358,18 @@ Batch normalization can indeed improve the performance of the model.
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
 
+\begin{figure}[ht]
+  \centering
+   \includegraphics[width=\linewidth]{matval.png}
+   \caption{Overview of the confusion matrix on the validation set} 
+   \label{fig:matval}
+\end{figure}
+
 \paragraph{Classification Scores.}
 To further analyze the separate scores of each class of the model, 
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of the model with respect to each emotion class. 
 This CSV file is represented with the corresponding classification scores. 
+\Cref{fig:matval}
 
 \paragraph{Heatmap Overlayed Grad-CAM.}
 In our case, we leverage the fifth convolutional layer of our model to generate the CAM heatmap.
@@ -438,8 +446,7 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 \section{Conclusion and Discussion}
 \label{sec:conclusion}
 
-\section{Limitation}
-\label{sec:limitation}
+\paragraph{Limitations.}
 
 \newpage
 % \clearpage

@@ -53,7 +53,7 @@ Our main contributions can be summarized as follows.
     \addlegendentry{ResNet50}
     \addplot[fill=Orange!30] coordinates {(Baseline,66.8)};
     \addlegendentry{Baseline}
-    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,74.5)};
+    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,75.0)};
     \addlegendentry{GiMeFive}
     \end{axis}
   \end{tikzpicture}
@@ -326,7 +326,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     \midrule
     \multirow{4}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & 96.5 & 72.4 & 73.8 & 11179590 \\
-    &\textsc{GiMeFive} & 15 & +BN-SE & 94.6 & 72.5 & 73.5 & 10478086 \\
+    &\textsc{GiMeFive} & 15 & +BN-SE & 84.9 & 75.3 & 75.0 & 10478086 \\
     &\textsc{GiMeFive} & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule
   \end{tabular}
@@ -410,7 +410,7 @@ Meanwhile, we create various replications of existing photos by randomly alterin
     Pooling & \{\texttt{max}, \texttt{adaptive avg}\} \\
     Optimizer & \{\texttt{Adam}, \texttt{AdamW}, \texttt{SGD}\} \\
     Activation & \{ \texttt{relu}, \texttt{tanh}, \texttt{elu}, \texttt{gelu}\} \\
-    Epoch & \{50, 100\} \\
+    Epoch & \{10, 20, 40, 80\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
     Patience & \{5, 10, 15\} \\
     \bottomrule

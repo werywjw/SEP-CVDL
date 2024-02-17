@@ -8,12 +8,13 @@ import argparse
 import warnings
 from urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
-from model import EmotionClassifier
+
+from model import GiMeFive
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
-model = EmotionClassifier().to(device)
-model.load_state_dict(torch.load('best_RAF.pth', map_location=device))
+model = GiMeFive().to(device)
+model.load_state_dict(torch.load('best_GiMeFive.pth', map_location=device))
 model.eval()
 
 transform = transforms.Compose([
@@ -51,7 +52,7 @@ def process_folder(folder_path):
 def main(folder_path):
     results = process_folder(folder_path)
     header = ['filepath', 'happiness', 'surprise', 'sadness', 'anger', 'disgust', 'fear']
-    with open('classification_scores_vali.csv', 'w', newline='') as file: # change here
+    with open('classification_scores_valid.csv', 'w', newline='') as file: # change here
         writer = csv.writer(file)
         writer.writerow(header)
         writer.writerows(results)
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     main(args.folder_path)
     
-    # IMAGE_PATH = 'dataset/vali' # Please change this to your own path
+    # IMAGE_PATH = 'data/valid' # Please change this to your own path
     # # IMAGE_PATH = 'archive/RAF-DB/train'
     # # IMAGE_PATH = 'archive/RAF-DB/test'
     # main(IMAGE_PATH)

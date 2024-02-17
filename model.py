@@ -44,12 +44,12 @@ class ResidualBlock(nn.Module):
         out = F.relu(out)
         return out
     
-class EmotionClassifier(nn.Module):
+    
+class GiMeFive(nn.Module):
     def __init__(self):
-        super(EmotionClassifier, self).__init__()
+        super(GiMeFive, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(64)
-        # self.se1 = SEBlock(64)
         self.conv2 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
         self.bn2 = nn.BatchNorm2d(128)
         self.conv3 = nn.Conv2d(128, 256, kernel_size=3, padding=1)
@@ -62,30 +62,35 @@ class EmotionClassifier(nn.Module):
         self.pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc1 = nn.Linear(1024, 2048)
         self.fc2 = nn.Linear(2048, 1024) 
-        self.dropout1 = nn.Dropout(0.5)
+        self.dropout1 = nn.Dropout(0.2)
+        self.dropout2 = nn.Dropout(0.5)
         self.fc3 = nn.Linear(1024, 6)
 
-    def forward(self, x):
-        x = F.relu(self.bn1(self.conv1(x)))
-        # x = self.se1(x)
-        # x = F.relu(self.se1(self.conv1(x)))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.bn2(self.conv2(x)))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.bn3(self.conv3(x)))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.bn4(self.conv4(x)))
-        x = F.max_pool2d(x, 2)
-        x = F.relu(self.bn5(self.conv5(x)))
-        x = F.max_pool2d(x, 2)
-        
-        x = self.pool(x)
-        x = x.view(x.size(0), -1)  
-        x = F.relu(self.fc1(x))
+    def forward(self, x): # (batch_size, channels=3, 64, 64)
+        x = F.relu(self.bn1(self.conv1(x))) # (batch_size, 64, 64, 64)
+        x = F.max_pool2d(x, 2) # (batch_size, 64, 32, 32)
         x = self.dropout1(x)
-        x = F.relu(self.fc2(x))
-        x = self.fc3(x)
+        x = F.relu(self.bn2(self.conv2(x))) # (batch_size, 128, 32, 32)
+        x = F.max_pool2d(x, 2) # (batch_size, 128, 16, 16)
+        x = self.dropout1(x)
+        x = F.relu(self.bn3(self.conv3(x))) # (batch_size, 256, 16, 16)
+        x = F.max_pool2d(x, 2) # (batch_size, 256, 8, 8)
+        x = self.dropout1(x)
+        x = F.relu(self.bn4(self.conv4(x))) # (batch_size, 512, 8, 8)
+        x = F.max_pool2d(x, 2) # (batch_size, 512, 4, 4)
+        x = self.dropout1(x)
+        x = F.relu(self.bn5(self.conv5(x))) # (batch_size, 1024, 4, 4)
+        x = F.max_pool2d(x, 2) # (batch_size, 1024, 2, 2)
+        # x = self.dropout1(x)
+        
+        x = self.pool(x) # (batch_size, 1024, 1, 1)
+        x = x.view(x.size(0), -1) # (batch_size, 1024) # Flatten
+        x = F.relu(self.fc1(x)) # (batch_size, 2048)
+        x = self.dropout2(x) # (batch_size, 2048)
+        x = F.relu(self.fc2(x)) # (batch_size, 1024)
+        x = self.fc3(x) # (batch_size, 6)
         return x
+
 
 class GiMeFiveRes(nn.Module):
     def __init__(self):

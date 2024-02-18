@@ -382,6 +382,83 @@ especially when human sometimes also represents the disgusting and angry emotion
 Moreover, 
 the confusion matrix illustrates that the model has good performances in terms of classifying the surprise, sadness, and anger as well. 
 
+\begin{figure*}
+  \centering
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_happiness_.png}
+    \caption{Happiness}
+    \label{fig:xai1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_surprise.png}
+    \caption{Surprise}
+    \label{fig:xai2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_sadness_.png}
+    \caption{Sadness}
+    \label{fig:xai3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_anger.png}
+    \caption{Anger}
+    \label{fig:xai4}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_disgust.png}
+    \caption{Disgust}
+    \label{fig:xai5}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_fear.png}
+    \caption{Fear}
+    \label{fig:xai6}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_happiness.png}
+    \caption{Happiness}
+    \label{fig:xai7}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_surprise_.png}
+    \caption{Surprise}
+    \label{fig:xai8}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_sadness.png}
+    \caption{Sadness}
+    \label{fig:xai9}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_anger_.png}
+    \caption{Anger}
+    \label{fig:xai10}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_disgust_.png}
+    \caption{Disgust}
+    \label{fig:xai11}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.15\linewidth}
+    \includegraphics[width=\linewidth]{xai_fear_.png}
+    \caption{Fear}
+    \label{fig:xai12}
+  \end{subfigure}
+  \caption{Overview of explainable AI with all six emotional classes}
+  \label{fig:xai}
+\end{figure*}
+
 \paragraph{Heatmap Overlayed Grad-CAM.}
 In our case, we leverage the last (i.e., fifth) convolutional layer of our model to generate the CAM heatmap. 
 The \textit{global average pooling} (GAP) layer, 

@@ -58,7 +58,7 @@ Our main contributions can be summarized as follows.
     \end{axis}
   \end{tikzpicture}
   }
-  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the RAF-DB dataset} 
+  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the RAF-DB dataset.} 
   \label{fig:acc}
 \end{figure}
 
@@ -75,7 +75,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \begin{figure*}[ht]
   \centering
    \includegraphics[width=\linewidth]{pipeline.png}
-   \caption{Overview of the experimental pipeline} 
+   \caption{Overview of the experimental pipeline.} 
    \label{fig:pipeline}
 \end{figure*}
 
@@ -158,7 +158,7 @@ The experiment and evaluation are conducted on two MacBook Pro
       \bottomrule
   \end{tabular}
   }
-\caption{Overview of the data statistics for each emotion class and the total number of videos/images in our experiment}
+\caption{Overview of the data statistics for each emotion class and the total number of videos/images in our experiment.}
 \label{tab:data}
 \end{table*}
 
@@ -248,7 +248,7 @@ VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}.
   \end{tikzpicture}
   }
   \caption{Overview of the \textsc{GiMeFive} model architecture 
-  (see \Cref{fig:modeldetail} for a detailed version)} 
+  (see \Cref{fig:modeldetail} for a detailed version).} 
   \label{fig:model}
 \end{figure*}
 
@@ -340,13 +340,14 @@ Here $n$ denotes the total number of classes, in our case, 6.
   RB for residual block, 
   SE for the squeeze and excitation block, 
   and DO for dropout; 
-  +/- represent with/without respectively)}
+  +/- represent with/without respectively).}
   \label{tab:model}
 \end{table*}
 
 As seen in \Cref{tab:model}, 
 the test results are aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
-Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. % that have been developed. 
+Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
+The confusion matrix of the test set on the RAF-DB is given in \Cref{fig:mattest}. 
 
 Our CNN without random augmentation outperforms the other models in terms of accuracy, 
 indicating that this kind of augmentation is not able to help our model predict the correct label, 
@@ -362,7 +363,7 @@ Batch normalization can indeed improve the performance of the model.
 \begin{figure}[ht]
   \centering
    \includegraphics[width=\linewidth]{matval.png}
-   \caption{Overview of the confusion matrix on the validation set} 
+   \caption{Overview of the confusion matrix on the validation set.} 
    \label{fig:matval}
 \end{figure}
 
@@ -386,76 +387,76 @@ the confusion matrix illustrates that the model has good performances in terms o
   \centering
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_happiness_.png}
-    \caption{Happiness}
+    \caption{Happiness.}
     \label{fig:xai1}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_surprise.png}
-    \caption{Surprise}
+    \caption{Surprise.}
     \label{fig:xai2}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_sadness_.png}
-    \caption{Sadness}
+    \caption{Sadness.}
     \label{fig:xai3}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_anger.png}
-    \caption{Anger}
+    \caption{Anger.}
     \label{fig:xai4}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_disgust.png}
-    \caption{Disgust}
+    \caption{Disgust.}
     \label{fig:xai5}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_fear.png}
-    \caption{Fear}
+    \caption{Fear.}
     \label{fig:xai6}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_happiness.png}
-    \caption{Happiness}
+    \caption{Happiness.}
     \label{fig:xai7}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_surprise_.png}
-    \caption{Surprise}
+    \caption{Surprise.}
     \label{fig:xai8}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_sadness.png}
-    \caption{Sadness}
+    \caption{Sadness.}
     \label{fig:xai9}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_anger_.png}
-    \caption{Anger}
+    \caption{Anger.}
     \label{fig:xai10}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_disgust_.png}
-    \caption{Disgust}
+    \caption{Disgust.}
     \label{fig:xai11}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.15\linewidth}
     \includegraphics[width=\linewidth]{xai_fear_.png}
-    \caption{Fear}
+    \caption{Fear.}
     \label{fig:xai12}
   \end{subfigure}
-  \caption{Overview of explainable AI with all six emotional classes}
+  \caption{Overview of explainable AI with all six facial emotional classes.}
   \label{fig:xai}
 \end{figure*}
 
@@ -501,21 +502,21 @@ Meanwhile, we create various replications of existing photos by randomly alterin
     \toprule
     \textsc{Hyperparameter} & \textsc{Value} \\
     \midrule
-    Learning rate & \{0.01, 0.001, 0.0001\}  \\
+    Learning rate & $ \{\num{1e-2}, \num{1e-3}, \num{1e-4} \} $ \\
     Batch size & \{8, 16, 32, 64\} \\
     Dropout rate & \{0.2, 0.5\} \\
     Convolution depth & \{4, 5, 6\} \\
-    Fully connected depth & \{2, 3\} \\
+    Fully connected depth & \{1, 2, 3\} \\
     Batch normalization & \{\texttt{True}, \texttt{False}\} \\
     Pooling & \{\texttt{max}, \texttt{adaptive avg}\} \\
     Optimizer & \{\texttt{Adam}, \texttt{AdamW}, \texttt{SGD}\} \\
-    Activation & \{ \texttt{relu}, \texttt{tanh}, \texttt{elu}, \texttt{gelu}\} \\
+    Activation & \{ \texttt{relu}\} \\ % , \texttt{tanh}, \texttt{elu}, \texttt{gelu}
     Epoch & \{10, 20, 40, 80\} \\
     Early stopping & \{\texttt{True}, \texttt{False}\} \\
     Patience & \{5, 10, 15\} \\
     \bottomrule
   \end{tabular}
-  \caption{Explored hyperparameter space for our models}
+  \caption{Explored hyperparameter space for our models.}
   \label{tab:hyper}
 \end{table}
 

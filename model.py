@@ -239,4 +239,9 @@ class ResNet(nn.Module):
 def EmotionClassifierResNet18():
     return ResNet(BasicBlock, [2, 2, 2, 2])
 
+def EmotionClassifierResNet34():
+    return ResNet(BasicBlock, [3, 4, 6, 3])
+
+
 # model = EmotionClassifierResNet18().to(device)
+# model = EmotionClassifierResNet34().to(device)

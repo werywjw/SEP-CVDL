@@ -140,7 +140,6 @@ The experiment and evaluation are conducted on two MacBook Pro
       \toprule
       \textsc{Dataset} & \textsc{Split} & \# happiness & \# surprise & \# sadness & \# anger & \# disgust & \# fear & \# total videos/images \\
       \midrule
-      \midrule
       DISFA~\cite{mavadati2013disfa} & Test &  &  &  &  &  &  & 27 \\ % TODO Leah
       \midrule
       \multirow{2}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} & Train & 4772 & 1290 & 1982 & 705 & 717 & 281 & 9747 \\
@@ -338,6 +337,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     \midrule
     \multirow{4}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
+    & ResNet34~\cite{HeZRS16} & 34 & +RB  & 94.5 & 70.8 & 72.8 & 21287750 \\
     &\textsc{GiMeFive} (Ours) & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
     &\textsc{GiMeFive} (Ours) & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule

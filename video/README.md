@@ -1,5 +1,5 @@
 ## TODO Leah (Note that all the video < 100MB, otherwise Google drive or somewhere else)
 
-- [ ] add orginial video (.mp4 or .mov)
-- [ ] add code
-- [ ] add script
+- [x] add orginial video (.mp4 or .mov)
+- [x] add code
+- [x] add script

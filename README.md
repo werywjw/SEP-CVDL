@@ -37,9 +37,9 @@ python3 script_csv.py 'dataset/validation_set'
 ./script_csv.sh
 ```
 
-## How to run the script `evaluation.py` to generate an Explainable AI video from a given video or a camera stream?
+## How to run the script `evaluation.py` to generate an Explainable AI video from a given video path or a camera stream? 🥹 📹
 
-Run one of the following command: 
+Run one of the following commands: 
 ```
 python3 evaluation.py -h
 

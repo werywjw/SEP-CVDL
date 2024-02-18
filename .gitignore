@@ -28,3 +28,5 @@ __pycache__
 *.fdb_latexmk
 *.fls
 *.brf
+
+.venv

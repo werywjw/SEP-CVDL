@@ -11,6 +11,9 @@ To make our model more transparent,
 we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
 (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
+\paragraph{Motivation.} % TODO
+The goal of our research is to build a robust and interpretable model for the facial emotion recognition.
+
 % update later
 % \paragraph{Paper Contribution.}
 Our main contributions can be summarized as follows.
@@ -18,9 +21,10 @@ Our main contributions can be summarized as follows.
   \item We collect, preprocess, and evaluate the training and testing data thoroughly, 
   (both image and video) from various public databases. 
   \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
-  Meanwhile, we provide the classification scores of each emotion class in a detailed script with respect to each image. 
-  \item We give the video demo to illustrate the real-world performance of our best model. 
-  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. 
+  Meanwhile, we provide the classification scores of each emotion class, 
+  as well as the confusion matrix heat map, with respect to each image. 
+  \item We give the video demo to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
+  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. % TODO
 \end{itemize}
 
 \begin{figure}[ht]
@@ -174,7 +178,7 @@ For reviewing Explainable AI we used the Video Dataset
 \textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA, spontaneous expressions)~\cite{mavadati2013disfa}, 
 containing a variety of levels of intensity in expression.
 The procurement was proceeded through public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
-\Cref{tab:data} gives detailed insides of each training, test, and validation set, along with data statistics on emotion classes.
+\Cref{tab:data} gives detailed data statistics of each training, test, and validation set on emotion classes.
 
 
 \paragraph{Image Preprocessing.}
@@ -184,10 +188,10 @@ anger (3), disgust (4), and fear (5).
 Afterward, we append the emotion labels 0 to 5 to the name of each matching image.
 
 In order to later efficiently pass the images to the model, 
-we also create via script a CSV file to store all the images and their corresponding labels. 
+we also create a script for generating CSV files to store all the images and their corresponding labels. 
 The images together with the CSV file are being loaded and preprocessed for training. 
-Therefore we manipulate the pixel data through resizing, 
-augmentation, conversion to grayscale, creating Tensors and normalization. 
+Therefore, we manipulate the pixel data through resizing, 
+augmentation, conversion to grayscale, creating tensors and normalization. 
 The images are converted to greyscale with three channels at $64 \times 64$ resolution in the JPG format, 
 as our original CNN is designed to work with three-channel inputs. 
 Typically, we assume that the color of the image does not affect the emotion classification. 
@@ -206,9 +210,10 @@ The validation set is given with equal 100 images per class to test the performa
 The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
 % We set standards for extracting frames from the selected videos.
 To evaluate videos or live webcam streams, we extract every frame and crop the area (rectangle) of interest for emotion detection.  
-The cropped image is preprocessed by resizing to $64 \times 64$ resolution, then converted to greyscale with three channels, 
-after that a Tensor is generated, which then is normalized. 
-For every cropped image is evaluated through our model.
+The cropped image is also preprocessed by resizing to $64 \times 64$ resolution, 
+then converted to greyscale with three channels, 
+after that a tensor is generated and then normalized. 
+Every cropped image is evaluated through our model.
 % where to put the writing of the evaluated videos? - See \Cref{sec:evaluation:inter} \paragraph{Video.}
 
 
@@ -217,7 +222,7 @@ For every cropped image is evaluated through our model.
 
 In order to compare the performance of our model with other state-of-the-art models, 
 we replicate several CNNs from scratch, 
-which includes ResNet18~\cite{HeZRS16}, 
+which include ResNet18~\cite{HeZRS16}, 
 VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}. 
 
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
@@ -254,18 +259,18 @@ VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}.
 
 \paragraph{Residual Networks.}
 In principle, 
-deeper neural networks are more difficult to train. 
+deeper neural networks with more parameters are more difficult to train. 
 Inspired by \citet{HeZRS16}, 
-we build the ResNet18 with the residual block from scratch to ease the training process. 
+we add the ResNet18 with the residual block to ease the training process. 
 
 \paragraph{VGG16.}
 \citet{SimonyanZ14a}
 
 \paragraph{\textsc{GiMeFive}.}
-\Cref{fig:model} illustrates the overview of our model architecture. 
+Our model architecture is illustrated in \Cref{fig:model} (see \Cref{fig:modeldetail} for details). 
 The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
-The output is 6 emotion classes: happiness, surprise, sadness, anger, disgust, and fear. 
-We implement an emotion classification model from scratch with four convolution blocks at the very beginning. 
+The output is 6 emotion classes. % : happiness, surprise, sadness, anger, disgust, and fear. 
+We implement an emotion classification model from scratch with four convolution blocks as our baseline at the very beginning. 
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
 as it is efficient to train and share the weights without expensive computation. 
@@ -275,12 +280,13 @@ Meanwhile,
 BN ensures forward propagated signals to have non-zero variances. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
-We also add a 50\% dropout layer to prevent overfitting. 
+We also add a 50\% dropout layer between the first and second linear layer to prevent overfitting. 
 Verified by \citet{BarsoumZCZ16}, 
 the dropout layers are effective in avoiding model overfitting. 
 The activation function after each layer is \textit{Rectified Linear Unit} (ReLU), 
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
+Our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\% after the max pooling layer as well.
 
 \section{Evaluation}
 \label{sec:evaluation}
@@ -324,7 +330,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & 92.6 & 64.7 & 42.1 & 11179590 \\
     & \textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
     &\textsc{GiMeFive} & 15 & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
-    &\textsc{GiMeFive} & 15 & +DO+BN-SE & 69.7 & \textbf{67.5} & 46.2 & 10478086 \\
+    &\textsc{GiMeFive} & 15 & +DO+BN-SE & 69.7 & \textbf{67.5} & \textbf{46.2} & 10478086 \\
     &\textsc{GiMeFive} & 17 & +BN-SE & \textbf{96.0} & 65.5 & 41.6 & 41950726 \\
     \midrule
     \midrule
@@ -340,14 +346,15 @@ Here $n$ denotes the total number of classes, in our case, 6.
   RB for residual block, 
   SE for the squeeze and excitation block, 
   and DO for dropout; 
-  +/- represent with/without respectively).}
+  +/- represent with/without respectively). 
+  The confusion matrix of the test set on the RAF-DB is given in \Cref{fig:mattest}, 
+  while the result of validation test is shown in \Cref{fig:matval}.} 
   \label{tab:model}
 \end{table*}
 
 As seen in \Cref{tab:model}, 
 the test results are aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
 Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
-The confusion matrix of the test set on the RAF-DB is given in \Cref{fig:mattest}. 
 
 Our CNN without random augmentation outperforms the other models in terms of accuracy, 
 indicating that this kind of augmentation is not able to help our model predict the correct label, 
@@ -383,82 +390,83 @@ especially when human sometimes also represents the disgusting and angry emotion
 Moreover, 
 the confusion matrix illustrates that the model has good performances in terms of classifying the surprise, sadness, and anger as well. 
 
-\begin{figure*}
+
+\begin{figure}[ht]
   \centering
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_happiness_.png}
     \caption{Happiness.}
     \label{fig:xai1}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_surprise.png}
     \caption{Surprise.}
     \label{fig:xai2}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_sadness_.png}
     \caption{Sadness.}
     \label{fig:xai3}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_anger.png}
     \caption{Anger.}
     \label{fig:xai4}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_disgust.png}
     \caption{Disgust.}
     \label{fig:xai5}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.15\linewidth}
+  \begin{subfigure}{0.3\linewidth}
     \includegraphics[width=\linewidth]{xai_fear.png}
     \caption{Fear.}
     \label{fig:xai6}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_happiness.png}
-    \caption{Happiness.}
-    \label{fig:xai7}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_surprise_.png}
-    \caption{Surprise.}
-    \label{fig:xai8}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_sadness.png}
-    \caption{Sadness.}
-    \label{fig:xai9}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_anger_.png}
-    \caption{Anger.}
-    \label{fig:xai10}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_disgust_.png}
-    \caption{Disgust.}
-    \label{fig:xai11}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.15\linewidth}
-    \includegraphics[width=\linewidth]{xai_fear_.png}
-    \caption{Fear.}
-    \label{fig:xai12}
-  \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_happiness.png}
+  %   \caption{Happiness.}
+  %   \label{fig:xai7}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_surprise_.png}
+  %   \caption{Surprise.}
+  %   \label{fig:xai8}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_sadness.png}
+  %   \caption{Sadness.}
+  %   \label{fig:xai9}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_anger_.png}
+  %   \caption{Anger.}
+  %   \label{fig:xai10}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_disgust_.png}
+  %   \caption{Disgust.}
+  %   \label{fig:xai11}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}{0.15\linewidth}
+  %   \includegraphics[width=\linewidth]{xai_fear_.png}
+  %   \caption{Fear.}
+  %   \label{fig:xai12}
+  % \end{subfigure}
   \caption{Overview of explainable AI with all six facial emotional classes.}
   \label{fig:xai}
-\end{figure*}
+\end{figure}
 
 \paragraph{Heatmap Overlayed Grad-CAM.}
 In our case, we leverage the last (i.e., fifth) convolutional layer of our model to generate the CAM heatmap. 

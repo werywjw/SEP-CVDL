@@ -30,21 +30,17 @@ class GiMeFiveDataset(Dataset):
     
 if __name__ == '__main__':
     transform = transforms.Compose([
-    transforms.Resize((64, 64)),
-    transforms.Lambda(lambda img: img.convert('RGB') if img.mode != 'RGB' else img),  
-    transforms.RandomHorizontalFlip(), 
-    transforms.RandomApply([
-        transforms.RandomRotation(5),
-        transforms.RandomCrop(64, padding=8)
-    ], p=0.2),
-    transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    transforms.RandomErasing(scale=(0.02,0.25)),
+        transforms.Resize((64, 64)),
+        transforms.Grayscale(num_output_channels=3),
+        transforms.RandomHorizontalFlip(), 
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        # transforms.RandomErasing(scale=(0.02,0.25)),
     ])
     
-    rafdb_dataset_train = GiMeFiveDataset(csv_file='archive/train_labels.csv',
-                             img_dir='archive/DATASET/train/',
-                             transform=transform)
+    rafdb_dataset_train = GiMeFiveDataset(csv_file='data/train_labels.csv',
+                                img_dir='data/train/',
+                                transform=transform)
     
     data_train_loader = DataLoader(rafdb_dataset_train, batch_size=64, shuffle=True, num_workers=4)
 

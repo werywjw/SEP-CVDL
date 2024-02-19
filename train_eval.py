@@ -16,7 +16,10 @@ device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 from get_dataset import GiMeFiveDataset
 from models import GiMeFive, GiMeFiveRes
-from models import SEBlock, ResidualBlock, VGG16, BasicBlock, ResNet, EmotionClassifierResNet18, EmotionClassifierResNet34
+from models import SEBlock
+from models import VGG16
+from models import ResidualBlock, BasicBlock, ResNet, EmotionClassifierResNet18, EmotionClassifierResNet34
+
 
 def main():
     transform = transforms.Compose([

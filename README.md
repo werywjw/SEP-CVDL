@@ -29,7 +29,7 @@ Please change the **filepath** to the image folder that you would like to try. �
 
 - Option 1️⃣: Run the following command:
 ```
-python3 script_csv.py 'dataset/validation_set'
+python3 script_csv.py 'data/valid'
 ```
 
 - Option 2️⃣: Use shell:

@@ -1,5 +1,8 @@
 final/main.pdf
 models
+archive/AffectNet_
+archive/CK+_
+archive/TFEID_
 # data
 dataset_original
 *.pth

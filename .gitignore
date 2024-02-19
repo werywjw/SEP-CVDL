@@ -1,6 +1,7 @@
 final/main.pdf
 models
 # data
+dataset_original
 *.pth
 !best_GiMeFive.pth
 result.md

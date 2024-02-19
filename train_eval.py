@@ -1,11 +1,9 @@
 import torch
 import torch
 import torch.nn as nn
-from torch.nn import Linear, Conv2d, BatchNorm1d, BatchNorm2d, PReLU, Sequential, Module
 from torchvision.transforms import transforms
 from torch.utils.data import DataLoader
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
 from tqdm import tqdm
 # import pandas as pd
@@ -15,11 +13,10 @@ from tqdm import tqdm
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 # device = torch.device("cpu")
-# print(f"Using device: {device}")
 
 from get_dataset import GiMeFiveDataset
-from model import GiMeFive
-from model import SEBlock, ResidualBlock, GiMeFiveRes, VGG16, BasicBlock, ResNet, EmotionClassifierResNet18
+from models import GiMeFive, GiMeFiveRes
+from models import SEBlock, ResidualBlock, VGG16, BasicBlock, ResNet, EmotionClassifierResNet18, EmotionClassifierResNet34
 
 def main():
     transform = transforms.Compose([

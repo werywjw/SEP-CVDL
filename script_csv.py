@@ -9,7 +9,7 @@ import warnings
 from urllib3.exceptions import InsecureRequestWarning
 warnings.simplefilter('ignore', InsecureRequestWarning)
 
-from model import GiMeFive
+from models import GiMeFive
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 

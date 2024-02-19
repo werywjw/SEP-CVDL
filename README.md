@@ -37,34 +37,34 @@ python3 script_csv.py 'dataset/validation_set'
 ./script_csv.sh
 ```
 
-## How to run the script `evaluation.py` to generate an Explainable AI video from a given video path or a camera stream? 🥹 📹
+## How to run the script to generate an XAI video from a given video path or a camera stream? 🥹 📹
 
 Run one of the following commands: 
 ```
-python3 evaluation.py -h
+python3 script_video.py -h
 
-python3 evaluation.py -s camera
-python3 evaluation.py -s video -i <video-path>
+python3 script_video.py -s camera
+python3 script_video.py -s video -i 'video/video.mp4'
 ```
 
 ## How does our video look like?
 
 ![](./video/v1.gif)
 
-## How to test the live Demo with camera?
+## How to test the live Demo with camera (old version)?
 
 Run the following command:
 ```
-python3 livecam.py
+python3 eval_livecam.py
 ```
 
 Exit via `control` + `C`.
 
 ## Q&A
 
-### Where is our final report 📄?
+### Where is our paper (final report) 📄?
 
-### Where are our slides 🎥?
+### Where are our presentation slides 🎥?
 
 On [goolge docs](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit#slide=id.g2b4d85efaed_0_31). 
 The shared link is available [here](https://docs.google.com/presentation/d/14AazB5FY5jLyB5-9R6Ix7LoMX8yNR_illDAaYDCm8_s/edit?usp=sharing). 

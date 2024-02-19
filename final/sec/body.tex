@@ -290,7 +290,6 @@ Our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\
 \section{Evaluation}
 \label{sec:evaluation}
 
-% add confusion matrix figure
 For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
 We report all the training, testing, and validation accuracies in 
 \% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
@@ -335,7 +334,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     &\textsc{GiMeFive} (Ours) & 17 & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\
     \midrule
     \midrule
-    \multirow{4}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
+    \multirow{5}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & 94.5 & 70.8 & 72.8 & 21287750 \\
     &\textsc{GiMeFive} (Ours) & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\

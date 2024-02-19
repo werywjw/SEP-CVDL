@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Please change this to your own path
-IMAGE_PATH="dataset/validation_set" 
+IMAGE_PATH="data/valid" 
 # IMAGE_PATH='archive/RAF-DB/test'
 
 # Activate your Python environment if needed # /path/to/your/virtualenv/bin/activate

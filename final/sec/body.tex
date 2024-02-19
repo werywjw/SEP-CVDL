@@ -2,6 +2,7 @@
 \label{sec:intro}
 
 % update later
+% TODO: add more paragraphs & relates (global)
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
 In this report, we aim to leverage several deep 
@@ -92,6 +93,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
 \citet{Malik0R21} 
 
+% TODO: add video related work (new paragraph)
 \paragraph{Explainable AI.}
 To understand the decision-making process of our model, 
 we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
@@ -215,7 +217,7 @@ after that a tensor is generated and then normalized.
 Every cropped image is evaluated through our model.
 % where to put the writing of the evaluated videos? - See \Cref{sec:evaluation:inter} \paragraph{Video.}
 
-
+% TODO (Jiawen)
 \subsection{Model Architecture}
 \label{sec:setup:model}
 
@@ -365,6 +367,8 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
 Batch normalization can indeed improve the performance of the model. 
 
+% TODO (Jiawen)
+
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
 
@@ -477,6 +481,8 @@ is used to obtain a spatial average of the feature maps.
 
 \paragraph{Video Landmark Something.} % TODO Leah
 We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}.
+
+% TODO (Jiawen)
 
 \section{Optimization Strategies}
 \label{sec:optim}

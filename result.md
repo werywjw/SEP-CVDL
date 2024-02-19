@@ -42,9 +42,3 @@ optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9, weight_decay=1
 - Train: 69.0
 - Test: 49.4
 - Valid: 35.6
-
-## TODO
-
-add model.summary()
-
-add confusion matrix

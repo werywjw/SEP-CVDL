@@ -131,6 +131,12 @@ Co-authored-by: werywjw <werywjw@gmail.com>"
 colab-convert livecam.ipynb livecam.py -nc -rm -o
 ```
 
+### How to create submodules?
+
+```
+git submodule add https://github.com/werywjw/data.git
+```
+
 ### How to create the virtual environment?
 
 ```

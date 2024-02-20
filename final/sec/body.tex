@@ -207,7 +207,7 @@ the training set of FER \textsc{GiMeFive} is aggregated from the training sets o
 while the test set is combined from the test sets of RAF-DB and FER2013. 
 The validation set is given with equal 100 images per class to test the performance of models. 
 
-\paragraph{Video Preprocessing.} % TODO Leah in progress
+\paragraph{Video Preprocessing.} % TODO Leah
 The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
 % We set standards for extracting frames from the selected videos.
 To evaluate videos or live webcam streams, we extract every frame and crop the area (rectangle) of interest for emotion detection.  
@@ -215,7 +215,8 @@ The cropped image is also preprocessed by resizing to $64 \times 64$ resolution,
 then converted to greyscale with three channels, 
 after that a tensor is generated and then normalized. 
 Every cropped image is evaluated through our model.
-% where to put the writing of the evaluated videos? - See \Cref{sec:evaluation:inter} \paragraph{Video.}
+
+Detailed information of emotion classification - See \Cref{sec:evaluation:inter} % \paragraph{Video.} ?? is video right?
 
 % TODO (Jiawen)
 \subsection{Model Architecture}
@@ -479,8 +480,16 @@ The \textit{global average pooling} (GAP) layer,
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
-\paragraph{Video Landmark Something.} % TODO Leah
-We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}.
+\paragraph{Dlib Landmarks.} % TODO Leah
+To plot Landmarks on each video frame, we implemented the dlib face detector
+\texttt{shape_predictor_68_face_landmarks.dat}, constructed using the classic Histogram of Oriented Gradients feature
+(HOG)~\cite{1467360} combined with a linear classifier, an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
+The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.
+
+With this pertained model, 68 numbered Landmarks assist emotion analysis, and facial expression tracking, to understand and to interpret facial features.
+
+We implement using the libraries such as OpenCV~\footnote{~\url{http://dlib.net/}}. % Für dlib
+We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. % Für Cascade
 
 % TODO (Jiawen)
 
@@ -497,7 +506,7 @@ To further understand and enhance the performance of the model during training,
 \label{sec:optim:aug}
 
 In deep learning and AI, 
-augmentation stands as a transformative technique, 
+augmentation~\cite{augment} stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
 By introducing subtle modifications to existing data points, 
 augmentation effectively expands the dataset, 

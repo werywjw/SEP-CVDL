@@ -493,10 +493,39 @@ is used to obtain a spatial average of the feature maps.
 The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap).
 On top of the saliency map the main emotion, extracted every fifth frame, is written, so it is easier for our eyes to adapt.
 
+\begin{figure*}[ht]
+  \centering
+  \begin{subfigure}{0.23\linewidth}
+    \includegraphics[width=\linewidth]{GiMeFive01.png}
+    \caption{Happiness.}
+    \label{fig:v1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.23\linewidth}
+    \includegraphics[width=\linewidth]{GiMeFive02.png}
+    \caption{Fear.}
+    \label{fig:v2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.23\linewidth}
+    \includegraphics[width=\linewidth]{GiMeFive03.png}
+    \caption{Surprise.}
+    \label{fig:v3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.23\linewidth}
+    \includegraphics[width=\linewidth]{GiMeFive04.png}
+    \caption{Sadness.}
+    \label{fig:v4}
+  \end{subfigure}
+  \caption{Overview of explainable AI with all six facial emotional classes.}
+  \label{fig:video}
+\end{figure*}
+
 \paragraph{Landmarks.} % TODO Leah
 To plot Landmarks on each video frame, we implemented the pretrained dlib shape predictor 
-% \texttt{dlib_shape_predictor}, does not work ;P
-% \texttt{shape_predictor_68_face_landmarks.dat}, 
+\texttt{dlib shape predictor}, % worked ;P
+\texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
 an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
 The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.
@@ -505,7 +534,7 @@ With this pertained model, 68 numbered Landmarks assist emotion analysis, and fa
 
 We implement using the libraries such as Dlib~\footnote{~\url{http://dlib.net/}}. % Für dlib
 
-% image of GiMeFive_Video or Landmarks??
+% image of GiMeFive_Video or Landmarks?? Yes of course! Done
 
 % TODO (Jiawen)
 

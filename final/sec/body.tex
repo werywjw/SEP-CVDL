@@ -489,12 +489,13 @@ The \textit{global average pooling} (GAP) layer,
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
-\paragraph{Overlayed evaluated emotions.} % TODO Leah
+\paragraph{Overlay evaluated emotions.} % TODO Leah
 The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap).
 On top of the saliency map the main emotion, extracted every fifth frame, is written, so it is easier for our eyes to adapt.
 
 \paragraph{Landmarks.} % TODO Leah
-To plot Landmarks on each video frame, we implemented the pretrained \texttt{dlib.shape_predictor},
+To plot Landmarks on each video frame, we implemented the pretrained dlib shape predictor 
+% \texttt{dlib_shape_predictor}, does not work ;P
 % \texttt{shape_predictor_68_face_landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
 an image pyramid, and sliding window detection scheme.~\cite{dlib_site}

@@ -142,7 +142,7 @@ The experiment and evaluation are conducted on two MacBook Pro
       \toprule
       \textsc{Dataset} & \textsc{Split} & \# happiness & \# surprise & \# sadness & \# anger & \# disgust & \# fear & \# total videos/images \\
       \midrule
-      DISFA~\cite{mavadati2013disfa} & Test &  &  &  &  &  &  & 27 \\ % TODO Leah
+      DISFA~\cite{MavadatiMBTC13} & Test &  &  &  &  &  &  & 27 \\ % TODO Leah
       \midrule
       \multirow{2}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} & Train & 4772 & 1290 & 1982 & 705 & 717 & 281 & 9747 \\
       &Test &1185&329&478&162&160&74& 2388 \\
@@ -176,7 +176,7 @@ and \textit{Taiwanese Facial Expression Image Database} (TFEID, posed expression
 These image datasets come in folder-structure classification.
 
 For reviewing Explainable AI we used the Video Dataset
-\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA, spontaneous expressions)~\cite{mavadati2013disfa}, 
+\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA, spontaneous expressions)~\cite{MavadatiMBTC13}, 
 containing a variety of levels of intensity in expression.
 The procurement was proceeded through public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
 \Cref{tab:data} gives detailed data statistics of each training, test, and validation set on emotion classes.
@@ -483,7 +483,7 @@ is used to obtain a spatial average of the feature maps.
 % We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. %% Für Cascade
 
 \paragraph{Dlib Landmarks.} % TODO Leah
-To plot Landmarks on each video frame, we implemented the dlib face detector shape_predictor_68_face_landmarks.dat % \texttt{shape_predictor_68_face_landmarks.dat}, 
+To plot Landmarks on each video frame, we implemented the dlib face detector % \texttt{shape_predictor_68_face_landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
 an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
 The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.

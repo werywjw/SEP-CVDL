@@ -208,15 +208,25 @@ while the test set is combined from the test sets of RAF-DB and FER2013.
 The validation set is given with equal 100 images per class to test the performance of models. 
 
 \paragraph{Video Preprocessing.} % TODO Leah
-The Denver Intensity of Spontaneous Facial Action (DISFA) dataset consists of 27 videos of 4844 frames each, with 130,788 images in total
-% We set standards for extracting frames from the selected videos.
-To evaluate videos or live webcam streams, we extract every frame and crop the area (rectangle) of interest for emotion detection.  
-The cropped image is also preprocessed by resizing to $64 \times 64$ resolution, 
+The Denver Intensity of Spontaneous Facial Action (DISFA~\cite{MavadatiMBTC13}) dataset comprises two sets of videos, differentiated 
+by capturing various camera angles. Each set consists of 27 videos, with each video comprising 4844 frames, resulting 
+in 130,788 images for each camera angle and a total of 261,576 images across both angles.
+For testing our model, we established standards for the extracted frames from videos or live webcam streams. 
+Each frame, extracted for testing, undergoes scanning for the region of interest, the face(s). To achieve this, 
+we implemented the (OpenCV) \texttt{CascadeClassifier}~\cite{casc_class}.
+OpenCV, a comprehensive computer vision library, incorporates the Viola-Jones algorithm to power Haar Cascade Classifiers 
+for face detection. The Viola-Jones algorithm, introduced by Paul Viola and Michael Jones, revolutionized real-time object 
+detection~\cite{990517}. 
+
+As part of the video preprocessing, we run every frame through the Haar Cascade Classifiers to detect our region of interest, 
+and crop the rectangled region of the face.
+
+The cropped image is then also preprocessed by resizing to $64 \times 64$ resolution, 
 then converted to greyscale with three channels, 
 after that a tensor is generated and then normalized. 
-Every cropped image is evaluated through our model.
+Every cropped image is evaluated through our model, so that the classifications can be used for further interpretation. 
 
-Detailed information of emotion classification - See \Cref{sec:evaluation:inter} % \paragraph{Video.} ?? is video right?
+We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. %% Für Cascade
 
 % TODO (Jiawen)
 \subsection{Model Architecture}
@@ -480,7 +490,9 @@ The \textit{global average pooling} (GAP) layer,
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
-% We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. %% Für Cascade
+\paragraph{Classified emotion (Plot something).} % TODO Leah
+The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap), to the right hand side.
+On top of the saliency map the main emotion, extracted every fifth frame, is written, so it is easier for our eyes to adapt.
 
 \paragraph{Dlib Landmarks.} % TODO Leah
 To plot Landmarks on each video frame, we implemented the dlib face detector % \texttt{shape_predictor_68_face_landmarks.dat}, 
@@ -491,6 +503,8 @@ The pose estimator was created using dlib's implementation of the paper by Kazem
 With this pertained model, 68 numbered Landmarks assist emotion analysis, and facial expression tracking, to understand and to interpret facial features.
 
 We implement using the libraries such as OpenCV~\footnote{~\url{http://dlib.net/}}. % Für dlib
+
+% image of GiMeFive_Video??
 
 % TODO (Jiawen)
 

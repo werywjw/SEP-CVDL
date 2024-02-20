@@ -480,16 +480,17 @@ The \textit{global average pooling} (GAP) layer,
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
+% We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. %% Für Cascade
+
 \paragraph{Dlib Landmarks.} % TODO Leah
-To plot Landmarks on each video frame, we implemented the dlib face detector
-\texttt{shape_predictor_68_face_landmarks.dat}, constructed using the classic Histogram of Oriented Gradients feature
-(HOG)~\cite{1467360} combined with a linear classifier, an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
+To plot Landmarks on each video frame, we implemented the dlib face detector shape_predictor_68_face_landmarks.dat % \texttt{shape_predictor_68_face_landmarks.dat}, 
+constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
+an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
 The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.
 
 With this pertained model, 68 numbered Landmarks assist emotion analysis, and facial expression tracking, to understand and to interpret facial features.
 
 We implement using the libraries such as OpenCV~\footnote{~\url{http://dlib.net/}}. % Für dlib
-We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. % Für Cascade
 
 % TODO (Jiawen)
 

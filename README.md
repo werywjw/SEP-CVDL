@@ -106,6 +106,10 @@ git commit
 git push
 ```
 
+### How to cite?
+
+Typically [dblp](https://dblp.uni-trier.de) and [Google Scholar](https://scholar.google.com). 
+
 ### How to coauthor?
 
 ```

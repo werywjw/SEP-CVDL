@@ -213,13 +213,12 @@ by capturing various camera angles. Each set consists of 27 videos, with each vi
 in 130,788 images for each camera angle and a total of 261,576 images across both angles.
 For testing our model, we established standards for the extracted frames from videos or live webcam streams. 
 Each frame, extracted for testing, undergoes scanning for the region of interest, the face(s). To achieve this, 
-we implemented the (OpenCV) \texttt{CascadeClassifier}~\cite{casc_class}.
-OpenCV, a comprehensive computer vision library, incorporates the Viola-Jones algorithm to power Haar Cascade Classifiers 
-for face detection. The Viola-Jones algorithm, introduced by Paul Viola and Michael Jones, revolutionized real-time object 
+we implemented the \texttt{CascadeClassifier}~\cite{casc_class} incorporating the Viola-Jones algorithm to power, in our case, face detection. 
+The Viola-Jones algorithm, introduced by Paul Viola and Michael Jones, revolutionized real-time object 
 detection~\cite{990517}. 
 
-As part of the video preprocessing, we run every frame through the Haar Cascade Classifiers to detect our region of interest, 
-and crop the rectangled region of the face.
+As part of the video preprocessing, we run every frame through the Face Classifier to detect our region of interest, 
+and crop the rectangled region.
 
 The cropped image is then also preprocessed by resizing to $64 \times 64$ resolution, 
 then converted to greyscale with three channels, 
@@ -490,19 +489,20 @@ The \textit{global average pooling} (GAP) layer,
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
-\paragraph{Classified emotion (Plot something).} % TODO Leah
-The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap), to the right hand side.
+\paragraph{Overlayed evaluated emotions.} % TODO Leah
+The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap).
 On top of the saliency map the main emotion, extracted every fifth frame, is written, so it is easier for our eyes to adapt.
 
-\paragraph{Dlib Landmarks.} % TODO Leah
-To plot Landmarks on each video frame, we implemented the dlib face detector % \texttt{shape_predictor_68_face_landmarks.dat}, 
+\paragraph{Landmarks.} % TODO Leah
+To plot Landmarks on each video frame, we implemented the pretrained \texttt{dlib.shape_predictor},
+% \texttt{shape_predictor_68_face_landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
 an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
 The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.
 
 With this pertained model, 68 numbered Landmarks assist emotion analysis, and facial expression tracking, to understand and to interpret facial features.
 
-We implement using the libraries such as OpenCV~\footnote{~\url{http://dlib.net/}}. % Für dlib
+We implement using the libraries such as Dlib~\footnote{~\url{http://dlib.net/}}. % Für dlib
 
 % image of GiMeFive_Video??
 

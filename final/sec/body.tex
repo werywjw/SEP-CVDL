@@ -75,7 +75,7 @@ In \Cref{sec:setup},
 we address the datasets we collected and the model architecture we implemented. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
-An overview of the experimental pipeline of our project is illustrated in \Cref{fig:pipeline}. 
+An overview of the experimental pipeline of our project is illustrated in \cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 \begin{figure*}[ht]
@@ -186,9 +186,9 @@ we used the video dataset \textit{Denver Intensity of Spontaneous Facial Action 
 which comprises two sets of videos, 
 differentiated by capturing various camera angles. 
 Each set consists of 27 videos, with each video comprising 4844 frames, 
-resulting in 130788 images for each camera angle and a total of 261576 images across both angles. 
+resulting in 130788 images for each camera angle and a total of 261576 images across both left and right angles. 
+The participants in the videos are instructed to perform a series of spontaneous facial actions. 
 % which contains a variety of levels of intensity in expression. 
-% TODO: Each emotion is recorded
 
 \paragraph{Image Preprocessing.}
 The procedure is proceeded from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
@@ -231,12 +231,6 @@ Every cropped image is evaluated through our model so that the classification ca
 \subsection{Model Architecture}
 \label{sec:setup:model}
 
-In order to compare the performance of our \textsc{GiMeFive} with other models, 
-we replicate several state-of-the-art CNNs from scratch, 
-which include \textit{Visual Geometry Group} (VGG)~\cite{SimonyanZ14a} and 
-ResNet~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
-as well as FER \textsc{GiMeFive} (see \Cref{sec:setup:datasets} for details). 
-
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex', line width=0.7pt]
 
@@ -269,19 +263,36 @@ as well as FER \textsc{GiMeFive} (see \Cref{sec:setup:datasets} for details).
   \label{fig:model}
 \end{figure*}
 
+In order to compare the performance of our \textsc{GiMeFive} with other models, 
+we replicate several state-of-the-art CNNs from scratch, 
+which include \textit{Visual Geometry Group} (VGG)~\cite{SimonyanZ14a} and 
+ResNet~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
+as well as FER \textsc{GiMeFive} (see \cref{tab:data} for details). 
+
 \paragraph{VGG16.}
-\citet{SimonyanZ14a} developed the VGG16 model, 
-which represents
+Developed by \citet{SimonyanZ14a}, 
+the VGG model represents a milestone in the evolution of CNNs for image recognition tasks. 
+Destinct for its simple architecture, 
+the VGG16 employs a series of convolutional layers with small $3 \times 3$ convolution filters, 
+followed by max-pooling layers, fully connected layers, and a softmax layer. 
+This designed option allows the VGG to learn more complex patterns through the depth to 16-19 weight layers. 
+
+Previous work has shown that the VGG16 model is effective in classifying large-scale facial emotions, 
+as the representations generalize well to other datasets, 
+where they achieve state-of-the-art results, 
+confirming the importance of the depth in visual representations. 
 
 \paragraph{ResNet.}
 In principle, 
+also verified by \citet{SimonyanZ14a}, 
 deeper neural networks with more parameters are more difficult to train. 
 Inspired by \citet{HeZRS16}, 
 we implement the ResNet18 and ResNet34 with the residual block to ease the training process. 
 
 \paragraph{\textsc{GiMeFive}.}
 Our model architecture is illustrated in \Cref{fig:model} (see \Cref{fig:modeldetail} for details). 
-The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
+Inspired by \citet{SimonyanZ14a}, 
+the input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
 The output is 6 emotion classes. % : happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classification model from scratch with four convolution blocks as our baseline at the very beginning. 
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
@@ -290,7 +301,8 @@ as it is efficient to train and share the weights without expensive computation.
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
 Meanwhile, 
-BN ensures forward propagated signals to have non-zero variances. 
+the batch normalization ensures forward propagated signals to have non-zero variances. 
+The convolution stride is fixed to 1 pixel. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
 We also add a 50\% dropout layer between the first and second linear layers to prevent overfitting. 

@@ -6,6 +6,10 @@
 
 ### - [ ] 2. Related Work
 
+- [ ] FER.
+- [ ] XAI.
+- [ ] Interpretable Emotion Classification.
+
 ### - [x] 3. Experimental Setup
 
 #### - [x] 3.1 Dataset

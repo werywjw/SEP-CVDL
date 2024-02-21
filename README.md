@@ -54,8 +54,8 @@ python3 script_video.py -s video -i 'video/video.mp4'
 ## How does our video look like?
 
 <p align="center">
-  <img src="./video/v1.gif" height="300" />
-  <img src="./video/v2.gif" height="300" /> 
+  <img src="./video/v1.gif" width="400" />
+  <img src="./video/v2.gif" width="400" /> 
 </p>
 
 ## How to test the live Demo with camera (old version)?

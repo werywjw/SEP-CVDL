@@ -68,6 +68,16 @@ Our main contributions can be summarized as follows.
   \label{fig:acc}
 \end{figure}
 
+\begin{figure*}[ht]
+  \centering
+   \includegraphics[width=\linewidth]{pipeline.png}
+   \caption{Overview of the experimental pipeline.} 
+   \label{fig:pipeline}
+\end{figure*}
+
+% TODO: about here
+\newpage
+
 \paragraph{Paper Outline.}
 The structure of the rest of the report is arranged as follows. 
 \Cref{sec:related} contains the related work of our research. 
@@ -77,13 +87,6 @@ The evaluation results of our models are given in \Cref{sec:evaluation} with int
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
 An overview of the experimental pipeline of our project is illustrated in \cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
-
-\begin{figure*}[ht]
-  \centering
-   \includegraphics[width=\linewidth]{pipeline.png}
-   \caption{Overview of the experimental pipeline.} 
-   \label{fig:pipeline}
-\end{figure*}
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
 \section{Related Work}
@@ -125,6 +128,10 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 \citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
 \citet{Malik0R21} 
 
+
+% TODO: about here
+\newpage
+
 \section{Experimental Setup}
 \label{sec:setup}
 
@@ -132,11 +139,6 @@ All the experiments are implemented in Python.
 We also use Shell and Jupyter Notebook for generating image and video scripts. 
 The experiment and evaluation are conducted on two MacBook Pros 
 (M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
-
-\subsection{Dataset}
-\label{sec:setup:datasets}
-
-% https://www.mdpi.com/1424-8220/22/21/8089
 
 \begin{table*}[ht]
   \centering
@@ -170,6 +172,11 @@ The experiment and evaluation are conducted on two MacBook Pros
 \label{tab:data}
 \end{table*}
 
+\subsection{Dataset}
+\label{sec:setup:datasets}
+
+% https://www.mdpi.com/1424-8220/22/21/8089
+
 To initiate the project, 
 we gathered image databases representing different types of emotional expressions from 
 \textit{Real-world Affective Faces Database} (RAF-DB, in-the-wild expression)~\cite{li_reliable_2017,li2019reliable}, 
@@ -177,7 +184,7 @@ we gathered image databases representing different types of emotional expression
 \textit{Facial Expression Recognition AffectNet Database} (FER AffectNet, in-the-wild expression)~\cite{Mollah2019ANet}, 
 \textit{Extended Cohn-Kanade Dataset Plus} (CK+, posed expressions)~\cite{LuceyCKSAM10}, 
 and \textit{Taiwanese Facial Expression Image Database} (TFEID, posed expressions)~\cite{tfeid,LiGL22}.
-These image datasets come in folder-structure classification (See \Cref{tab:data} 
+These image datasets come in folder-structure classification (See \cref{tab:data} 
 for statistic details with specific numbers on training, test, and validation set for each emotion class). 
 
 For reviewing explainable AI, 
@@ -259,17 +266,17 @@ Every cropped image is evaluated through our model so that the classification ca
   \end{tikzpicture}
   }
   \caption{Overview of the \textsc{GiMeFive} model architecture 
-  (see \Cref{fig:modeldetail} for a detailed version).} 
+  (see \cref{fig:modeldetail} for a detailed version).} 
   \label{fig:model}
 \end{figure*}
 
 In order to compare the performance of our \textsc{GiMeFive} with other models, 
 we replicate several state-of-the-art CNNs from scratch, 
 which include \textit{Visual Geometry Group} (VGG)~\cite{SimonyanZ14a} and 
-ResNet~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
+\textit{Residual Network} (ResNet)~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
 as well as FER \textsc{GiMeFive} (see \cref{tab:data} for details). 
 
-\paragraph{VGG16.}
+\paragraph{Visual Geometry Group.}
 Developed by \citet{SimonyanZ14a}, 
 the VGG model represents a milestone in the evolution of CNNs for image recognition tasks. 
 Destinct for its simple architecture, 
@@ -278,19 +285,26 @@ followed by max-pooling layers, fully connected layers, and a softmax layer.
 This designed option allows the VGG to learn more complex patterns through the depth to 16-19 weight layers. 
 
 Previous work has shown that the VGG16 model is effective in classifying large-scale facial emotions, 
-as the representations generalize well to other datasets, 
+as the representations generalize well to various datasets, 
 where they achieve state-of-the-art results, 
 confirming the importance of the depth in visual representations. 
 
-\paragraph{ResNet.}
+\paragraph{Residual Network.}
 In principle, 
-also verified by \citet{SimonyanZ14a}, 
 deeper neural networks with more parameters are more difficult to train. 
+ResNet have emerged as a groundbreaking architecture, 
+significantly advancing the performance on various tasks including image classification, 
+object detection, and semantic segmentation. 
 Inspired by \citet{HeZRS16}, 
-we implement the ResNet18 and ResNet34 with the residual block to ease the training process. 
+we implement the ResNet18 and ResNet34 to ease the training process. 
+ResNet18 and ResNet34 containing 18 and 34 layers respectively are specific configurations of the ResNet architecture, 
+which address the vanishing/exploding gradient problem associated with training very deep neural networks through the introduction of residual blocks. 
+These residual blocks allow for the direct propagation of gradients through the network by adding the input of the block to its output, 
+effectively enabling the training of networks that are much deeper than previous architectures. 
+ResNets leverage the power of deep residual learning to achieve remarkable accuracies on benchmark datasets such as ImageNet. 
 
 \paragraph{\textsc{GiMeFive}.}
-Our model architecture is illustrated in \Cref{fig:model} (see \Cref{fig:modeldetail} for details). 
+Our model architecture is illustrated in \Cref{fig:model} (see \cref{fig:modeldetail} for details). 
 Inspired by \citet{SimonyanZ14a}, 
 the input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
 The output is 6 emotion classes. % : happiness, surprise, sadness, anger, disgust, and fear. 
@@ -375,8 +389,8 @@ Here $n$ denotes the total number of classes, in our case, 6.
   SE for the squeeze and excitation block, 
   and DO for dropout; 
   +/- represent with/without respectively). 
-  The confusion matrix of the validation set in terms of the number of classified images is shown in \Cref{fig:matval}, 
-  while the result of the test set on the RAF-DB is given in \Cref{fig:mattest}.} 
+  The confusion matrix of the validation set in terms of the number of classified images is shown in \cref{fig:matval}, 
+  while the result of the test set on the RAF-DB is given in \cref{fig:mattest}.} 
   \label{tab:model}
 \end{table*}
 
@@ -392,6 +406,11 @@ Further research is orientated on papers engaging similar investigations~\cite{Z
 Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
 Batch normalization can indeed improve the performance of the model. 
 
+ResNet18 being appreciated for its efficiency and lower computational cost, 
+and ResNet34 for offering a balance between depth and performance, 
+making them widely adopted in both academic research and practical applications. 
+The innovative approach of using residual connections has not only improved the performance of deep neural networks 
+but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures
 % TODO (Jiawen)
 
 \subsection{Interpretable Results}
@@ -619,7 +638,7 @@ Meanwhile, we create various replications of existing photos by randomly alterin
   \label{tab:hyper}
 \end{table}
 
-In order to find the best hyperparameter configuration (see \Cref{tab:hyper} for details) of the model, 
+In order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
 we utilize the parameter grid from Sklearn.
 % ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
 Additionally, 

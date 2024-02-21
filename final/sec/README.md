@@ -20,9 +20,9 @@
 
 #### - [x] 3.2 Model Architecture
 
-- [ ] VGG16
+- [x] VGG
 
-- [ ] ResNet
+- [x] ResNet
 
 - [ ] GiMeFive
 

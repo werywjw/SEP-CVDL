@@ -1,34 +1,44 @@
 \section{Introduction}
 \label{sec:intro}
 
-% update later
-% TODO: add more paragraphs & relates (global)
-\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,PhamVT20,Malik0R21} 
-is a topic of significant frontier and ongoing debate, 
+% introduction from Leah
+\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
-In this report, we aim to leverage several deep 
-\textit{convolutional neural networks} (CNNs) to detect and interpret six basic universally recognized and expressed human facial emotions 
-(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
-To make our model more transparent, 
-we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
-(Grad-CAM)~\cite{SelvarajuCDVPB17}. 
+In this report, we present our best model named \textsc{GiMeFive}~\cite{GiMeFive, sec:evaluation:inter} (Cite: Figure 9), beside several deep
+\textit{convolutional neural networks} (CNNs) \Cref{sec:setup:model}, listed in \Cref{fig:acc}, to detect and interpret six basic universally recognized and expressed human facial emotions (i.e., happiness, surprise, sadness, anger, disgust, and fear).
 
-\paragraph{Motivation.} % TODO
-The goal of our research is to build a robust and interpretable model for facial emotion recognition.
+Leveraging Explainable AI (XAI), we shed light on the decision-making process behind our emotion classification model, enhancing its transparency. (Cite: Explainable AI)
 
-% update later
+% we exp\lain this emotion classification task with \textit{gradient-weighted class activation mapping} 
+% (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
+
+\paragraph{Motivation.}
+The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
+
 % \paragraph{Paper Contribution.}
 Our main contributions can be summarized as follows.
 \begin{itemize}
-  \item We collect, preprocess, and evaluate the training and testing data thoroughly, 
-  (both image and video) from various public databases. 
-  \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
-  Meanwhile, we provide the classification scores of each emotion class, 
-  as well as the confusion matrix heat map, with respect to each image. 
-  \item We give the video demo to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
-  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM. % TODO
+  \item We collected Datasets \Cref{sec:setup:datasets}, preprocessed images or videos Cite: preprocessing image/video, and evaluated (Cite: Evaluation) the training and testing data (Cite: figure 4, 8) thoroughly from various 
+  public databases listed in (Cite: Table 1).
+
+  \item To prepare training and testing images for loading we wrote a script.
+
+  \item All implemented classification models, such as VGG16 (Cite: VGG16), ResNet (Cite: ResNet), or \textsc{GiMeFive} (Cite: GiMeFive) we built from scratch, and compared in accuracy in consideration of Layers and Architecture (Cite: Table 2).
+
+  \item Subsequently optimization was executed with several techniques in a systematic manner. (Cite: Optimization Strategies)
+
+  \item The classification scores (Cite: Classification scores) of each emotion class, as well as the parameters to perform the confusion matrix heat map, are saved (in a serialised PyTorch state dictionary,) with respect to each image or video frame.
+
+  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM (Cite: Grad-CAM), (Cite: Heatmap), (Cite: Figure 5), combined with Face Landmarks (Cite: Landmarks) and the indication of the classified emotion 
+  percentages, emphasizing the main emotion (Cite: Overlay emotions).
+
+  \item To evaluate a video from a given video or live camera we created a script. (not in text, to put or paragraph after Landmarks or 4.3??)
+
+	\item To illustrate the real-world performance of our best model \textsc{GiMeFive}, we edited and provide a demo video. (Cite: Figure 6)
+
 \end{itemize}
 
+The experimental pipeline is outlined in cite Figure 2.
 \begin{figure}[ht]
   \centering
   \resizebox{.47\textwidth}{!}{

@@ -49,7 +49,10 @@ python3 script_video.py -s video -i 'video/video.mp4'
 
 ## How does our video look like?
 
-![](./video/v1.gif)
+<p align="center">
+  <img src="./video/v1.gif" width="400" />
+  <img src="./video/v2.gif" width="400" /> 
+</p>
 
 ## How to test the live Demo with camera (old version)?
 
@@ -134,6 +137,10 @@ Co-authored-by: werywjw <werywjw@gmail.com>"
 ```
 colab-convert livecam.ipynb livecam.py -nc -rm -o
 ```
+
+### How to convert `.mp4` to `.gif`?
+
+Use [ezgif webpage](https://ezgif.com/video-to-gif).
 
 ### How to create submodules?
 

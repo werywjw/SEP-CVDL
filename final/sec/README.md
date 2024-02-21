@@ -1,31 +1,37 @@
-## Abstract
+## GIMEFIVE: Towards Interpretable Facial Emotion Classification
 
-## 1. Introduction
+### - [ ] Abstract
 
-## 2. Related Work
+### - [ ] 1. Introduction
 
-### 2.1 Facial Emotion Recognition
+### - [ ] 2. Related Work
 
-### 2.2 Explainable AI
+### - [x] 3. Experimental Setup
 
-## 3. Experimental Setup
+#### - [x] 3.1 Dataset
 
-### 3.1 Dataset Description
+- [x] Image Preprocessing.
 
-### 3.2 Model Architecture
+- [x] Video Preprocessing.
 
-## 4. Evaluation
+#### - [x] 3.2 Model Architecture
 
-### 4.1 Evaluation Results
+- [ ] VGG16
 
-### 4.2 Interpretable Results
+- [ ] ResNet
 
-## 5. Optimization Strategies
+- [ ] GiMeFive
 
-### 5.1 Data Augmentation
+### - [ ] 4. Evaluation
 
-### 5.2 Hyper-parameter Tuning
+#### - [ ] 4.1 Evaluation Results
 
-## 6. Conclusion and Discussion
+#### - [ ] 4.2 Interpretable Results
 
-## 7. Limitation
+### - [ ] 5. Optimization Strategies
+
+#### - [ ] 5.1 Data Augmentation
+
+#### - [ ] 5.2 Hyperparameter Tuning
+
+### - [ ] 6. Conclusion and Discussion

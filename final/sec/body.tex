@@ -94,7 +94,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \citet{Malik0R21} 
 
 % TODO: add video related work (new paragraph)
-\paragraph{Explainable AI.}
+\paragraph{Explainable AI (XAI).}
 To understand the decision-making process of our model, 
 we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
 i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
@@ -126,8 +126,8 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 \label{sec:setup}
 
 All the experiments are implemented in Python. 
-We also use Shell for generating image and video scripts. 
-The experiment and evaluation are conducted on two MacBook Pro 
+We also use Shell and Jupyter Notebook for generating image and video scripts. 
+The experiment and evaluation are conducted on two MacBook Pros 
 (M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
 \subsection{Dataset}
@@ -167,74 +167,71 @@ The experiment and evaluation are conducted on two MacBook Pro
 \label{tab:data}
 \end{table*}
 
-To initiate the project, we gathered image databases representing different types of emotional expressions. 
+To initiate the project, 
+we gathered image databases representing different types of emotional expressions from 
 \textit{Real-world Affective Faces Database} (RAF-DB, in-the-wild expression)~\cite{li_reliable_2017,li2019reliable}, 
 \textit{Facial Expression Recognition} 2013 (FER2013, real-time wild expression)~\cite{BarsoumZCZ16}, 
-\textit{FER AffectNet Database} (FER AffectNet, in-the-wild expression)~\cite{Mollah2019ANet}, 
+\textit{Facial Expression Recognition AffectNet Database} (FER AffectNet, in-the-wild expression)~\cite{Mollah2019ANet}, 
 \textit{Extended Cohn-Kanade Dataset Plus} (CK+, posed expressions)~\cite{LuceyCKSAM10}, 
 and \textit{Taiwanese Facial Expression Image Database} (TFEID, posed expressions)~\cite{tfeid,LiGL22}.
-These image datasets come in folder-structure classification.
+These image datasets come in folder-structure classification (See \Cref{tab:data} 
+for statistic details with specific numbers on training, test, and validation set for each emotion class). 
 
-For reviewing Explainable AI we used the Video Dataset
-\textit{Denver Intensity of Spontaneous Facial Action Database} (DISFA, spontaneous expressions)~\cite{MavadatiMBTC13}, 
-containing a variety of levels of intensity in expression.
-The procurement was proceeded through public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
-\Cref{tab:data} gives detailed data statistics of each training, test, and validation set on emotion classes.
-
+For reviewing explainable AI, 
+we used the video dataset \textit{Denver Intensity of Spontaneous Facial Action Database} 
+(DISFA, spontaneous expressions)~\cite{MavadatiMBTC13}, 
+which comprises two sets of videos, 
+differentiated by capturing various camera angles. 
+Each set consists of 27 videos, with each video comprising 4844 frames, 
+resulting in 130788 images for each camera angle and a total of 261576 images across both angles. 
+% which contains a variety of levels of intensity in expression. 
 
 \paragraph{Image Preprocessing.}
-Building upon these image databases, we exclusively analyze human faces representing 6 emotions. 
-That is, we first generalize a folder structure into happiness (0), surprise (1), sadness (2), 
-anger (3), disgust (4), and fear (5).
-Afterward, we append the emotion labels 0 to 5 to the name of each matching image.
+The procedure was proceeded from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
+To enhance the generalizability and robustness of our model, 
+we aggregate the these five FER image benchmarks into a new customized dataset called FER 
+\textsc{GiMeFive}~\footnote{\url{https://github.com/werywjw/data}}. 
+More specifically, 
+the training set of FER \textsc{GiMeFive} is aggregated from the training sets of the five image datasets (55073 images in total), 
+while the test set is combined from the test sets of RAF-DB and FER2013 (8333 images). 
+The validation set is given with equal 100 images per class to test the performance of models. 
 
-In order to later efficiently pass the images to the model, 
-we also create a script for generating CSV files to store all the images and their corresponding labels. 
-The images together with the CSV file are being loaded and preprocessed for training. 
+Building upon these image databases, we exclusively analyze human faces representing 6 emotions. 
+That is, we first generalize a folder structure append the emotion labels 0 to 5 to the name of each matching image 
+(0 for happiness, 1 for surprise, 2 for sadness, 3 for anger, 4 for disgust, and 5 for fear).
+For implementation, 
+we create a script for generating CSV files to store all the images names and their corresponding labels to later efficiently pass to the model. 
+The images together with the CSV file are loaded and preprocessed for training. 
 Therefore, we manipulate the pixel data through resizing, 
-augmentation, conversion to grayscale, creating tensors and normalization. 
+augmentation, conversion to grayscale, and create tensors and normalization. 
 The images are converted to greyscale with three channels at $64 \times 64$ resolution in the JPG format, 
 as our original CNN is designed to work with three-channel inputs. 
 Typically, we assume that the color of the image does not affect the emotion classification. 
-For augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, \texttt{RandomCrop}, and \texttt{RandomErasing}. 
-Our result and analysis are given in \Cref{sec:optim:aug}. 
 
-To enhance the generalizability and robustness of our model, 
-we aggregate the previous five FER benchmarks into a new customized dataset called FER \textsc{GiMeFive} 
-(See \Cref{tab:data} for statistic details with specific numbers for each emotion class). 
-That is, 
-the training set of FER \textsc{GiMeFive} is aggregated from the training sets of the five datasets, 
-while the test set is combined from the test sets of RAF-DB and FER2013. 
-The validation set is given with equal 100 images per class to test the performance of models. 
+\paragraph{Video Preprocessing.}
+For testing our model, we establish standards for extracted frames from videos or live webcam streams. 
+Each frame, extracted for testing, undergoes scanning for the region of interest, the face(s). 
+To achieve this, 
+we implement the \texttt{CascadeClassifier}~\cite{casc_class} incorporating the Viola-Jones algorithm introduced by \citet{990517} to power, 
+in our case, the face detection, 
+since the Viola-Jones algorithm revolutionizes the real-time object detection. 
 
-\paragraph{Video Preprocessing.} % TODO Leah
-The Denver Intensity of Spontaneous Facial Action (DISFA~\cite{MavadatiMBTC13}) dataset comprises two sets of videos, differentiated 
-by capturing various camera angles. Each set consists of 27 videos, with each video comprising 4844 frames, resulting 
-in 130,788 images for each camera angle and a total of 261,576 images across both angles.
-For testing our model, we established standards for the extracted frames from videos or live webcam streams. 
-Each frame, extracted for testing, undergoes scanning for the region of interest, the face(s). To achieve this, 
-we implemented the \texttt{CascadeClassifier}~\cite{casc_class} incorporating the Viola-Jones algorithm to power, in our case, face detection. 
-The Viola-Jones algorithm, introduced by Paul Viola and Michael Jones, revolutionized real-time object 
-detection~\cite{990517}. 
-
-As part of the video preprocessing, we run every frame through the Face Classifier to detect our region of interest, 
-and crop the rectangled region.
-
+As part of the video preprocessing, 
+we run every frame through the \texttt{FaceClassifier} to detect our region of interest, 
+and crop the rectangled region. 
 The cropped image is then also preprocessed by resizing to $64 \times 64$ resolution, 
 then converted to greyscale with three channels, 
 after that a tensor is generated and then normalized. 
-Every cropped image is evaluated through our model, so that the classifications can be used for further interpretation. 
+Every cropped image is evaluated through our model, so that the classification can be further used for interpretation. 
 
-We implement using the libraries such as OpenCV~\footnote{~\url{https://opencv.org}}. %% Für Cascade
-
-% TODO (Jiawen)
 \subsection{Model Architecture}
 \label{sec:setup:model}
 
-In order to compare the performance of our model with other state-of-the-art models, 
-we replicate several CNNs from scratch, 
-which include ResNet18~\cite{HeZRS16}, 
-VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}. 
+In order to compare the performance of our \textsc{GiMeFive} with other models, 
+we replicate several state-of-the-art CNNs from scratch, 
+which include VGG16~\cite{SimonyanZ14a}, 
+ResNet18~\cite{HeZRS16}, and ResNet34~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
+as well as FER \textsc{GiMeFive} (see \Cref{sec:setup:datasets} for details). 
 
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
 \tikzstyle{line} = [draw, -latex', line width=0.7pt]
@@ -268,14 +265,14 @@ VGG~\cite{SimonyanZ14a} on the FER \textsc{GiMeFive}.
   \label{fig:model}
 \end{figure*}
 
-\paragraph{Residual Networks.}
+\paragraph{VGG16.}
+\citet{SimonyanZ14a}
+
+\paragraph{ResNet.}
 In principle, 
 deeper neural networks with more parameters are more difficult to train. 
 Inspired by \citet{HeZRS16}, 
-we add the ResNet18 with the residual block to ease the training process. 
-
-\paragraph{VGG16.}
-\citet{SimonyanZ14a}
+we implement the ResNet18 and ResNet34 with the residual block to ease the training process. 
 
 \paragraph{\textsc{GiMeFive}.}
 Our model architecture is illustrated in \Cref{fig:model} (see \Cref{fig:modeldetail} for details). 
@@ -286,7 +283,7 @@ Despite the larger kernel being able to provide more information and a wider are
 we use a $3 \times 3$ kernel size for all convolutional layers, 
 as it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
-batch normalization (BN) is used for stabilizing the learning by normalizing the input to each layer. 
+batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
 Meanwhile, 
 BN ensures forward propagated signals to have non-zero variances. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
@@ -334,7 +331,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     &\textsc{GiMeFive} (Ours) & 10 & -BN-SE & 96.3 & 76.9 & 60.6 & 10474118 \\
     &\textsc{GiMeFive} (Ours) & 16 & +BN+SE & 98.4 & 81.7 & 71.1 & 10478598 \\
     &\textsc{GiMeFive} (Ours) & 15 & +BN-SE & 98.6 & 83.1 & 72.1 & 10478086 \\
-    &\textsc{GiMeFive} (Ours) & 15 & +DO+BN-SE & 97.0 & \textbf{86.5} & \textbf{78.1} & 10478086 \\
+    &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 97.0 & \textbf{86.5} & \textbf{78.1} & 10478086 \\
     &\textsc{GiMeFive} (Ours) & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
     \multirow{7}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\
@@ -342,26 +339,27 @@ Here $n$ denotes the total number of classes, in our case, 6.
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & \textbf{97.6} & 67.1 & 43.6 & 21287750 \\
     & \textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
     &\textsc{GiMeFive} (Ours) & 15 & +BN-SE & 89.6 & 65.6 & 40.7 & 10478086 \\
-    &\textsc{GiMeFive} (Ours) & 15 & +DO+BN-SE & 69.7 & \textbf{67.5} & \textbf{46.2} & 10478086 \\
+    &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 69.7 & \textbf{67.5} & \textbf{46.2} & 10478086 \\
     &\textsc{GiMeFive} (Ours) & 17 & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\
     \midrule
     \midrule
     \multirow{5}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & 94.5 & 70.8 & 72.8 & 21287750 \\
-    &\textsc{GiMeFive} (Ours) & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
+    &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
     &\textsc{GiMeFive} (Ours) & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule
   \end{tabular}
   % }
-  \caption{Accuracies (\%) for different models (with specific architectures and numbers of parameters) in our experiments 
-  (Note that BN stands for the batch normalization, 
+  \caption{Accuracies (\%) for different models with specific architectures and numbers of parameters and layers in our experiments 
+  (Note that \textcolor{LMUGreen}{$^\star$} denotes our best GiMeFive; 
+  BN stands for the batch normalization, 
   RB for residual block, 
   SE for the squeeze and excitation block, 
   and DO for dropout; 
   +/- represent with/without respectively). 
-  The confusion matrix of the test set on the RAF-DB is given in \Cref{fig:mattest}, 
-  while the result of validation test is shown in \Cref{fig:matval}.} 
+  The confusion matrix of the result of validation test is shown in \Cref{fig:matval}, 
+  while the test set on the RAF-DB is given in \Cref{fig:mattest}.} 
   \label{tab:model}
 \end{table*}
 
@@ -495,25 +493,25 @@ On top of the saliency map the main emotion, extracted every fifth frame, is wri
 
 \begin{figure*}[ht]
   \centering
-  \begin{subfigure}{0.23\linewidth}
+  \begin{subfigure}{0.24\linewidth}
     \includegraphics[width=\linewidth]{GiMeFive01.png}
     \caption{Happiness.}
     \label{fig:v1}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.23\linewidth}
+  \begin{subfigure}{0.24\linewidth}
     \includegraphics[width=\linewidth]{GiMeFive02.png}
     \caption{Fear.}
     \label{fig:v2}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.23\linewidth}
+  \begin{subfigure}{0.24\linewidth}
     \includegraphics[width=\linewidth]{GiMeFive03.png}
     \caption{Surprise.}
     \label{fig:v3}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.23\linewidth}
+  \begin{subfigure}{0.24\linewidth}
     \includegraphics[width=\linewidth]{GiMeFive04.png}
     \caption{Sadness.}
     \label{fig:v4}
@@ -522,7 +520,7 @@ On top of the saliency map the main emotion, extracted every fifth frame, is wri
   \label{fig:video}
 \end{figure*}
 
-\paragraph{Landmarks.} % TODO Leah
+\paragraph{Landmarks.}
 To plot Landmarks on each video frame, we implemented the pretrained dlib shape predictor 
 \texttt{dlib shape predictor}, % worked ;P
 \texttt{shape predictor 68 face landmarks.dat}, 
@@ -533,6 +531,7 @@ The pose estimator was created using dlib's implementation of the paper by Kazem
 With this pertained model, 68 numbered Landmarks assist emotion analysis, 
 and facial expression tracking, to understand and to interpret facial features.
 We implement using the libraries such as Dlib~\footnote{~\url{http://dlib.net/}}. % Für dlib
+Again, \Cref{{fig:v1}} happiness the easy to detection in principle 
 
 
 % TODO (Jiawen)
@@ -549,6 +548,8 @@ To further understand and enhance the performance of the model during training,
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
 
+For augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
+\texttt{RandomCrop}, and \texttt{RandomErasing} at the very begining. 
 In deep learning and AI, 
 augmentation~\cite{augment} stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 

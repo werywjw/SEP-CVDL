@@ -196,9 +196,7 @@ def evaluate_input(source, input_path_to_video):
             break  # terminate the loop if the frame is not read successfully
         
         faces = detect_bounding_box(video_frame, counter)  # apply the function we created to the video frame, faces as variable not used
-        
-        cv2.imshow("My Face Detection Project", video_frame)  # display the processed frame in a window named "My Face Detection Project"
-
+        cv2.imshow("GiMeFive", video_frame)  # display the processed frame in a window named "GiMeFive"
         out.write(video_frame)  # write the processed frame to the output video file
         
         if cv2.waitKey(1) & 0xFF == ord("q"):

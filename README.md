@@ -140,7 +140,7 @@ colab-convert livecam.ipynb livecam.py -nc -rm -o
 
 ### How to convert `.mp4` to `.gif`?
 
-Use [ezgif webpage](https://ezgif.com/video-to-gif).
+Go to [ezgif webpage](https://ezgif.com/video-to-gif).
 
 ### How to create submodules?
 

@@ -13,7 +13,7 @@ we explain this emotion classification task with \textit{gradient-weighted class
 (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
 \paragraph{Motivation.} % TODO
-The goal of our research is to build a robust and interpretable model for the facial emotion recognition.
+The goal of our research is to build a robust and interpretable model for facial emotion recognition.
 
 % update later
 % \paragraph{Paper Contribution.}
@@ -187,9 +187,9 @@ resulting in 130788 images for each camera angle and a total of 261576 images ac
 % which contains a variety of levels of intensity in expression. 
 
 \paragraph{Image Preprocessing.}
-The procedure was proceeded from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
+The procedure is proceeded from public institutions and kaggle~\cite{kaggle_rafdb,kagaff}. 
 To enhance the generalizability and robustness of our model, 
-we aggregate the these five FER image benchmarks into a new customized dataset called FER 
+we aggregate these five FER image benchmarks into a new customized dataset called FER 
 \textsc{GiMeFive}~\footnote{\url{https://github.com/werywjw/data}}. 
 More specifically, 
 the training set of FER \textsc{GiMeFive} is aggregated from the training sets of the five image datasets (55073 images in total), 
@@ -197,10 +197,10 @@ while the test set is combined from the test sets of RAF-DB and FER2013 (8333 im
 The validation set is given with equal 100 images per class to test the performance of models. 
 
 Building upon these image databases, we exclusively analyze human faces representing 6 emotions. 
-That is, we first generalize a folder structure append the emotion labels 0 to 5 to the name of each matching image 
+That is, we first generalize a folder structure and append the emotion labels 0 to 5 to the name of each matching image 
 (0 for happiness, 1 for surprise, 2 for sadness, 3 for anger, 4 for disgust, and 5 for fear).
 For implementation, 
-we create a script for generating CSV files to store all the images names and their corresponding labels to later efficiently pass to the model. 
+we create a script for generating CSV files to store all the image names and their corresponding labels to later efficiently pass to the model. 
 The images together with the CSV file are loaded and preprocessed for training. 
 Therefore, we manipulate the pixel data through resizing, 
 augmentation, conversion to grayscale, and create tensors and normalization. 
@@ -213,24 +213,24 @@ For testing our model, we establish standards for extracted frames from videos o
 Each frame, extracted for testing, undergoes scanning for the region of interest, the face(s). 
 To achieve this, 
 we implement the \texttt{CascadeClassifier}~\cite{casc_class} incorporating the Viola-Jones algorithm introduced by \citet{990517} to power, 
-in our case, the face detection, 
-since the Viola-Jones algorithm revolutionizes the real-time object detection. 
+in our case, face detection, 
+since the Viola-Jones algorithm revolutionizes real-time object detection. 
 
 As part of the video preprocessing, 
 we run every frame through the \texttt{FaceClassifier} to detect our region of interest, 
-and crop the rectangled region. 
+and crop the rectangle region. 
 The cropped image is then also preprocessed by resizing to $64 \times 64$ resolution, 
 then converted to greyscale with three channels, 
-after that a tensor is generated and then normalized. 
-Every cropped image is evaluated through our model, so that the classification can be further used for interpretation. 
+after that, a tensor is generated and then normalized. 
+Every cropped image is evaluated through our model so that the classification can be further used for interpretation. 
 
 \subsection{Model Architecture}
 \label{sec:setup:model}
 
 In order to compare the performance of our \textsc{GiMeFive} with other models, 
 we replicate several state-of-the-art CNNs from scratch, 
-which include VGG16~\cite{SimonyanZ14a}, 
-ResNet18~\cite{HeZRS16}, and ResNet34~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
+which include \textit{Visual Geometry Group} (VGG)~\cite{SimonyanZ14a} and 
+ResNet~\cite{HeZRS16} on two FER benchmarks (i.e., RAF-DB and FER 2013), 
 as well as FER \textsc{GiMeFive} (see \Cref{sec:setup:datasets} for details). 
 
 \tikzstyle{block} = [rectangle, draw, fill=LMUGreen!30, text width=5em, text centered, rounded corners, minimum height=4em]
@@ -266,7 +266,8 @@ as well as FER \textsc{GiMeFive} (see \Cref{sec:setup:datasets} for details).
 \end{figure*}
 
 \paragraph{VGG16.}
-\citet{SimonyanZ14a}
+\citet{SimonyanZ14a} developed the VGG16 model, 
+which represents
 
 \paragraph{ResNet.}
 In principle, 
@@ -288,7 +289,7 @@ Meanwhile,
 BN ensures forward propagated signals to have non-zero variances. 
 We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
-We also add a 50\% dropout layer between the first and second linear layer to prevent overfitting. 
+We also add a 50\% dropout layer between the first and second linear layers to prevent overfitting. 
 Verified by \citet{BarsoumZCZ16}, 
 the dropout layers are effective in avoiding model overfitting. 
 The activation function after each layer is \textit{Rectified Linear Unit} (ReLU), 
@@ -358,8 +359,8 @@ Here $n$ denotes the total number of classes, in our case, 6.
   SE for the squeeze and excitation block, 
   and DO for dropout; 
   +/- represent with/without respectively). 
-  The confusion matrix of the result of validation test is shown in \Cref{fig:matval}, 
-  while the test set on the RAF-DB is given in \Cref{fig:mattest}.} 
+  The confusion matrix of the validation set in terms of the number of classified images is shown in \Cref{fig:matval}, 
+  while the result of the test set on the RAF-DB is given in \Cref{fig:mattest}.} 
   \label{tab:model}
 \end{table*}
 
@@ -390,7 +391,7 @@ Batch normalization can indeed improve the performance of the model.
 \paragraph{Classification Scores.} 
 To further analyze the individual scores of each class of the model, 
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of our best model \textsc{GiMeFive}. 
-This CSV file is represented with the corresponding classification scores via softmax. 
+This CSV file is represented with the corresponding classification scores via the softmax. 
 Meanwhile, 
 we also generate a confusion matrix heatmap to visualize the performance of the model with respect to each emotional class.
 
@@ -399,9 +400,9 @@ we observe that our \textsc{GiMeFive} can predict the happiness class with the h
 while the class with the lowest accuracy is disgust. 
 This is understandable, 
 as the facial emotions such as sadness and anger are similar to disgust, 
-especially when human sometimes also represents the disgusting and angry emotions at the same time. 
+especially when humans sometimes also represent disgusting and angry emotions at the same time. 
 Moreover, 
-the confusion matrix illustrates that the model has good performances in terms of classifying the surprise, sadness, and anger as well. 
+the confusion matrix illustrates that the model has good performances in terms of classifying surprise, sadness, and anger as well. 
 
 
 \begin{figure}[ht]
@@ -477,7 +478,7 @@ the confusion matrix illustrates that the model has good performances in terms o
   %   \caption{Fear.}
   %   \label{fig:xai12}
   % \end{subfigure}
-  \caption{Overview of explainable AI with all six facial emotional classes.}
+  \caption{Overview of explainable AI with all six facial emotional classes on the validation set.}
   \label{fig:xai}
 \end{figure}
 
@@ -488,8 +489,8 @@ which computes the average value of each feature map to obtain a spatial average
 is used to obtain a spatial average of the feature maps. 
 
 \paragraph{Overlay evaluated emotions.} % TODO Leah
-The GiMeFive classifications of every frame are plotted in percentace next to the saliency map (Heatmap).
-On top of the saliency map the main emotion, extracted every fifth frame, is written, so it is easier for our eyes to adapt.
+The GiMeFive classifications of every frame are plotted in percentage next to the saliency map (heatmap).
+On top of the saliency map the main emotion, extracted from every fifth frame, is written, so it is easier for our eyes to adapt.
 
 \begin{figure*}[ht]
   \centering
@@ -516,7 +517,8 @@ On top of the saliency map the main emotion, extracted every fifth frame, is wri
     \caption{Sadness.}
     \label{fig:v4}
   \end{subfigure}
-  \caption{Overview of explainable AI with all six facial emotional classes.}
+  \hfill
+  \caption{Overview of XAI with grad-CAM and landmarks on DISFA dataset.}
   \label{fig:video}
 \end{figure*}
 
@@ -526,10 +528,10 @@ To plot Landmarks on each video frame, we implemented the pretrained dlib shape 
 \texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
 an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
-The pose estimator was created using dlib's implementation of the paper by Kazemi and Sullivan 2014~\cite{6909637}.
+The pose estimator was created using the implementation dlib from \citet{6909637}.
 
 With this pertained model, 68 numbered Landmarks assist emotion analysis, 
-and facial expression tracking, to understand and to interpret facial features.
+and facial expression tracking, to understand and interpret facial features.
 We implement using the libraries such as Dlib~\footnote{~\url{http://dlib.net/}}. % Für dlib
 Again, \Cref{{fig:v1}} happiness the easy to detection in principle 
 

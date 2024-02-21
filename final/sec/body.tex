@@ -145,9 +145,7 @@ The experiment and evaluation are conducted on two MacBook Pros
   \resizebox{.99\textwidth}{!}{
   \begin{tabular}{@{}lrcccccc|c@{}}
       \toprule
-      \textsc{Dataset} & \textsc{Split} & \# happiness & \# surprise & \# sadness & \# anger & \# disgust & \# fear & \# total videos/images \\
-      \midrule
-      DISFA~\cite{MavadatiMBTC13} & Test & - & - & - & - & - & - & 54 \\ 
+      \textsc{Dataset} & \textsc{Split} & \# happiness & \# surprise & \# sadness & \# anger & \# disgust & \# fear & \# total images/videos \\
       \midrule
       \multirow{2}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} & Train & 4772 & 1290 & 1982 & 705 & 717 & 281 & 9747 \\
       &Test &1185&329&478&162&160&74& 2388 \\
@@ -166,9 +164,12 @@ The experiment and evaluation are conducted on two MacBook Pros
       & Test & 2959 & 1160 & 1725 & 1120 & 271 & 1098 & \textbf{8333} \\
       & Valid & 100 & 100 & 100 & 100 & 100 & 100 & \textbf{600} \\ 
       \bottomrule
+      DISFA~\cite{MavadatiMBTC13} & Test & - & - & - & - & - & - & 54 \\
+      \bottomrule
   \end{tabular}
   }
-\caption{Overview of the data statistics for each emotion class and the total number of videos/images in our experiment.}
+\caption{Overview of the data statistics for each emotion class and the total number of images/videos in our experiment 
+(Note that - denotes the unknown information as the total videos are recorded from the participants randomly acting out their emotions).}
 \label{tab:data}
 \end{table*}
 
@@ -295,37 +296,47 @@ deeper neural networks with more parameters are more difficult to train.
 ResNet have emerged as a groundbreaking architecture, 
 significantly advancing the performance on various tasks including image classification, 
 object detection, and semantic segmentation. 
+ResNets leverage the power of deep residual learning to achieve remarkable accuracies on benchmark datasets such as ImageNet. 
+
 Inspired by \citet{HeZRS16}, 
 we implement the ResNet18 and ResNet34 to ease the training process. 
 ResNet18 and ResNet34 containing 18 and 34 layers respectively are specific configurations of the ResNet architecture, 
 which address the vanishing/exploding gradient problem associated with training very deep neural networks through the introduction of residual blocks. 
 These residual blocks allow for the direct propagation of gradients through the network by adding the input of the block to its output, 
 effectively enabling the training of networks that are much deeper than previous architectures. 
-ResNets leverage the power of deep residual learning to achieve remarkable accuracies on benchmark datasets such as ImageNet. 
 
 \paragraph{\textsc{GiMeFive}.}
 Our model architecture is illustrated in \Cref{fig:model} (see \cref{fig:modeldetail} for details). 
-Inspired by \citet{SimonyanZ14a}, 
-the input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
-The output is 6 emotion classes. % : happiness, surprise, sadness, anger, disgust, and fear. 
-We implement an emotion classification model from scratch with four convolution blocks as our baseline at the very beginning. 
+The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
+The output is 6 emotion classes, i.e., happiness, surprise, sadness, anger, disgust, and fear. 
+We implement an emotion classifier from scratch with four convolution blocks as our baseline at the very beginning. 
+
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
-as it is efficient to train and share the weights without expensive computation. 
+which is same as the VGG16 model, 
+since it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
 Meanwhile, 
 the batch normalization ensures forward propagated signals to have non-zero variances. 
+
 The convolution stride is fixed to 1 pixel. 
-We interleaved with the max pooling layer because it reduces the spatial dimensions of the input volume. 
+We interleave with the max pooling layer because it reduces the spatial dimensions of the input volume. 
 Afterward, three linear layers are applied to extract features to the final output. 
 We also add a 50\% dropout layer between the first and second linear layers to prevent overfitting. 
-Verified by \citet{BarsoumZCZ16}, 
-the dropout layers are effective in avoiding model overfitting. 
 The activation function after each layer is \textit{Rectified Linear Unit} (ReLU), 
 since it introduces the non-linearity into the model, 
 allowing it to learn more complex patterns. 
-Our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\% after the max pooling layer as well.
+Note that our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\% after max pooling layers. 
+
+The softmax function plays a critial role in the final stage of a neural network, 
+which corrsponds to 6 classes by exponentiating each logit and then normalizing these values by the sum of all exponentiated logits. 
+Mathemathically, for a given logit $z_i$ among six classes, 
+the softmax function $\mathcal{S}(z_i)$ is defined as:
+\begin{equation}
+  \mathcal{S}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{6} e^{z_j}} \in [0,1], 
+\end{equation}
+where the true class has probability 1 and all others have probability 0. 
 
 \section{Evaluation}
 \label{sec:evaluation}
@@ -334,8 +345,10 @@ For evaluation, we use the metric accuracy to see if our model can classify the 
 We report all the training, testing, and validation accuracies in 
 \% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
 
+By converting logits to probabilities, 
+the softmax function allows for a more interpretable output from the model and facilitates the use of probability-based loss functions. 
 The loss function employed for all models is cross-entropy (CE), 
-which is typically for multi-class classification. 
+which is typically for multi-class classification during training. 
 Mathematically, the CE loss is defined as follows: 
 \begin{equation}
   \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
@@ -403,6 +416,7 @@ indicating that this kind of augmentation is not able to help our model predict 
 thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
 Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
 
+Inspired by \citet{SimonyanZ14a}, 
 Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
 Batch normalization can indeed improve the performance of the model. 
 
@@ -637,6 +651,9 @@ Meanwhile, we create various replications of existing photos by randomly alterin
   \caption{Explored hyperparameter space for our models.}
   \label{tab:hyper}
 \end{table}
+
+Verified by \citet{BarsoumZCZ16}, 
+the dropout layers are effective in avoiding model overfitting. 
 
 In order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
 we utilize the parameter grid from Sklearn.

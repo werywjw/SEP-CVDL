@@ -10,21 +10,21 @@
 - [ ] XAI.
 - [ ] Interpretable Emotion Classification.
 
-### - [x] 3. Experimental Setup
+- [x] 3. Experimental Setup
 
-#### - [x] 3.1 Dataset
+- [x] 3.1 Dataset
 
 - [x] Image Preprocessing.
 
 - [x] Video Preprocessing.
 
-#### - [x] 3.2 Model Architecture
+- [x] 3.2 Model Architecture
 
 - [x] VGG
 
 - [x] ResNet
 
-- [ ] GiMeFive
+- [x] GiMeFive
 
 ### - [ ] 4. Evaluation
 

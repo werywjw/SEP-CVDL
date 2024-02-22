@@ -22,7 +22,7 @@ enhancing its transparency.
 % TODO
 % citations for the entire paper in introduction
 \paragraph{Motivation.}
-The goal of our research and development was to build a robust and interpretable model for facial emotion recognitions. 
+The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
 
 \begin{figure}[ht]
   \centering
@@ -67,8 +67,8 @@ The goal of our research and development was to build a robust and interpretable
 Our main contributions can be summarized as follows. 
 
 \begin{itemize}
-  \item We collect, preprocess, 
-  and evaluate the training and testing data (both image and video) thoroughly from various public databases. 
+  \item We collect, preprocess and evaluate the training and testing data 
+  (both image and video) thoroughly from various public databases. 
   \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
   Meanwhile, we provide the classification scores of each emotion class, 
   as well as the confusion matrix heat map, with respect to each image. 
@@ -143,14 +143,6 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 % TODO: about here
 \newpage
 
-\section{Experimental Setup}
-\label{sec:setup}
-
-All the experiments are implemented in Python. 
-We also use Shell and Jupyter Notebook for generating image and video scripts. 
-The experiment and evaluation are conducted on two MacBook Pros 
-(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
-
 \begin{table*}[ht]
   \centering
   \resizebox{.99\textwidth}{!}{
@@ -183,6 +175,14 @@ The experiment and evaluation are conducted on two MacBook Pros
 (Note that - denotes the unknown information as the total videos are recorded from the participants randomly acting out their emotions).}
 \label{tab:data}
 \end{table*}
+
+\section{Experimental Setup}
+\label{sec:setup}
+
+All the experiments are implemented in Python. 
+We also use Shell and Jupyter Notebook for generating image and video scripts. 
+The experiment and evaluation are conducted on two MacBook Pros 
+(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
 \subsection{Dataset}
 \label{sec:setup:datasets}
@@ -291,7 +291,7 @@ as well as FER \textsc{GiMeFive} (see \cref{tab:data} for details).
 \paragraph{Visual Geometry Group.}
 Developed by \citet{SimonyanZ14a}, 
 the VGG model represents a milestone in the evolution of CNNs for image recognition tasks. 
-Destinct for its simple architecture, 
+Distinct for its simple architecture, 
 the VGG16 employs a series of convolutional layers with small $3 \times 3$ convolution filters, 
 followed by max-pooling layers, fully connected layers, and a softmax layer. 
 This designed option allows the VGG to learn more complex patterns through the depth to 16-19 weight layers. 
@@ -299,12 +299,12 @@ This designed option allows the VGG to learn more complex patterns through the d
 Previous work has shown that the VGG16 model is effective in classifying large-scale facial emotions, 
 as the representations generalize well to various datasets, 
 where they achieve state-of-the-art results, 
-confirming the importance of the depth in visual representations. 
+confirming the importance of depth in visual representations. 
 
 \paragraph{Residual Network.}
 In principle, 
 deeper neural networks with more parameters are more difficult to train. 
-ResNet have emerged as a groundbreaking architecture, 
+ResNet has emerged as a groundbreaking architecture, 
 significantly advancing the performance on various tasks including image classification, 
 object detection, and semantic segmentation. 
 ResNets leverage the power of deep residual learning to achieve remarkable accuracies on benchmark datasets such as ImageNet. 
@@ -324,12 +324,12 @@ We implement an emotion classifier from scratch with four convolution blocks as 
 
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
-which is same as the VGG16 model, 
+which is the same as the VGG16 model, 
 since it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
 Meanwhile, 
-the batch normalization ensures forward propagated signals to have non-zero variances. 
+the batch normalization ensures forward propagated signals have non-zero variances. 
 
 The convolution stride is fixed to 1 pixel. 
 We interleave with the max pooling layer because it reduces the spatial dimensions of the input volume. 
@@ -340,32 +340,14 @@ since it introduces the non-linearity into the model,
 allowing it to learn more complex patterns. 
 Note that our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\% after max pooling layers. 
 
-The softmax function plays a critial role in the final stage of a neural network, 
-which corrsponds to different classes by exponentiating each logit and then normalizing these values by the sum of all exponentiated logits. 
-Mathemathically, for a given logit $z_i$ among $n$ classes, 
+The softmax function plays a critical role in the final stage of a neural network, 
+which corresponds to different classes by exponentiating each logit and then normalizing these values by the sum of all exponentiated logits. 
+Mathematically, for a given logit $z_i$ among $n$ classes, 
 the softmax function $\mathcal{S}(z_i)$ is defined as: 
 \begin{equation}
   \mathcal{S}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}} \in [0,1], 
 \end{equation}
 where the true class has probability 1 and all others have probability 0. 
-
-\section{Evaluation}
-\label{sec:evaluation}
-
-For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
-We report all the training, testing, and validation accuracies in \% 
-to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
-
-By converting logits to probabilities, 
-the softmax function allows for a more interpretable output from the model and facilitates the use of probability-based loss functions. 
-The loss function employed for all models is \textit{cross-entropy} (CE), 
-which is typically for multi-class classification during training. 
-The CE loss is given by: 
-\begin{equation}
-  \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
-\end{equation}
-where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class. 
-Here $n$ denotes the total number of classes, in our case, 6.
 
 \begin{table*}[ht]
   \centering
@@ -415,6 +397,24 @@ Here $n$ denotes the total number of classes, in our case, 6.
   \label{tab:model}
 \end{table*}
 
+\section{Evaluation}
+\label{sec:evaluation}
+
+For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
+We report all the training, testing, and validation accuracies in \% 
+to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
+
+By converting logits to probabilities, 
+the softmax function allows for a more interpretable output from the model and facilitates the use of probability-based loss functions. 
+The loss function employed for all models is \textit{cross-entropy} (CE), 
+which is typically for multi-class classification during training. 
+The CE loss is given by: 
+\begin{equation}
+  \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
+\end{equation}
+where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class. 
+Here $n$ denotes the total number of classes, in our case, 6.
+
 \subsection{Evaluation Results}
 \label{sec:evaluation:results}
 
@@ -425,7 +425,7 @@ We observe that our models achieve the best performance on RAF-DB instead of on 
 We assume that the reason for this is that the RAF-DB dataset is more balanced, 
 while the FER2013 dataset is more challenging due to the imbalance of the classes. 
 Also verified on the test and validation set, 
-the performance of all our models on FER2013 is worse than on on RAF-DB. 
+the performance of all our models on FER2013 is worse than on the RAF-DB. 
 
 At the same time, 
 we can see that there is a trade-off between accuracy and the number of parameters. 
@@ -439,38 +439,46 @@ but also a higher risk of overfitting and increased computational cost.
 The models are then too complex and need more resources and time to train. 
 Therefore, we propose our best model \textsc{GiMeFive}, 
 the one with 15 layers and 10478086 parameters, 
-which is 7 times less than the VGG16 and half than ResNet34, 
+which is 7 times less than the VGG16 and half of ResNet34, 
 efficiently achieving the best performance on the both test and validation set on all benchmarks. 
 
 In terms of the implementation details, 
 our \textsc{GiMeFive} 
 (marked as a green asterisk \textcolor{LMUGreen}{$\star$}) without random augmentation outperforms the other methods in terms of accuracy, 
 indicating that this kind of random augmentation is not necessarily able to help our model predict the correct label, 
-one reason is that the images on RAF-DB is already aligned and cropped, 
+one reason is that the images on RAF-DB are already aligned and cropped, 
 the \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
 \texttt{RandomCrop}, and \texttt{RandomErasing} might confuse the model by adding more noise to aligned facial images. 
-We further continue to simply apply merely normalization to detact more representative features with respect to different emotions.
-\citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engage similar investigations. 
+We further continue to simply apply merely normalization to detect more representative features with respect to different emotions.
+Previous research from \citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engages similar investigations for simplicity. 
 
-We run extensive experiments to determine the number of the convolution blocks for a better trade-off between the number of parameters and the performance. 
+We run extensive experiments to determine the number of convolutional blocks for a better trade-off between the number of parameters and the performance. 
 Eventually, we find that adding an extra convolutional block 
 (5 blocks with 15 layers in total) from our initial baseline (4 blocks with 13 layers)
 leads to the best performance. 
-However, six convolutional blocks with 17 layers do not necessarily result in a better performance, 
+However, six convolutional blocks with 17 layers do not necessarily result in better performance, 
 this is due to the complexity and overfitting of the models. 
 
 Moreover, 
 we find that the dropout and batch normalization can indeed improve the performance of the model, 
-as such regularization techniques can prevent overfitting by by randomly dropping units 
+as such regularization techniques can prevent overfitting by randomly dropping units 
 (along with their connections) from the neural networks during training. 
-Also the batch normalization can help the model to stabilize the learning process and reduce the number of training epochs, 
-leading to a faster learn progress and thus improving the generalization ability of the model. 
+Also, 
+batch normalization can help the model stabilize the learning process and reduce the number of training epochs, 
+leading to faster learning progress and thus improving the generalization ability of the model. 
+Unfortunately, the squeeze and excitation block~\cite{HuSASW20}, 
+a mechanism that adaptively recalibrates channel-wise attention feature responses by explicitly modeling interdependencies between channels, 
+did not improve the performance in this task. 
+One possible interpretation is that emotion classification might benefit more from spatial relationships rather than channel-wise dependencies. 
 
-ResNet18 being appreciated for its efficiency and lower computational cost, 
-and ResNet34 for offering a balance between depth and performance, 
-making them widely adopted in both academic research and practical applications. 
+Notably, 
+ResNet18 is appreciated for its efficiency and lower computational cost and ResNet34 for offering a balance between depth and performance, 
+making them widely adopted in both academic research and practical applications, 
+achieving also a good performance on two FER benchmarks in our empirical experiment. 
+However, due to the lack of further optimization techniques such as hyperparameter searching on these state-of-the-art models, 
+they did not significantly outperform our best model \textsc{GiMeFive}. 
 The innovative approach of using residual connections has not only improved the performance of deep neural networks 
-but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures.
+but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures for informative facial feature detections.
 
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
@@ -656,7 +664,6 @@ To further understand and enhance the performance of the model during training,
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
 
-For augmentation we determined at the very begining. 
 In deep learning and AI, 
 augmentation~\cite{augment} stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 

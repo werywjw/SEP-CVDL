@@ -28,7 +28,7 @@
 
 - [x] 4. Evaluation
 
-- [ ] 4.1 Evaluation Results
+- [x] 4.1 Evaluation Results
 
 - [ ] 4.2 Interpretable Results
 

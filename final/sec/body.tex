@@ -67,10 +67,10 @@ Facial expressions, a cornerstone of non-verbal communication, hold significant 
 Leveraging \textit{explainable AI} (XAI), 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
-not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
+not only in our daily lives but also in the fields of AI. 
 In this report, we present our best model named \textsc{GiMeFive}, 
-beside several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions 
-(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
+beside several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions, 
+namely happiness, surprise, sadness, anger, disgust, and fear. 
 The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
 
 \begin{figure*}[ht]
@@ -123,7 +123,7 @@ real-time operation is crucial.
 But this must be balanced with fairness, robustness, and scalability, 
 aspects often overlooked in recent research~\cite{Savchenko22}. 
 \citet{WangQKGNHR20} proposed a benchmark for bias mitigation, 
-while \citet{PhamVT20} presented a novel masking idea to boost the performance on FER2013 and private VEMO dataset. 
+while \citet{PhamVT20} presented a novel masking idea to boost the performance on FER2013~\cite{BarsoumZCZ16} and \textit{Vietnam Emotion} (VEMO) dataset. 
 % Building upon recent, comprehensive reviews of FER models and datasets~\cite{LiGL22,CanalMMSSPS22,sajjad2023comprehensive}. 
 % our research delves into a range of CNNs with varying complexity. 
 % We utilize datasets with extensive labeling encompassing subpopulations, head poses, occlusion types, and class imbalances. 
@@ -138,24 +138,39 @@ while \citet{PhamVT20} presented a novel masking idea to boost the performance o
 % Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
 \paragraph{Explainable AI.}
 
-Understanding the visual world through machines has been a driving force in computer vision for decades (Juneja et al., 2013; Mahendran & Vedaldi, 2016; Parikh & Zitnick, 2011; Singh et al., 2012; Sudderth et al., 2005). Early attempts at peering into the "black box" of recognition models included directly visualizing filter responses (Zeiler & Fergus, 2014), reconstructing inputs from network layers (Zeiler & Taylor, 2011), and even crafting inputs to activate specific neurons (Nguyen et al., 2015).
-Recently, techniques like Class Activation Mapping (CAM) by Zhou et al. (2016) and Gradient-weighted CAM (Grad-CAM) by Selvaraju et al. (2017) have pushed the boundaries. While CAM leverages global pooling to pinpoint informative regions, Grad-CAM offers a more general framework for visualizing any convolutional filter, revealing insights hidden within neural networks.
-The quest for meaningful representations in face recognition goes back even further (Chen et al., 2002; Learned-Miller, 2016; Toole et al., 2018). Traditional approaches often prioritized accuracy over interpretability, building representations from either facial parts (Li et al., 2013; Cao et al., 2010) or facial attributes (Kumar et al., 2009). While these methods achieved progress, they lacked transparency in how they captured and utilized facial information.
-The field of interpretable representation learning aims to bridge this gap. By delving deeper into the inner workings of models, we can understand not just what, but also why and how they make decisions. This newfound transparency holds immense potential for applications where trust and explainability are critical, such as healthcare, law enforcement, and autonomous vehicles.
+Understanding the visual world through machines has been a driving force in computer vision for decades~\cite{SudderthTFW05,parikh2011human,SinghGE12,JunejaVJZ13,MahendranV16}. 
+Early attempts at peering into the ``black box'' of recognition models included directly visualizing filter responses~\cite{ZeilerF14}, 
+reconstructing inputs from network layers~\cite{ZeilerTF11}, 
+and even crafting inputs to activate specific neurons~\cite{NguyenYC15}.
+Recently, techniques such as \textit{Class Activation Mapping} (CAM) by \citet{ZhouKLOT16}, 
+\textit{Gradient-weighted CAM} (Grad-CAM) by \citet{SelvarajuCDVPB17}, 
+and Grad-CAM++ by \citet{chattopadhay2018grad}, 
+have pushed the boundaries. 
+While CAM leverages global pooling to pinpoint informative regions, 
+Grad-CAM offers a more general framework for visualizing any convolutional filter, 
+revealing insights hidden within neural networks.
+The quest for meaningful representations in face recognition goes back even further~\cite{ChenHLZ02,learned2016labeled,o2018face}. 
+Traditional approaches often prioritized accuracy over interpretability, 
+building representations from either facial parts~\cite{CaoYTS10,LiHLBY13} or facial attributes~\cite{KumarBBN09}. 
+While these methods achieved progress, 
+they lacked transparency in how they captured and utilized facial information, 
+bridging the gap in the field of interpretable representation learning. 
+% The field of interpretable representation learning aims to bridge this gap. 
+% By delving deeper into the inner workings of models, 
+% we can understand not just what, but also why and how they make decisions. 
+% This newfound transparency holds immense potential for applications where trust and explainability are critical, 
+% such as healthcare, law enforcement, and autonomous vehicles.
 
-Generally speaking, 
-Class Activation Mapping (CAM)~\cite{ZhouKLOT16} is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
-CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
-as it highlights the important regions of an image or a video, 
-aiding in the understanding of the behavior of the model, 
-which is especially useful for model debugging and further improvement. 
-
+% Generally speaking, 
+% CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
+% CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
+% as it highlights the important regions of an image or a video, 
+% aiding in the understanding of the behavior of the model, 
+% which is especially useful for model debugging and further improvement. 
 %~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 % The weights connecting the feature maps to the output class are obtained.
 % The weighted combination of feature maps, 
 % representing the importance of each spatial location, is used to generate the CAM heatmap.
-
-\citet{chattopadhay2018grad} proposed Grad-CAM++,
 
 
 % TODO: see e.g.,

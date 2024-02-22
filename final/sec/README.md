@@ -30,9 +30,9 @@
 
 - [x] 4.1 Evaluation Results
 
-- [ ] 4.2 Interpretable Results
+- [x] 4.2 Interpretable Results
 
-- [ ] Classification Scores.
+- [x] Classification Scores.
 
 - [ ] Heatmap Overlayed Grad-CAM.
 

@@ -60,7 +60,7 @@ python3 script_video.py -s video -i 'video/video.mp4'
   <img src="./video/v2.gif" width="400" /> 
 </p>
 
-## How to test the live Demo with camera (old version)?
+## How to test the live demo with camera (old version)?
 
 Run the following command:
 ```
@@ -111,7 +111,7 @@ See what is asked to be modified, then:
 ```
 git add .
 git pull 
-git rebase --
+git config pull.rebase false
 git pull 
 git commit
 git push

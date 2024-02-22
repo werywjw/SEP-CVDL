@@ -344,6 +344,7 @@ which corresponds to different classes by exponentiating each logit and then nor
 Mathematically, for a given logit $z_i$ among $n$ classes, 
 the softmax function $\mathcal{S}(z_i)$ is defined as: 
 \begin{equation}
+  \label{eq:softmax}
   \mathcal{S}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}} \in [0,1], 
 \end{equation}
 where the true class has probability 1 and all others have probability 0. 
@@ -409,6 +410,7 @@ The loss function employed for all models is \textit{cross-entropy} (CE),
 which is typically for multi-class classification during training. 
 The CE loss is given by: 
 \begin{equation}
+  \label{eq:ce}
   \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
 \end{equation}
 where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class. 
@@ -490,21 +492,25 @@ but also inspired a plethora of subsequent research efforts aimed at enhancing n
 \end{figure}
 
 \paragraph{Classification Scores.} 
-To further analyze the individual scores of each class of the model, 
+To further analyze the individual probability of each class of the model, 
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of our best model \textsc{GiMeFive}. 
-This CSV file is represented with the corresponding classification scores via the softmax. 
-Meanwhile, 
-we also generate a confusion matrix heatmap to visualize the performance of the model with respect to each emotional class.
+This CSV file is represented with the corresponding classification scores via the softmax function (see \cref{eq:softmax}). 
 
+For having a better overview of the total correctly classified images by \textsc{GiMeFive}, 
+we also generate a confusion matrix heatmap (see \cref{fig:matval}) to visualize the performance of the model with respect to each emotional class, 
+where the numbers in diagonal of this heatmap represent the number of correct predicted images on the validation set. 
+Each line has a sum of 100, 
+since our validation set contains one hundred images with the ground-truth label per class (see \cref{tab:data}). 
 As shown in \Cref{fig:matval}, 
 we observe that our \textsc{GiMeFive} can predict the happiness class with the highest accuracy, 
 while the class with the lowest accuracy is disgust. 
 This is understandable, 
 as the facial emotions such as sadness and anger are similar to disgust, 
 especially when humans sometimes also represent disgusting and angry emotions at the same time. 
+Roughly speaking, 
+happiness is the largest sub-class in our training data (see \cref{tab:data}) and the happy emotion the easiest to detection in principle. 
 Moreover, 
 the confusion matrix illustrates that the model has good performances in terms of classifying surprise, sadness, and anger as well. 
-
 
 \begin{figure}[ht]
   \centering

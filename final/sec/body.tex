@@ -521,7 +521,7 @@ This CSV file is represented with the corresponding classification scores via th
 \begin{figure}[ht]
   \centering
    \includegraphics[width=\linewidth]{matval.png}
-   \caption{Overview of the confusion matrix on the validation set.} 
+   \caption{Overview of the confusion matrix evaluated from our \textsc{GiMeFive} on the validation set.} 
    \label{fig:matval}
 \end{figure}
 
@@ -540,6 +540,17 @@ Roughly speaking,
 happiness is the largest sub-class in our training data (see \cref{tab:data}) and the happy emotion the easiest to detection in principle. 
 Moreover, 
 the confusion matrix illustrates that the model has good performances in terms of classifying surprise, sadness, and anger as well. 
+
+\paragraph{Overlay Grad-CAM.}
+To understand the decision-making process of our model, 
+we aim to explain our model in a more transparent and interpretable way using 
+\textit{Gradient-weighted Class Activation Mapping} (Grad-CAM)~\cite{SelvarajuCDVPB17}, 
+a technique that is easier to implement with different architectures. 
+Typically, 
+Grad-CAM is a generalization of CAM and helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
+as it highlights the important regions of an image, 
+aiding in the understanding of the behavior of the model, 
+which is especially useful for model debugging and further improvement. 
 
 \begin{figure}[ht]
   \centering
@@ -578,33 +589,35 @@ the confusion matrix illustrates that the model has good performances in terms o
     \caption{Fear.}
     \label{fig:xai6}
   \end{subfigure}
-  \caption{Examples of XAI images with all six facial emotional classes (left: original image; middle: heatmap; right: Grad-CAM overlayed image) on the validation set.}
+  \caption{Interpreting images with all six facial emotional classes (left: original image; middle: heatmap; right: Grad-CAM) evaluated from our \textsc{GiMeFive} on the validation set.}
   \label{fig:xai}
 \end{figure}
 
-\paragraph{Heatmap Overlayed Grad-CAM.}
-To understand the decision-making process of our model, 
-we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
-i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
-a technique that is easier to implement with different architectures. 
-
-Typically,
-CAM is applied to the final convolutional layer of a CNN. 
 Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, 
 we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
-The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
-Despite CAM can provide valuable insights into the decision-making process of deep learning models, 
-especially CNNs, 
-CAM must be implemented in the last layer of a CNN or before the fully connected layer.
-
-In our case, we leverage the last (i.e., fifth) convolutional layer of our model to generate the CAM heatmap. 
+The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image. 
+In our case, we leverage the last (i.e., fifth) convolutional layer of our \textsc{GiMeFive} to generate the Grad-CAM heatmap. 
 The \textit{global average pooling} (GAP) layer, 
 which computes the average value of each feature map to obtain a spatial average of feature maps, 
 is used to obtain a spatial average of the feature maps. 
 
-\paragraph{Overlay evaluated emotions.} % TODO Leah
-The GiMeFive classifications of every frame are plotted in percentage next to the saliency map (heatmap).
-On top of the saliency map the main emotion, extracted from every fifth frame, is written, so it is easier for our eyes to adapt.
+As seen in \Cref{fig:xai}, 
+the heatmap in the middle represents the results of our best model \textsc{GiMeFive} on the validation set, 
+showing areas of the face to identify each emotion. 
+The warmer colors (red and yellow) indicate the higher activation or relevance in recognizing the facial emotions, 
+while the cooler colors (blue and green) indicate the lower activation. 
+The scale ranges from 0 to 1, 
+indicating the level of activation or confidence of emotion recognitions,
+where 1 means the highest measured activation. 
+
+The right side of each sub-figure is result of the overlay Grad-CAM. 
+For instance, 
+we can see that happiness and sadness (see \cref{fig:xai1} and \cref{fig:xai3} respectively) 
+class represent a high level of activation around the mouth region, 
+which is common in uplifting and drooping corners. 
+Surprise (see \cref{fig:xai2}) show activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
+Other emotions such as anger, disgust, and fear (see \cref{fig:xai4}, \cref{fig:xai5}, and \cref{fig:xai6} respectively) 
+represent entire distributions, highlighting the complexity of facial expressions from our models.
 
 \begin{figure*}[ht]
   \centering
@@ -644,16 +657,18 @@ On top of the saliency map the main emotion, extracted from every fifth frame, i
   %   \label{fig:v6}
   % \end{subfigure}
   % \hfill
-  \caption{Overview of XAI with grad-CAM and landmarks on DISFA dataset.}
+  \caption{Interpreting video screenshots with grad-CAM and landmarks evaluated from our \textsc{GiMeFive} on DISFA dataset.}
   \label{fig:video}
 \end{figure*}
 
-\paragraph{Landmarks.}
+\paragraph{Overlay Landmark.}
+The \textsc{GiMeFive} classifications of every frame are plotted in percentage next to the saliency map.
+On top of the saliency map the main emotion, extracted from every fifth frame, is written, 
+so it is easier for our eyes to adapt.
 To plot Landmarks on each video frame, we implemented the pretrained dlib shape predictor 
-\texttt{dlib shape predictor}, % worked ;P
-\texttt{shape predictor 68 face landmarks.dat}, 
+\texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
-an image pyramid, and sliding window detection scheme.~\cite{dlib_site}
+an image pyramid, and sliding window detection scheme~\cite{dlib_site}.
 The pose estimator was created using the implementation dlib from \citet{6909637}.
 
 With this pertained model, 68 numbered Landmarks assist emotion analysis, 
@@ -734,7 +749,12 @@ we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attenti
 \section{Conclusion and Discussion}
 \label{sec:conclusion}
 
+In this work, we propose a novel emotion classifier \textsc{GiMeFive} for facial expression analysis. 
+
+
 \paragraph{Limitations.}
+
+Please feel free to contact us if you have any questions or further suggestions.
 
 \newpage
 % \clearpage

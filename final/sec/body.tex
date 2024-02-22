@@ -513,17 +513,17 @@ but also inspired a plethora of subsequent research efforts aimed at enhancing n
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
 
+\paragraph{Classification Scores.} 
+To further analyze the individual probability of each class of the model, 
+we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of our best model \textsc{GiMeFive}. 
+This CSV file is represented with the corresponding classification scores via the softmax function (see \cref{eq:softmax}). 
+
 \begin{figure}[ht]
   \centering
    \includegraphics[width=\linewidth]{matval.png}
    \caption{Overview of the confusion matrix on the validation set.} 
    \label{fig:matval}
 \end{figure}
-
-\paragraph{Classification Scores.} 
-To further analyze the individual probability of each class of the model, 
-we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of our best model \textsc{GiMeFive}. 
-This CSV file is represented with the corresponding classification scores via the softmax function (see \cref{eq:softmax}). 
 
 For having a better overview of the total correctly classified images by \textsc{GiMeFive}, 
 we also generate a confusion matrix heatmap (see \cref{fig:matval}) to visualize the performance of the model with respect to each emotional class, 
@@ -543,78 +543,42 @@ the confusion matrix illustrates that the model has good performances in terms o
 
 \begin{figure}[ht]
   \centering
-  \begin{subfigure}{0.3\linewidth}
-    \includegraphics[width=\linewidth]{xai_happiness_.png}
+  \begin{subfigure}{0.47\linewidth}
+    \includegraphics[width=\linewidth]{xai_happiness.png}
     \caption{Happiness.}
     \label{fig:xai1}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.3\linewidth}
+  \begin{subfigure}{0.47\linewidth}
     \includegraphics[width=\linewidth]{xai_surprise.png}
     \caption{Surprise.}
     \label{fig:xai2}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.3\linewidth}
-    \includegraphics[width=\linewidth]{xai_sadness_.png}
+  \begin{subfigure}{0.47\linewidth}
+    \includegraphics[width=\linewidth]{xai_sadness.png}
     \caption{Sadness.}
     \label{fig:xai3}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.3\linewidth}
+  \begin{subfigure}{0.47\linewidth}
     \includegraphics[width=\linewidth]{xai_anger.png}
     \caption{Anger.}
     \label{fig:xai4}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.3\linewidth}
+  \begin{subfigure}{0.47\linewidth}
     \includegraphics[width=\linewidth]{xai_disgust.png}
     \caption{Disgust.}
     \label{fig:xai5}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.3\linewidth}
+  \begin{subfigure}{0.47\linewidth}
     \includegraphics[width=\linewidth]{xai_fear.png}
     \caption{Fear.}
     \label{fig:xai6}
   \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_happiness.png}
-  %   \caption{Happiness.}
-  %   \label{fig:xai7}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_surprise_.png}
-  %   \caption{Surprise.}
-  %   \label{fig:xai8}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_sadness.png}
-  %   \caption{Sadness.}
-  %   \label{fig:xai9}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_anger_.png}
-  %   \caption{Anger.}
-  %   \label{fig:xai10}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_disgust_.png}
-  %   \caption{Disgust.}
-  %   \label{fig:xai11}
-  % \end{subfigure}
-  % \hfill
-  % \begin{subfigure}{0.15\linewidth}
-  %   \includegraphics[width=\linewidth]{xai_fear_.png}
-  %   \caption{Fear.}
-  %   \label{fig:xai12}
-  % \end{subfigure}
-  \caption{Overview of explainable AI with all six facial emotional classes on the validation set.}
+  \caption{Examples of XAI images with all six facial emotional classes (left: original image; middle: heatmap; right: Grad-CAM overlayed image) on the validation set.}
   \label{fig:xai}
 \end{figure}
 

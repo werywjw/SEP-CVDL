@@ -1,10 +1,19 @@
-paper
-presentation
+final/main.pdf
+models
+archive/AffectNet
+archive/CK+
+archive/TFEID
+# data
+dataset_original
+*.pth
+!best_GiMeFive.pth
+result.md
 
 .DS_Store
 *.DS_Store
 .ipynb_checkpoints
 .vscode
+__pycache__
 
 *blx.bib
 *.aux
@@ -23,7 +32,5 @@ presentation
 *.fdb_latexmk
 *.fls
 *.brf
-
-__pycache__/
 
 .venv

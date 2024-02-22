@@ -2,43 +2,28 @@
 \label{sec:intro}
 
 % introduction from Leah
+% See introduction writing e.g., 
+% Visualizing and Understanding Convolutional Networks
+% Towards East Asian Facial Expression Recognition in the Real World: A New Database and Deep Recognition Baseline
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} is a topic of significant frontier and ongoing debate, 
 not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
-In this report, we present our best model named \textsc{GiMeFive}~\cite{GiMeFive, sec:evaluation:inter} (Cite: Figure 9), beside several deep
-\textit{convolutional neural networks} (CNNs) \Cref{sec:setup:model}, listed in \Cref{fig:acc}, to detect and interpret six basic universally recognized and expressed human facial emotions (i.e., happiness, surprise, sadness, anger, disgust, and fear).
+In this report, we present our best model named \textsc{GiMeFive}, 
+beside several deep \textit{convolutional neural networks} (CNNs) 
+to detect and interpret six basic universally recognized and expressed human facial emotions 
+(i.e., happiness, surprise, sadness, anger, disgust, and fear).
 
-Leveraging Explainable AI (XAI), we shed light on the decision-making process behind our emotion classification model, enhancing its transparency. (Cite: Explainable AI)
+Leveraging explainable AI (XAI), 
+we shed light on the decision-making process behind our emotion classifier, 
+enhancing its transparency. 
 
-% we exp\lain this emotion classification task with \textit{gradient-weighted class activation mapping} 
+% we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
 % (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
+% TODO
+% citations for the entire paper in introduction
 \paragraph{Motivation.}
-The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
+The goal of our research and development was to build a robust and interpretable model for facial emotion recognitions. 
 
-% \paragraph{Paper Contribution.}
-Our main contributions can be summarized as follows.
-\begin{itemize}
-  \item We collected Datasets \Cref{sec:setup:datasets}, preprocessed images or videos Cite: preprocessing image/video, and evaluated (Cite: Evaluation) the training and testing data (Cite: figure 4, 8) thoroughly from various 
-  public databases listed in (Cite: Table 1).
-
-  \item To prepare training and testing images for loading we wrote a script.
-
-  \item All implemented classification models, such as VGG16 (Cite: VGG16), ResNet (Cite: ResNet), or \textsc{GiMeFive} (Cite: GiMeFive) we built from scratch, and compared in accuracy in consideration of Layers and Architecture (Cite: Table 2).
-
-  \item Subsequently optimization was executed with several techniques in a systematic manner. (Cite: Optimization Strategies)
-
-  \item The classification scores (Cite: Classification scores) of each emotion class, as well as the parameters to perform the confusion matrix heat map, are saved (in a serialised PyTorch state dictionary,) with respect to each image or video frame.
-
-  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM (Cite: Grad-CAM), (Cite: Heatmap), (Cite: Figure 5), combined with Face Landmarks (Cite: Landmarks) and the indication of the classified emotion 
-  percentages, emphasizing the main emotion (Cite: Overlay emotions).
-
-  \item To evaluate a video from a given video or live camera we created a script. (not in text, to put or paragraph after Landmarks or 4.3??)
-
-	\item To illustrate the real-world performance of our best model \textsc{GiMeFive}, we edited and provide a demo video. (Cite: Figure 6)
-
-\end{itemize}
-
-The experimental pipeline is outlined in cite Figure 2.
 \begin{figure}[ht]
   \centering
   \resizebox{.47\textwidth}{!}{
@@ -78,6 +63,19 @@ The experimental pipeline is outlined in cite Figure 2.
   \label{fig:acc}
 \end{figure}
 
+% DONE (<= 4 bullet points usually very shot without citations)
+Our main contributions can be summarized as follows. 
+
+\begin{itemize}
+  \item We collect, preprocess, 
+  and evaluate the training and testing data (both image and video) thoroughly from various public databases. 
+  \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
+  Meanwhile, we provide the classification scores of each emotion class, 
+  as well as the confusion matrix heat map, with respect to each image. 
+  \item We give the video demo to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
+  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM and face landmarks.
+\end{itemize}
+
 \begin{figure*}[ht]
   \centering
    \includegraphics[width=\linewidth]{pipeline.png}
@@ -85,7 +83,6 @@ The experimental pipeline is outlined in cite Figure 2.
    \label{fig:pipeline}
 \end{figure*}
 
-% TODO: about here
 \newpage
 
 \paragraph{Paper Outline.}
@@ -95,7 +92,7 @@ In \Cref{sec:setup},
 we address the datasets we collected and the model architecture we implemented. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
-An overview of the experimental pipeline of our project is illustrated in \cref{fig:pipeline}. 
+An overview of the experimental pipeline of our project is outlined in \cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 % add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
@@ -103,6 +100,10 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 \label{sec:related}
 
 % TODO: FER image/video
+% See e.g. for introduction writing: 
+% Facial Expression Recognition with Adaptive Frame Rate based on Multiple Testing Correction
+% 
+
 \paragraph{Facial Emotion Recognition.}
 \citet{PhamVT20} on FER2013
 
@@ -340,11 +341,11 @@ allowing it to learn more complex patterns.
 Note that our best model \textsc{GiMeFive} is later optimized with the dropout rate at 20\% after max pooling layers. 
 
 The softmax function plays a critial role in the final stage of a neural network, 
-which corrsponds to 6 classes by exponentiating each logit and then normalizing these values by the sum of all exponentiated logits. 
-Mathemathically, for a given logit $z_i$ among six classes, 
-the softmax function $\mathcal{S}(z_i)$ is defined as:
+which corrsponds to different classes by exponentiating each logit and then normalizing these values by the sum of all exponentiated logits. 
+Mathemathically, for a given logit $z_i$ among $n$ classes, 
+the softmax function $\mathcal{S}(z_i)$ is defined as: 
 \begin{equation}
-  \mathcal{S}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{6} e^{z_j}} \in [0,1], 
+  \mathcal{S}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}} \in [0,1], 
 \end{equation}
 where the true class has probability 1 and all others have probability 0. 
 
@@ -352,22 +353,19 @@ where the true class has probability 1 and all others have probability 0.
 \label{sec:evaluation}
 
 For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
-We report all the training, testing, and validation accuracies in 
-\% to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
+We report all the training, testing, and validation accuracies in \% 
+to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
 
 By converting logits to probabilities, 
 the softmax function allows for a more interpretable output from the model and facilitates the use of probability-based loss functions. 
-The loss function employed for all models is cross-entropy (CE), 
+The loss function employed for all models is \textit{cross-entropy} (CE), 
 which is typically for multi-class classification during training. 
-Mathematically, the CE loss is defined as follows: 
+The CE loss is given by: 
 \begin{equation}
   \mathcal{L}_{\text{CE}} = -\sum_{i=1}^{n} y_i \log(p_i),
 \end{equation}
 where $y_i$ is the true label and $p_i$ is the predicted probability of the $i$-th class. 
 Here $n$ denotes the total number of classes, in our case, 6.
-
-\subsection{Evaluation Results}
-\label{sec:evaluation:results}
 
 \begin{table*}[ht]
   \centering
@@ -401,7 +399,7 @@ Here $n$ denotes the total number of classes, in our case, 6.
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & 94.5 & 70.8 & 72.8 & 21287750 \\
     &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
-    &\textsc{GiMeFive} (Ours) & - & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
+    &\textsc{GiMeFive} (Ours) & 25 & +BN+SE+RB & 95.2 & 70.4 & 74.5 & 95051014 \\
     \bottomrule
   \end{tabular}
   % }
@@ -417,25 +415,62 @@ Here $n$ denotes the total number of classes, in our case, 6.
   \label{tab:model}
 \end{table*}
 
+\subsection{Evaluation Results}
+\label{sec:evaluation:results}
+
 As seen in \Cref{tab:model}, 
-the test results are aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}.
-Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
+the results in terms of accuracies are aggregated from the database RAF-DB~\cite{kaggle_rafdb} and FER2013~\cite{kaggle_fer}, 
+as well as the FER \textsc{GiMeFive}. 
+We observe that our models achieve the best performance on RAF-DB instead of on our aggregated FER \textsc{GiMeFive}. 
+We assume that the reason for this is that the RAF-DB dataset is more balanced, 
+while the FER2013 dataset is more challenging due to the imbalance of the classes. 
+Also verified on the test and validation set, 
+the performance of all our models on FER2013 is worse than on on RAF-DB. 
 
-Our CNN without random augmentation outperforms the other models in terms of accuracy, 
-indicating that this kind of augmentation is not able to help our model predict the correct label, 
-thus we later aim to optimize with other augmentation techniques to capture more representative features of different emotions.
-Further research is orientated on papers engaging similar investigations~\cite{ZeilerF14,li_reliable_2017,VermaMRMV23}.
+At the same time, 
+we can see that there is a trade-off between accuracy and the number of parameters. 
+In general, 
+deeper CNNs with more layers and parameters tend to perform better, 
+as they can capture more nuanced facial patterns and features. 
+However, in our experiments, 
+this is not always the case. 
+We hypothesize that more parameters often mean greater learning capacity, 
+but also a higher risk of overfitting and increased computational cost. 
+The models are then too complex and need more resources and time to train. 
+Therefore, we propose our best model \textsc{GiMeFive}, 
+the one with 15 layers and 10478086 parameters, 
+which is 7 times less than the VGG16 and half than ResNet34, 
+efficiently achieving the best performance on the both test and validation set on all benchmarks. 
 
-Inspired by \citet{SimonyanZ14a}, 
-Adding an extra convolutional block to the model with more parameters does not necessarily lead to better performance.
-Batch normalization can indeed improve the performance of the model. 
+In terms of the implementation details, 
+our \textsc{GiMeFive} 
+(marked as a green asterisk \textcolor{LMUGreen}{$\star$}) without random augmentation outperforms the other methods in terms of accuracy, 
+indicating that this kind of random augmentation is not necessarily able to help our model predict the correct label, 
+one reason is that the images on RAF-DB is already aligned and cropped, 
+the \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
+\texttt{RandomCrop}, and \texttt{RandomErasing} might confuse the model by adding more noise to aligned facial images. 
+We further continue to simply apply merely normalization to detact more representative features with respect to different emotions.
+\citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engage similar investigations. 
+
+We run extensive experiments to determine the number of the convolution blocks for a better trade-off between the number of parameters and the performance. 
+Eventually, we find that adding an extra convolutional block 
+(5 blocks with 15 layers in total) from our initial baseline (4 blocks with 13 layers)
+leads to the best performance. 
+However, six convolutional blocks with 17 layers do not necessarily result in a better performance, 
+this is due to the complexity and overfitting of the models. 
+
+Moreover, 
+we find that the dropout and batch normalization can indeed improve the performance of the model, 
+as such regularization techniques can prevent overfitting by by randomly dropping units 
+(along with their connections) from the neural networks during training. 
+Also the batch normalization can help the model to stabilize the learning process and reduce the number of training epochs, 
+leading to a faster learn progress and thus improving the generalization ability of the model. 
 
 ResNet18 being appreciated for its efficiency and lower computational cost, 
 and ResNet34 for offering a balance between depth and performance, 
 making them widely adopted in both academic research and practical applications. 
 The innovative approach of using residual connections has not only improved the performance of deep neural networks 
-but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures
-% TODO (Jiawen)
+but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures.
 
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
@@ -621,8 +656,7 @@ To further understand and enhance the performance of the model during training,
 \subsection{Data Augmentation}
 \label{sec:optim:aug}
 
-For augmentation we determined \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
-\texttt{RandomCrop}, and \texttt{RandomErasing} at the very begining. 
+For augmentation we determined at the very begining. 
 In deep learning and AI, 
 augmentation~\cite{augment} stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
@@ -634,6 +668,7 @@ they are forced to make more nuanced and robust predictions.
 With this process, we aim to prevent overfitting, which is a common pitfall in machine learning. 
 Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
+Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
 
 \subsection{Hyperparameter Tuning}
 \label{sec:optim:tuning}

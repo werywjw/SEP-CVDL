@@ -26,11 +26,17 @@
 
 - [x] GiMeFive
 
-### - [ ] 4. Evaluation
+- [x] 4. Evaluation
 
-#### - [ ] 4.1 Evaluation Results
+- [ ] 4.1 Evaluation Results
 
-#### - [ ] 4.2 Interpretable Results
+- [ ] 4.2 Interpretable Results
+
+- [ ] Classification Scores.
+
+- [ ] Heatmap Overlayed Grad-CAM.
+
+- [ ] Overlay Evaluated Landmarks.
 
 ### - [ ] 5. Optimization Strategies
 

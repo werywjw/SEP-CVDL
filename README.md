@@ -14,10 +14,12 @@
 
 ## Results
 
-<p align="center">
-  <img src="./final/result.png" height="300" />
+![](./final/tab_result.png)
+
+<!-- <p align="center">
+  <img src="./final/fig_result.png" height="300" />
   <img src="./final/matval.png" height="300" /> 
-</p>
+</p> -->
 
 ## Requirements
 
@@ -108,6 +110,8 @@ git status
 See what is asked to be modified, then:
 ```
 git add .
+git pull 
+git rebase --
 git pull 
 git commit
 git push

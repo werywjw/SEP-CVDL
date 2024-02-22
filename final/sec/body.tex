@@ -5,42 +5,25 @@
 % See introduction writing e.g., 
 % Visualizing and Understanding Convolutional Networks
 % Towards East Asian Facial Expression Recognition in the Real World: A New Database and Deep Recognition Baseline
-\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} is a topic of significant frontier and ongoing debate, 
-not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
-In this report, we present our best model named \textsc{GiMeFive}, 
-beside several deep \textit{convolutional neural networks} (CNNs) 
-to detect and interpret six basic universally recognized and expressed human facial emotions 
-(i.e., happiness, surprise, sadness, anger, disgust, and fear).
 
 In recent years, facial recognition technology has matured significantly. 
-As an important branch of facial recognition, FER has received growing attention from researchers. 
-This progress is largely driven by the effective utilization of Convolutional Neural Networks (CNNs). 
-Originally introduced for image classification, CNNs have proven their ability to capture spatial hierarchies, 
+As an important branch of facial recognition, 
+\textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} has received growing attention from researchers. 
+This progress is largely driven by the effective utilization of \textit{convolutional neural networks} (CNNs). 
+Originally introduced for image classification, 
+CNNs have proven their ability to capture spatial hierarchies, 
 making them ideal for analyzing facial features and expressions. 
 Since the pioneering work by \citet{Lecun89Backpropagation}, 
 CNNs have significantly improved, fueled by larger datasets, 
-powerful GPU implementations, and innovative regularization strategies.
-In the era of deep learning, one major focus in the research community has been on designing network architectures and objective 
-functions towards discriminative feature learning \cite{HeZRS16, liu2017learning, wen2016discriminative}.
-
-Meanwhile, there is a strong demand from researchers and general audiences to interpret its successes and 
-failures \cite{goodfellow2014explaining}, to understand, improve, and trust the generated decisions by these models. 
-This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the 
-important visual cues they rely on \cite{olah2018building}.
-
-Leveraging explainable AI (XAI), 
-we shed light on the decision-making process behind our emotion classifier, 
-enhancing its transparency. 
-
-% we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
-% (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
-
-% TODO
-% citations for the entire paper in introduction
-\paragraph{Motivation.}
-
-(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
-The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
+powerful GPU implementations, 
+and innovative regularization strategies.
+In the era of deep learning and \textit{artificial intelligence} (AI), 
+one major focus in the research community has been on designing network architectures 
+and objective functions towards discriminative feature learning~\cite{HeZRS16, liu2017learning, wen2016discriminative}. 
+Meanwhile, 
+there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
+to understand, improve, and trust the generated decisions by these models. 
+This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
 
 \begin{figure}[ht]
   \centering
@@ -81,27 +64,14 @@ The goal of our research and development was to build a robust and interpretable
   \label{fig:acc}
 \end{figure}
 
-% we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
-% (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
-
-% \paragraph{Motivation.}
-In recent years, facial recognition technology has matured significantly. 
-As an important branch of facial recognition, FER has received growing attention from researchers. 
-This progress is largely driven by the effective utilization of CNNs. 
-Originally introduced for image classification, CNNs have proven their ability to capture spatial hierarchies, 
-making them ideal for analyzing facial features and expressions. 
-Since the pioneering work by \citet{Lecun89Backpropagation}, 
-CNNs have significantly improved, fueled by larger datasets, 
-powerful GPU implementations, and innovative regularization strategies.
-In the era of deep learning, one major focus in the research community has been on designing network architectures and objective functions towards discriminative feature learning~\cite{HeZRS16,WenZL016}, 
-(Learning deep features via congenerous cosine loss for person recognition 2017). 
-Meanwhile, there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
-to understand, improve, and trust the generated decisions by these models. 
-This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
-
-Leveraging explainable AI (XAI), 
+Leveraging \textit{explainable AI} (XAI), 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
+not only in our daily lives but also in the fields of \textit{artificial intelligence} (AI).
+In this report, we present our best model named \textsc{GiMeFive}, 
+beside several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions 
+(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
+The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
 
 \begin{figure*}[ht]
   \centering
@@ -131,7 +101,6 @@ The evaluation results of our models are given in \Cref{sec:evaluation} with int
 An overview of the experimental pipeline of our project is outlined in \cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
-% add demo: see https://github.com/werywjw/SEP-CVDL/blob/main/paper/Selvaraju_Cogswell_Grad-CAM.pdf
 \section{Related Work}
 \label{sec:related}
 
@@ -142,6 +111,11 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 
 \paragraph{Facial Emotion Recognition.}
 \citet{PhamVT20} on FER2013
+
+Facial expressions, a cornerstone of non-verbal communication, hold significant weight in human interactions. Research by Samadiani (2019) and Mehrabian (2008) confirms this, highlighting their substantial contribution to communication. Studies like Ekman's (1971) and Weihong's (2018) categorize these expressions into distinct states like happiness, sadness, or anger, demonstrating their cross-cultural recognition. While emotions can intertwine in specific situations, primary emotions remain broadly identifiable due to their innate nature.
+Facial Emotion Recognition (FER) capitalizes on this understanding by classifying individuals' emotional states based solely on their facial expressions. This field has witnessed a shift from hand-crafted features to sophisticated deep learning architectures, achieving remarkable accuracy on benchmark datasets (Fard, 2022; Li, 2022). In any case, ethical considerations are paramount. Given the widespread use of video streams and FER applications, real-time operation is crucial. But this must be balanced with fairness, robustness, and scalability, aspects often overlooked in current research (Savchenko, 2022). Wang et al. (2020) proposed a benchmark for bias mitigation, while Xu et al. (2020) focused on sensitive attributes like gender, age, and race.
+Building upon recent, comprehensive reviews of FER models and datasets (Li, 2022; Sajjad, 2023; Canal, 2022), our research delves into a range of convolutional neural network models with varying complexity. We utilize datasets with extensive labeling encompassing subpopulations, head poses, occlusion types, and class imbalances. This approach allows us to explore the intricate relationship between facial expressions and emotions while ensuring responsible development and application of FER technologies.
+By combining the power of facial expressions with advanced machine learning, FER has the potential to revolutionize various fields. However, ethical considerations must be woven into the fabric of this technology from the outset to guarantee its responsible and inclusive use in shaping the future of human-computer interaction.
 
 % TODO: see e.g., 
 % Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)

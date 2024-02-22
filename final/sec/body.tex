@@ -10,35 +10,7 @@ not only in our daily lives but also in the fields of \textit{artificial intelli
 In this report, we present our best model named \textsc{GiMeFive}, 
 beside several deep \textit{convolutional neural networks} (CNNs) 
 to detect and interpret six basic universally recognized and expressed human facial emotions 
-(i.e., happiness, surprise, sadness, anger, disgust, and fear).
-
-In recent years, facial recognition technology has matured significantly. 
-As an important branch of facial recognition, FER has received growing attention from researchers. 
-This progress is largely driven by the effective utilization of Convolutional Neural Networks (CNNs). 
-Originally introduced for image classification, CNNs have proven their ability to capture spatial hierarchies, 
-making them ideal for analyzing facial features and expressions. 
-Since the pioneering work by \citet{Lecun89Backpropagation}, 
-CNNs have significantly improved, fueled by larger datasets, 
-powerful GPU implementations, and innovative regularization strategies.
-In the era of deep learning, one major focus in the research community has been on designing network architectures and objective functions towards discriminative feature learning 
-(Cite: Deep residual learning for image recognition 2016), 
-(Learning deep features via congenerous cosine loss for person recognition 2017), 
-(A discriminative feature learning approach for deep face recognition 2016). 
-Meanwhile, there is a strong demand from researchers and general audiences to interpret its successes and failures 
-(Cite: Explaining and harnessing adversarial examples, 2015), to understand, improve, and trust the generated decisions by these models. 
-This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on 
-(The building blocks of interpretability 2018).
-
-Leveraging explainable AI (XAI), 
-we shed light on the decision-making process behind our emotion classifier, 
-enhancing its transparency. 
-
-% we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
-% (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
-
-% TODO
-% citations for the entire paper in introduction
-\paragraph{Motivation.}
+(i.e., happiness, surprise, sadness, anger, disgust, and fear). 
 The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
 
 \begin{figure}[ht]
@@ -80,9 +52,36 @@ The goal of our research and development was to build a robust and interpretable
   \label{fig:acc}
 \end{figure}
 
-% DONE (<= 4 bullet points usually very shot without citations)
-Our main contributions can be summarized as follows. 
+% we explain this emotion classification task with \textit{gradient-weighted class activation mapping} 
+% (Grad-CAM)~\cite{SelvarajuCDVPB17}. 
 
+% \paragraph{Motivation.}
+In recent years, facial recognition technology has matured significantly. 
+As an important branch of facial recognition, FER has received growing attention from researchers. 
+This progress is largely driven by the effective utilization of CNNs. 
+Originally introduced for image classification, CNNs have proven their ability to capture spatial hierarchies, 
+making them ideal for analyzing facial features and expressions. 
+Since the pioneering work by \citet{Lecun89Backpropagation}, 
+CNNs have significantly improved, fueled by larger datasets, 
+powerful GPU implementations, and innovative regularization strategies.
+In the era of deep learning, one major focus in the research community has been on designing network architectures and objective functions towards discriminative feature learning~\cite{HeZRS16,WenZL016}, 
+(Learning deep features via congenerous cosine loss for person recognition 2017). 
+Meanwhile, there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
+to understand, improve, and trust the generated decisions by these models. 
+This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
+
+Leveraging explainable AI (XAI), 
+we shed light on the decision-making process behind our emotion classifier, 
+enhancing its transparency. 
+
+\begin{figure*}[ht]
+  \centering
+   \includegraphics[width=\linewidth]{pipeline.png}
+   \caption{Overview of the experimental pipeline.} 
+   \label{fig:pipeline}
+\end{figure*}
+
+Our main contributions can be summarized as follows. 
 \begin{itemize}
   \item We collect, preprocess and evaluate the training and testing data 
   (both image and video) thoroughly from various public databases. 
@@ -92,15 +91,6 @@ Our main contributions can be summarized as follows.
   \item We give the video demo to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM and face landmarks.
 \end{itemize}
-
-\begin{figure*}[ht]
-  \centering
-   \includegraphics[width=\linewidth]{pipeline.png}
-   \caption{Overview of the experimental pipeline.} 
-   \label{fig:pipeline}
-\end{figure*}
-
-\newpage
 
 \paragraph{Paper Outline.}
 The structure of the rest of the report is arranged as follows. 
@@ -119,16 +109,15 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 % TODO: FER image/video
 % See e.g. for introduction writing: 
 % Facial Expression Recognition with Adaptive Frame Rate based on Multiple Testing Correction
-% 
+% https://github.com/kdhht2334/awesome-SOTA-FER
 
 \paragraph{Facial Emotion Recognition.}
 \citet{PhamVT20} on FER2013
 
+% TODO: see e.g., 
+% Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)
+% Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
 \paragraph{Explainable AI.}
-To understand the decision-making process of our model, 
-we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
-i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
-a technique that is easier to implement with different architectures. 
 
 Generally speaking, 
 Class Activation Mapping (CAM)~\cite{ZhouKLOT16} is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
@@ -136,29 +125,30 @@ CAM helps interpret CNN decisions by providing visual cues about the regions tha
 as it highlights the important regions of an image or a video, 
 aiding in the understanding of the behavior of the model, 
 which is especially useful for model debugging and further improvement. 
-Typically,
-CAM is applied to the final convolutional layer of a CNN. 
-Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, 
-we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
-The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
 
 %~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
 % The weights connecting the feature maps to the output class are obtained.
 % The weighted combination of feature maps, 
 % representing the importance of each spatial location, is used to generate the CAM heatmap.
-Despite CAM can provide valuable insights into the decision-making process of deep learning models, 
-especially CNNs, 
-CAM must be implemented in the last layer of a CNN or before the fully connected layer.
+
 \citet{chattopadhay2018grad} proposed Grad-CAM++,
 
+
+% TODO: see e.g.,
+% Towards Interpretable Facial Emotion Recognition
+% Towards Interpretable Face Recognition
 \paragraph{Interpretable Emotion Classification.}
 
 \citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
 \citet{Malik0R21} 
 
+\section{Experimental Setup}
+\label{sec:setup}
 
-% TODO: about here
-\newpage
+All the experiments are implemented in Python. 
+We also use Shell and Jupyter Notebook for generating image and video scripts. 
+The experiment and evaluation are conducted on two MacBook Pros 
+(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
 \begin{table*}[ht]
   \centering
@@ -192,14 +182,6 @@ CAM must be implemented in the last layer of a CNN or before the fully connected
 (Note that - denotes the unknown information as the total videos are recorded from the participants randomly acting out their emotions).}
 \label{tab:data}
 \end{table*}
-
-\section{Experimental Setup}
-\label{sec:setup}
-
-All the experiments are implemented in Python. 
-We also use Shell and Jupyter Notebook for generating image and video scripts. 
-The experiment and evaluation are conducted on two MacBook Pros 
-(M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
 \subsection{Dataset}
 \label{sec:setup:datasets}
@@ -602,6 +584,20 @@ the confusion matrix illustrates that the model has good performances in terms o
 \end{figure}
 
 \paragraph{Heatmap Overlayed Grad-CAM.}
+To understand the decision-making process of our model, 
+we aim to explain our model in a more transparent and interpretable way using the Grad-CAM, 
+i.e., Gradient-weighted CAM~\cite{SelvarajuCDVPB17}, 
+a technique that is easier to implement with different architectures. 
+
+Typically,
+CAM is applied to the final convolutional layer of a CNN. 
+Besides proposing a method to visualize the discriminative regions of a CNN trained for the classification task, 
+we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
+The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image or video. 
+Despite CAM can provide valuable insights into the decision-making process of deep learning models, 
+especially CNNs, 
+CAM must be implemented in the last layer of a CNN or before the fully connected layer.
+
 In our case, we leverage the last (i.e., fifth) convolutional layer of our model to generate the CAM heatmap. 
 The \textit{global average pooling} (GAP) layer, 
 which computes the average value of each feature map to obtain a spatial average of feature maps, 

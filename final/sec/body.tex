@@ -108,7 +108,7 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 % https://github.com/kdhht2334/awesome-SOTA-FER
 
 \paragraph{Facial Emotion Recognition.}
-Research by \citet{SamadianiHCLCXH19} and \citet{mehrabian2017communication} confirms this, 
+Previous research by \citet{SamadianiHCLCXH19} and \citet{mehrabian2017communication} confirms this, 
 highlighting their substantial contribution to communication. 
 Studies from \citet{ekman1971constants} and \citet{LiD22a} categorize these expressions into distinct states 
 like happiness, sadness, or anger, demonstrating their cross-cultural recognition. 
@@ -137,6 +137,11 @@ while \citet{PhamVT20} presented a novel masking idea to boost the performance o
 % Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)
 % Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
 \paragraph{Explainable AI.}
+
+Understanding the visual world through machines has been a driving force in computer vision for decades (Juneja et al., 2013; Mahendran & Vedaldi, 2016; Parikh & Zitnick, 2011; Singh et al., 2012; Sudderth et al., 2005). Early attempts at peering into the "black box" of recognition models included directly visualizing filter responses (Zeiler & Fergus, 2014), reconstructing inputs from network layers (Zeiler & Taylor, 2011), and even crafting inputs to activate specific neurons (Nguyen et al., 2015).
+Recently, techniques like Class Activation Mapping (CAM) by Zhou et al. (2016) and Gradient-weighted CAM (Grad-CAM) by Selvaraju et al. (2017) have pushed the boundaries. While CAM leverages global pooling to pinpoint informative regions, Grad-CAM offers a more general framework for visualizing any convolutional filter, revealing insights hidden within neural networks.
+The quest for meaningful representations in face recognition goes back even further (Chen et al., 2002; Learned-Miller, 2016; Toole et al., 2018). Traditional approaches often prioritized accuracy over interpretability, building representations from either facial parts (Li et al., 2013; Cao et al., 2010) or facial attributes (Kumar et al., 2009). While these methods achieved progress, they lacked transparency in how they captured and utilized facial information.
+The field of interpretable representation learning aims to bridge this gap. By delving deeper into the inner workings of models, we can understand not just what, but also why and how they make decisions. This newfound transparency holds immense potential for applications where trust and explainability are critical, such as healthcare, law enforcement, and autonomous vehicles.
 
 Generally speaking, 
 Class Activation Mapping (CAM)~\cite{ZhouKLOT16} is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 

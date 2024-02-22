@@ -4,7 +4,6 @@
 % introduction from Leah
 % See introduction writing e.g., 
 % Visualizing and Understanding Convolutional Networks
-% Towards East Asian Facial Expression Recognition in the Real World: A New Database and Deep Recognition Baseline
 
 In recent years, facial recognition technology has matured significantly. 
 As an important branch of facial recognition, 
@@ -64,6 +63,7 @@ This has led to the development of various tools for visualizing CNNs and dissec
   \label{fig:acc}
 \end{figure}
 
+Facial expressions, a cornerstone of non-verbal communication, hold significant weight in human interactions. 
 Leveraging \textit{explainable AI} (XAI), 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
@@ -96,28 +96,44 @@ The structure of the rest of the report is arranged as follows.
 \Cref{sec:related} contains the related work of our research. 
 In \Cref{sec:setup}, 
 we address the datasets we collected and the model architecture we implemented. 
+An overview of the experimental pipeline of our project is outlined in \Cref{fig:pipeline}. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
-An overview of the experimental pipeline of our project is outlined in \cref{fig:pipeline}. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
 \section{Related Work}
 \label{sec:related}
 
-% TODO: FER image/video
-% See e.g. for introduction writing: 
 % Facial Expression Recognition with Adaptive Frame Rate based on Multiple Testing Correction
 % https://github.com/kdhht2334/awesome-SOTA-FER
 
 \paragraph{Facial Emotion Recognition.}
-\citet{PhamVT20} on FER2013
+Research by \citet{SamadianiHCLCXH19} and \citet{mehrabian2017communication} confirms this, 
+highlighting their substantial contribution to communication. 
+Studies from \citet{ekman1971constants} and \citet{LiD22a} categorize these expressions into distinct states 
+like happiness, sadness, or anger, demonstrating their cross-cultural recognition. 
+While emotions can intertwine in specific situations, 
+primary emotions remain broadly identifiable due to their innate nature.
+Facial emotion recognition capitalizes on this understanding by classifying emotional states of individuals based solely on their facial expressions. 
+This field has witnessed a shift from hand-crafted features to sophisticated deep learning architectures, 
+achieving remarkable accuracy on benchmark datasets~\cite{FardM22,LiGL22}. 
+In any case, ethical considerations are paramount. 
+Given the widespread use of video streams and FER applications, 
+real-time operation is crucial. 
+But this must be balanced with fairness, robustness, and scalability, 
+aspects often overlooked in recent research~\cite{Savchenko22}. 
+\citet{WangQKGNHR20} proposed a benchmark for bias mitigation, 
+while \citet{PhamVT20} presented a novel masking idea to boost the performance on FER2013 and private VEMO dataset. 
+% Building upon recent, comprehensive reviews of FER models and datasets~\cite{LiGL22,CanalMMSSPS22,sajjad2023comprehensive}. 
+% our research delves into a range of CNNs with varying complexity. 
+% We utilize datasets with extensive labeling encompassing subpopulations, head poses, occlusion types, and class imbalances. 
+% This approach allows us to explore the intricate relationship between facial expressions and emotions while ensuring responsible development and application of FER technologies.
+% By combining the power of facial expressions with advanced machine learning, 
+% FER has the potential to revolutionize various fields. 
+% However, ethical considerations must be woven into the fabric of this technology from the outset to guarantee its responsible and inclusive use in shaping the future of human-computer interaction.
+% while Xu et al. (2020) focused on sensitive attributes like gender, age, and race.
+% cite did not found
 
-Facial expressions, a cornerstone of non-verbal communication, hold significant weight in human interactions. Research by Samadiani (2019) and Mehrabian (2008) confirms this, highlighting their substantial contribution to communication. Studies like Ekman's (1971) and Weihong's (2018) categorize these expressions into distinct states like happiness, sadness, or anger, demonstrating their cross-cultural recognition. While emotions can intertwine in specific situations, primary emotions remain broadly identifiable due to their innate nature.
-Facial Emotion Recognition (FER) capitalizes on this understanding by classifying individuals' emotional states based solely on their facial expressions. This field has witnessed a shift from hand-crafted features to sophisticated deep learning architectures, achieving remarkable accuracy on benchmark datasets (Fard, 2022; Li, 2022). In any case, ethical considerations are paramount. Given the widespread use of video streams and FER applications, real-time operation is crucial. But this must be balanced with fairness, robustness, and scalability, aspects often overlooked in current research (Savchenko, 2022). Wang et al. (2020) proposed a benchmark for bias mitigation, while Xu et al. (2020) focused on sensitive attributes like gender, age, and race.
-Building upon recent, comprehensive reviews of FER models and datasets (Li, 2022; Sajjad, 2023; Canal, 2022), our research delves into a range of convolutional neural network models with varying complexity. We utilize datasets with extensive labeling encompassing subpopulations, head poses, occlusion types, and class imbalances. This approach allows us to explore the intricate relationship between facial expressions and emotions while ensuring responsible development and application of FER technologies.
-By combining the power of facial expressions with advanced machine learning, FER has the potential to revolutionize various fields. However, ethical considerations must be woven into the fabric of this technology from the outset to guarantee its responsible and inclusive use in shaping the future of human-computer interaction.
-
-% TODO: see e.g., 
 % Peeking Inside the Black-Box: A Survey on Explainable Artificial Intelligence (XAI)
 % Explainable Artificial Intelligence (XAI): Concepts, taxonomies, opportunities and challenges toward responsible AI
 \paragraph{Explainable AI.}

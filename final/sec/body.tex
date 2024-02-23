@@ -29,33 +29,33 @@ This has led to the development of various tools for visualizing CNNs and dissec
         % enlargelimits=0.1, 
         legend style={at={(1.35,0.795)},
           anchor=east}, % ,legend columns=-1
-        ylabel={Validation Accuracies (\%)}, 
+        ylabel={Test Accuracies (\%)}, 
         symbolic x coords={VGG16,ResNet18,ResNet34,Baseline,GiMeFive},
         x tick label style={rotate=30,anchor=east},
         every axis plot/.append style={
           bar shift=0pt
         },
         bar width=18pt, 
-        ymin=60, 
-        ymax=80,
+        ymin=78, 
+        ymax=88,
         grid=major, 
         % ymajorgrids=true,
         % xmajorgrids=true,
     ]
-    \addplot[fill=Pink!30] coordinates {(VGG16,68.8)};
+    \addplot[fill=Pink!30] coordinates {(VGG16,83.3)};
     \addlegendentry{VGG16}
-    \addplot[fill=LightPurple!30] coordinates {(ResNet18,67.9)};
+    \addplot[fill=LightPurple!30] coordinates {(ResNet18,81.3)};
     \addlegendentry{ResNet18}
-    \addplot[fill=cvprblue!30] coordinates {(ResNet34,72)}; 
+    \addplot[fill=cvprblue!30] coordinates {(ResNet34,83.7)}; 
     \addlegendentry{ResNet34}
-    \addplot[fill=Orange!30] coordinates {(Baseline,66.8)};
+    \addplot[fill=Orange!30] coordinates {(Baseline,80.6)};
     \addlegendentry{Baseline}
-    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,78.1)};
+    \addplot[fill=LMUGreen!30] coordinates {(GiMeFive,86.5)};
     \addlegendentry{\textsc{GiMeFive}}
     \end{axis}
   \end{tikzpicture}
   }
-  \caption{Validation accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the RAF-DB dataset.} 
+  \caption{Test accuracies of our \textsc{GiMeFive} compared to other state-of-the-art models on the RAF-DB dataset.} 
   \label{fig:acc}
 \end{figure}
 
@@ -180,7 +180,7 @@ This dimensional approach has found its way into numerous models of emotion reco
 as seen in the work of \citet{KolliasTBCZ23} and \citet{tottenham2009nimstim}. 
 Lately, 
 \citet{YinTLS019} focused on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
-\citet{Malik0R21} proposed an interpretable deep-learning-based system, 
+\citet{Malik0R21} proposed an interpretable deep learning-based system, 
 which has been developed for facial emotion recognition tasks. 
 % By embracing this more fluid understanding, 
 % we gain a deeper insight into the complex tapestry of human emotions and their expression.

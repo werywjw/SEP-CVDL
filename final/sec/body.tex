@@ -168,15 +168,14 @@ bridging the gap in the field of interpretable representation learning.
 For centuries, the central pursuit in psychology has been studies of the kaleidoscope of human emotions.
 In the 1960s, \citet{ekman1971constants} identified six basic universal expressions: 
 happiness, sadness, anger, fear, surprise, and disgust. 
-This framework, 
-later expanded to include contempt and embarrassment, 
+This framework later expanded to include contempt and embarrassment, 
 offered a starting point for understanding emotional communication across cultures.
 However, research has evolved, recognizing the more nuanced nature of emotions. 
 Instead of discrete categories, 
 recent models focus on ``emotional dimensions'': valence (positivity/negativity) and arousal (activation level). 
 Proposed by \citet{russell1980circumplex}, 
 these dimensions offer a broader spectrum, 
-encompassing the vast range of human emotions beyond just 8 facial expressions. 
+encompassing the vast range of human emotions beyond just eight facial expressions. 
 This dimensional approach has found its way into numerous models of emotion recognition and synthesis, 
 as seen in the work of \citet{KolliasTBCZ23} and \citet{tottenham2009nimstim}. 
 Lately, 
@@ -195,7 +194,7 @@ We also use Shell and Jupyter Notebook for generating image and video scripts.
 The experiment and evaluation are conducted on two MacBook Pros 
 (M1 Pro-Chip with 10-core CPU and 16-core GPU; Intel Core i9 with 2.3 GHz 8-Core). 
 
-\begin{table*}[ht]
+\begin{table*}[!ht]
   \centering
   \resizebox{.99\textwidth}{!}{
   \begin{tabular}{@{}lrcccccc|c@{}}
@@ -234,7 +233,7 @@ The experiment and evaluation are conducted on two MacBook Pros
 % https://www.mdpi.com/1424-8220/22/21/8089
 
 To initiate the project, 
-we gathered image databases representing different types of emotional expressions from 
+we gathered image databases representing different types of emotional expressions from the
 \textit{Real-world Affective Faces Database} (RAF-DB, in-the-wild expression)~\cite{li_reliable_2017,li2019reliable}, 
 \textit{Facial Expression Recognition} 2013 (FER2013, real-time wild expression)~\cite{BarsoumZCZ16}, 
 \textit{Facial Expression Recognition AffectNet Database} (FER AffectNet, in-the-wild expression)~\cite{Mollah2019ANet}, 
@@ -244,12 +243,12 @@ These image datasets come in folder-structure classification (See \cref{tab:data
 for statistic details with specific numbers on training, test, and validation set for each emotion class). 
 
 For reviewing explainable AI, 
-we used the video dataset \textit{Denver Intensity of Spontaneous Facial Action Database} 
+we leverage the video dataset \textit{Denver Intensity of Spontaneous Facial Action Database} 
 (DISFA, spontaneous expressions)~\cite{MavadatiMBTC13}, 
 which comprises two sets of videos, 
-differentiated by capturing various camera angles. 
+differentiated by capturing various camera angles (left and right). 
 Each set consists of 27 videos, with each video comprising 4844 frames, 
-resulting in 130788 images for each camera angle and a total of 261576 images across both left and right angles. 
+resulting in 130788 images for each camera angle and a total of 261576 images. 
 The participants in the videos are performing a series of spontaneous facial actions. 
 % which contains a variety of levels of intensity in expression. 
 
@@ -260,18 +259,17 @@ we aggregate these five FER image benchmarks into a new customized dataset calle
 \textsc{GiMeFive}~\footnote{\url{https://github.com/werywjw/data}}. 
 More specifically, 
 the training set of FER \textsc{GiMeFive} is aggregated from the training sets of the five image datasets (55073 images in total), 
-while the test set is combined from the test sets of RAF-DB and FER2013 (8333 images). 
+while the test set is combined from the test sets of RAF-DB and FER2013 (a total of 8333 images). 
 The validation set is given with equal 100 images per class to test the performance of models. 
 
-Building upon these image databases, we exclusively analyze human faces representing 6 emotions. 
+Building upon these image databases, we exclusively analyze human faces representing six emotions. 
 That is, we first generalize a folder structure and append the emotion labels 0 to 5 to the name of each matching image 
-(0 for happiness, 1 for surprise, 2 for sadness, 3 for anger, 4 for disgust, and 5 for fear).
+(i.e., 0 for happiness, 1 for surprise, 2 for sadness, 3 for anger, 4 for disgust, and 5 for fear).
 For implementation, 
 we create a script for generating CSV files to store all the image names and their corresponding labels to later efficiently pass to the model. 
 The images together with the CSV file are loaded and preprocessed for training. 
-Therefore, we manipulate the pixel data through resizing, 
-augmentation, conversion to grayscale, and create tensors and normalization. 
-The images are converted to greyscale with three channels at $64 \times 64$ resolution in the JPG format, 
+Therefore, we manipulate the pixel data through resizing, normalization, 
+augmentation, and conversion to grayscale with three channels at $64 \times 64$ resolution in the JPG format, 
 as our original CNN is designed to work with three-channel inputs. 
 Typically, we assume that the color of the image does not affect the emotion classification. 
 
@@ -282,13 +280,11 @@ To achieve this,
 we implement the \texttt{CascadeClassifier}~\cite{casc_class} incorporating the Viola-Jones algorithm introduced by \citet{990517} to power, 
 in our case, face detection, 
 since the Viola-Jones algorithm revolutionizes real-time object detection. 
-
 As part of the video preprocessing, 
-we run every frame through the \texttt{FaceClassifier} to detect our region of interest, 
-and crop the rectangle region. 
-The cropped image is then also preprocessed by resizing to $64 \times 64$ resolution, 
+we run every frame through the \texttt{FaceClassifier} to detect our region of interest and crop the rectangle region. 
+The cropped image is also preprocessed by resizing to $64 \times 64$ resolution, 
 then converted to greyscale with three channels, 
-after that, a tensor is generated and then normalized. 
+after that, a tensor is generated and normalized. 
 Every cropped image is evaluated through our model so that the classification can be further used for interpretation. 
 
 \subsection{Model Architecture}

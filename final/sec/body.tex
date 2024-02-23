@@ -441,7 +441,7 @@ where the true class has probability 1 and all others have probability 0.
 \section{Evaluation}
 \label{sec:evaluation}
 
-For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
+For evaluation, we use the metric accuracy to see if our model can classify facial emotions correctly. 
 We report all the training, testing, and validation accuracies in \% 
 to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
 By converting logits to probabilities, 
@@ -491,7 +491,7 @@ one reason is that the images on RAF-DB are already aligned and cropped,
 the \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
 \texttt{RandomCrop}, and \texttt{RandomErasing} might confuse the model by adding more noise to aligned facial images. 
 We further continue to simply apply merely normalization to detect more representative features with respect to different emotions.
-Previous research from \citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engage similar investigations for simplicity. 
+Previous research from \citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engage similar investigations. % for simplicity. 
 
 We run extensive experiments to determine the number of convolutional blocks for a better trade-off between the number of parameters and the performance. 
 Eventually, we find that adding an extra convolutional block 
@@ -516,37 +516,36 @@ Notably,
 ResNet18 is appreciated for its efficiency and lower computational cost, 
 and ResNet34 for offering a balance between depth and performance, 
 making them widely adopted in both academic research and practical applications, 
-achieving also a good performance on two FER benchmarks in our empirical experiment. 
-However, due to the lack of further optimization techniques such as hyperparameter searching on these state-of-the-art models, 
+achieving good performance on two FER benchmarks in our empirical experiment as well. 
+However, due to the lack of further optimization techniques, % such as hyperparameter searching,  on these state-of-the-art models, 
 they did not significantly outperform our best model \textsc{GiMeFive}. 
-The innovative approach of using residual connections has not only improved the performance of deep neural networks 
-but also inspired a plethora of subsequent research efforts aimed at enhancing network architectures for informative facial feature detections.
+We agree that the innovative approach of using residual connections has not only improved the performance of deep neural networks 
+but also inspired a plethora of subsequent research efforts for informative facial feature detections. % aimed at enhancing network architectures
 
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
 
 \paragraph{Classification Scores.} 
-To further analyze the individual probability of each class of the model, 
+To further analyze the probability of each individual image, 
 we write a script that takes a folder path as input and iterates through the images inside a subfolder to record the performance of our best model \textsc{GiMeFive}. 
 This CSV file is represented with the corresponding classification scores via the softmax function (see \cref{eq:softmax}). 
+To have a better review of the total correctly classified images, 
+we also generate a confusion matrix heatmap (see \cref{fig:matval}) to visualize the performance of the model with respect to each emotional class, 
+where the numbers in the diagonal of this heatmap represent the number of correct predicted images on the validation set. 
+Each line has a sum of 100, 
+as our validation set contains one hundred images with the ground-truth label per class (see \cref{tab:data}). 
 
 \begin{figure}[ht]
   \centering
-   \includegraphics[width=\linewidth]{matval.png}
+   \includegraphics[width=.9\linewidth]{matval.png}
    \caption{Overview of the confusion matrix evaluated from our \textsc{GiMeFive} on the validation set.} 
    \label{fig:matval}
 \end{figure}
 
-For having a better overview of the total correctly classified images by \textsc{GiMeFive}, 
-we also generate a confusion matrix heatmap (see \cref{fig:matval}) to visualize the performance of the model with respect to each emotional class, 
-where the numbers in the diagonal of this heatmap represent the number of correct predicted images on the validation set. 
-Each line has a sum of 100, 
-since our validation set contains one hundred images with the ground-truth label per class (see \cref{tab:data}). 
 As shown in \Cref{fig:matval}, 
 we observe that our \textsc{GiMeFive} can predict the happiness class with the highest accuracy, 
 while the class with the lowest accuracy is disgust. 
-This is understandable, 
-as the facial emotions such as sadness and anger are similar to disgust, 
+This is understandable since facial emotions such as sadness and anger are similar to disgust, 
 especially when humans sometimes also represent disgusting and angry emotions at the same time. 
 Roughly speaking, 
 happiness is the largest sub-class in our training data (see \cref{tab:data}) and the happy emotion is the easiest to detect in principle. 
@@ -704,8 +703,7 @@ enabling models to generalize better and achieve enhanced performance.
 Preliminary, 
 we create various replications of existing photos by randomly altering different properties such as size, 
 brightness, color channels, or perspectives on the RAF-DB dataset. 
-The results, however, are not as expected, 
-since aligned and cropped images do not have significant advantages in helping our \textsc{GiMeFive}. 
+The results, however, are not as expected since aligned and cropped images do not have significant advantages in helping our \textsc{GiMeFive}. 
 In the future, 
 we believe this technique can be more effective when applied to the other state-of-the-art models on real-world variations, 
 which can slightly encounter altered versions of familiar data, 

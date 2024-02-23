@@ -554,12 +554,10 @@ the confusion matrix illustrates that the model has good performances in terms o
 
 \paragraph{Overlay Grad-CAM.}
 To understand the decision-making process of our model, 
-we aim to explain our model in a more transparent and interpretable way using 
-\textit{Gradient-weighted Class Activation Mapping} (Grad-CAM)~\cite{SelvarajuCDVPB17}, 
-a technique that is easier to implement with different architectures. 
-Typically, 
-Grad-CAM is a generalization of CAM and helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
-as it highlights the important regions of an image, 
+we aim to explain our model in a more transparent and interpretable way using Grad-CAM~\cite{SelvarajuCDVPB17}, 
+as Grad-CAM is a generalization of CAM and helps interpret CNN decisions 
+by providing visual cues about the regions that influenced the classification. 
+Grad-CAM highlights the important regions of an image, 
 aiding in the understanding of the behavior of the model, 
 which is especially useful for model debugging and further improvement. 
 
@@ -615,16 +613,16 @@ resulting in a spatial average of feature maps.
 As seen in \Cref{fig:xai}, 
 the heatmap in the middle represents the results of our best model \textsc{GiMeFive} on the validation set, 
 showing different areas of the face to identify each emotion. 
-The warmer colors (red and yellow) indicate the higher activation or relevance in recognizing the facial emotions, 
+The warmer colors (red and yellow) indicate the higher activation or relevance in recognizing facial emotions, 
 while the cooler colors (blue and green) indicate the lower activation. 
 The scale ranges from 0 to 1, 
-indicating the level of activation or confidence in emotion recognitions,
+indicating the level of activation or confidence in emotion recognition,
 where 1 means the highest measured activation. 
 
 The right side of each sub-figure is a result of the overlay Grad-CAM. 
 For instance, 
-we can see that happiness and sadness (see \cref{fig:xai1} and \cref{fig:xai3} respectively) 
-class represents a high level of activation around the mouth region, 
+we can see that the happiness and sadness (see \cref{fig:xai1} and \cref{fig:xai3} respectively) 
+classes show a high level of activation around the mouth region, 
 which is common in uplifting and drooping corners. 
 Surprise (see \cref{fig:xai2}) implies activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
 Other emotions such as anger, disgust, and fear (see \cref{fig:xai4}, \cref{fig:xai5}, and \cref{fig:xai6} respectively) 
@@ -677,16 +675,16 @@ The \textsc{GiMeFive} classifications of every frame are plotted in percentage n
 The most important emotion, extracted from every fifth frame, 
 is displayed above the map to make it easier for our eyes to follow. 
 To plot landmarks on each video frame, 
-we implemented the pretrained \texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
+we implemented the pre-trained \texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic \textit{Histogram of Oriented Gradients} (HOG)~\cite{1467360} feature combined with a linear classifier, 
 an image pyramid, and a sliding window detection scheme~\cite{dlib_site}. 
 The pose estimator was created using the \texttt{dlib} from \citet{6909637}.
 
-With this pretrained model, 
+With this pre-trained model, 
 68 numbered landmarks assist the emotion analysis and facial expression tracking to understand and interpret facial features.
 % We implement using the libraries such as Dlib~\cite{dlib_site}. 
-Again illustrated from \Cref{fig:video}, 
-happiness emotions (see \Cref{{fig:v1}}) are the easiest to detection in principle. 
+Again, illustrated in \Cref{fig:video}, 
+happiness emotions (see \Cref{{fig:v1}}) are the easiest to detect in principle. 
 
 \section{Optimization Strategies}
 \label{sec:optim}

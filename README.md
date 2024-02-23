@@ -100,7 +100,7 @@ The PDF Version is [here](https://github.com/werywjw/SEP-CVDL/blob/main/proposal
 ### How to generate a requirements.txt?
 ```
 pipreqs /Users/wery/Desktop/SEP-CVDL
-pipreqs /Path/to/the/repository/SEP-CVDL
+pip3 freeze > requirements.txt
 ```
 
 ### How to resolve the conflicts?

@@ -108,7 +108,7 @@ while True:
     
     faces = detect_bounding_box(video_frame, counter)  # apply the function we created to the video frame, faces as variable not used
     
-    cv2.imshow("My Face Detection Project", video_frame)  # display the processed frame in a window named "My Face Detection Project"
+    cv2.imshow("GiMeFive", video_frame)  # display the processed frame in a window named "GiMeFive"
 
     # print(type(video_frame))
     if cv2.waitKey(1) & 0xFF == ord("q"):

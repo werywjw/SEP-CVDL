@@ -63,8 +63,6 @@ class Baseline(nn.Module):
         self.bn3 = nn.BatchNorm2d(256)
         self.conv4 = nn.Conv2d(256, 512, kernel_size=3, padding=1)
         self.bn4 = nn.BatchNorm2d(512)
-        # self.conv5 = nn.Conv2d(512, 1024, kernel_size=3, padding=1)
-        # self.bn5 = nn.BatchNorm2d(1024)
 
         self.pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc1 = nn.Linear(512, 1024)
@@ -86,9 +84,6 @@ class Baseline(nn.Module):
         x = F.relu(self.bn4(self.conv4(x))) 
         x = F.max_pool2d(x, 2) 
         x = self.dropout1(x)
-        # x = F.relu(self.bn5(self.conv5(x))) 
-        # x = F.max_pool2d(x, 2)
-        # x = self.dropout1(x)
         
         x = self.pool(x) 
         x = x.view(x.size(0), -1)
@@ -179,9 +174,9 @@ class GiMeFiveRes(nn.Module):
         return x
     
     
-class VGG16(nn.Module):
+class VGG(nn.Module):
     def __init__(self):
-        super(VGG16, self).__init__()
+        super(VGG, self).__init__()
         
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1)
         self.bn1 = nn.BatchNorm2d(64)

@@ -1,10 +1,33 @@
 # GiMeFive✋: Towards Interpretable Facial Emotion Classification
 
 <div align="center" style="text-align: center; white-space: nowrap;">
-  <a href="https://github.com/werywjw/SEP-CVDL/blob/main/final/main.pdf">Paper PDF Version📄</a> &nbsp; | &nbsp;
+  <a href="https://github.com/werywjw/SEP-CVDL/blob/main/final/GIMEFIVE%3A%20Towards%20Interpretable%20Facial%20Emotion%20Classification.pdf">Paper PDF Version📄</a> &nbsp; | &nbsp;
   <a href="https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf">Presentation PDF Version🎥</a> &nbsp; | &nbsp;
   <a href="https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf">Proposal PDF Version📃</a>
 </div>
+
+## Submission Index
+- [x] Final Report ([GiMeFive: Towards Interpretable Facial Emotion Classification](https://github.com/werywjw/SEP-CVDL/blob/main/final/GIMEFIVE%3A%20Towards%20Interpretable%20Facial%20Emotion%20Classification.pdf))
+- [x] requirements.txt ([requirements of packages for GiMeFive](https://github.com/werywjw/SEP-CVDL/blob/main/requirements.txt))
+- [x] README.md ([README for GiMeFive](https://github.com/werywjw/SEP-CVDL/blob/main/README.md))
+- [x] best_GiMeFive.pth ([saved GiMeFive model](https://github.com/werywjw/SEP-CVDL/blob/main/best_GiMeFive.pth))
+- [x] script_csv.py ([script that iterates through folders and creates csv file](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.py))
+- [x] script_csv.sh ([alternative script](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.sh))
+- [x] script_video.py ([Script that classifies and saves videos and live camera streams](https://github.com/werywjw/SEP-CVDL/blob/main/script_video.py))
+- [x] script_label.ipynb ([Jupiter Notebook for preprocess images and labels](https://github.com/werywjw/SEP-CVDL/blob/main/script_label.ipynb))
+- [x] models.py ([GiMeFive and all sota models (VGG & ResNet)](https://github.com/werywjw/SEP-CVDL/blob/main/models.py))
+- [x] train_eval.py ([Train and evaluate the models](https://github.com/werywjw/SEP-CVDL/blob/main/train_eval.py))
+- [x] models_train_eval.ipynb ([Jupiter Notebook version](https://github.com/werywjw/SEP-CVDL/blob/main/models_train_eval.ipynb))
+- [x] hook.py ([Class Hook for GradCAM and video](https://github.com/werywjw/SEP-CVDL/blob/main/hook.py))
+- [x] plot_gcam.ipynb ([Jupiter Notebook for GradCAM visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
+- [x] plot_heatmap.ipynb ([Jupiter Notebook for Heatmap visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
+- [x] eval_video.ipynb ([Jupiter Notebook that classifies and saves videos and live camera](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.ipynb))
+- [x] video.mp4 ([test video with no evaluation](https://github.com/werywjw/SEP-CVDL/blob/main/video/video.mp4))
+- [x] eval_video.mp4 ([evaluated video](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.mp4))
+- [x] haarcascade_frontalface_default.xml ([pretrained model of haar cascade](https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml))
+- [x] shape_predictor_68_face_landmarks.dat ([pretrained model of Landmarks](https://github.com/werywjw/SEP-CVDL/blob/main/shape_predictor_68_face_landmarks.dat))
+- [x] slurm_jobs.sh ([script for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/slurm_job.sh))
+- [x] installed_packages.txt ([requirements of packages for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/installed_packages.txt))
 
 ## Abstract
 

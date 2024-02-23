@@ -82,10 +82,9 @@ Our main contributions can be summarized as follows.
   \item We collect, preprocess, and evaluate the training and testing data 
   (both images and videos) from various public databases thoroughly. 
   \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
-  Meanwhile, we provide the classification scores of each emotion class, 
-  as well as the confusion matrix heat map, with respect to each image. 
-  \item We give several video demos to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
-  \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM and face landmarks.
+  Meanwhile, we illustrate the classification scores with the confusion matrix heat map. 
+  \item We give several video demos to show the real-world performance of our best model \textsc{GiMeFive}. 
+  \item We provide qualitative benefits such as interpretability to explain our model with gradient-weighted class activation mapping and face landmarks.
 \end{itemize}
 
 \paragraph{Paper Outline.}
@@ -95,6 +94,7 @@ In \Cref{sec:setup},
 we address the datasets we collected and the model architecture we implemented. 
 An overview of the experimental pipeline of our project is outlined in \Cref{fig:pipeline}. 
 The evaluation results of our models are given in \Cref{sec:evaluation} with interpretability. 
+The test accuracy on the RAF-DB dataset is shown in \Cref{fig:acc}. 
 \Cref{sec:optim} describes the optimization strategies such as data augmentation and hyperparameter tuning. 
 We provide the conclusion and discussion in \Cref{sec:conclusion}. 
 
@@ -115,13 +115,14 @@ primary emotions remain broadly identifiable due to their innate nature.
 Facial emotion recognition capitalizes on this understanding by classifying the emotional states of individuals based solely on their facial expressions. 
 This field has witnessed a shift from hand-crafted features to sophisticated deep learning architectures, 
 achieving remarkable accuracy on benchmark datasets~\cite{FardM22,LiGL22}. 
-In any case, ethical considerations are paramount. 
+% In any case, ethical considerations are paramount. 
 Given the widespread use of video streams and FER applications, 
 real-time operation is crucial. 
-But this must be balanced with fairness, robustness, and scalability, 
+However, 
+this must be balanced with fairness, robustness, and scalability, 
 aspects often overlooked in recent research~\cite{Savchenko22}. 
 \citet{WangQKGNHR20} proposed a benchmark for bias mitigation, 
-while \citet{PhamVT20} presented a novel masking idea to boost the performance on FER2013~\cite{BarsoumZCZ16} and \textit{Vietnam Emotion} (VEMO) dataset. 
+while \citet{PhamVT20} presented a novel masking idea to boost the performance on the FER2013~\cite{BarsoumZCZ16} and \textit{Vietnam Emotion} (VEMO) dataset. 
 % Building upon recent, comprehensive reviews of FER models and datasets~\cite{LiGL22,CanalMMSSPS22,sajjad2023comprehensive}. 
 % our research delves into a range of CNNs with varying complexity. 
 % We utilize datasets with extensive labeling encompassing subpopulations, head poses, occlusion types, and class imbalances. 
@@ -140,9 +141,9 @@ Understanding the visual world through machines has been a driving force in comp
 Early attempts at peering into the ``black box'' of recognition models included directly visualizing filter responses~\cite{ZeilerF14}, 
 reconstructing inputs from network layers~\cite{ZeilerTF11}, 
 and even crafting inputs to activate specific neurons~\cite{NguyenYC15}.
-Recently, techniques such as \textit{Class Activation Mapping} (CAM) by \citet{ZhouKLOT16}, 
-\textit{Gradient-weighted CAM} (Grad-CAM) by \citet{SelvarajuCDVPB17}, 
-and Grad-CAM++ by \citet{chattopadhay2018grad}, 
+Recently, techniques such as \textit{Class Activation Mapping} (CAM)~\cite{ZhouKLOT16}, 
+\textit{Gradient-weighted CAM} (Grad-CAM)~\cite{SelvarajuCDVPB17}, 
+and Grad-CAM++~\cite{chattopadhay2018grad}, 
 have pushed the boundaries. 
 While CAM leverages global pooling to pinpoint informative regions, 
 Grad-CAM offers a more general framework for visualizing any convolutional filter, 

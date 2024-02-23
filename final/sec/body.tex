@@ -15,7 +15,7 @@ and innovative regularization strategies.
 In the era of deep learning and \textit{artificial intelligence} (AI), 
 one major focus in the research community has been on designing network architectures 
 and objective functions towards discriminative feature learning~\cite{HeZRS16, liu2017learning, wen2016discriminative}. 
-Meanwhile, 
+Simultaneously, 
 there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
 to understand, improve, and trust the generated decisions by these models. 
 This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
@@ -165,7 +165,7 @@ bridging the gap in the field of interpretable representation learning.
 % Towards Interpretable Face Recognition
 \paragraph{Interpretable Emotion Classification.}
 
-Studies of the kaleidoscope of human emotions have been a central pursuit in psychology for centuries. 
+For centuries, the central pursuit in psychology has been studies of the kaleidoscope of human emotions.
 In the 1960s, \citet{ekman1971constants} identified six basic universal expressions: 
 happiness, sadness, anger, fear, surprise, and disgust. 
 This framework, 
@@ -250,7 +250,7 @@ which comprises two sets of videos,
 differentiated by capturing various camera angles. 
 Each set consists of 27 videos, with each video comprising 4844 frames, 
 resulting in 130788 images for each camera angle and a total of 261576 images across both left and right angles. 
-The participants in the videos are instructed to perform a series of spontaneous facial actions. 
+The participants in the videos are performing a series of spontaneous facial actions. 
 % which contains a variety of levels of intensity in expression. 
 
 \paragraph{Image Preprocessing.}
@@ -613,9 +613,9 @@ Besides proposing a method to visualize the discriminative regions of a CNN trai
 we adopt this approach from \citet{ZhouKLOT16} to localize objects without providing the model with any bounding box annotations. 
 The model can therefore learn the classification task with class labels and is then able to localize the object of a specific class in an image. 
 In our case, we leverage the last (i.e., fifth) convolutional layer of our \textsc{GiMeFive} to generate the Grad-CAM heatmap. 
-The \textit{global average pooling} (GAP) layer, 
-which computes the average value of each feature map to obtain a spatial average of feature maps, 
-is used to obtain a spatial average of the feature maps. 
+The \textit{global average pooling} 
+(GAP) layer is utilized to compute the average value of each feature map, 
+resulting in a spatial average of feature maps.
 
 As seen in \Cref{fig:xai}, 
 the heatmap in the middle represents the results of our best model \textsc{GiMeFive} on the validation set, 
@@ -679,17 +679,17 @@ represent entire distributions, highlighting the complexity of facial expression
 
 \paragraph{Overlay Landmark.}
 The \textsc{GiMeFive} classifications of every frame are plotted in percentage next to the saliency map~\cite{SimonyanVZ13}.
-On the top of the saliency map is the main emotion, extracted from every fifth frame, is written, 
-such that it is easier for our eyes to adapt. 
+The most important emotion, extracted from every fifth frame, 
+is displayed above the map to make it easier for our eyes to follow. 
 To plot landmarks on each video frame, 
 we implemented the pretrained \texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic \textit{Histogram of Oriented Gradients} (HOG)~\cite{1467360} feature combined with a linear classifier, 
 an image pyramid, and a sliding window detection scheme~\cite{dlib_site}. 
 The pose estimator was created using the \texttt{dlib} from \citet{6909637}.
 
-With this pertained model, 
+With this pretrained model, 
 68 numbered landmarks assist the emotion analysis and facial expression tracking to understand and interpret facial features.
-We implement using the libraries such as Dlib~\cite{dlib_site}. 
+% We implement using the libraries such as Dlib~\cite{dlib_site}. 
 Again illustrated from \Cref{fig:video}, 
 happiness emotions (see \Cref{{fig:v1}}) are the easiest to detection in principle. 
 

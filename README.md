@@ -11,6 +11,7 @@
 - [x] requirements.txt ([requirements of packages for GiMeFive](https://github.com/werywjw/SEP-CVDL/blob/main/requirements.txt))
 - [x] README.md ([README for GiMeFive](https://github.com/werywjw/SEP-CVDL/blob/main/README.md))
 - [x] best_GiMeFive.pth ([saved GiMeFive model](https://github.com/werywjw/SEP-CVDL/blob/main/best_GiMeFive.pth))
+- [x] classification_scores_valid.csv ([result from script of classification scores](https://github.com/werywjw/SEP-CVDL/blob/main/classification_scores_valid.csv))
 - [x] script_csv.py ([script that iterates through folders and creates csv file](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.py))
 - [x] script_csv.sh ([alternative script](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.sh))
 - [x] script_video.py ([Script that classifies and saves videos and live camera streams](https://github.com/werywjw/SEP-CVDL/blob/main/script_video.py))
@@ -22,12 +23,13 @@
 - [x] plot_gcam.ipynb ([Jupiter Notebook for GradCAM visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
 - [x] plot_heatmap.ipynb ([Jupiter Notebook for Heatmap visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
 - [x] eval_video.ipynb ([Jupiter Notebook that classifies and saves videos and live camera](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.ipynb))
-- [x] video.mp4 ([test video with no evaluation](https://github.com/werywjw/SEP-CVDL/blob/main/video/video.mp4))
-- [x] eval_video.mp4 ([evaluated video](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.mp4))
-- [x] haarcascade_frontalface_default.xml ([pretrained model of haar cascade](https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml))
-- [x] shape_predictor_68_face_landmarks.dat ([pretrained model of Landmarks](https://github.com/werywjw/SEP-CVDL/blob/main/shape_predictor_68_face_landmarks.dat))
 - [x] slurm_jobs.sh ([script for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/slurm_job.sh))
 - [x] installed_packages.txt ([requirements of packages for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/installed_packages.txt))
+
+- [ ] video.mp4 ([test video with no evaluation](https://github.com/werywjw/SEP-CVDL/blob/main/video/video.mp4))
+- [ ] eval_video.mp4 ([evaluated video](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.mp4))
+- [ ] shape_predictor_68_face_landmarks.dat ([pretrained model of Landmarks](https://github.com/werywjw/SEP-CVDL/blob/main/shape_predictor_68_face_landmarks.dat))
+- [ ] haarcascade_frontalface_default.xml ([pretrained model of haar cascade](https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml))
 
 ## Abstract
 

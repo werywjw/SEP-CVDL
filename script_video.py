@@ -43,11 +43,14 @@ def classify_image(image_path):
     
     return rounded_scores, image, image_array, image_tensor
 
-
+# Please download the haarcascade_frontalface_default.xml file from:
+# https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml
 from pathlib import Path
 face_classifier = cv2.CascadeClassifier(
     cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
+# Please download the shape_predictor_68_face_landmarks.dat file from:
+# https://github.com/werywjw/SEP-CVDL/blob/main/shape_predictor_68_face_landmarks.dat
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
 # text settings

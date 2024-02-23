@@ -8,6 +8,8 @@
 
 ## Abstract
 
+Deep convolutional neural networks have been shown to successfully recognize facial emotions for the past years in the realm of computer vision. However, the existing detection approaches are not always reliable or explainable, we here propose our model GiMeFive with interpretations, i.e., via layer activations and gradient-weighted class activation mapping. We compare against the state-of-the-art methods to classify the six facial emotions. Empirical results show that our model outperforms the previous meth- ods in terms of accuracy on two *Facial Emotion Recognition* (FER) benchmarks and our aggregated FER GiMeFive. Furthermore, we explain our work in real-world image and video examples, as well as real-time live streams.
+
 ## Overview
 
 ![](./final/pipeline.png)

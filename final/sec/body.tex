@@ -17,7 +17,7 @@ one major focus in the research community has been on designing network architec
 and objective functions towards discriminative feature learning~\cite{HeZRS16, liu2017learning, wen2016discriminative}. 
 Simultaneously, 
 there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
-to understand, improve, and trust the generated decisions by these models. 
+and to understand, improve, and trust the generated decisions by these models. 
 This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
 
 \begin{figure}[ht]
@@ -30,7 +30,7 @@ This has led to the development of various tools for visualizing CNNs and dissec
         legend style={at={(1.35,0.795)},
           anchor=east}, % ,legend columns=-1
         ylabel={Test Accuracies (\%)}, 
-        symbolic x coords={VGG16,ResNet18,ResNet34,Baseline,GiMeFive},
+        symbolic x coords={VGG,ResNet18,ResNet34,Baseline,GiMeFive},
         x tick label style={rotate=30,anchor=east},
         every axis plot/.append style={
           bar shift=0pt
@@ -42,8 +42,8 @@ This has led to the development of various tools for visualizing CNNs and dissec
         % ymajorgrids=true,
         % xmajorgrids=true,
     ]
-    \addplot[fill=Pink!30] coordinates {(VGG16,83.3)};
-    \addlegendentry{VGG16}
+    \addplot[fill=Pink!30] coordinates {(VGG,83.3)};
+    \addlegendentry{VGG}
     \addplot[fill=LightPurple!30] coordinates {(ResNet18,81.3)};
     \addlegendentry{ResNet18}
     \addplot[fill=cvprblue!30] coordinates {(ResNet34,83.7)}; 
@@ -62,14 +62,13 @@ This has led to the development of various tools for visualizing CNNs and dissec
 
 Facial expressions, a cornerstone of non-verbal communication, 
 hold significant weight in human interactions. 
-Leveraging \textit{explainable AI} (XAI), 
+Leveraging \textit{explainable AI} (XAI)~\cite{olah2018building,YinTLS019,Malik0R21}, 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
-not only in our daily lives but also in the field of AI. 
 In this report, we present our best model named \textsc{GiMeFive}, 
 besides several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions, 
 namely happiness, surprise, sadness, anger, disgust, and fear. 
-The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
+The goal of our research is to build a robust and interpretable model for facial emotion recognition tasks. 
 
 \begin{figure*}[ht]
   \centering
@@ -80,12 +79,12 @@ The goal of our research and development was to build a robust and interpretable
 
 Our main contributions can be summarized as follows. 
 \begin{itemize}
-  \item We collect, preprocess and evaluate the training and testing data 
-  (both image and video) thoroughly from various public databases. 
+  \item We collect, preprocess, and evaluate the training and testing data 
+  (both images and videos) from various public databases thoroughly. 
   \item We implement all classification models from scratch and optimize them with several techniques in a systematic manner. 
   Meanwhile, we provide the classification scores of each emotion class, 
   as well as the confusion matrix heat map, with respect to each image. 
-  \item We give the video demo to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
+  \item We give several video demos to illustrate the real-world performance of our best model \textsc{GiMeFive}. 
   \item We provide qualitative benefits such as interpretability to explain our model with Grad-CAM and face landmarks.
 \end{itemize}
 
@@ -336,14 +335,15 @@ as well as FER \textsc{GiMeFive} (see \cref{tab:data} for details).
 Developed by \citet{SimonyanZ14a}, 
 the VGG model represents a milestone in the evolution of CNNs for image recognition tasks. 
 Distinct for its simple architecture, 
-the VGG16 employs a series of convolutional layers with small $3 \times 3$ convolution filters, 
+the VGG employs a series of convolutional layers with small $3 \times 3$ convolution filters, 
 followed by max-pooling layers, fully connected layers, and a softmax layer. 
 This designed option allows the VGG to learn more complex patterns through the depth to 16-19 weight layers. 
 
-Previous work has shown that the VGG16 model is effective in classifying large-scale facial emotions, 
+Previous work has shown that the VGG model is effective in classifying large-scale facial emotions, 
 as the representations generalize well to various datasets, 
 where they achieve state-of-the-art results, 
 confirming the importance of depth in visual representations. 
+We adapt the VGG by adding batch normalization and dropout to stabilize the learning process.
 
 \paragraph{Residual Network.}
 In principle, 
@@ -368,7 +368,7 @@ We implement an emotion classifier from scratch with four convolution blocks as 
 
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
-which is the same as the VGG16 model, 
+which is the same as the VGG model, 
 since it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
@@ -403,7 +403,7 @@ where the true class has probability 1 and all others have probability 0.
     \cline{5-7}
     &&&& Train & Test & Valid  &  \\
     \midrule
-    \multirow{8}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG16~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
+    \multirow{8}{*}{RAF-DB~\cite{li_reliable_2017,li2019reliable}} &VGG~\cite{SimonyanZ14a} & 16 &+BN&93.8&83.3&68.8&72460742\\ 
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & 98.9 & 81.3 & 67.9 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & \textbf{100.0} & 83.7 & 72.0 & 21287750 \\
     &\textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 96.6 & 80.6 & 66.8 & 2606086 \\ 
@@ -413,7 +413,7 @@ where the true class has probability 1 and all others have probability 0.
     &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 97.0 & \textbf{86.5} & \textbf{78.1} & 10478086 \\
     &\textsc{GiMeFive} (Ours) & 17 & +BN-SE & 97.5 & 82.5 & 70.0 & 41950726 \\ 
     \midrule
-    \multirow{7}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\
+    \multirow{7}{*}{FER2013~\cite{BarsoumZCZ16}} & VGG~\cite{SimonyanZ14a} & 16 & +BN & 69.0 & 49.4 & 35.6 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & 92.6 & 64.7 & 42.1 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & \textbf{97.6} & 67.1 & 43.6 & 21287750 \\
     & \textsc{GiMeFive} (Baseline) & 13 & +BN-SE & 86.6 & 64.1 & 40.2 & 2606086 \\
@@ -422,7 +422,7 @@ where the true class has probability 1 and all others have probability 0.
     &\textsc{GiMeFive} (Ours) & 17 & +BN-SE & 96.0 & 65.5 & 41.6 & 41950726 \\
     \midrule
     \midrule
-    \multirow{5}{*}{FER \textsc{GiMeFive}} & VGG16~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
+    \multirow{5}{*}{FER \textsc{GiMeFive}} & VGG~\cite{SimonyanZ14a} & 16 & +BN & 79.4 & 53.7 & 61.4 & 72460742 \\
     & ResNet18~\cite{HeZRS16} & 18 & +RB  & \textbf{96.5} & 72.4 & 73.8 & 11179590 \\
     & ResNet34~\cite{HeZRS16} & 34 & +RB  & 94.5 & 70.8 & 72.8 & 21287750 \\
     &\textsc{GiMeFive} (Ours)\textcolor{LMUGreen}{$^\star$} & 15 & +DO+BN-SE & 84.9 & \textbf{75.3} & \textbf{75.0} & 10478086 \\
@@ -485,7 +485,7 @@ but also a higher risk of overfitting and increased computational cost.
 The models are then too complex and need more resources and time to train. 
 Therefore, we propose our best model \textsc{GiMeFive}, 
 the one with 15 layers and 10478086 parameters, 
-which is 7 times less than the VGG16 and half of ResNet34, 
+which is 7 times less than the VGG and half of ResNet34, 
 efficiently achieving the best performance on the both test and validation set on all benchmarks. 
 
 In terms of the implementation details, 

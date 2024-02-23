@@ -335,12 +335,11 @@ Distinct for its simple architecture,
 the VGG employs a series of convolutional layers with small $3 \times 3$ convolution filters, 
 followed by max-pooling layers, fully connected layers, and a softmax layer. 
 This designed option allows the VGG to learn more complex patterns through the depth to 16-19 weight layers. 
-
+We adapt the VGG by adding batch normalization and dropout to stabilize the learning process. 
 Previous work has shown that the VGG model is effective in classifying large-scale facial emotions, 
 as the representations generalize well to various datasets, 
 where they achieve state-of-the-art results, 
 confirming the importance of depth in visual representations. 
-We adapt the VGG by adding batch normalization and dropout to stabilize the learning process.
 
 \paragraph{Residual Network.}
 In principle, 
@@ -360,16 +359,16 @@ effectively enabling the training of networks that are much deeper than previous
 \paragraph{\textsc{GiMeFive}.}
 Our model architecture is illustrated in \Cref{fig:model} (see \cref{fig:modeldetail} for details). 
 The input of our emotion recognition model is an image with 3 channels at $64 \times 64 $ resolution. 
-The output is 6 emotion classes, i.e., happiness, surprise, sadness, anger, disgust, and fear. 
+The output is six emotion classes. 
+% , i.e., happiness, surprise, sadness, anger, disgust, and fear. 
 We implement an emotion classifier from scratch with four convolution blocks as our baseline at the very beginning. 
-
 Despite the larger kernel being able to provide more information and a wider area view due to more parameters, 
 we use a $3 \times 3$ kernel size for all convolutional layers, 
 which is the same as the VGG model, 
 since it is efficient to train and share the weights without expensive computation. 
 Following each convolutional layer, 
 batch normalization is used for stabilizing the learning by normalizing the input to each layer. 
-Meanwhile, 
+Also, 
 the batch normalization ensures forward propagated signals have non-zero variances. 
 
 The convolution stride is fixed to 1 pixel. 

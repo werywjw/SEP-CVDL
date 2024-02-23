@@ -1,10 +1,6 @@
 \section{Introduction}
 \label{sec:intro}
 
-% introduction from Leah
-% See introduction writing e.g., 
-% Visualizing and Understanding Convolutional Networks
-
 In recent years, facial recognition technology has matured significantly. 
 As an important branch of facial recognition, 
 \textit{Facial emotion recognition} (FER)~\cite{Ko18,JainSS19,YinTLS019,Malik0R21} has received growing attention from researchers. 
@@ -15,7 +11,7 @@ making them ideal for analyzing facial features and expressions.
 Since the pioneering work by \citet{Lecun89Backpropagation}, 
 CNNs have significantly improved, fueled by larger datasets, 
 powerful GPU implementations, 
-and innovative regularization strategies.
+and innovative regularization strategies. 
 In the era of deep learning and \textit{artificial intelligence} (AI), 
 one major focus in the research community has been on designing network architectures 
 and objective functions towards discriminative feature learning~\cite{HeZRS16, liu2017learning, wen2016discriminative}. 
@@ -63,7 +59,8 @@ This has led to the development of various tools for visualizing CNNs and dissec
   \label{fig:acc}
 \end{figure}
 
-Facial expressions, a cornerstone of non-verbal communication, hold significant weight in human interactions. 
+Facial expressions, a cornerstone of non-verbal communication, 
+hold significant weight in human interactions. 
 Leveraging \textit{explainable AI} (XAI), 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
@@ -108,10 +105,11 @@ We provide the conclusion and discussion in \Cref{sec:conclusion}.
 % https://github.com/kdhht2334/awesome-SOTA-FER
 
 \paragraph{Facial Emotion Recognition.}
-Previous research by \citet{SamadianiHCLCXH19} and \citet{mehrabian2017communication} confirms this, 
-highlighting their substantial contribution to communication. 
-Studies from \citet{ekman1971constants} and \citet{LiD22a} categorize these expressions into distinct states 
-like happiness, sadness, or anger, demonstrating their cross-cultural recognition. 
+% Previous research by \citet{SamadianiHCLCXH19} and \citet{mehrabian2017communication} confirms this, 
+% highlighting their substantial contribution to communication. 
+Studies from \citet{ekman1971constants} and \citet{LiD22a} categorize facial expressions into distinct states 
+such as happiness, sadness, or anger, 
+demonstrating their cross-cultural recognition. 
 While emotions can intertwine in specific situations, 
 primary emotions remain broadly identifiable due to their innate nature.
 Facial emotion recognition capitalizes on this understanding by classifying emotional states of individuals based solely on their facial expressions. 
@@ -178,11 +176,26 @@ bridging the gap in the field of interpretable representation learning.
 % Towards Interpretable Face Recognition
 \paragraph{Interpretable Emotion Classification.}
 
-Studies of the kaleidoscope of human emotions has been a central pursuit in psychology for centuries. In the 1960s, Paul Ekman's influential work [~cite 1971] identified six basic universal expressions: happiness, sadness, anger, fear, surprise, and disgust. This framework, later expanded to include contempt and embarrassment, offered a starting point for understanding emotional communication across cultures.
-However, research has evolved, recognizing the more nuanced nature of emotions. Instead of discrete categories, recent models focus on "emotional dimensions": valence (positivity/negativity) and arousal (activation level). Proposed by James Russell in 1980 [J. A. Russell 1980], these dimensions offer a broader spectrum, encompassing the vast range of human emotions beyond just 8 facial expressions. This dimensional approach has found its way into numerous models of emotion recognition and synthesis, as seen in the work of Kollias (2022) and Tottenham (2009). By embracing this more fluid understanding, we gain a deeper insight into the complex tapestry of human emotions and their expression.
+Studies of the kaleidoscope of human emotions has been a central pursuit in psychology for centuries. 
+In the 1960s, \citet{ekman1971constants} identified six basic universal expressions: 
+happiness, sadness, anger, fear, surprise, and disgust. 
+This framework, later expanded to include contempt and embarrassment, 
+offered a starting point for understanding emotional communication across cultures.
+However, research has evolved, recognizing the more nuanced nature of emotions. 
+Instead of discrete categories, 
+recent models focus on ``emotional dimensions'': valence (positivity/negativity) and arousal (activation level). 
+Proposed by \citet{russell1980circumplex}, 
+these dimensions offer a broader spectrum, 
+encompassing the vast range of human emotions beyond just 8 facial expressions. 
+This dimensional approach has found its way into numerous models of emotion recognition and synthesis, 
+as seen in the work of \citet{KolliasTBCZ23} and \citet{tottenham2009nimstim}. 
+Lately, 
+\citet{YinTLS019} focused on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
+\citet{Malik0R21} proposed an interpretable deep-learning-based system, 
+which has been developed for facial emotion recognition tasks. 
+% By embracing this more fluid understanding, 
+% we gain a deeper insight into the complex tapestry of human emotions and their expression.
 
-\citet{YinTLS019} focus on a specific area of interpretable visual recognition by learning from data a structured facial representation. 
-\citet{Malik0R21} 
 
 \section{Experimental Setup}
 \label{sec:setup}
@@ -616,7 +629,7 @@ is used to obtain a spatial average of the feature maps.
 
 As seen in \Cref{fig:xai}, 
 the heatmap in the middle represents the results of our best model \textsc{GiMeFive} on the validation set, 
-showing areas of the face to identify each emotion. 
+showing different areas of the face to identify each emotion. 
 The warmer colors (red and yellow) indicate the higher activation or relevance in recognizing the facial emotions, 
 while the cooler colors (blue and green) indicate the lower activation. 
 The scale ranges from 0 to 1, 
@@ -628,7 +641,7 @@ For instance,
 we can see that happiness and sadness (see \cref{fig:xai1} and \cref{fig:xai3} respectively) 
 class represent a high level of activation around the mouth region, 
 which is common in uplifting and drooping corners. 
-Surprise (see \cref{fig:xai2}) show activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
+Surprise (see \cref{fig:xai2}) implys activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
 Other emotions such as anger, disgust, and fear (see \cref{fig:xai4}, \cref{fig:xai5}, and \cref{fig:xai6} respectively) 
 represent entire distributions, highlighting the complexity of facial expressions from our models.
 
@@ -675,50 +688,66 @@ represent entire distributions, highlighting the complexity of facial expression
 \end{figure*}
 
 \paragraph{Overlay Landmark.}
-The \textsc{GiMeFive} classifications of every frame are plotted in percentage next to the saliency map.
-On top of the saliency map the main emotion, extracted from every fifth frame, is written, 
-so it is easier for our eyes to adapt.
-To plot Landmarks on each video frame, we implemented the pretrained dlib shape predictor 
-\texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
-constructed using the classic Histogram of Oriented Gradients feature (HOG)~\cite{1467360} combined with a linear classifier, 
-an image pyramid, and sliding window detection scheme~\cite{dlib_site}.
+The \textsc{GiMeFive} classifications of every frame are plotted in percentage next to the saliency map~\cite{SimonyanVZ13}.
+On the top of the saliency map is the main emotion, extracted from every fifth frame, is written, 
+such that it is easier for our eyes to adapt. 
+To plot landmarks on each video frame, 
+we implemented the pretrained \texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
+constructed using the classic \textit{Histogram of Oriented Gradients} (HOG)~\cite{1467360} feature combined with a linear classifier, 
+an image pyramid, and an sliding window detection scheme~\cite{dlib_site}. 
 The pose estimator was created using the implementation dlib from \citet{6909637}.
 
-With this pertained model, 68 numbered Landmarks assist emotion analysis, 
-and facial expression tracking, to understand and interpret facial features.
-We implement using the libraries such as Dlib~\footnote{~\url{http://dlib.net/}}. % Für dlib
-Again, \Cref{{fig:v1}} happiness the easy to detection in principle 
-
-
-% TODO (Jiawen)
+With this pertained model, 
+68 numbered landmarks assist the emotion analysis and facial expression tracking to understand and interpret facial features.
+We implement using the libraries such as Dlib~\cite{dlib_site}. 
+Again illustrated from \Cref{fig:video}, 
+happiness emotions (see \Cref{{fig:v1}}) are the easiest to detection in principle. 
 
 \section{Optimization Strategies}
 \label{sec:optim}
 
-To further understand and enhance the performance of the model during training, 
-% we focus on the following tasks, 
-% i.e., data augmentation (see \Cref{sec:optim:aug}), 
-% CAM (see \Cref{sec:optim:cam}), and Grad-CAM (see \Cref{sec:optim:gcam}). 
 %~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
 
-\subsection{Data Augmentation}
-\label{sec:optim:aug}
-
+\paragraph{Data Augmentation.}
 In deep learning and AI, 
-augmentation~\cite{augment} stands as a transformative technique, 
+data augmentation~\cite{augment} stands as a transformative technique, 
 empowering algorithms to learn from and adapt to a wider range of data. 
-By introducing subtle modifications to existing data points, 
+This is typically beneficial when the dataset is limited, 
+by introducing subtle modifications to existing data points, 
 augmentation effectively expands the dataset, 
 enabling models to generalize better and achieve enhanced performance. 
-As models encounter slightly altered versions of familiar data, 
-they are forced to make more nuanced and robust predictions. 
-With this process, we aim to prevent overfitting, which is a common pitfall in machine learning. 
-Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
-Meanwhile, we create various replications of existing photos by randomly altering different properties such as size, brightness, color channels, or perspectives.
-Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
 
-\subsection{Hyperparameter Tuning}
-\label{sec:optim:tuning}
+Preliminary, 
+we create various replications of existing photos by randomly altering different properties such as size, 
+brightness, color channels, or perspectives on RAF-DB dataset. 
+The results, however, are not as expected, 
+since aligned and cropped images do not have significant advantages in helping our \textsc{GiMeFive}. 
+In the future, 
+we believe this technique can be more effective when applied to the other state-of-the-art models on real-world variations, 
+which can slightly encounter altered versions of familiar data, 
+forcing to make more nuanced and robust predictions. 
+% Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
+% Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
+
+\paragraph{Hyperparameter Tuning.}
+To understand and enhance the performance of the model during training 
+and find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
+we utilize the \texttt{parameter grid}~\cite{parameterGrid}. 
+As a result, 
+The learning rate for all our \textsc{GiMeFive} models is set to $0.001$ with the stochatic gradient descent optimizer. 
+The \texttt{momentum} $=0.9$, 
+meanwhile, we apply the \texttt{weight decay} $ = \num{1e-4}$. 
+Additionally, 
+we increase the depth of the network by adding some convolutional layers to learn more complex features. 
+To help the training of deeper networks more efficiently, 
+we add the residual connections, 
+as they allow gradients to flow through the network more easily, 
+improving the training for deep architectures. 
+Verified by \citet{BarsoumZCZ16}, 
+the dropout layers are effective in avoiding model overfitting. 
+Potential, 
+more advanced optimization techniques such as random search, bayesian optimization, 
+and genetic algorithms are also able to be further explored to find the best hyperparameters for our \textsc{GiMeFive}.
 
 \begin{table}[ht]
   \centering
@@ -744,29 +773,23 @@ Different combinations of functions from the \texttt{pytorch.transforms} library
   \label{tab:hyper}
 \end{table}
 
-Verified by \citet{BarsoumZCZ16}, 
-the dropout layers are effective in avoiding model overfitting. 
-
-In order to find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
-we utilize the parameter grid from Sklearn.
-% ~\footnote{\url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ParameterGrid.html}}.
-Additionally, 
-we increase the depth of the network by adding some convolutional layers to learn more complex features. 
-To help the training of deeper networks more efficiently, 
-we add the residual connections, 
-as they allow gradients to flow through the network more easily, 
-improving the training for deep architectures. 
-Moreover, 
-we add \textit{squeeze and excitation} (SE) blocks to apply channel-wise attention. 
-
 \section{Conclusion and Discussion}
 \label{sec:conclusion}
 
-In this work, we propose a novel emotion classifier \textsc{GiMeFive} for facial expression analysis. 
-
+In this work, we propose a novel emotion classifier \textsc{GiMeFive} for facial expression analysis, 
+offering novel insights and methodologies for enhancing the interpretability and accuracy of facial emotion classifications. 
+We run extensive experiments on two FER benchmarks and a five-datasets aggregated FER \textsc{GiMeFive} to evaluate the performance of our models, 
+finding that our best model \textsc{GiMeFive} 
+with 15 layers and 10478086 parameters outperforms other state-of-the-art models with both efficiency and explainability. 
+In addition, 
+we also provide several demonstrating videos and live webcam streams to illustrate the interpretability of our model. 
+We hope that our work can inspire future research in the field of facial emotion classification and multimodal analysis. 
 
 \paragraph{Limitations.}
-
+We acknowledge that our work has several constrains in terms of the accuracies of the models on the leadboard. 
+The limited time frame allocated for the study might have influenced both the depth and the breadth of the investigation. 
+We believe that the performance of our model can be further improved by incorporating more advanced optimization techniques 
+and loss functions~\cite{LiGL22}. 
 Please feel free to contact us if you have any questions or further suggestions.
 
 \newpage

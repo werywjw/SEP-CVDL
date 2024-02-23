@@ -190,9 +190,9 @@ ssh <cip-kennung>@<server_name>
 Linux terminal command: lsb_release -a
 get info of graphiccard command: nvidia-smi
 list of python versions: 
-kawka@chondrit:~ (0) [15:43:07] % python --version  
+<cip-kennung>@chondrit:~ (0) [15:43:07] % python --version  
 Python 2.7.18  
-kawka@chondrit:~ (0) [15:45:06] % python3 --version  
+<cip-kennung>@chondrit:~ (0) [15:45:06] % python3 --version  
 Python 3.8.10  
 information systemworkload command: htop 
 exit: q

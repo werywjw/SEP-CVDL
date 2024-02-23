@@ -64,9 +64,9 @@ hold significant weight in human interactions.
 Leveraging \textit{explainable AI} (XAI), 
 we shed light on the decision-making process behind our emotion classifier, 
 enhancing its transparency. 
-not only in our daily lives but also in the fields of AI. 
+not only in our daily lives but also in the field of AI. 
 In this report, we present our best model named \textsc{GiMeFive}, 
-beside several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions, 
+besides several deep CNNs to detect and interpret six basic universally recognized and expressed human facial emotions, 
 namely happiness, surprise, sadness, anger, disgust, and fear. 
 The goal of our research and development was to build a robust and interpretable model for facial emotion recognition. 
 
@@ -112,7 +112,7 @@ such as happiness, sadness, or anger,
 demonstrating their cross-cultural recognition. 
 While emotions can intertwine in specific situations, 
 primary emotions remain broadly identifiable due to their innate nature.
-Facial emotion recognition capitalizes on this understanding by classifying emotional states of individuals based solely on their facial expressions. 
+Facial emotion recognition capitalizes on this understanding by classifying the emotional states of individuals based solely on their facial expressions. 
 This field has witnessed a shift from hand-crafted features to sophisticated deep learning architectures, 
 achieving remarkable accuracy on benchmark datasets~\cite{FardM22,LiGL22}. 
 In any case, ethical considerations are paramount. 
@@ -159,27 +159,16 @@ bridging the gap in the field of interpretable representation learning.
 % This newfound transparency holds immense potential for applications where trust and explainability are critical, 
 % such as healthcare, law enforcement, and autonomous vehicles.
 
-% Generally speaking, 
-% CAM is a technique popularly used in CNNs to visualize and understand the regions of an input image that contribute the most to a particular class prediction. 
-% CAM helps interpret CNN decisions by providing visual cues about the regions that influenced the classification, 
-% as it highlights the important regions of an image or a video, 
-% aiding in the understanding of the behavior of the model, 
-% which is especially useful for model debugging and further improvement. 
-%~\footnote{~\url{https://medium.com/@stepanulyanin/implementing-grad-cam-in-pytorch-ea0937c31e82}}
-% The weights connecting the feature maps to the output class are obtained.
-% The weighted combination of feature maps, 
-% representing the importance of each spatial location, is used to generate the CAM heatmap.
 
-
-% TODO: see e.g.,
 % Towards Interpretable Facial Emotion Recognition
 % Towards Interpretable Face Recognition
 \paragraph{Interpretable Emotion Classification.}
 
-Studies of the kaleidoscope of human emotions has been a central pursuit in psychology for centuries. 
+Studies of the kaleidoscope of human emotions have been a central pursuit in psychology for centuries. 
 In the 1960s, \citet{ekman1971constants} identified six basic universal expressions: 
 happiness, sadness, anger, fear, surprise, and disgust. 
-This framework, later expanded to include contempt and embarrassment, 
+This framework, 
+later expanded to include contempt and embarrassment, 
 offered a starting point for understanding emotional communication across cultures.
 However, research has evolved, recognizing the more nuanced nature of emotions. 
 Instead of discrete categories, 
@@ -553,7 +542,7 @@ This CSV file is represented with the corresponding classification scores via th
 
 For having a better overview of the total correctly classified images by \textsc{GiMeFive}, 
 we also generate a confusion matrix heatmap (see \cref{fig:matval}) to visualize the performance of the model with respect to each emotional class, 
-where the numbers in diagonal of this heatmap represent the number of correct predicted images on the validation set. 
+where the numbers in the diagonal of this heatmap represent the number of correct predicted images on the validation set. 
 Each line has a sum of 100, 
 since our validation set contains one hundred images with the ground-truth label per class (see \cref{tab:data}). 
 As shown in \Cref{fig:matval}, 
@@ -563,7 +552,7 @@ This is understandable,
 as the facial emotions such as sadness and anger are similar to disgust, 
 especially when humans sometimes also represent disgusting and angry emotions at the same time. 
 Roughly speaking, 
-happiness is the largest sub-class in our training data (see \cref{tab:data}) and the happy emotion the easiest to detection in principle. 
+happiness is the largest sub-class in our training data (see \cref{tab:data}) and the happy emotion is the easiest to detect in principle. 
 Moreover, 
 the confusion matrix illustrates that the model has good performances in terms of classifying surprise, sadness, and anger as well. 
 
@@ -633,15 +622,15 @@ showing different areas of the face to identify each emotion.
 The warmer colors (red and yellow) indicate the higher activation or relevance in recognizing the facial emotions, 
 while the cooler colors (blue and green) indicate the lower activation. 
 The scale ranges from 0 to 1, 
-indicating the level of activation or confidence of emotion recognitions,
+indicating the level of activation or confidence in emotion recognitions,
 where 1 means the highest measured activation. 
 
-The right side of each sub-figure is result of the overlay Grad-CAM. 
+The right side of each sub-figure is a result of the overlay Grad-CAM. 
 For instance, 
 we can see that happiness and sadness (see \cref{fig:xai1} and \cref{fig:xai3} respectively) 
-class represent a high level of activation around the mouth region, 
+class represents a high level of activation around the mouth region, 
 which is common in uplifting and drooping corners. 
-Surprise (see \cref{fig:xai2}) implys activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
+Surprise (see \cref{fig:xai2}) implies activation around the eyes and eyebrows, which are typically raised in a look in human faces. 
 Other emotions such as anger, disgust, and fear (see \cref{fig:xai4}, \cref{fig:xai5}, and \cref{fig:xai6} respectively) 
 represent entire distributions, highlighting the complexity of facial expressions from our models.
 
@@ -694,8 +683,8 @@ such that it is easier for our eyes to adapt.
 To plot landmarks on each video frame, 
 we implemented the pretrained \texttt{dlib shape predictor}, \texttt{shape predictor 68 face landmarks.dat}, 
 constructed using the classic \textit{Histogram of Oriented Gradients} (HOG)~\cite{1467360} feature combined with a linear classifier, 
-an image pyramid, and an sliding window detection scheme~\cite{dlib_site}. 
-The pose estimator was created using the implementation dlib from \citet{6909637}.
+an image pyramid, and a sliding window detection scheme~\cite{dlib_site}. 
+The pose estimator was created using the \texttt{dlib} from \citet{6909637}.
 
 With this pertained model, 
 68 numbered landmarks assist the emotion analysis and facial expression tracking to understand and interpret facial features.
@@ -705,8 +694,6 @@ happiness emotions (see \Cref{{fig:v1}}) are the easiest to detection in princip
 
 \section{Optimization Strategies}
 \label{sec:optim}
-
-%~\footnote{\url{https://github.com/maelfabien/Multimodal-Emotion-Recognition}}. 
 
 \paragraph{Data Augmentation.}
 In deep learning and AI, 
@@ -719,13 +706,13 @@ enabling models to generalize better and achieve enhanced performance.
 
 Preliminary, 
 we create various replications of existing photos by randomly altering different properties such as size, 
-brightness, color channels, or perspectives on RAF-DB dataset. 
+brightness, color channels, or perspectives on the RAF-DB dataset. 
 The results, however, are not as expected, 
 since aligned and cropped images do not have significant advantages in helping our \textsc{GiMeFive}. 
 In the future, 
 we believe this technique can be more effective when applied to the other state-of-the-art models on real-world variations, 
 which can slightly encounter altered versions of familiar data, 
-forcing to make more nuanced and robust predictions. 
+making more nuanced and robust predictions. 
 % Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
 % Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
 
@@ -734,7 +721,7 @@ To understand and enhance the performance of the model during training
 and find the best hyperparameter configuration (see \cref{tab:hyper} for details) of the model, 
 we utilize the \texttt{parameter grid}~\cite{parameterGrid}. 
 As a result, 
-The learning rate for all our \textsc{GiMeFive} models is set to $0.001$ with the stochatic gradient descent optimizer. 
+The learning rate for all our \textsc{GiMeFive} models is set to $0.001$ with the stochastic gradient descent optimizer. 
 The \texttt{momentum} $=0.9$, 
 meanwhile, we apply the \texttt{weight decay} $ = \num{1e-4}$. 
 Additionally, 
@@ -786,7 +773,7 @@ we also provide several demonstrating videos and live webcam streams to illustra
 We hope that our work can inspire future research in the field of facial emotion classification and multimodal analysis. 
 
 \paragraph{Limitations.}
-We acknowledge that our work has several constrains in terms of the accuracies of the models on the leadboard. 
+We acknowledge that our work has several constraints in terms of the accuracy of the models on the leaderboard. 
 The limited time frame allocated for the study might have influenced both the depth and the breadth of the investigation. 
 We believe that the performance of our model can be further improved by incorporating more advanced optimization techniques 
 and loss functions~\cite{LiGL22}. 

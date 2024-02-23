@@ -444,7 +444,6 @@ where the true class has probability 1 and all others have probability 0.
 For evaluation, we use the metric accuracy to see if our model can classify the facial emotions correctly. 
 We report all the training, testing, and validation accuracies in \% 
 to compare the performance of our \textsc{GiMeFive} with other state-of-the-art methods. 
-
 By converting logits to probabilities, 
 the softmax function allows for a more interpretable output from the model and facilitates the use of probability-based loss functions. 
 The loss function employed for all models is \textit{cross-entropy} (CE), 
@@ -481,7 +480,7 @@ but also a higher risk of overfitting and increased computational cost.
 The models are then too complex and need more resources and time to train. 
 Therefore, we propose our best model \textsc{GiMeFive}, 
 the one with 15 layers and 10478086 parameters, 
-which is 7 times less than the VGG and half of ResNet34, 
+which is seven times less than the VGG and half of ResNet34, 
 efficiently achieving the best performance on the both test and validation set on all benchmarks. 
 
 In terms of the implementation details, 
@@ -492,7 +491,7 @@ one reason is that the images on RAF-DB are already aligned and cropped,
 the \texttt{RandomHorizontalFlip}, \texttt{RandomRotation}, 
 \texttt{RandomCrop}, and \texttt{RandomErasing} might confuse the model by adding more noise to aligned facial images. 
 We further continue to simply apply merely normalization to detect more representative features with respect to different emotions.
-Previous research from \citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engages similar investigations for simplicity. 
+Previous research from \citet{ZeilerF14,li_reliable_2017,VermaMRMV23} engage similar investigations for simplicity. 
 
 We run extensive experiments to determine the number of convolutional blocks for a better trade-off between the number of parameters and the performance. 
 Eventually, we find that adding an extra convolutional block 
@@ -505,8 +504,8 @@ Moreover,
 we find that the dropout and batch normalization can indeed improve the performance of the model, 
 as such regularization techniques can prevent overfitting by randomly dropping units 
 (along with their connections) from the neural networks during training. 
-Also, 
-batch normalization can help the model stabilize the learning process and reduce the number of training epochs, 
+Also, % stabilize the learning process and
+batch normalization can help the model reduce the number of training epochs, 
 leading to faster learning progress and thus improving the generalization ability of the model. 
 Unfortunately, the squeeze and excitation block~\cite{HuSASW20}, 
 a mechanism that adaptively recalibrates channel-wise attention feature responses by explicitly modeling interdependencies between channels, 
@@ -514,7 +513,8 @@ did not improve the performance in this task.
 One possible interpretation is that emotion classification might benefit more from spatial relationships rather than channel-wise dependencies. 
 
 Notably, 
-ResNet18 is appreciated for its efficiency and lower computational cost and ResNet34 for offering a balance between depth and performance, 
+ResNet18 is appreciated for its efficiency and lower computational cost, 
+and ResNet34 for offering a balance between depth and performance, 
 making them widely adopted in both academic research and practical applications, 
 achieving also a good performance on two FER benchmarks in our empirical experiment. 
 However, due to the lack of further optimization techniques such as hyperparameter searching on these state-of-the-art models, 

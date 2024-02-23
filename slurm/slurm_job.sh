@@ -9,7 +9,7 @@ echo "Starting execution of CVDL_JML"
 echo "Shell: $SHELL"
 echo "Python version: $(python3 --version)"
 
-branch_name="Leah" # TODO: change to your branch name
+branch_name="<branch_name>" # TODO: change to your branch name
 echo "Branch name: $branch_name"
 
 jupyternotebook_to_execute="validation_GCAM.ipynb"
@@ -26,11 +26,11 @@ source ~/miniconda3/bin/activate
 echo "Conda version: $(conda --version)"
 conda config --append channels conda-forge
 
-# get repo for Leah for everyone to use
+# get repo for <branch_name> for everyone to use, TODO: change to your branch_name
 rm -rf SEP-CVDL
-git clone https://<github-token>/werywjw/SEP-CVDL.git
+git clone https://<github-token>/werywjw/SEP-CVDL.git # TODO: change to your github-token
 cd SEP-CVDL/
-git checkout $branch_name
+git checkout $<branch_name>
 GIT_CHECKOUT_PID=$!
 
 # step 2: Wait for the Git checkout to finish

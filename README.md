@@ -5,7 +5,7 @@
   <a href="https://github.com/werywjw/SEP-CVDL/blob/main/presentation/SEP-CVDL.pdf">Presentation PDF Version🎥</a> &nbsp; | &nbsp;
   <a href="https://github.com/werywjw/SEP-CVDL/blob/main/proposal/Emotion%20Recognition%20From%20Facial%20Expressions%3A%20A%20Preliminary%20Report.pdf">Proposal PDF Version📃</a>
 </div>
-
+<!-- 
 ## Submission Index
 - [x] Final Report ([GiMeFive: Towards Interpretable Facial Emotion Classification](https://github.com/werywjw/SEP-CVDL/blob/main/final/GIMEFIVE%3A%20Towards%20Interpretable%20Facial%20Emotion%20Classification.pdf))
 - [x] requirements.txt ([requirements of packages for GiMeFive](https://github.com/werywjw/SEP-CVDL/blob/main/requirements.txt))
@@ -15,21 +15,21 @@
 - [x] script_csv.py ([script that iterates through folders and creates csv file](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.py))
 - [x] script_csv.sh ([alternative script](https://github.com/werywjw/SEP-CVDL/blob/main/script_csv.sh))
 - [x] script_video.py ([Script that classifies and saves videos and live camera streams](https://github.com/werywjw/SEP-CVDL/blob/main/script_video.py))
-- [x] script_label.ipynb ([Jupiter Notebook for preprocess images and labels](https://github.com/werywjw/SEP-CVDL/blob/main/script_label.ipynb))
+- [x] script_label.ipynb ([Jupyter Notebook for preprocess images and labels](https://github.com/werywjw/SEP-CVDL/blob/main/script_label.ipynb))
+- [x] get_dataset.py ([Class GiMeFiveDataset](https://github.com/werywjw/SEP-CVDL/blob/main/get_dataset.py))
 - [x] models.py ([GiMeFive and all sota models (VGG & ResNet)](https://github.com/werywjw/SEP-CVDL/blob/main/models.py))
 - [x] train_eval.py ([Train and evaluate the models](https://github.com/werywjw/SEP-CVDL/blob/main/train_eval.py))
-- [x] models_train_eval.ipynb ([Jupiter Notebook version](https://github.com/werywjw/SEP-CVDL/blob/main/models_train_eval.ipynb))
+- [x] models_train_eval.ipynb ([Jupyter Notebook version](https://github.com/werywjw/SEP-CVDL/blob/main/models_train_eval.ipynb))
 - [x] hook.py ([Class Hook for GradCAM and video](https://github.com/werywjw/SEP-CVDL/blob/main/hook.py))
-- [x] plot_gcam.ipynb ([Jupiter Notebook for GradCAM visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
-- [x] plot_heatmap.ipynb ([Jupiter Notebook for Heatmap visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
-- [x] eval_video.ipynb ([Jupiter Notebook that classifies and saves videos and live camera](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.ipynb))
+- [x] plot_gcam.ipynb ([Jupyter Notebook for GradCAM visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
+- [x] plot_heatmap.ipynb ([Jupyter Notebook for Heatmap visulization](https://github.com/werywjw/SEP-CVDL/blob/main/plot_gcam.ipynb))
+- [x] eval_video.ipynb ([Jupyter Notebook that classifies and saves videos and live camera](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.ipynb))
 - [x] slurm_jobs.sh ([script for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/slurm_job.sh))
 - [x] installed_packages.txt ([requirements of packages for slurm](https://github.com/werywjw/SEP-CVDL/blob/main/slurm/installed_packages.txt))
-
 - [ ] video.mp4 ([test video without evaluation](https://github.com/werywjw/SEP-CVDL/blob/main/video/video.mp4))
 - [ ] eval_video.mp4 ([evaluated video](https://github.com/werywjw/SEP-CVDL/blob/main/eval_video.mp4))
 - [ ] shape_predictor_68_face_landmarks.dat ([pretrained model of Landmarks](https://github.com/werywjw/SEP-CVDL/blob/main/shape_predictor_68_face_landmarks.dat))
-- [ ] haarcascade_frontalface_default.xml ([pretrained model of haar cascade](https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml))
+- [ ] haarcascade_frontalface_default.xml ([pretrained model of haar cascade](https://github.com/werywjw/SEP-CVDL/blob/main/haarcascade_frontalface_default.xml)) -->
 
 ## Abstract
 
@@ -80,7 +80,7 @@ python3 script_video.py -s camera
 python3 script_video.py -s video -i 'video/video.mp4'
 ```
 
-## How does our video look like?
+## How do our videos look like?
 
 <p align="center">
   <img src="./video/v1.gif" width="400" />
@@ -95,6 +95,17 @@ python3 eval_livecam.py
 ```
 
 Exit via `control` + `C`.
+
+## Please kindly cite if you find this repository helpful 😸
+
+```
+@article{wang2024gimefive,
+  title={GiMeFive: Towards Interpretable Facial Emotion Classification},
+  author={Wang, Jiawen and Kawka, Leah},
+  journal={arXiv preprint arXiv:2402.15662},
+  year={2024}
+}
+```
 
 ## Q&A
 
@@ -146,27 +157,16 @@ git commit
 git push
 ```
 
-### How to cite?
-
-Typically [dblp](https://dblp.uni-trier.de) and [Google Scholar](https://scholar.google.com). 
-
 ### How to coauthor?
 
 ```
 git add .
-git commit -m "
+git commit -m " <bababa>
 
 
-Co-authored-by: leahkawka <leahkawka@gmail.com>"
-git push origin main
-```
-
-Similarly, `command` + `enter` for blank lines:
-```
-git commit -m " <balala>
-
-
+Co-authored-by: leahkawka <leahkawka@gmail.com>
 Co-authored-by: werywjw <werywjw@gmail.com>"
+git push origin main
 ```
 
 ### How to convert `.ipynb` to `.py`?
@@ -189,49 +189,4 @@ git submodule add https://github.com/werywjw/data.git
 
 ```
 source /Users/wery/venv/bin/activate
-```
-
-## Notes on Slurm
-
-1. get your CIP account information 
-2. activate romote access
-3. git bash (ssh included) on windows / go to Terminal on MacBook
-4. Login to remote host: (e.g., name lachen) command:
-```
-ssh <cip-kennung>@remote.cip.ifi.lmu.de
-```
- + password
-ok everthing
-
-5. command:
-```
-sinfo | grep Nvidia2060
-```
-
-6. go to Nvidia2060 host, get there by picking one of the names listed after idle 
-command: 
-```
-ssh <cip-kennung>@<server_name>
-```
-(e.g., ssh <cip-kennung>@chondrit, ssh <cip-kennung>@idle) asked to type yes + enter password
-
-7. to get information of the server architechtur, 
-Linux terminal command: lsb_release -a
-get info of graphiccard command: nvidia-smi
-list of python versions: 
-<cip-kennung>@chondrit:~ (0) [15:43:07] % python --version  
-Python 2.7.18  
-<cip-kennung>@chondrit:~ (0) [15:45:06] % python3 --version  
-Python 3.8.10  
-information systemworkload command: htop 
-exit: q
-
-8. exit the server by command:
-```
-exit
-```
-
-9. exit the remote host by command:
-```
-exit
 ```

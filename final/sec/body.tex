@@ -12,13 +12,14 @@ Since the pioneering work by \citet{Lecun89Backpropagation},
 CNNs have significantly improved, fueled by larger datasets, 
 powerful GPU implementations, 
 and innovative regularization strategies. 
+
 In the era of deep learning and \textit{artificial intelligence} (AI), 
 one major focus in the research community has been on designing network architectures 
 and objective functions towards discriminative feature learning~\cite{HeZRS16, liu2017learning, wen2016discriminative}. 
 Simultaneously, 
 there is a strong demand from researchers and general audiences to interpret its successes and failures~\cite{GoodfellowSS14}, 
 and to understand, improve, and trust the generated decisions by these models. 
-This has led to the development of various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
+This has led to the development of 
 
 \begin{figure}[ht]
   \centering
@@ -59,6 +60,8 @@ This has led to the development of various tools for visualizing CNNs and dissec
   compared to other state-of-the-art models on the RAF-DB dataset (see \cref{tab:model} for full results).} 
   \label{fig:acc}
 \end{figure}
+
+various tools for visualizing CNNs and dissecting their prediction paths to identify the important visual cues they rely on~\cite{olah2018building}. 
 
 Facial expressions, a cornerstone of non-verbal communication, 
 hold significant weight in human interactions. 
@@ -504,7 +507,7 @@ Moreover,
 we find that the dropout and batch normalization can indeed improve the performance of the model, 
 as such regularization techniques can prevent overfitting by randomly dropping units 
 (along with their connections) from the neural networks during training. 
-Also, % stabilize the learning process and
+Also, 
 batch normalization can help the model reduce the number of training epochs, 
 leading to faster learning progress and thus improving the generalization ability of the model. 
 Unfortunately, the squeeze and excitation block~\cite{HuSASW20}, 
@@ -517,10 +520,10 @@ ResNet18 is appreciated for its efficiency and lower computational cost,
 and ResNet34 for offering a balance between depth and performance, 
 making them widely adopted in both academic research and practical applications, 
 achieving good performance on two FER benchmarks in our empirical experiment as well. 
-However, due to the lack of further optimization techniques, % such as hyperparameter searching,  on these state-of-the-art models, 
+However, due to the lack of further optimization techniques, 
 they did not significantly outperform our best model \textsc{GiMeFive}. 
 We agree that the innovative approach of using residual connections has not only improved the performance of deep neural networks 
-but also inspired a plethora of subsequent research efforts for informative facial feature detections. % aimed at enhancing network architectures
+but also inspired a plethora of subsequent research efforts for informative facial feature detections. 
 
 \subsection{Interpretable Results}
 \label{sec:evaluation:inter}
@@ -537,7 +540,7 @@ as our validation set contains one hundred images with the ground-truth label pe
 
 \begin{figure}[ht]
   \centering
-   \includegraphics[width=.9\linewidth]{matval.png}
+   \includegraphics[width=\linewidth]{matval.png}
    \caption{Overview of the confusion matrix evaluated from our \textsc{GiMeFive} on the validation set.} 
    \label{fig:matval}
 \end{figure}
@@ -682,7 +685,6 @@ The pose estimator was created using the \texttt{dlib} from \citet{6909637}.
 
 With this pre-trained model, 
 68 numbered landmarks assist the emotion analysis and facial expression tracking to understand and interpret facial features.
-% We implement using the libraries such as Dlib~\cite{dlib_site}. 
 Again, illustrated in \Cref{fig:video}, 
 happiness emotions (see \Cref{{fig:v1}}) are the easiest to detect in principle. 
 
@@ -706,8 +708,6 @@ In the future,
 we believe this technique can be more effective when applied to the other state-of-the-art models on real-world variations, 
 which can slightly encounter altered versions of familiar data, 
 making more nuanced and robust predictions. 
-% Additionally, we guide the training process to enhance the recognition and handling of real-world variations.
-% Different combinations of functions from the \texttt{pytorch.transforms} library are tested for augmentation from those already established filters. 
 
 \paragraph{Hyperparameter Tuning.}
 To understand and enhance the performance of the model during training 
@@ -760,7 +760,6 @@ In this work, we propose a novel emotion classifier \textsc{GiMeFive} for facial
 offering novel insights and methodologies for enhancing the interpretability and accuracy of facial emotion classifications. 
 We run extensive experiments on two FER benchmarks and a five-dataset aggregated FER \textsc{GiMeFive} to evaluate the performance of our models, 
 finding that our best model \textsc{GiMeFive} outperforms other state-of-the-art models with both efficiency and explainability. 
-% with 15 layers and 10478086 parameters 
 In addition, 
 we also provide several demonstration videos and live web camera streams to illustrate the interpretability of our model. 
 We hope that our work can inspire future research in the field of facial emotion classification and multimodal analysis. 
@@ -769,6 +768,18 @@ We hope that our work can inspire future research in the field of facial emotion
 We acknowledge that our work has several constraints in terms of the accuracy of the models on the leaderboard. 
 The limited time frame allocated for the study might have influenced both the depth and the breadth of the investigation. 
 We believe that the performance of our model can be further improved by incorporating more advanced optimization techniques 
-and loss functions~\cite{LiGL22}. 
-Please feel free to contact us if you have any questions or further suggestions.
+and loss functions. 
 
+\section*{Ethics Statement}
+The authors declare no competing interests. 
+This research is conducted in accordance with the ethical guidelines by the agreement on use of video data. 
+The studies involving human participants were reviewed and approved by the IRB committee of Carnegie Mellon University.
+
+\section*{Acknowledgements}
+We are deeply grateful to our advisors \textbf{Johannes Fischer} and \textbf{Ming Gui} for their helpful feedback and valuable support on an earlier version of this manuscript. 
+We also thank \textbf{Prof. Dr. Björn Ommer} for providing this interesting practical course. 
+A special acknowledgement to our former team members \textbf{Mahdi Mohammadi}, who joined us till the end of the 
+second phase of the project and shared research in conclusion, data pre-processing, and CAM-Images inquiry, 
+and \textbf{Tanja Jaschkowitz}, who joined us during the first phase of the project and shared two Jupyter Notebook scripts.
+
+% \newpage 
